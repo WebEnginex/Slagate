@@ -192,7 +192,7 @@ const TierList = () => {
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <div className="absolute -top-2 -left-2 h-6 w-6 rounded-full overflow-hidden border-2 border-background bg-white">
+                                <div className="absolute -top-2 -left-2 h-6 w-6 overflow-hidden rounded-full border-2 border-background">
                                   <img
                                     src={getElementImageUrl(hunter.element)}
                                     alt={hunter.element}
@@ -262,7 +262,7 @@ const TierList = () => {
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <div className="absolute -top-2 -left-2 h-6 w-6 rounded-full overflow-hidden border-2 border-background bg-white">
+                                <div className="absolute -top-2 -left-2 h-6 w-6 overflow-hidden rounded-full border-2 border-background">
                                   <img
                                     src={getElementImageUrl(weapon.element)}
                                     alt={weapon.element}
@@ -279,11 +279,6 @@ const TierList = () => {
                       </div>
                       <div className="flex flex-col">
                         <p className="font-medium">{weapon.nom}</p>
-                        {weapon.arme_element && (
-                          <span className="text-xs text-muted-foreground mt-1">
-                            Type: {weapon.arme_element}
-                          </span>
-                        )}
                       </div>
                     </div>
                   ))}
