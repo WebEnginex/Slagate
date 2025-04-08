@@ -1,10 +1,12 @@
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Layout from "@/components/Layout";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
+import { Badge } from "@/components/ui/badge";
+import { Avatar } from "@/components/ui/avatar";
 
 // Types for our data
 type Hunter = {
@@ -21,6 +23,23 @@ type Weapon = {
   image: string | null;
   element: string | null;
   arme_element: string | null;
+};
+
+// Get the element image URL based on element name
+const getElementImageUrl = (element: string | null): string => {
+  if (!element) return "/placeholder.svg";
+  
+  // Map element names to their image URLs
+  const elementMap: Record<string, string> = {
+    "Eau": "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements/Eau_element.webp",
+    "Feu": "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements/Feu_element.webp",
+    "Vent": "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements/Vent_element.webp",
+    "Lumière": "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements/Lumiere_element.webp",
+    "Ténèbres": "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements/Tenebres_element.webp",
+    // Add other elements as needed
+  };
+
+  return elementMap[element] || "/placeholder.svg";
 };
 
 // Fetch functions
@@ -56,20 +75,22 @@ const TierList = () => {
   });
 
   // Categorization of hunters/weapons into tiers
-  const categorizeTiers = <T extends { nom: string; image?: string | null; element?: string | null }>(
+  const categorizeTiers = <T extends { nom: string; image?: string | null; element?: string | null; rarete?: string | null }>(
     items: T[]
   ) => {
-    // This is a simplified tier assignment - in reality you might want a more sophisticated approach
+    // This is a simplified tier assignment based on rarity
     const tierS: T[] = [];
     const tierA: T[] = [];
     const tierB: T[] = [];
     const tierC: T[] = [];
 
-    items.forEach((item, index) => {
-      // Simple distribution logic - just for demonstration
-      if (index % 4 === 0) tierS.push(item);
-      else if (index % 4 === 1) tierA.push(item);
-      else if (index % 4 === 2) tierB.push(item);
+    items.forEach((item) => {
+      // For hunters, use rarete if available
+      const rarity = (item as Hunter).rarete;
+      
+      if (rarity === "SSR") tierS.push(item);
+      else if (rarity === "SR") tierA.push(item);
+      else if (rarity === "R") tierB.push(item);
       else tierC.push(item);
     });
 
@@ -140,9 +161,9 @@ const TierList = () => {
               </CardHeader>
               <CardContent className="pt-6">
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {hunters.map((hunter, idx) => (
+                  {hunters.map((hunter) => (
                     <div
-                      key={hunter.id || idx}
+                      key={hunter.id}
                       className="flex gap-3 rounded-md border p-3 transition-colors hover:bg-secondary"
                     >
                       <div className="h-12 w-12 overflow-hidden rounded-md bg-muted">
@@ -152,12 +173,25 @@ const TierList = () => {
                           className="h-full w-full object-cover"
                         />
                       </div>
-                      <div>
+                      <div className="flex flex-col">
                         <p className="font-medium">{hunter.nom}</p>
-                        <p className="text-sm text-muted-foreground">{(hunter as Hunter).element || "Unknown"}</p>
-                        {(hunter as Hunter).rarete && (
-                          <p className="text-xs text-muted-foreground">Rareté: {(hunter as Hunter).rarete}</p>
-                        )}
+                        <div className="flex items-center gap-2 mt-1">
+                          {hunter.element && (
+                            <div className="flex items-center gap-1">
+                              <img 
+                                src={getElementImageUrl(hunter.element)} 
+                                alt={hunter.element} 
+                                className="h-4 w-4 object-cover"
+                              />
+                              <span className="text-xs text-muted-foreground">{hunter.element}</span>
+                            </div>
+                          )}
+                          {hunter.rarete && (
+                            <Badge variant="outline" className="text-xs px-1 py-0">
+                              {hunter.rarete}
+                            </Badge>
+                          )}
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -189,9 +223,9 @@ const TierList = () => {
               </CardHeader>
               <CardContent className="pt-6">
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {weapons.map((weapon, idx) => (
+                  {weapons.map((weapon) => (
                     <div
-                      key={weapon.id || idx}
+                      key={weapon.id}
                       className="flex gap-3 rounded-md border p-3 transition-colors hover:bg-secondary"
                     >
                       <div className="h-12 w-12 overflow-hidden rounded-md bg-muted">
@@ -201,14 +235,25 @@ const TierList = () => {
                           className="h-full w-full object-cover"
                         />
                       </div>
-                      <div>
+                      <div className="flex flex-col">
                         <p className="font-medium">{weapon.nom}</p>
-                        {(weapon as Weapon).element && (
-                          <p className="text-sm text-muted-foreground">Élément: {(weapon as Weapon).element}</p>
-                        )}
-                        {(weapon as Weapon).arme_element && (
-                          <p className="text-xs text-muted-foreground">Type: {(weapon as Weapon).arme_element}</p>
-                        )}
+                        <div className="flex flex-wrap items-center gap-2 mt-1">
+                          {weapon.element && (
+                            <div className="flex items-center gap-1">
+                              <img 
+                                src={getElementImageUrl(weapon.element)} 
+                                alt={weapon.element} 
+                                className="h-4 w-4 object-cover"
+                              />
+                              <span className="text-xs text-muted-foreground">Élément: {weapon.element}</span>
+                            </div>
+                          )}
+                          {weapon.arme_element && (
+                            <div className="flex items-center gap-1">
+                              <span className="text-xs text-muted-foreground">Type: {weapon.arme_element}</span>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   ))}
