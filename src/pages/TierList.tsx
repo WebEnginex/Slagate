@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 // Types for our data
 type Hunter = {
@@ -75,30 +76,43 @@ const TierList = () => {
   });
 
   // Categorization of hunters/weapons into tiers
-  const categorizeTiers = <T extends { nom: string; image?: string | null; element?: string | null; rarete?: string | null }>(
-    items: T[]
-  ) => {
+  const categorizeHunterTiers = (hunters: Hunter[]) => {
     // This is a simplified tier assignment based on rarity
-    const tierS: T[] = [];
-    const tierA: T[] = [];
-    const tierB: T[] = [];
-    const tierC: T[] = [];
+    const tierS: Hunter[] = [];
+    const tierA: Hunter[] = [];
+    const tierB: Hunter[] = [];
+    const tierC: Hunter[] = [];
 
-    items.forEach((item) => {
-      // For hunters, use rarete if available
-      const rarity = (item as Hunter).rarete;
-      
-      if (rarity === "SSR") tierS.push(item);
-      else if (rarity === "SR") tierA.push(item);
-      else if (rarity === "R") tierB.push(item);
-      else tierC.push(item);
+    hunters.forEach((hunter) => {
+      if (hunter.rarete === "SSR") tierS.push(hunter);
+      else if (hunter.rarete === "SR") tierA.push(hunter);
+      else if (hunter.rarete === "R") tierB.push(hunter);
+      else tierC.push(hunter);
+    });
+
+    return { S: tierS, A: tierA, B: tierB, C: tierC };
+  };
+  
+  const categorizeWeaponTiers = (weapons: Weapon[]) => {
+    // This is a simplified tier assignment for weapons
+    const tierS: Weapon[] = [];
+    const tierA: Weapon[] = [];
+    const tierB: Weapon[] = [];
+    const tierC: Weapon[] = [];
+
+    // Simplistic categorization for demonstration
+    weapons.forEach((weapon, index) => {
+      if (index % 4 === 0) tierS.push(weapon);
+      else if (index % 3 === 0) tierA.push(weapon);
+      else if (index % 2 === 0) tierB.push(weapon);
+      else tierC.push(weapon);
     });
 
     return { S: tierS, A: tierA, B: tierB, C: tierC };
   };
 
-  const hunterTiers = huntersQuery.data ? categorizeTiers(huntersQuery.data) : { S: [], A: [], B: [], C: [] };
-  const weaponTiers = weaponsQuery.data ? categorizeTiers(weaponsQuery.data) : { S: [], A: [], B: [], C: [] };
+  const hunterTiers = huntersQuery.data ? categorizeHunterTiers(huntersQuery.data) : { S: [], A: [], B: [], C: [] };
+  const weaponTiers = weaponsQuery.data ? categorizeWeaponTiers(weaponsQuery.data) : { S: [], A: [], B: [], C: [] };
 
   // Loading state for both queries
   if (huntersQuery.isLoading || weaponsQuery.isLoading) {
@@ -166,32 +180,40 @@ const TierList = () => {
                       key={hunter.id}
                       className="flex gap-3 rounded-md border p-3 transition-colors hover:bg-secondary"
                     >
-                      <div className="h-12 w-12 overflow-hidden rounded-md bg-muted">
-                        <img
-                          src={hunter.image || "/placeholder.svg"}
-                          alt={hunter.nom}
-                          className="h-full w-full object-cover"
-                        />
+                      <div className="relative">
+                        <div className="h-16 w-16 overflow-hidden rounded-md bg-muted">
+                          <img
+                            src={hunter.image || "/placeholder.svg"}
+                            alt={hunter.nom}
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                        {hunter.element && (
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <div className="absolute -top-2 -left-2 h-6 w-6 rounded-full overflow-hidden border-2 border-background bg-white">
+                                  <img
+                                    src={getElementImageUrl(hunter.element)}
+                                    alt={hunter.element}
+                                    className="h-full w-full object-cover"
+                                  />
+                                </div>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Élément: {hunter.element}</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        )}
                       </div>
                       <div className="flex flex-col">
                         <p className="font-medium">{hunter.nom}</p>
-                        <div className="flex items-center gap-2 mt-1">
-                          {hunter.element && (
-                            <div className="flex items-center gap-1">
-                              <img 
-                                src={getElementImageUrl(hunter.element)} 
-                                alt={hunter.element} 
-                                className="h-4 w-4 object-cover"
-                              />
-                              <span className="text-xs text-muted-foreground">{hunter.element}</span>
-                            </div>
-                          )}
-                          {hunter.rarete && (
-                            <Badge variant="outline" className="text-xs px-1 py-0">
-                              {hunter.rarete}
-                            </Badge>
-                          )}
-                        </div>
+                        {hunter.rarete && (
+                          <Badge variant="outline" className="text-xs mt-1 w-fit">
+                            {hunter.rarete}
+                          </Badge>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -228,32 +250,40 @@ const TierList = () => {
                       key={weapon.id}
                       className="flex gap-3 rounded-md border p-3 transition-colors hover:bg-secondary"
                     >
-                      <div className="h-12 w-12 overflow-hidden rounded-md bg-muted">
-                        <img
-                          src={weapon.image || "/placeholder.svg"}
-                          alt={weapon.nom}
-                          className="h-full w-full object-cover"
-                        />
+                      <div className="relative">
+                        <div className="h-16 w-16 overflow-hidden rounded-md bg-muted">
+                          <img
+                            src={weapon.image || "/placeholder.svg"}
+                            alt={weapon.nom}
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                        {weapon.element && (
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <div className="absolute -top-2 -left-2 h-6 w-6 rounded-full overflow-hidden border-2 border-background bg-white">
+                                  <img
+                                    src={getElementImageUrl(weapon.element)}
+                                    alt={weapon.element}
+                                    className="h-full w-full object-cover"
+                                  />
+                                </div>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Élément: {weapon.element}</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        )}
                       </div>
                       <div className="flex flex-col">
                         <p className="font-medium">{weapon.nom}</p>
-                        <div className="flex flex-wrap items-center gap-2 mt-1">
-                          {weapon.element && (
-                            <div className="flex items-center gap-1">
-                              <img 
-                                src={getElementImageUrl(weapon.element)} 
-                                alt={weapon.element} 
-                                className="h-4 w-4 object-cover"
-                              />
-                              <span className="text-xs text-muted-foreground">Élément: {weapon.element}</span>
-                            </div>
-                          )}
-                          {weapon.arme_element && (
-                            <div className="flex items-center gap-1">
-                              <span className="text-xs text-muted-foreground">Type: {weapon.arme_element}</span>
-                            </div>
-                          )}
-                        </div>
+                        {weapon.arme_element && (
+                          <span className="text-xs text-muted-foreground mt-1">
+                            Type: {weapon.arme_element}
+                          </span>
+                        )}
                       </div>
                     </div>
                   ))}
