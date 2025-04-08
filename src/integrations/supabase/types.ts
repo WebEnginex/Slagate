@@ -60,21 +60,21 @@ export type Database = {
       chasseurs: {
         Row: {
           element: string | null
-          id: string
+          id: number | null
           image: string | null
           nom: string
           rarete: string | null
         }
         Insert: {
           element?: string | null
-          id?: string
+          id?: number | null
           image?: string | null
           nom: string
           rarete?: string | null
         }
         Update: {
           element?: string | null
-          id?: string
+          id?: number | null
           image?: string | null
           nom?: string
           rarete?: string | null
@@ -103,21 +103,21 @@ export type Database = {
         Row: {
           arme_element: string | null
           created_at: string | null
-          id: string
+          id: number
           image: string | null
           nom: string
         }
         Insert: {
           arme_element?: string | null
           created_at?: string | null
-          id?: string
+          id?: number
           image?: string | null
           nom: string
         }
         Update: {
           arme_element?: string | null
           created_at?: string | null
-          id?: string
+          id?: number
           image?: string | null
           nom?: string
         }
