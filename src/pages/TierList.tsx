@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
@@ -6,6 +7,8 @@ import { weaponTiers } from "@/config/tier-list/armes";
 import { teamJinwooTiers } from "@/config/tier-list/teamsJinwoo";
 import { teamChasseursTiers } from "@/config/tier-list/teamsChasseurs";
 import Layout from "@/components/Layout";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent } from "@/components/ui/card";
 
 // Types Supabase
 type Chasseur = Database["public"]["Tables"]["chasseurs"]["Row"];
@@ -21,26 +24,38 @@ export default function TierListPage() {
       <div className="max-w-6xl mx-auto p-6 text-white">
         <h1 className="text-3xl font-bold mb-6">Tier List</h1>
 
-        {/* Onglets de navigation */}
-        <div className="flex flex-wrap gap-4 mb-6">
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-4 py-2 rounded-xl font-medium transition ${
-                activeTab === tab ? "bg-white text-black" : "bg-gray-700 hover:bg-gray-600"
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
+        {/* Tabs navigation using shadcn/ui */}
+        <Tabs
+          defaultValue="Chasseurs"
+          value={activeTab}
+          onValueChange={setActiveTab}
+          className="w-full"
+        >
+          <TabsList className="w-full flex flex-wrap mb-6 bg-card/50">
+            {tabs.map((tab) => (
+              <TabsTrigger
+                key={tab}
+                value={tab}
+                className="flex-grow text-base data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              >
+                {tab}
+              </TabsTrigger>
+            ))}
+          </TabsList>
 
-        {/* Affichage selon l'onglet actif */}
-        {activeTab === "Chasseurs" && <HuntersTab />}
-        {activeTab === "Armes" && <WeaponsTab />}
-        {activeTab === "Teams Jinwoo" && <TeamsTab tiers={teamJinwooTiers} teamSize={4} />}
-        {activeTab === "Teams Chasseurs" && <TeamsTab tiers={teamChasseursTiers} teamSize={3} />}
+          <TabsContent value="Chasseurs">
+            <HuntersTab />
+          </TabsContent>
+          <TabsContent value="Armes">
+            <WeaponsTab />
+          </TabsContent>
+          <TabsContent value="Teams Jinwoo">
+            <TeamsTab tiers={teamJinwooTiers} teamSize={4} />
+          </TabsContent>
+          <TabsContent value="Teams Chasseurs">
+            <TeamsTab tiers={teamChasseursTiers} teamSize={3} />
+          </TabsContent>
+        </Tabs>
       </div>
     </Layout>
   );
@@ -66,32 +81,40 @@ function HuntersTab() {
   return (
     <div className="space-y-10">
       {Object.entries(huntersByTier).map(([tier, hunters]) => (
-        <div key={tier}>
-          <h2 className="text-2xl font-bold mb-4">Tier {tier}</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {hunters.map((hunter) => (
-              <div
-                key={hunter.id}
-                className="relative bg-[#1e1e2e] rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition"
-              >
-                <img
-                  src={hunter.image || ""}
-                  alt={hunter.nom}
-                  className="w-20 h-20 mx-auto rounded-full object-cover"
-                />
-                {hunter.element && (
-                  <img
-                    src={hunter.element}
-                    alt="Élément"
-                    className="absolute top-2 left-2 w-6 h-6"
-                  />
-                )}
-                <p className="font-medium mt-2 text-sm truncate">{hunter.nom}</p>
-                <p className="text-xs text-gray-400">{hunter.rarete}</p>
-              </div>
-            ))}
+        <Card key={tier} className="bg-card/50 border-primary/20 overflow-hidden">
+          <div className="bg-muted/30 py-3 px-6 border-b border-primary/10">
+            <h2 className="text-2xl font-bold">Tier {tier}</h2>
           </div>
-        </div>
+          <CardContent className="p-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              {hunters.map((hunter) => (
+                <div
+                  key={hunter.id}
+                  className="relative bg-card rounded-2xl shadow-md p-4 text-center hover:scale-[1.03] transition-transform border border-primary/10 hover:border-primary/30"
+                >
+                  <div className="relative mx-auto w-24 h-24 mb-2">
+                    <img
+                      src={hunter.image || ""}
+                      alt={hunter.nom}
+                      className="w-24 h-24 mx-auto rounded-full object-cover border-2 border-primary/20"
+                    />
+                    {hunter.element && (
+                      <div className="absolute -top-1 -left-1 w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm p-1 flex items-center justify-center">
+                        <img
+                          src={hunter.element}
+                          alt="Élément"
+                          className="w-6 h-6"
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <p className="font-medium mt-1 text-sm truncate">{hunter.nom}</p>
+                  <p className="text-xs text-gray-400">{hunter.rarete}</p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       ))}
     </div>
   );
@@ -117,31 +140,39 @@ function WeaponsTab() {
   return (
     <div className="space-y-10">
       {Object.entries(armesByTier).map(([tier, armes]) => (
-        <div key={tier}>
-          <h2 className="text-2xl font-bold mb-4">Tier {tier}</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {armes.map((arme) => (
-              <div
-                key={arme.id}
-                className="relative bg-[#1e1e2e] rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition"
-              >
-                <img
-                  src={arme.image || ""}
-                  alt={arme.nom}
-                  className="w-20 h-20 mx-auto rounded-full object-cover"
-                />
-                {arme.arme_element && (
-                  <img
-                    src={arme.arme_element}
-                    alt="Élément"
-                    className="absolute top-2 left-2 w-6 h-6"
-                  />
-                )}
-                <p className="font-medium mt-2 text-sm truncate">{arme.nom}</p>
-              </div>
-            ))}
+        <Card key={tier} className="bg-card/50 border-primary/20 overflow-hidden">
+          <div className="bg-muted/30 py-3 px-6 border-b border-primary/10">
+            <h2 className="text-2xl font-bold">Tier {tier}</h2>
           </div>
-        </div>
+          <CardContent className="p-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              {armes.map((arme) => (
+                <div
+                  key={arme.id}
+                  className="relative bg-card rounded-2xl shadow-md p-4 text-center hover:scale-[1.03] transition-transform border border-primary/10 hover:border-primary/30"
+                >
+                  <div className="relative mx-auto w-24 h-24 mb-2">
+                    <img
+                      src={arme.image || ""}
+                      alt={arme.nom}
+                      className="w-24 h-24 mx-auto rounded-full object-cover border-2 border-primary/20"
+                    />
+                    {arme.arme_element && (
+                      <div className="absolute -top-1 -left-1 w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm p-1 flex items-center justify-center">
+                        <img
+                          src={arme.arme_element}
+                          alt="Élément"
+                          className="w-6 h-6"
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <p className="font-medium mt-1 text-sm truncate">{arme.nom}</p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       ))}
     </div>
   );
@@ -167,47 +198,57 @@ function TeamsTab({
   return (
     <div className="space-y-10">
       {Object.entries(tiers).map(([tier, teams]) => (
-        <div key={tier}>
-          <h2 className="text-2xl font-bold mb-4">Tier {tier}</h2>
-          <div className="space-y-6">
-            {teams.map((team) => (
-              <div key={team.id}>
-                <p className="text-lg font-semibold mb-2">{team.name}</p>
-                <div
-                  className={`grid gap-4 ${
-                    teamSize === 4 ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-3 sm:grid-cols-3"
-                  }`}
-                >
-                  {team.hunters.map((hunterId) => {
-                    const hunter = chasseurs.find((h) => Number(h.id) === hunterId);
-                    return (
-                      hunter && (
-                        <div
-                          key={hunter.id}
-                          className="relative bg-[#1e1e2e] rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition"
-                        >
-                          <img
-                            src={hunter.image || ""}
-                            alt={hunter.nom}
-                            className="w-20 h-20 mx-auto rounded-full object-cover"
-                          />
-                          {hunter.element && (
-                            <img
-                              src={hunter.element}
-                              alt="Élément"
-                              className="absolute top-2 left-2 w-6 h-6"
-                            />
-                          )}
-                          <p className="font-medium mt-2 text-sm truncate">{hunter.nom}</p>
-                        </div>
-                      )
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
+        <Card key={tier} className="bg-card/50 border-primary/20 overflow-hidden">
+          <div className="bg-muted/30 py-3 px-6 border-b border-primary/10">
+            <h2 className="text-2xl font-bold">Tier {tier}</h2>
           </div>
-        </div>
+          <CardContent className="p-6">
+            <div className="space-y-8">
+              {teams.map((team) => (
+                <div key={team.id} className="mb-6">
+                  <h3 className="text-lg font-semibold mb-3 px-2 py-1 bg-primary/10 inline-block rounded-lg">
+                    {team.name}
+                  </h3>
+                  <div
+                    className={`grid gap-4 ${
+                      teamSize === 4 ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-3"
+                    }`}
+                  >
+                    {team.hunters.map((hunterId) => {
+                      const hunter = chasseurs.find((h) => Number(h.id) === hunterId);
+                      return (
+                        hunter && (
+                          <div
+                            key={hunter.id}
+                            className="relative bg-card rounded-2xl shadow-md p-4 text-center hover:scale-[1.03] transition-transform border border-primary/10 hover:border-primary/30"
+                          >
+                            <div className="relative mx-auto w-20 h-20 mb-2">
+                              <img
+                                src={hunter.image || ""}
+                                alt={hunter.nom}
+                                className="w-20 h-20 mx-auto rounded-full object-cover border-2 border-primary/20"
+                              />
+                              {hunter.element && (
+                                <div className="absolute -top-1 -left-1 w-7 h-7 rounded-full bg-black/40 backdrop-blur-sm p-1 flex items-center justify-center">
+                                  <img
+                                    src={hunter.element}
+                                    alt="Élément"
+                                    className="w-5 h-5"
+                                  />
+                                </div>
+                              )}
+                            </div>
+                            <p className="font-medium mt-1 text-sm truncate">{hunter.nom}</p>
+                          </div>
+                        )
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       ))}
     </div>
   );
