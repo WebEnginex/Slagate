@@ -102,7 +102,7 @@ function HuntersTab() {
                       className="w-full h-full mx-auto rounded-full object-cover border-2 border-primary/20"
                     />
                     {hunter.element && (
-                      <div className="absolute -top-1 -left-1 w-7 h-7 rounded-full flex items-center justify-center">
+                      <div className="absolute -top-1 -left-1 w-7 h-7">
                         <img
                           src={hunter.element}
                           alt="Élément"
@@ -162,7 +162,7 @@ function WeaponsTab() {
                       className="w-full h-full mx-auto rounded-full object-cover border-2 border-primary/20"
                     />
                     {arme.arme_element && (
-                      <div className="absolute -top-1 -left-1 w-7 h-7 rounded-full flex items-center justify-center">
+                      <div className="absolute -top-1 -left-1 w-7 h-7">
                         <img
                           src={arme.arme_element}
                           alt="Élément"
@@ -236,7 +236,7 @@ function TeamsTab({
                                 className="w-full h-full mx-auto rounded-full object-cover border-2 border-primary/20"
                               />
                               {hunter.element && (
-                                <div className="absolute -top-1 -left-1 w-7 h-7 rounded-full flex items-center justify-center">
+                                <div className="absolute -top-1 -left-1 w-7 h-7">
                                   <img
                                     src={hunter.element}
                                     alt="Élément"
