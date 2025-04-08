@@ -22,7 +22,6 @@ type Weapon = {
   id: string;
   nom: string;
   image: string | null;
-  element: string | null;
   arme_element: string | null;
 };
 
@@ -192,7 +191,7 @@ const TierList = () => {
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <div className="absolute -top-2 -left-2 h-6 w-6 overflow-hidden rounded-full border-2 border-background">
+                                <div className="absolute -top-2 -left-2 h-6 w-6 overflow-hidden rounded-full border-2 border-background bg-white">
                                   <img
                                     src={getElementImageUrl(hunter.element)}
                                     alt={hunter.element}
@@ -258,20 +257,20 @@ const TierList = () => {
                             className="h-full w-full object-cover"
                           />
                         </div>
-                        {weapon.element && (
+                        {weapon.arme_element && (
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger asChild>
                                 <div className="absolute -top-2 -left-2 h-6 w-6 overflow-hidden rounded-full border-2 border-background">
                                   <img
-                                    src={getElementImageUrl(weapon.element)}
-                                    alt={weapon.element}
+                                    src={getElementImageUrl(weapon.arme_element)}
+                                    alt={weapon.arme_element}
                                     className="h-full w-full object-contain"
                                   />
                                 </div>
                               </TooltipTrigger>
                               <TooltipContent>
-                                <p>Élément: {weapon.element}</p>
+                                <p>Élément: {weapon.arme_element}</p>
                               </TooltipContent>
                             </Tooltip>
                           </TooltipProvider>

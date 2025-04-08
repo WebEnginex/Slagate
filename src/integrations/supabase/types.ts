@@ -103,7 +103,6 @@ export type Database = {
         Row: {
           arme_element: string | null
           created_at: string | null
-          element: string | null
           id: string
           image: string | null
           nom: string
@@ -111,7 +110,6 @@ export type Database = {
         Insert: {
           arme_element?: string | null
           created_at?: string | null
-          element?: string | null
           id?: string
           image?: string | null
           nom: string
@@ -119,7 +117,6 @@ export type Database = {
         Update: {
           arme_element?: string | null
           created_at?: string | null
-          element?: string | null
           id?: string
           image?: string | null
           nom?: string
