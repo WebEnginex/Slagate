@@ -191,11 +191,12 @@ const TierList = () => {
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <div className="absolute -top-2 -left-2 h-6 w-6 overflow-hidden rounded-full border-2 border-background bg-white">
+                                <div className="absolute -top-2 -left-2 h-6 w-6 overflow-hidden rounded-full border-2 border-background">
                                   <img
                                     src={getElementImageUrl(hunter.element)}
                                     alt={hunter.element}
                                     className="h-full w-full object-contain"
+                                    style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
                                   />
                                 </div>
                               </TooltipTrigger>
@@ -266,6 +267,7 @@ const TierList = () => {
                                     src={getElementImageUrl(weapon.arme_element)}
                                     alt={weapon.arme_element}
                                     className="h-full w-full object-contain"
+                                    style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
                                   />
                                 </div>
                               </TooltipTrigger>
