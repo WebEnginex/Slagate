@@ -196,7 +196,7 @@ const TierList = () => {
                                   <img
                                     src={getElementImageUrl(hunter.element)}
                                     alt={hunter.element}
-                                    className="h-full w-full object-cover"
+                                    className="h-full w-full object-contain"
                                   />
                                 </div>
                               </TooltipTrigger>
@@ -266,7 +266,7 @@ const TierList = () => {
                                   <img
                                     src={getElementImageUrl(weapon.element)}
                                     alt={weapon.element}
-                                    className="h-full w-full object-cover"
+                                    className="h-full w-full object-contain"
                                   />
                                 </div>
                               </TooltipTrigger>
