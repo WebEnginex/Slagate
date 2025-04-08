@@ -3,70 +3,77 @@ import React from "react";
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Youtube, Twitch, Twitter } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { ExternalLink, Youtube, Twitch, Twitter, Instagram, ChevronDown, ChevronUp } from "lucide-react";
 
-// Types pour nos créateurs de contenu
+// Types pour les réseaux sociaux
 type SocialLink = {
-  type: "youtube" | "twitch" | "twitter" | "website";
+  type: "youtube" | "twitch" | "twitter" | "instagram" | "website";
   url: string;
-};
-
-type Creator = {
-  name: string;
-  image: string;
-  description: string;
-  specialization: string[];
-  socialLinks: SocialLink[];
+  label: string;
 };
 
 const Creators = () => {
-  // Données fictives pour nos créateurs de contenu
-  const creators: Creator[] = [
+  // Données pour les réseaux sociaux de Sohoven
+  const socialLinks: SocialLink[] = [
+    { 
+      type: "youtube", 
+      url: "https://www.youtube.com/@Sohoven", 
+      label: "Sohoven" 
+    },
+    { 
+      type: "twitch", 
+      url: "https://www.twitch.tv/sohoven", 
+      label: "sohoven" 
+    },
+    { 
+      type: "twitter", 
+      url: "https://twitter.com/SohovenYT", 
+      label: "@SohovenYT" 
+    },
+    { 
+      type: "instagram", 
+      url: "https://www.instagram.com/sohoven", 
+      label: "sohoven" 
+    },
+    { 
+      type: "website", 
+      url: "https://creator.netmarble.com/en/sololv/ranking/sohoven", 
+      label: "Page créateur" 
+    },
+  ];
+
+  // Étapes du guide
+  const steps = [
     {
-      name: "GamingWithSunbae",
-      image: "/placeholder.svg",
-      description:
-        "Créateur de guides de progression et d'optimisation pour les joueurs F2P. Spécialisé dans les analyses de meta et les stratégies d'économie de ressources.",
-      specialization: ["Guides", "F2P", "Tier Lists"],
-      socialLinks: [
-        { type: "youtube", url: "https://youtube.com/example" },
-        { type: "twitter", url: "https://twitter.com/example" },
-      ],
+      title: "Se connecter au site Netmarble Creator",
+      description: "Accédez à la page du créateur que vous souhaitez supporter. Par exemple, pour Sohoven :",
+      action: "https://creator.netmarble.com/en/sololv/ranking/sohoven",
+      actionText: "Visiter la page de Sohoven",
+      image: "/placeholder.svg"
     },
     {
-      name: "AriseWithZeals",
-      image: "/placeholder.svg",
-      description:
-        "Streamer quotidien de Solo Leveling: Arise. Propose des sessions de questions-réponses et des avis détaillés sur les nouveaux personnages.",
-      specialization: ["Streams", "Nouveautés", "Challenges"],
-      socialLinks: [
-        { type: "twitch", url: "https://twitch.tv/example" },
-        { type: "youtube", url: "https://youtube.com/example" },
-      ],
+      title: "Accéder à votre profil",
+      description: "Cliquez sur le bouton en haut à droite pour ouvrir le menu, puis allez dans \"My Page\".",
+      image: "/placeholder.svg"
     },
     {
-      name: "JinWooMaster",
-      image: "/placeholder.svg",
-      description:
-        "Joueur de haut niveau spécialisé dans le contenu PvP. Partage des astuces avancées et des analyses de méta pour dominer en arène.",
-      specialization: ["PvP", "Builds", "Stratégies"],
-      socialLinks: [
-        { type: "youtube", url: "https://youtube.com/example" },
-        { type: "twitch", url: "https://twitch.tv/example" },
-        { type: "twitter", url: "https://twitter.com/example" },
-      ],
+      title: "Lier votre compte de jeu",
+      description: "Cliquez sur le bouton \"Link Game Account\" puis \"Link account\" pour lier votre compte Solo Leveling: Arise.",
+      image: "/placeholder.svg"
     },
     {
-      name: "AriseFR",
-      image: "/placeholder.svg",
-      description:
-        "Principale source d'information en français sur Solo Leveling: Arise. Guides détaillés pour tous les niveaux de jeu.",
-      specialization: ["Guides en français", "Communauté FR", "Tutoriels"],
-      socialLinks: [
-        { type: "youtube", url: "https://youtube.com/example" },
-        { type: "website", url: "https://example.com" },
-      ],
+      title: "Retourner sur la page du créateur",
+      description: "Revenez sur la page du créateur que vous souhaitez supporter.",
+      action: "https://creator.netmarble.com/en/sololv/ranking/sohoven",
+      actionText: "Retour à la page de Sohoven",
+      image: "/placeholder.svg"
     },
+    {
+      title: "Supporter le créateur",
+      description: "Cliquez sur le bouton \"Support\", acceptez les conditions et cliquez sur \"Yes\".",
+      image: "/placeholder.svg"
+    }
   ];
 
   // Fonction pour afficher l'icône correspondant au type de lien social
@@ -78,83 +85,137 @@ const Creators = () => {
         return <Twitch className="h-5 w-5" />;
       case "twitter":
         return <Twitter className="h-5 w-5" />;
+      case "instagram":
+        return <Instagram className="h-5 w-5" />;
       case "website":
         return <ExternalLink className="h-5 w-5" />;
     }
   };
 
+  const [openStep, setOpenStep] = React.useState<number | null>(0);
+
+  const toggleStep = (index: number) => {
+    setOpenStep(openStep === index ? null : index);
+  };
+
   return (
     <Layout>
       <div className="mb-8">
-        <h1 className="mb-2 text-3xl font-bold">Créateurs de Contenu</h1>
+        <h1 className="mb-2 text-3xl font-bold">Soutenir un créateur</h1>
         <p className="text-muted-foreground">
-          Découvrez les meilleurs créateurs de contenu de Solo Leveling: Arise qui partagent des 
-          guides, astuces et analyses pour améliorer votre expérience de jeu.
+          Suivez ce guide pour apprendre comment supporter vos créateurs de contenu préférés pour Solo Leveling: Arise sur le site Netmarble Creator.
         </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        {creators.map((creator, index) => (
-          <Card key={index} className="overflow-hidden">
-            <div className="flex flex-col md:flex-row">
-              <div className="aspect-square w-full overflow-hidden bg-muted md:w-1/3">
-                <img
-                  src={creator.image}
-                  alt={creator.name}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <div className="flex-1">
-                <CardHeader>
-                  <CardTitle>{creator.name}</CardTitle>
-                  <CardDescription>
-                    {creator.specialization.join(" • ")}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-sm text-muted-foreground">{creator.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {creator.socialLinks.map((link, idx) => (
-                      <Button
-                        key={idx}
-                        variant="outline"
-                        size="sm"
-                        className="gap-2"
-                        asChild
-                      >
-                        <a
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {getSocialIcon(link.type)}
-                          <span className="capitalize">{link.type}</span>
-                        </a>
-                      </Button>
-                    ))}
-                  </div>
-                </CardContent>
+      {/* Section réseaux sociaux de Sohoven */}
+      <Card className="mb-8 overflow-hidden bg-gradient-to-r from-solo-purple to-solo-dark-purple">
+        <div className="p-6">
+          <div className="flex flex-col sm:flex-row items-center gap-6">
+            <div className="aspect-square w-32 h-32 overflow-hidden rounded-full bg-muted border-4 border-white/10">
+              <img
+                src="/placeholder.svg"
+                alt="Sohoven"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="flex-1 text-center sm:text-left">
+              <h2 className="text-2xl font-bold mb-2">Sohoven</h2>
+              <p className="text-muted-foreground mb-4">
+                Créateur de contenu français pour Solo Leveling: Arise
+              </p>
+              <div className="flex flex-wrap justify-center sm:justify-start gap-3">
+                {socialLinks.map((link, idx) => (
+                  <Button
+                    key={idx}
+                    variant="secondary"
+                    size="sm"
+                    className="gap-2 bg-white/10 hover:bg-white/20 transition-colors"
+                    asChild
+                  >
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {getSocialIcon(link.type)}
+                      <span>{link.label}</span>
+                    </a>
+                  </Button>
+                ))}
               </div>
             </div>
+          </div>
+        </div>
+      </Card>
+
+      {/* Guide étape par étape */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-bold">Guide étape par étape</h2>
+        
+        {steps.map((step, index) => (
+          <Card key={index} className="overflow-hidden">
+            <Collapsible open={openStep === index} onOpenChange={() => toggleStep(index)}>
+              <CollapsibleTrigger asChild>
+                <CardHeader className="p-6 cursor-pointer flex flex-row items-center justify-between hover:bg-muted/20">
+                  <div>
+                    <CardTitle className="flex items-center">
+                      <span className="bg-solo-purple text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">
+                        {index + 1}
+                      </span>
+                      {step.title}
+                    </CardTitle>
+                    <CardDescription className="mt-1">
+                      Cliquez pour voir les détails
+                    </CardDescription>
+                  </div>
+                  {openStep === index ? 
+                    <ChevronUp className="h-5 w-5 text-muted-foreground" /> : 
+                    <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                  }
+                </CardHeader>
+              </CollapsibleTrigger>
+              <CollapsibleContent>
+                <CardContent className="pb-6">
+                  <div className="flex flex-col md:flex-row gap-6">
+                    <div className="w-full md:w-1/3 aspect-video bg-muted rounded-lg overflow-hidden">
+                      <img
+                        src={step.image}
+                        alt={`Étape ${index + 1}`}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-muted-foreground mb-4">{step.description}</p>
+                      {step.action && (
+                        <Button asChild>
+                          <a href={step.action} target="_blank" rel="noopener noreferrer">
+                            {step.actionText}
+                            <ExternalLink className="ml-2 h-4 w-4" />
+                          </a>
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                </CardContent>
+              </CollapsibleContent>
+            </Collapsible>
           </Card>
         ))}
       </div>
 
       <Card className="mt-8">
         <CardHeader>
-          <CardTitle>Proposez votre chaîne</CardTitle>
+          <CardTitle>Avantages de supporter un créateur</CardTitle>
           <CardDescription>
-            Vous êtes créateur de contenu pour Solo Leveling: Arise et souhaitez apparaître sur cette page?
+            Supporter un créateur permet non seulement de l'aider financièrement, mais aussi de bénéficier d'avantages dans le jeu.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground">
-            Nous cherchons constamment à enrichir cette liste avec des créateurs de qualité.
-            Envoyez-nous un message avec vos informations et liens pour être considéré pour cette page.
-          </p>
-          <Button className="mt-4" variant="default">
-            Contactez-nous
-          </Button>
+          <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+            <li>Le créateur obtient une commission sur vos achats dans le jeu</li>
+            <li>Vous recevez des récompenses en jeu pour votre soutien</li>
+            <li>Vous contribuez à la création de contenu de qualité pour la communauté</li>
+          </ul>
         </CardContent>
       </Card>
     </Layout>
