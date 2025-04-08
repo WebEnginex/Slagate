@@ -1,313 +1,214 @@
-
-import React from "react";
-import Layout from "@/components/Layout";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { useQuery } from "@tanstack/react-query";
-import { Badge } from "@/components/ui/badge";
-import { Avatar } from "@/components/ui/avatar";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import type { Database } from "@/integrations/supabase/types";
+import { hunterTiers } from "@/config/tier-list/chasseurs";
+import { weaponTiers } from "@/config/tier-list/armes";
+import { teamJinwooTiers } from "@/config/tier-list/teamsJinwoo";
+import { teamChasseursTiers } from "@/config/tier-list/teamsChasseurs";
+import Layout from "@/components/Layout";
 
-// Types for our data
-type Hunter = {
-  id: string;
-  nom: string;
-  image: string | null;
-  element: string | null;
-  rarete: string | null;
-};
+// Types Supabase
+type Chasseur = Database["public"]["Tables"]["chasseurs"]["Row"];
+type Arme = Database["public"]["Tables"]["jinwoo_armes"]["Row"];
 
-type Weapon = {
-  id: string;
-  nom: string;
-  image: string | null;
-  arme_element: string | null;
-};
+const tabs = ["Chasseurs", "Armes", "Teams Jinwoo", "Teams Chasseurs"];
 
-// Get the element image URL based on element name
-const getElementImageUrl = (element: string | null): string => {
-  if (!element) return "/placeholder.svg";
-  
-  // Map element names to their image URLs
-  const elementMap: Record<string, string> = {
-    "Eau": "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements/Eau_element.webp",
-    "Feu": "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements/Feu_element.webp",
-    "Vent": "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements/Vent_element.webp",
-    "Lumière": "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements/Lumiere_element.webp",
-    "Ténèbres": "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements/Tenebres_element.webp",
-    // Add other elements as needed
-  };
-
-  return elementMap[element] || "/placeholder.svg";
-};
-
-// Fetch functions
-const fetchHunters = async (): Promise<Hunter[]> => {
-  const { data, error } = await supabase.from("chasseurs").select("*");
-  if (error) {
-    console.error("Error fetching hunters:", error);
-    throw error;
-  }
-  return data || [];
-};
-
-const fetchWeapons = async (): Promise<Weapon[]> => {
-  const { data, error } = await supabase.from("jinwoo_armes").select("*");
-  if (error) {
-    console.error("Error fetching weapons:", error);
-    throw error;
-  }
-  return data || [];
-};
-
-// Tier list component
-const TierList = () => {
-  // Using react-query to fetch data
-  const huntersQuery = useQuery({
-    queryKey: ["hunters"],
-    queryFn: fetchHunters,
-  });
-
-  const weaponsQuery = useQuery({
-    queryKey: ["weapons"],
-    queryFn: fetchWeapons,
-  });
-
-  // Categorization of hunters/weapons into tiers
-  const categorizeHunterTiers = (hunters: Hunter[]) => {
-    // This is a simplified tier assignment based on rarity
-    const tierS: Hunter[] = [];
-    const tierA: Hunter[] = [];
-    const tierB: Hunter[] = [];
-    const tierC: Hunter[] = [];
-
-    hunters.forEach((hunter) => {
-      if (hunter.rarete === "SSR") tierS.push(hunter);
-      else if (hunter.rarete === "SR") tierA.push(hunter);
-      else if (hunter.rarete === "R") tierB.push(hunter);
-      else tierC.push(hunter);
-    });
-
-    return { S: tierS, A: tierA, B: tierB, C: tierC };
-  };
-  
-  const categorizeWeaponTiers = (weapons: Weapon[]) => {
-    // This is a simplified tier assignment for weapons
-    const tierS: Weapon[] = [];
-    const tierA: Weapon[] = [];
-    const tierB: Weapon[] = [];
-    const tierC: Weapon[] = [];
-
-    // Simplistic categorization for demonstration
-    weapons.forEach((weapon, index) => {
-      if (index % 4 === 0) tierS.push(weapon);
-      else if (index % 3 === 0) tierA.push(weapon);
-      else if (index % 2 === 0) tierB.push(weapon);
-      else tierC.push(weapon);
-    });
-
-    return { S: tierS, A: tierA, B: tierB, C: tierC };
-  };
-
-  const hunterTiers = huntersQuery.data ? categorizeHunterTiers(huntersQuery.data) : { S: [], A: [], B: [], C: [] };
-  const weaponTiers = weaponsQuery.data ? categorizeWeaponTiers(weaponsQuery.data) : { S: [], A: [], B: [], C: [] };
-
-  // Loading state for both queries
-  if (huntersQuery.isLoading || weaponsQuery.isLoading) {
-    return (
-      <Layout>
-        <div className="flex items-center justify-center h-64">
-          <p className="text-lg">Chargement des données...</p>
-        </div>
-      </Layout>
-    );
-  }
-
-  // Error state for either query
-  if (huntersQuery.error || weaponsQuery.error) {
-    return (
-      <Layout>
-        <div className="flex flex-col items-center justify-center h-64">
-          <p className="text-lg text-red-500">Erreur de chargement des données</p>
-          <p className="text-sm text-muted-foreground">Veuillez réessayer ultérieurement</p>
-        </div>
-      </Layout>
-    );
-  }
+export default function TierListPage() {
+  const [activeTab, setActiveTab] = useState("Chasseurs");
 
   return (
     <Layout>
-      <div className="mb-8">
-        <h1 className="mb-2 text-3xl font-bold">Tier List des Hunters</h1>
-        <p className="text-muted-foreground">
-          Classement complet des hunters de Solo Leveling: Arise basé sur leurs performances en PVE et PVP.
-          Mise à jour régulièrement pour refléter les changements de meta.
-        </p>
+      <div className="max-w-6xl mx-auto p-6 text-white">
+        <h1 className="text-3xl font-bold mb-6">Tier List</h1>
+
+        {/* Onglets de navigation */}
+        <div className="flex flex-wrap gap-4 mb-6">
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-4 py-2 rounded-xl font-medium transition ${
+                activeTab === tab ? "bg-white text-black" : "bg-gray-700 hover:bg-gray-600"
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+
+        {/* Affichage selon l'onglet actif */}
+        {activeTab === "Chasseurs" && <HuntersTab />}
+        {activeTab === "Armes" && <WeaponsTab />}
+        {activeTab === "Teams Jinwoo" && <TeamsTab tiers={teamJinwooTiers} teamSize={4} />}
+        {activeTab === "Teams Chasseurs" && <TeamsTab tiers={teamChasseursTiers} teamSize={3} />}
       </div>
-
-      <Tabs defaultValue="characters" className="mb-8">
-        <TabsList className="mb-6">
-          <TabsTrigger value="characters">Personnages</TabsTrigger>
-          <TabsTrigger value="weapons">Armes</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="characters" className="space-y-6">
-          {Object.entries(hunterTiers).map(([tier, hunters]) => (
-            <Card key={tier} className="overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-solo-purple/20 to-transparent">
-                <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-md bg-solo-purple font-bold text-white">
-                    {tier}
-                  </div>
-                  <CardTitle>Tier {tier}</CardTitle>
-                </div>
-                <CardDescription>
-                  {tier === "S"
-                    ? "Les meilleurs hunters du jeu, dominants dans presque tous les contenus"
-                    : tier === "A"
-                    ? "Très bons hunters, polyvalents et efficaces dans la plupart des situations"
-                    : tier === "B"
-                    ? "Hunters solides mais avec quelques limitations"
-                    : "Hunters plus faibles, à utiliser avec précaution"}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {hunters.map((hunter) => (
-                    <div
-                      key={hunter.id}
-                      className="flex gap-3 rounded-md border p-3 transition-colors hover:bg-secondary"
-                    >
-                      <div className="relative">
-                        <div className="h-16 w-16 overflow-hidden rounded-md bg-muted">
-                          <img
-                            src={hunter.image || "/placeholder.svg"}
-                            alt={hunter.nom}
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
-                        {hunter.element && (
-                          <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <div className="absolute -top-2 -left-2 h-6 w-6 overflow-hidden rounded-full border-2 border-background">
-                                  <img
-                                    src={getElementImageUrl(hunter.element)}
-                                    alt={hunter.element}
-                                    className="h-full w-full object-contain"
-                                    style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
-                                  />
-                                </div>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Élément: {hunter.element}</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
-                        )}
-                      </div>
-                      <div className="flex flex-col">
-                        <p className="font-medium">{hunter.nom}</p>
-                        {hunter.rarete && (
-                          <Badge variant="outline" className="text-xs mt-1 w-fit">
-                            {hunter.rarete}
-                          </Badge>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </TabsContent>
-
-        <TabsContent value="weapons" className="space-y-6">
-          {Object.entries(weaponTiers).map(([tier, weapons]) => (
-            <Card key={tier} className="overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-solo-purple/20 to-transparent">
-                <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-md bg-solo-purple font-bold text-white">
-                    {tier}
-                  </div>
-                  <CardTitle>Tier {tier}</CardTitle>
-                </div>
-                <CardDescription>
-                  {tier === "S"
-                    ? "Les armes les plus puissantes du jeu"
-                    : tier === "A"
-                    ? "Très bonnes armes pour la plupart des contenus"
-                    : tier === "B"
-                    ? "Armes efficaces dans certaines situations"
-                    : "Armes de base ou plus faibles"} 
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {weapons.map((weapon) => (
-                    <div
-                      key={weapon.id}
-                      className="flex gap-3 rounded-md border p-3 transition-colors hover:bg-secondary"
-                    >
-                      <div className="relative">
-                        <div className="h-16 w-16 overflow-hidden rounded-md bg-muted">
-                          <img
-                            src={weapon.image || "/placeholder.svg"}
-                            alt={weapon.nom}
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
-                        {weapon.arme_element && (
-                          <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <div className="absolute -top-2 -left-2 h-6 w-6 overflow-hidden rounded-full border-2 border-background">
-                                  <img
-                                    src={getElementImageUrl(weapon.arme_element)}
-                                    alt={weapon.arme_element}
-                                    className="h-full w-full object-contain"
-                                    style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
-                                  />
-                                </div>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Élément: {weapon.arme_element}</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
-                        )}
-                      </div>
-                      <div className="flex flex-col">
-                        <p className="font-medium">{weapon.nom}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </TabsContent>
-      </Tabs>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Note sur la Tier List</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>
-            Cette tier list est basée sur les performances générales des hunters et armes dans le contenu PvE et PvP. 
-            Notez que certains hunters peuvent être plus performants dans des contenus spécifiques ou avec 
-            certaines compositions d'équipe, même s'ils sont classés dans un tier inférieur.
-          </p>
-          <p className="mt-4">
-            Nous mettons à jour cette liste régulièrement après les patchs majeurs du jeu 
-            pour refléter les changements d'équilibrage.
-          </p>
-        </CardContent>
-      </Card>
     </Layout>
   );
-};
+}
 
-export default TierList;
+function HuntersTab() {
+  const [chasseurs, setChasseurs] = useState<Chasseur[]>([]);
+
+  useEffect(() => {
+    // Récupère tous les chasseurs depuis Supabase
+    const fetchChasseurs = async () => {
+      const { data } = await supabase.from("chasseurs").select("*");
+      if (data) setChasseurs(data);
+    };
+    fetchChasseurs();
+  }, []);
+
+  const huntersByTier = Object.entries(hunterTiers).reduce((acc, [tier, ids]) => {
+    acc[tier] = chasseurs.filter((h) => ids.includes(Number(h.id)));
+    return acc;
+  }, {} as Record<string, Chasseur[]>);
+
+  return (
+    <div className="space-y-10">
+      {Object.entries(huntersByTier).map(([tier, hunters]) => (
+        <div key={tier}>
+          <h2 className="text-2xl font-bold mb-4">Tier {tier}</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {hunters.map((hunter) => (
+              <div
+                key={hunter.id}
+                className="relative bg-[#1e1e2e] rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition"
+              >
+                <img
+                  src={hunter.image || ""}
+                  alt={hunter.nom}
+                  className="w-20 h-20 mx-auto rounded-full object-cover"
+                />
+                {hunter.element && (
+                  <img
+                    src={hunter.element}
+                    alt="Élément"
+                    className="absolute top-2 left-2 w-6 h-6"
+                  />
+                )}
+                <p className="font-medium mt-2 text-sm truncate">{hunter.nom}</p>
+                <p className="text-xs text-gray-400">{hunter.rarete}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function WeaponsTab() {
+  const [armes, setArmes] = useState<Arme[]>([]);
+
+  useEffect(() => {
+    // Récupère toutes les armes depuis Supabase
+    const fetchArmes = async () => {
+      const { data } = await supabase.from("jinwoo_armes").select("*");
+      if (data) setArmes(data);
+    };
+    fetchArmes();
+  }, []);
+
+  const armesByTier = Object.entries(weaponTiers).reduce((acc, [tier, ids]) => {
+    acc[tier] = armes.filter((a) => ids.includes(Number(a.id)));
+    return acc;
+  }, {} as Record<string, Arme[]>);
+
+  return (
+    <div className="space-y-10">
+      {Object.entries(armesByTier).map(([tier, armes]) => (
+        <div key={tier}>
+          <h2 className="text-2xl font-bold mb-4">Tier {tier}</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {armes.map((arme) => (
+              <div
+                key={arme.id}
+                className="relative bg-[#1e1e2e] rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition"
+              >
+                <img
+                  src={arme.image || ""}
+                  alt={arme.nom}
+                  className="w-20 h-20 mx-auto rounded-full object-cover"
+                />
+                {arme.arme_element && (
+                  <img
+                    src={arme.arme_element}
+                    alt="Élément"
+                    className="absolute top-2 left-2 w-6 h-6"
+                  />
+                )}
+                <p className="font-medium mt-2 text-sm truncate">{arme.nom}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function TeamsTab({
+  tiers,
+  teamSize,
+}: {
+  tiers: Record<string, { id: number; name: string; hunters: number[] }[]>;
+  teamSize: 3 | 4;
+}) {
+  const [chasseurs, setChasseurs] = useState<Chasseur[]>([]);
+
+  useEffect(() => {
+    const fetchChasseurs = async () => {
+      const { data } = await supabase.from("chasseurs").select("*");
+      if (data) setChasseurs(data);
+    };
+    fetchChasseurs();
+  }, []);
+
+  return (
+    <div className="space-y-10">
+      {Object.entries(tiers).map(([tier, teams]) => (
+        <div key={tier}>
+          <h2 className="text-2xl font-bold mb-4">Tier {tier}</h2>
+          <div className="space-y-6">
+            {teams.map((team) => (
+              <div key={team.id}>
+                <p className="text-lg font-semibold mb-2">{team.name}</p>
+                <div
+                  className={`grid gap-4 ${
+                    teamSize === 4 ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-3 sm:grid-cols-3"
+                  }`}
+                >
+                  {team.hunters.map((hunterId) => {
+                    const hunter = chasseurs.find((h) => Number(h.id) === hunterId);
+                    return (
+                      hunter && (
+                        <div
+                          key={hunter.id}
+                          className="relative bg-[#1e1e2e] rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition"
+                        >
+                          <img
+                            src={hunter.image || ""}
+                            alt={hunter.nom}
+                            className="w-20 h-20 mx-auto rounded-full object-cover"
+                          />
+                          {hunter.element && (
+                            <img
+                              src={hunter.element}
+                              alt="Élément"
+                              className="absolute top-2 left-2 w-6 h-6"
+                            />
+                          )}
+                          <p className="font-medium mt-2 text-sm truncate">{hunter.nom}</p>
+                        </div>
+                      )
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}

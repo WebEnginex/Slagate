@@ -90,37 +90,44 @@ const PromoCodes = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="space-y-1">
-            <p className="font-medium">1. Lancez le jeu Solo Leveling: Arise</p>
-            <p className="text-sm text-muted-foreground">
-              Assurez-vous d'être connecté à votre compte.
-            </p>
-          </div>
-          <div className="space-y-1">
-            <p className="font-medium">2. Accédez au menu des paramètres</p>
-            <p className="text-sm text-muted-foreground">
-              Appuyez sur l'icône d'engrenage dans le coin supérieur droit de l'écran.
-            </p>
-          </div>
-          <div className="space-y-1">
-            <p className="font-medium">3. Sélectionnez "Codes promo"</p>
-            <p className="text-sm text-muted-foreground">
-              Cette option se trouve généralement au bas du menu des paramètres.
-            </p>
-          </div>
-          <div className="space-y-1">
-            <p className="font-medium">4. Entrez le code</p>
-            <p className="text-sm text-muted-foreground">
-              Copiez le code de cette page et collez-le dans le champ de saisie du jeu.
-            </p>
-          </div>
-          <div className="space-y-1">
-            <p className="font-medium">5. Réclamez vos récompenses</p>
-            <p className="text-sm text-muted-foreground">
-              Après avoir validé le code, vos récompenses seront envoyées directement dans votre boîte de réception.
-            </p>
-          </div>
-        </CardContent>
+  <div className="space-y-1">
+    <p className="font-medium">1. Lancez le jeu Solo Leveling: Arise</p>
+    <p className="text-sm text-muted-foreground">
+      Assurez-vous d'être connecté à votre compte.
+    </p>
+  </div>
+  <div className="space-y-1">
+    <p className="font-medium">2. Accédez au menu des paramètres</p>
+    <p className="text-sm text-muted-foreground">
+      Appuyez sur l'icône avec les quatre carrés dans le coin supérieur droit de l'écran. Ensuite, cliquez sur l'icône d'engrenage en bas à droite.
+    </p>
+  </div>
+  <div className="space-y-1">
+    <p className="font-medium">3. Accédez à la gestion du compte</p>
+    <p className="text-sm text-muted-foreground">
+      Cliquez sur "Comptes" dans le menu latéral à gauche.
+    </p>
+  </div>
+  <div className="space-y-1">
+    <p className="font-medium">4. Ouvrez l’interface des codes</p>
+    <p className="text-sm text-muted-foreground">
+      Cliquez sur le bouton "Saisir un code" en bas à droite.
+    </p>
+  </div>
+  <div className="space-y-1">
+    <p className="font-medium">5. Entrez votre code</p>
+    <p className="text-sm text-muted-foreground">
+      Une fenêtre s’ouvre. Vous pouvez coller ou écrire le code promo, puis cliquer sur "Utiliser" pour valider.
+    </p>
+  </div>
+  <div className="space-y-1">
+    <p className="font-medium">6. Récupérez vos récompenses</p>
+    <p className="text-sm text-muted-foreground">
+      Les récompenses seront envoyées directement dans votre messagerie en jeu. Ouvrez-la pour les récupérer.
+    </p>
+  </div>
+</CardContent>
+
       </Card>
 
       <h2 className="mb-4 text-2xl font-bold">Codes Actifs</h2>
@@ -148,31 +155,6 @@ const PromoCodes = () => {
                     </Button>
                   </CardTitle>
                   <CardDescription>Expire le {code.expiryDate}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm font-medium">Récompenses:</p>
-                  <p className="text-sm text-muted-foreground">{code.rewards}</p>
-                </CardContent>
-              </div>
-            </Card>
-          ))}
-      </div>
-
-      <h2 className="mb-4 text-2xl font-bold">Codes Expirés</h2>
-      <div className="grid gap-4 md:grid-cols-2">
-        {promoCodes
-          .filter((code) => !code.isActive)
-          .map((code, index) => (
-            <Card key={index} className="overflow-hidden opacity-60">
-              <div className="border-l-4 border-gray-500">
-                <CardHeader className="pb-2">
-                  <CardTitle className="flex items-center justify-between">
-                    <span>{code.code}</span>
-                    <span className="rounded bg-red-500/10 px-2 py-1 text-xs text-red-400">
-                      Expiré
-                    </span>
-                  </CardTitle>
-                  <CardDescription>A expiré le {code.expiryDate}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm font-medium">Récompenses:</p>
