@@ -27,21 +27,21 @@ export default function AtelierDeLaLumiere() {
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8 space-y-2">
+      <div className="container mx-auto px-4 py-6 sm:py-8">
+        <div className="mb-6 sm:mb-8 space-y-2">
           <div className="flex items-center gap-2">
-            <Flame className="h-6 w-6 text-solo-purple sm:h-7 sm:w-7" />
-            <h1 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+            <Flame className="h-5 w-5 text-solo-purple sm:h-6 sm:w-6" />
+            <h1 className="text-2xl font-bold text-white sm:text-3xl md:text-4xl">
               Atelier de la Lumière
             </h1>
           </div>
           <Separator className="bg-sidebar-border" />
-          <p className="text-muted-foreground text-sm sm:text-base">
+          <p className="text-muted-foreground text-xs sm:text-sm">
             Sélectionnez un boss pour voir plus de détails
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-3 xl:grid-cols-4">
           {bosses.map((boss) => (
             <Card
               key={boss.id}
@@ -51,45 +51,45 @@ export default function AtelierDeLaLumiere() {
               <CardContent className="p-0 flex-grow flex flex-col">
                 <div className="relative">
                   <AspectRatio ratio={16 / 9}>
-                    <div className="flex h-full items-center justify-center bg-sidebar-accent p-4 transition-transform duration-500 group-hover:scale-105">
+                    <div className="flex h-full items-center justify-center bg-sidebar-accent p-3 transition-transform duration-500 group-hover:scale-105">
                       <img
                         src={boss.image || ""}
                         alt={boss.nom}
-                        className="h-full max-h-[140px] w-auto object-contain"
+                        className="h-full max-h-[120px] w-auto object-contain"
                       />
                     </div>
                   </AspectRatio>
                 </div>
-                <div className="p-4 flex flex-col flex-grow">
-                  <h2 className="text-lg sm:text-xl font-semibold text-white transition-colors group-hover:text-solo-purple mb-3">
+                <div className="p-3 sm:p-4 flex flex-col flex-grow">
+                  <h2 className="text-base sm:text-lg font-semibold text-white transition-colors group-hover:text-solo-purple mb-2">
                     {boss.nom}
                   </h2>
                   
-                  <div className="mt-auto pt-3 border-t border-sidebar-border space-y-2 sm:space-y-0">
-                    <div className="flex items-center justify-between text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1">
-                        <span className="mr-1 text-xs sm:text-sm">Faiblesses:</span>
-                        <div className="flex gap-1">
+                  <div className="mt-auto pt-2 border-t border-sidebar-border">
+                    <div className="flex items-center justify-between text-xs sm:text-sm text-muted-foreground gap-1">
+                      <div className="flex items-center gap-1 min-w-0">
+                        <span className="whitespace-nowrap">Faiblesses:</span>
+                        <div className="flex flex-shrink-0 gap-1">
                           {boss.faiblesse1 && (
                             <img
                               src={boss.faiblesse1}
                               alt="Faiblesse 1"
-                              className="h-4 w-4 sm:h-5 sm:w-5 object-contain"
+                              className="h-4 w-4 object-contain"
                             />
                           )}
                           {boss.faiblesse2 && (
                             <img
                               src={boss.faiblesse2}
                               alt="Faiblesse 2"
-                              className="h-4 w-4 sm:h-5 sm:w-5 object-contain"
+                              className="h-4 w-4 object-contain"
                             />
                           )}
                         </div>
                       </div>
                       
-                      <div className="flex items-center">
-                        <Sword className="mr-1 h-3 w-3 sm:h-4 sm:w-4 text-solo-purple" />
-                        <span className="text-xs sm:text-sm whitespace-nowrap">{boss.puissance_facile}</span>
+                      <div className="flex items-center flex-shrink-0">
+                        <Sword className="mr-1 h-3 w-3 text-solo-purple" />
+                        <span className="whitespace-nowrap">{boss.puissance_facile}</span>
                       </div>
                     </div>
                   </div>
@@ -100,9 +100,9 @@ export default function AtelierDeLaLumiere() {
         </div>
         
         {bosses.length === 0 && (
-          <div className="mt-16 flex flex-col items-center justify-center">
-            <Flame className="h-12 w-12 sm:h-16 sm:w-16 text-muted-foreground/50" />
-            <p className="mt-4 text-center text-muted-foreground text-sm sm:text-base">
+          <div className="mt-12 flex flex-col items-center justify-center">
+            <Flame className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground/50" />
+            <p className="mt-4 text-center text-muted-foreground text-sm">
               Chargement des boss...
             </p>
           </div>
