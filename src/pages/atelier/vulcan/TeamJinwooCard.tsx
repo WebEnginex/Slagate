@@ -4,8 +4,8 @@ import type { Database } from "@/integrations/supabase/types";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ChevronDown, ChevronUp, Star, Shield, Sword, BarChart } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { TeamVulcanJinwoo } from "@/config/atelier/vulcan/teamVulcanJinwoo";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 type Props = {
   team: TeamVulcanJinwoo;
@@ -47,32 +47,50 @@ export default function TeamJinwooCard({
   };
 
   return (
-    <Card className="mb-10 bg-card shadow-lg border-muted overflow-hidden">
+    <Card className="mb-10 bg-sidebar border-sidebar-border overflow-hidden">
       <CardHeader 
-        className={`p-4 flex flex-row items-center justify-between bg-gradient-to-r from-sidebar-accent to-card cursor-pointer transition-colors hover:from-sidebar-accent/80 hover:to-card/80`}
+        className={`p-4 flex flex-row items-center justify-between bg-sidebar cursor-pointer transition-colors hover:bg-sidebar/90`}
         onClick={() => toggleTeam(team.id)}
       >
-        <CardTitle className="text-xl font-bold flex items-center gap-2">
-          <Sword className="h-5 w-5 text-primary" />
+        <CardTitle className="text-xl font-bold flex items-center gap-2 text-white">
+          <Sword className="h-5 w-5 text-solo-purple" />
           {team.nom}
         </CardTitle>
         {expandedTeamId === team.id ? (
-          <ChevronUp className="h-5 w-5 text-muted-foreground" />
+          <ChevronUp className="h-5 w-5 text-white" />
         ) : (
-          <ChevronDown className="h-5 w-5 text-muted-foreground" />
+          <ChevronDown className="h-5 w-5 text-white" />
         )}
       </CardHeader>
 
+      {expandedTeamId !== team.id && (
+        <CardContent className="p-4 bg-sidebar-accent">
+          <div className="flex items-center justify-center gap-4 py-2">
+            {team.chasseurs.map((ch, idx) => {
+              const chasseur = getFromList(chasseurs, ch.id);
+              return (
+                <div key={idx} className="flex flex-col items-center">
+                  <Avatar className="w-20 h-20 border-2 border-sidebar-border shadow-md">
+                    <AvatarImage src={chasseur?.image || ""} alt={chasseur?.nom} />
+                  </Avatar>
+                  <p className="mt-2 text-xs text-white text-center">{chasseur?.nom}</p>
+                </div>
+              );
+            })}
+          </div>
+        </CardContent>
+      )}
+
       {expandedTeamId === team.id && (
-        <CardContent className="p-4 pt-6">
+        <CardContent className="p-4 pt-6 bg-sidebar-accent">
           <div className="space-y-6">
             {/* Chasseurs selection */}
-            <div className="bg-muted/40 p-3 rounded-lg">
-              <h4 className="text-sm font-medium mb-3 text-muted-foreground flex items-center gap-1.5">
-                <Star className="h-4 w-4 text-primary" />
+            <div className="bg-sidebar/50 p-3 rounded-lg">
+              <h4 className="text-sm font-medium mb-3 text-white flex items-center gap-1.5">
+                <Star className="h-4 w-4 text-solo-purple" />
                 Chasseurs
               </h4>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3 justify-center">
                 {team.chasseurs.map((ch, idx) => {
                   const chasseur = getFromList(chasseurs, ch.id);
                   return (
@@ -81,9 +99,9 @@ export default function TeamJinwooCard({
                       className={`relative group cursor-pointer transition-all duration-200 hover:scale-105`}
                       onClick={() => setSelectedChasseurId(ch.id)}
                     >
-                      <div className={`w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 ${
+                      <div className={`w-20 h-20 rounded-full overflow-hidden border-2 ${
                         selectedChasseurId === ch.id
-                          ? "border-primary shadow-md shadow-primary/20"
+                          ? "border-solo-purple shadow-lg shadow-solo-purple/30"
                           : "border-transparent"
                       }`}>
                         <img
@@ -93,11 +111,11 @@ export default function TeamJinwooCard({
                         />
                       </div>
                       <div className={`absolute -bottom-1 -right-1 rounded-full p-0.5 ${
-                        selectedChasseurId === ch.id ? "bg-primary" : "bg-muted"
+                        selectedChasseurId === ch.id ? "bg-solo-purple" : "bg-sidebar"
                       }`}>
-                        <Star className="h-3 w-3 text-background" fill={selectedChasseurId === ch.id ? "currentColor" : "none"} />
+                        <Star className="h-3 w-3 text-white" fill={selectedChasseurId === ch.id ? "currentColor" : "none"} />
                       </div>
-                      <div className="opacity-0 group-hover:opacity-100 absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-popover border border-border text-xs py-1 px-2 rounded whitespace-nowrap transition-opacity">
+                      <div className="opacity-0 group-hover:opacity-100 absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-sidebar-accent border border-sidebar-border text-xs py-1 px-2 rounded whitespace-nowrap transition-opacity text-white">
                         {chasseur?.nom}
                       </div>
                     </div>
@@ -114,27 +132,27 @@ export default function TeamJinwooCard({
               return (
                 <div key={index} className="space-y-6">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-lg font-bold flex items-center gap-2">
+                    <h4 className="text-lg font-bold flex items-center gap-2 text-white">
                       <img 
                         src={chasseur.image} 
                         alt={chasseur.nom} 
-                        className="w-8 h-8 rounded-full" 
+                        className="w-8 h-8 rounded-full border border-sidebar-border" 
                       />
                       {chasseur.nom}
                     </h4>
                   </div>
 
                   {/* Stats */}
-                  <div className="bg-muted/40 p-4 rounded-lg">
-                    <h5 className="font-medium mb-3 flex items-center gap-1.5 text-sm">
-                      <BarChart className="h-4 w-4 text-primary" />
+                  <div className="bg-sidebar/50 p-4 rounded-lg">
+                    <h5 className="font-medium mb-4 flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border pb-2">
+                      <BarChart className="h-4 w-4 text-solo-purple" />
                       Statistiques
                     </h5>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       {Object.entries(ch.stats).map(([label, val]) => (
-                        <div key={label} className="bg-background p-2 rounded border border-border">
-                          <div className="text-xs text-muted-foreground">{label}</div>
-                          <div className="font-medium">{val}</div>
+                        <div key={label} className="bg-sidebar p-3 rounded border border-sidebar-border">
+                          <div className="text-xs text-solo-light-purple mb-1">{label}</div>
+                          <div className="font-medium text-white">{val}</div>
                         </div>
                       ))}
                     </div>
@@ -142,30 +160,30 @@ export default function TeamJinwooCard({
 
                   {/* Armes - uniquement pour le 1er chasseur */}
                   {selectedChasseurId === team.chasseurs[0]?.id && (
-                    <div className="bg-muted/40 p-4 rounded-lg">
-                      <h5 className="font-medium mb-3 flex items-center gap-1.5 text-sm">
-                        <Sword className="h-4 w-4 text-primary" />
+                    <div className="bg-sidebar/50 p-4 rounded-lg">
+                      <h5 className="font-medium mb-4 flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border pb-2">
+                        <Sword className="h-4 w-4 text-solo-purple" />
                         Armes
                       </h5>
-                      <div className="flex gap-4 mt-2">
+                      <div className="flex gap-4 mt-2 justify-center">
                         {[team.arme1, team.arme2].map((armeId, i) => {
                           const arme = getFromList(armes, armeId);
                           if (!arme) return null;
                           return (
-                            <div key={i} className="bg-background p-3 rounded-lg border border-border text-center w-24">
+                            <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border text-center w-32">
                               <div className="relative mb-2">
                                 <img
                                   src={arme.image}
-                                  className="w-16 h-16 mx-auto object-contain"
+                                  className="w-20 h-20 mx-auto object-contain"
                                 />
                                 <div className="absolute -bottom-1 -right-1">
                                   <img
                                     src={arme.arme_element}
-                                    className="w-6 h-6 rounded-full border border-border"
+                                    className="w-6 h-6 rounded-full border border-sidebar-border"
                                   />
                                 </div>
                               </div>
-                              <p className="text-sm font-medium truncate">{arme.nom}</p>
+                              <p className="text-sm font-medium truncate text-white">{arme.nom}</p>
                             </div>
                           );
                         })}
@@ -174,30 +192,31 @@ export default function TeamJinwooCard({
                   )}
 
                   {/* Artefacts */}
-                  <div className="bg-muted/40 p-4 rounded-lg">
-                    <h5 className="font-medium mb-3 flex items-center gap-1.5 text-sm">
-                      <Shield className="h-4 w-4 text-primary" />
+                  <div className="bg-sidebar/50 p-4 rounded-lg">
+                    <h5 className="font-medium mb-4 flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border pb-2">
+                      <Shield className="h-4 w-4 text-solo-purple" />
                       Artefacts
                     </h5>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       {Object.entries(ch.artefacts).map(([slot, data]) => {
                         const art = getFromList(artefacts, data.id);
                         return (
-                          <div key={slot} className="bg-background p-3 rounded-lg border border-border">
+                          <div key={slot} className="bg-sidebar p-3 rounded-lg border border-sidebar-border">
                             <div className="flex flex-col items-center">
+                              <p className="mb-2 text-xs font-semibold text-solo-light-purple">{slot}</p>
                               <img
                                 src={art?.image || ""}
                                 className="w-16 h-16 mx-auto object-contain"
                               />
-                              <p className="mt-1 text-xs font-medium text-center">{art?.nom}</p>
+                              <p className="mt-1 text-xs font-medium text-center text-white">{art?.nom}</p>
                               
                               <div className="w-full mt-2">
-                                <div className="text-xs bg-primary/20 text-primary-foreground px-2 py-1 rounded mb-1.5 font-medium text-center">
+                                <div className="text-xs bg-solo-purple/20 text-white px-2 py-1 rounded mb-2 font-medium text-center">
                                   {data.statPrincipale}
                                 </div>
                                 <div className="space-y-1">
                                   {data.statsSecondaires.map((s, i) => (
-                                    <div key={i} className="text-xs text-muted-foreground px-2 py-0.5 bg-muted/50 rounded text-center">
+                                    <div key={i} className="text-xs text-gray-300 px-2 py-0.5 bg-sidebar-accent rounded text-center">
                                       {s}
                                     </div>
                                   ))}
@@ -211,9 +230,9 @@ export default function TeamJinwooCard({
                   </div>
 
                   {/* Sets Bonus */}
-                  <div className="bg-muted/40 p-4 rounded-lg">
-                    <h5 className="font-medium mb-3 flex items-center gap-1.5 text-sm">
-                      <Star className="h-4 w-4 text-primary" />
+                  <div className="bg-sidebar/50 p-4 rounded-lg">
+                    <h5 className="font-medium mb-4 flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border pb-2">
+                      <Star className="h-4 w-4 text-solo-purple" />
                       Sets Bonus
                     </h5>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
@@ -221,9 +240,9 @@ export default function TeamJinwooCard({
                         const bonus = getFromList(setsBonus, sb.id);
                         if (!bonus) return null;
                         return (
-                          <div key={i} className="bg-background p-3 rounded-lg border border-border">
-                            <p className="font-semibold text-sm">{bonus.nom}</p>
-                            <p className="text-xs text-muted-foreground mt-1">
+                          <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border">
+                            <p className="font-semibold text-sm text-solo-purple">{bonus.nom} ({sb.pieces})</p>
+                            <p className="text-xs text-gray-300 mt-2">
                               {bonus.description}
                             </p>
                           </div>
@@ -233,33 +252,36 @@ export default function TeamJinwooCard({
                   </div>
 
                   {/* Noyaux */}
-                  <div className="bg-muted/40 p-4 rounded-lg">
-                    <h5 className="font-medium mb-3 flex items-center gap-1.5 text-sm">
-                      <Shield className="h-4 w-4 text-primary" />
+                  <div className="bg-sidebar/50 p-4 rounded-lg">
+                    <h5 className="font-medium mb-4 flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border pb-2">
+                      <Shield className="h-4 w-4 text-solo-purple" />
                       Noyaux
                     </h5>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       {ch.noyaux.map((n, i) => {
                         const noyau = getFromList(noyaux, n.id);
                         return (
-                          <div key={i} className="bg-background p-3 rounded-lg border border-border flex items-start gap-3">
-                            <img
-                              src={noyau?.image || ""}
-                              className="w-12 h-12 object-contain"
-                            />
-                            <div>
-                              <p className="text-sm font-semibold">{noyau?.nom}</p>
-                              <div className="mt-1 space-y-1">
-                                <div className="text-xs bg-primary/20 text-primary-foreground px-2 py-0.5 rounded">
-                                  {n.statPrincipale}
-                                </div>
-                                {n.statSecondaire && (
-                                  <div className="text-xs text-muted-foreground px-2 py-0.5 bg-muted/50 rounded">
-                                    {n.statSecondaire}
-                                  </div>
-                                )}
+                          <div key={i} className="bg-sidebar p-4 rounded-lg border border-sidebar-border">
+                            <div className="flex flex-col">
+                              <div className="flex flex-col items-center mb-3">
+                                <img
+                                  src={noyau?.image || ""}
+                                  className="w-16 h-16 object-contain mb-2"
+                                />
+                                <p className="text-sm font-semibold text-white text-center">{noyau?.nom}</p>
                               </div>
-                              <p className="text-xs text-muted-foreground mt-1.5">{noyau?.description}</p>
+                              
+                              <div className="bg-solo-purple/20 text-white text-xs px-3 py-1.5 rounded-md mb-2 text-center font-medium">
+                                {n.statPrincipale}
+                              </div>
+                              
+                              {n.statSecondaire && (
+                                <div className="bg-sidebar-accent text-gray-300 text-xs px-3 py-1.5 rounded-md mb-2 text-center">
+                                  {n.statSecondaire}
+                                </div>
+                              )}
+                              
+                              <p className="text-xs text-gray-300 mt-1.5 text-center">{noyau?.description}</p>
                             </div>
                           </div>
                         );
@@ -268,9 +290,9 @@ export default function TeamJinwooCard({
                   </div>
 
                   {/* Ombres */}
-                  <div className="bg-muted/40 p-4 rounded-lg">
-                    <h5 className="font-medium mb-3 flex items-center gap-1.5 text-sm">
-                      <Star className="h-4 w-4 text-primary" />
+                  <div className="bg-sidebar/50 p-4 rounded-lg">
+                    <h5 className="font-medium mb-4 flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border pb-2">
+                      <Star className="h-4 w-4 text-solo-purple" />
                       Ombres
                     </h5>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -278,24 +300,20 @@ export default function TeamJinwooCard({
                         const ombre = getFromList(ombres, o.id);
                         if (!ombre) return null;
                         return (
-                          <div key={i} className="bg-background p-3 rounded-lg border border-border">
-                            <div className="flex items-center gap-3 mb-2">
-                              <div className="flex-shrink-0 relative">
-                                <img
-                                  src={ombre.image || ""}
-                                  className="w-12 h-12 object-contain"
-                                />
-                                <div className="absolute -top-1 -right-1 bg-primary text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center text-white">
-                                  {i + 1}
-                                </div>
-                              </div>
-                              <div className="flex-1">
-                                <p className="text-sm font-medium">{ombre.nom}</p>
+                          <div key={i} className="bg-sidebar p-4 rounded-lg border border-sidebar-border flex flex-col items-center">
+                            <div className="relative mb-2">
+                              <img
+                                src={ombre.image || ""}
+                                className="w-16 h-16 object-contain"
+                              />
+                              <div className="absolute -top-2 -right-2 bg-solo-purple text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center text-white border-2 border-sidebar">
+                                {i + 1}
                               </div>
                             </div>
+                            <p className="text-sm font-medium text-white text-center">{ombre.nom}</p>
                             {o.description && (
-                              <p className="text-xs text-muted-foreground mt-1 border-t border-border pt-2">
-                                {o.description}
+                              <p className="text-xs text-gray-300 mt-3 text-center">
+                                <span className="text-solo-purple font-medium">{ombre.nom}:</span> {o.description}
                               </p>
                             )}
                           </div>
@@ -308,9 +326,9 @@ export default function TeamJinwooCard({
                   {selectedChasseurId === team.chasseurs[0]?.id && (
                     <>
                       {/* Compétences */}
-                      <div className="bg-muted/40 p-4 rounded-lg">
-                        <h5 className="font-medium mb-3 flex items-center gap-1.5 text-sm">
-                          <Sword className="h-4 w-4 text-primary" />
+                      <div className="bg-sidebar/50 p-4 rounded-lg">
+                        <h5 className="font-medium mb-4 flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border pb-2">
+                          <Sword className="h-4 w-4 text-solo-purple" />
                           Compétences
                         </h5>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -318,14 +336,14 @@ export default function TeamJinwooCard({
                             const skill = getFromList(competences, id);
                             if (!skill) return null;
                             return (
-                              <div key={i} className="bg-background p-3 rounded-lg border border-border flex items-start gap-3">
+                              <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border flex items-start gap-3">
                                 <img
                                   src={skill.image || ""}
                                   className="w-14 h-14 object-contain"
                                 />
                                 <div>
-                                  <p className="text-sm font-medium">{skill.nom}</p>
-                                  <p className="text-xs text-muted-foreground mt-1">
+                                  <p className="text-sm font-medium text-white">{skill.nom}</p>
+                                  <p className="text-xs text-gray-300 mt-1">
                                     {skill.description}
                                   </p>
                                 </div>
@@ -336,9 +354,9 @@ export default function TeamJinwooCard({
                       </div>
 
                       {/* QTE */}
-                      <div className="bg-muted/40 p-4 rounded-lg">
-                        <h5 className="font-medium mb-3 flex items-center gap-1.5 text-sm">
-                          <Sword className="h-4 w-4 text-primary" />
+                      <div className="bg-sidebar/50 p-4 rounded-lg">
+                        <h5 className="font-medium mb-4 flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border pb-2">
+                          <Sword className="h-4 w-4 text-solo-purple" />
                           QTE
                         </h5>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -346,14 +364,14 @@ export default function TeamJinwooCard({
                             const qte = getFromList(qtes, id);
                             if (!qte) return null;
                             return (
-                              <div key={i} className="bg-background p-3 rounded-lg border border-border flex items-start gap-3">
+                              <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border flex items-start gap-3">
                                 <img
                                   src={qte.image || ""}
                                   className="w-14 h-14 object-contain"
                                 />
                                 <div>
-                                  <p className="text-sm font-medium">{qte.nom}</p>
-                                  <p className="text-xs text-muted-foreground mt-1">
+                                  <p className="text-sm font-medium text-white">{qte.nom}</p>
+                                  <p className="text-xs text-gray-300 mt-1">
                                     {qte.description}
                                   </p>
                                 </div>
@@ -364,14 +382,14 @@ export default function TeamJinwooCard({
                       </div>
 
                       {/* Pierres de bénédiction */}
-                      <div className="bg-muted/40 p-4 rounded-lg">
-                        <h5 className="font-medium mb-3 flex items-center gap-1.5 text-sm">
-                          <Shield className="h-4 w-4 text-primary" />
+                      <div className="bg-sidebar/50 p-4 rounded-lg">
+                        <h5 className="font-medium mb-4 flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border pb-2">
+                          <Shield className="h-4 w-4 text-solo-purple" />
                           Pierres de Bénédiction
                         </h5>
-                        <div className="space-y-3">
+                        <div className="space-y-4">
                           <div>
-                            <h6 className="text-xs font-medium mb-2 text-muted-foreground">Pierres Booster</h6>
+                            <h6 className="text-xs font-medium mb-3 text-solo-light-purple ml-1">Pierres Booster</h6>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                               {[
                                 team.pierre_benediction_booster1,
@@ -382,13 +400,13 @@ export default function TeamJinwooCard({
                                 const pierre = getFromList(pierres, id);
                                 if (!pierre) return null;
                                 return (
-                                  <div key={i} className="bg-background p-3 rounded-lg border border-border text-center">
+                                  <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border flex flex-col items-center">
                                     <img
                                       src={pierre.image || ""}
-                                      className="w-12 h-12 mx-auto object-contain"
+                                      className="w-12 h-12 object-contain mb-2"
                                     />
-                                    <p className="text-xs font-medium mt-1">{pierre.nom}</p>
-                                    <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
+                                    <p className="text-xs font-medium text-white text-center">{pierre.nom}</p>
+                                    <p className="text-xs text-gray-300 mt-2 text-center line-clamp-2">
                                       {pierre.description}
                                     </p>
                                   </div>
@@ -398,7 +416,7 @@ export default function TeamJinwooCard({
                           </div>
                           
                           <div>
-                            <h6 className="text-xs font-medium mb-2 text-muted-foreground">Pierres Survie</h6>
+                            <h6 className="text-xs font-medium mb-3 text-solo-light-purple ml-1">Pierres Survie</h6>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                               {[
                                 team.pierre_benediction_survie1,
@@ -409,13 +427,13 @@ export default function TeamJinwooCard({
                                 const pierre = getFromList(pierres, id);
                                 if (!pierre) return null;
                                 return (
-                                  <div key={i} className="bg-background p-3 rounded-lg border border-border text-center">
+                                  <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border flex flex-col items-center">
                                     <img
                                       src={pierre.image || ""}
-                                      className="w-12 h-12 mx-auto object-contain"
+                                      className="w-12 h-12 object-contain mb-2"
                                     />
-                                    <p className="text-xs font-medium mt-1">{pierre.nom}</p>
-                                    <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
+                                    <p className="text-xs font-medium text-white text-center">{pierre.nom}</p>
+                                    <p className="text-xs text-gray-300 mt-2 text-center line-clamp-2">
                                       {pierre.description}
                                     </p>
                                   </div>
