@@ -29,16 +29,16 @@ export default function AtelierDeLaLumiere() {
 
   return (
     <Layout>
-      <div className="container px-4 py-6">
-        <Link
-          to="/atelier"
-          className="mb-6 inline-flex items-center text-sm font-medium text-solo-purple hover:underline"
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Retour à l'Atelier de la Lumière
-        </Link>
-        
-        <div className="max-w-4xl mx-auto mt-4">
+      <div className="w-full px-4 py-6">
+        <div className="max-w-7xl mx-auto">
+          <Link
+            to="/atelier"
+            className="mb-6 inline-flex items-center text-sm font-medium text-solo-purple hover:underline"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Retour à l'Atelier de la Lumière
+          </Link>
+          
           <h1 className="text-2xl sm:text-3xl font-bold mb-6">{boss.nom}</h1>
 
           <Tabs defaultValue="facile" className="w-full">
@@ -56,11 +56,13 @@ export default function AtelierDeLaLumiere() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="grid sm:grid-cols-2 gap-6">
-                  <img
-                    src={boss.image || ""}
-                    alt={boss.nom}
-                    className="w-full h-auto object-contain rounded"
-                  />
+                  <div className="flex items-center justify-center">
+                    <img
+                      src={boss.image || ""}
+                      alt={boss.nom}
+                      className="w-full max-h-[300px] object-contain rounded"
+                    />
+                  </div>
                   <div className="space-y-4">
                     <p className="text-white">
                       Puissance requise : {boss.puissance_facile}
@@ -93,11 +95,13 @@ export default function AtelierDeLaLumiere() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="grid sm:grid-cols-2 gap-6">
-                  <img
-                    src={boss.image || ""}
-                    alt={boss.nom}
-                    className="w-full h-auto object-contain rounded"
-                  />
+                  <div className="flex items-center justify-center">
+                    <img
+                      src={boss.image || ""}
+                      alt={boss.nom}
+                      className="w-full max-h-[300px] object-contain rounded"
+                    />
+                  </div>
                   <div className="space-y-4">
                     <p className="text-white">
                       Puissance requise : {boss.puissance_normal}
@@ -130,11 +134,13 @@ export default function AtelierDeLaLumiere() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="grid sm:grid-cols-2 gap-6">
-                  <img
-                    src={boss.image || ""}
-                    alt={boss.nom}
-                    className="w-full h-auto object-contain rounded"
-                  />
+                  <div className="flex items-center justify-center">
+                    <img
+                      src={boss.image || ""}
+                      alt={boss.nom}
+                      className="w-full max-h-[300px] object-contain rounded"
+                    />
+                  </div>
                   <div className="space-y-4">
                     <p className="text-white">
                       Puissance requise : {boss.puissance_difficile}

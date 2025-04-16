@@ -79,88 +79,94 @@ export default function VulcanPage() {
 
   return (
     <Layout>
-      
-      <Link
-        to="/atelier"
-        className="mb-6 inline-flex items-center text-sm font-medium text-solo-purple hover:underline"
-      >
-        <ArrowLeft className="mr-2 h-4 w-4" />
-        Retour à l'Atelier de la Lumière
-      </Link>
+      <div className="w-full px-4 py-6">
+        <div className="max-w-7xl mx-auto">
+          <Link
+            to="/atelier"
+            className="mb-6 inline-flex items-center text-sm font-medium text-solo-purple hover:underline"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Retour à l'Atelier de la Lumière
+          </Link>
 
-      <div className="p-6 max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">{boss?.nom}</h1>
+          <h1 className="text-3xl font-bold mb-6">{boss?.nom}</h1>
 
-        <Tabs defaultValue="facile">
-          <TabsList>
-            <TabsTrigger value="facile">Facile</TabsTrigger>
-            <TabsTrigger value="normal">Normal</TabsTrigger>
-            <TabsTrigger value="difficile">Difficile</TabsTrigger>
-          </TabsList>
+          <Tabs defaultValue="facile">
+            <TabsList>
+              <TabsTrigger value="facile">Facile</TabsTrigger>
+              <TabsTrigger value="normal">Normal</TabsTrigger>
+              <TabsTrigger value="difficile">Difficile</TabsTrigger>
+            </TabsList>
 
-          {["facile", "normal", "difficile"].map((diff) => (
-            <TabsContent key={diff} value={diff}>
-              <Card className="bg-muted">
-                <CardHeader>
-                  <CardTitle>
-                    {boss?.nom} ({diff.charAt(0).toUpperCase() + diff.slice(1)})
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="grid md:grid-cols-2 gap-6">
-                  <img src={boss?.image || ""} className="w-full object-contain" />
-                  <div>
-                    <p className="mb-2">
-                      Puissance requise : {boss?.[`puissance_${diff}` as keyof Boss]}
-                    </p>
-                    <div className="flex gap-2">
-                      <img src={boss?.faiblesse1 || ""} className="h-10 w-10" />
-                      <img src={boss?.faiblesse2 || ""} className="h-10 w-10" />
+            {["facile", "normal", "difficile"].map((diff) => (
+              <TabsContent key={diff} value={diff}>
+                <Card className="bg-muted">
+                  <CardHeader>
+                    <CardTitle>
+                      {boss?.nom} ({diff.charAt(0).toUpperCase() + diff.slice(1)})
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="grid md:grid-cols-2 gap-6">
+                    <div className="flex items-center justify-center">
+                      <img 
+                        src={boss?.image || ""} 
+                        className="w-full max-h-[300px] object-contain" 
+                      />
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                    <div>
+                      <p className="mb-2">
+                        Puissance requise : {boss?.[`puissance_${diff}` as keyof Boss]}
+                      </p>
+                      <div className="flex gap-2">
+                        <img src={boss?.faiblesse1 || ""} className="h-10 w-10" />
+                        <img src={boss?.faiblesse2 || ""} className="h-10 w-10" />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
 
-              <Tabs defaultValue="chasseurs" className="mt-8">
-                <TabsList className="mb-4">
-                  <TabsTrigger value="chasseurs">Teams Chasseurs</TabsTrigger>
-                  <TabsTrigger value="jinwoo">Teams Jinwoo</TabsTrigger>
-                </TabsList>
+                <Tabs defaultValue="chasseurs" className="mt-8">
+                  <TabsList className="mb-4">
+                    <TabsTrigger value="chasseurs">Teams Chasseurs</TabsTrigger>
+                    <TabsTrigger value="jinwoo">Teams Jinwoo</TabsTrigger>
+                  </TabsList>
 
-                <TabsContent value="chasseurs">
-                  {teamVulcanChasseurs.map((team: TeamVulcanChasseur) => (
-                    <TeamChasseurCard
-                      key={team.id}
-                      team={team}
-                      chasseurs={chasseurs}
-                      artefacts={artefacts}
-                      noyaux={noyaux}
-                      ombres={ombres}
-                      setsBonus={setsBonus}
-                    />
-                  ))}
-                </TabsContent>
+                  <TabsContent value="chasseurs">
+                    {teamVulcanChasseurs.map((team: TeamVulcanChasseur) => (
+                      <TeamChasseurCard
+                        key={team.id}
+                        team={team}
+                        chasseurs={chasseurs}
+                        artefacts={artefacts}
+                        noyaux={noyaux}
+                        ombres={ombres}
+                        setsBonus={setsBonus}
+                      />
+                    ))}
+                  </TabsContent>
 
-                <TabsContent value="jinwoo">
-                  {teamVulcanJinwoo.map((team, i) => (
-                    <TeamJinwooCard
-                      key={team.id}
-                      team={team}
-                      chasseurs={chasseurs}
-                      artefacts={artefacts}
-                      noyaux={noyaux}
-                      ombres={ombres}
-                      setsBonus={setsBonus}
-                      armes={armes}
-                      competences={competences}
-                      qtes={qtes}
-                      pierres={pierres}
-                    />
-                  ))}
-                </TabsContent>
-              </Tabs>
-            </TabsContent>
-          ))}
-        </Tabs>
+                  <TabsContent value="jinwoo">
+                    {teamVulcanJinwoo.map((team, i) => (
+                      <TeamJinwooCard
+                        key={team.id}
+                        team={team}
+                        chasseurs={chasseurs}
+                        artefacts={artefacts}
+                        noyaux={noyaux}
+                        ombres={ombres}
+                        setsBonus={setsBonus}
+                        armes={armes}
+                        competences={competences}
+                        qtes={qtes}
+                        pierres={pierres}
+                      />
+                    ))}
+                  </TabsContent>
+                </Tabs>
+              </TabsContent>
+            ))}
+          </Tabs>
+        </div>
       </div>
     </Layout>
   );

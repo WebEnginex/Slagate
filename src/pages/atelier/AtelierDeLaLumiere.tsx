@@ -27,8 +27,8 @@ export default function AtelierDeLaLumiere() {
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-6 sm:py-8 max-w-full">
-        <div className="mb-6 sm:mb-8 space-y-2">
+      <div className="w-full px-4 py-6 sm:py-8">
+        <div className="mb-6 sm:mb-8 space-y-2 max-w-7xl mx-auto">
           <div className="flex items-center gap-2">
             <Flame className="h-5 w-5 text-solo-purple sm:h-6 sm:w-6" />
             <h1 className="text-2xl font-bold text-white sm:text-3xl md:text-4xl">
@@ -41,21 +41,21 @@ export default function AtelierDeLaLumiere() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto gap-4 md:gap-6">
           {bosses.map((boss) => (
             <Card
               key={boss.id}
               onClick={() => navigate(`/atelier/${boss.nom}`)}
-              className="group h-full cursor-pointer overflow-hidden border-sidebar-border bg-sidebar transition-all duration-300 hover:-translate-y-1 hover:border-solo-purple hover:shadow-lg hover:shadow-solo-purple/20 relative flex flex-col w-full"
+              className="group h-full cursor-pointer overflow-hidden border-sidebar-border bg-sidebar transition-all duration-300 hover:-translate-y-1 hover:border-solo-purple hover:shadow-lg hover:shadow-solo-purple/20 relative flex flex-col"
             >
-              <CardContent className="p-0 flex-grow flex flex-col w-full">
-                <div className="relative w-full">
+              <CardContent className="p-0 flex-grow flex flex-col">
+                <div className="relative">
                   <AspectRatio ratio={16 / 9}>
-                    <div className="flex h-full items-center justify-center bg-sidebar-accent p-3 transition-transform duration-500 group-hover:scale-105 w-full">
+                    <div className="flex h-full items-center justify-center bg-sidebar-accent p-3 transition-transform duration-500 group-hover:scale-105">
                       <img
                         src={boss.image || ""}
                         alt={boss.nom}
-                        className="h-full max-h-[120px] w-auto object-contain"
+                        className="h-full max-h-[160px] w-auto object-contain"
                       />
                     </div>
                   </AspectRatio>
