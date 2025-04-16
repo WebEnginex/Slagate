@@ -1,3 +1,4 @@
+
 import Layout from "@/components/Layout";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -29,13 +30,13 @@ export default function AtelierDeLaLumiere() {
       <div className="w-full px-4 py-6 sm:py-8">
         <div className="mb-6 sm:mb-8 space-y-2 max-w-7xl mx-auto">
           <div className="flex items-center gap-2">
-            <Flame className="h-5 w-5 text-solo-purple sm:h-6 sm:w-6" />
+            <Flame className="h-5 w-5 text-solo-purple sm:h-6 sm:w-6 md:h-7 md:w-7" />
             <h1 className="text-2xl font-bold text-white sm:text-3xl md:text-4xl">
               Atelier de la Lumière
             </h1>
           </div>
           <Separator className="bg-sidebar-border" />
-          <p className="text-muted-foreground text-xs sm:text-sm">
+          <p className="text-muted-foreground text-xs sm:text-sm md:text-base">
             Sélectionnez un boss pour voir plus de détails
           </p>
         </div>
@@ -60,32 +61,32 @@ export default function AtelierDeLaLumiere() {
                   </AspectRatio>
                 </div>
                 <div className="p-3 sm:p-4 flex flex-col flex-grow">
-                  <h2 className="text-base sm:text-lg font-semibold text-white transition-colors group-hover:text-solo-purple mb-2">
+                  <h2 className="text-base sm:text-lg md:text-xl font-semibold text-white transition-colors group-hover:text-solo-purple mb-2">
                     {boss.nom}
                   </h2>
                   
                   <div className="mt-auto pt-2 border-t border-sidebar-border">
-                    <div className="flex flex-col space-y-2 text-xs sm:text-sm text-muted-foreground">
+                    <div className="flex flex-col space-y-2 text-xs sm:text-sm md:text-base text-muted-foreground">
                       <div className="flex items-center gap-2">
-                        <Sword className="h-3 w-3 flex-shrink-0 text-solo-purple" />
+                        <Sword className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 flex-shrink-0 text-solo-purple" />
                         <span className="whitespace-nowrap">{boss.puissance_facile}</span>
                       </div>
                       
-                      <div className="flex items-center flex-wrap gap-1">
-                        <span className="whitespace-nowrap mr-1">Faiblesses:</span>
-                        <div className="flex flex-shrink-0 gap-2">
+                      <div className="flex items-center flex-wrap gap-1 sm:gap-2">
+                        <span className="whitespace-nowrap mr-1 text-xs sm:text-sm md:text-base">Faiblesses:</span>
+                        <div className="flex flex-shrink-0 gap-2 sm:gap-3">
                           {boss.faiblesse1 && (
                             <img
                               src={boss.faiblesse1}
                               alt="Faiblesse 1"
-                              className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 object-contain"
+                              className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-9 lg:w-9 object-contain"
                             />
                           )}
                           {boss.faiblesse2 && (
                             <img
                               src={boss.faiblesse2}
                               alt="Faiblesse 2"
-                              className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 object-contain"
+                              className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-9 lg:w-9 object-contain"
                             />
                           )}
                         </div>
@@ -100,8 +101,8 @@ export default function AtelierDeLaLumiere() {
         
         {bosses.length === 0 && (
           <div className="mt-12 flex flex-col items-center justify-center">
-            <Flame className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground/50" />
-            <p className="mt-4 text-center text-muted-foreground text-sm">
+            <Flame className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 text-muted-foreground/50" />
+            <p className="mt-4 text-center text-muted-foreground text-sm sm:text-base md:text-lg">
               Chargement des boss...
             </p>
           </div>
