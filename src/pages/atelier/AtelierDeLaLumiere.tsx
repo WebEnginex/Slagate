@@ -1,4 +1,3 @@
-
 import Layout from "@/components/Layout";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -6,7 +5,7 @@ import type { Database } from "@/integrations/supabase/types";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Flame, Shield } from "lucide-react";
+import { Flame, Shield, Sword } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -46,9 +45,9 @@ export default function AtelierDeLaLumiere() {
             <Card
               key={boss.id}
               onClick={() => navigate(`/atelier/${boss.nom}`)}
-              className="group h-full cursor-pointer overflow-hidden border-sidebar-border bg-sidebar transition-all duration-300 hover:-translate-y-1 hover:border-solo-purple hover:shadow-lg hover:shadow-solo-purple/20"
+              className="group h-full cursor-pointer overflow-hidden border-sidebar-border bg-sidebar transition-all duration-300 hover:-translate-y-1 hover:border-solo-purple hover:shadow-lg hover:shadow-solo-purple/20 relative flex flex-col"
             >
-              <CardContent className="p-0">
+              <CardContent className="p-0 flex-grow flex flex-col">
                 <div className="relative">
                   <AspectRatio ratio={16 / 9}>
                     <div className="flex h-full items-center justify-center bg-sidebar-accent p-6 transition-transform duration-500 group-hover:scale-105">
@@ -59,18 +58,12 @@ export default function AtelierDeLaLumiere() {
                       />
                     </div>
                   </AspectRatio>
-                  <div className="absolute left-2 top-2 flex items-center gap-1 rounded-md bg-sidebar-accent/80 px-2 py-1 backdrop-blur-sm">
-                    <Shield size={16} className="text-solo-purple" />
-                    <span className="text-xs font-medium text-white">
-                      {boss.puissance_facile}
-                    </span>
-                  </div>
                 </div>
-                <div className="p-4">
-                  <h2 className="text-xl font-semibold text-white transition-colors group-hover:text-solo-purple">
+                <div className="p-4 flex flex-col flex-grow">
+                  <h2 className="text-xl font-semibold text-white transition-colors group-hover:text-solo-purple mb-2">
                     {boss.nom}
                   </h2>
-                  <div className="mt-2 flex flex-wrap items-center gap-2">
+                  <div className="mt-2 flex flex-wrap items-center gap-2 mb-4">
                     {boss.faiblesse1 && (
                       <img
                         src={boss.faiblesse1}
@@ -85,6 +78,10 @@ export default function AtelierDeLaLumiere() {
                         className="h-5 w-5 object-contain"
                       />
                     )}
+                  </div>
+                  <div className="mt-auto flex items-center justify-end text-sm text-muted-foreground">
+                    <Sword className="mr-2 h-4 w-4 text-solo-purple" />
+                    {boss.puissance_facile}
                   </div>
                 </div>
               </CardContent>
