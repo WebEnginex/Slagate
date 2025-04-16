@@ -80,17 +80,17 @@ const PromoCodes = () => {
     },
     {
       title: "Accédez à la gestion du compte",
-      description: "Cliquez sur \"Comptes\" dans le menu latéral à gauche pour accéder au menu de la gestion du compte.",
+      description: 'Cliquez sur "Comptes" dans le menu latéral à gauche pour accéder au menu de la gestion du compte.',
       image: "/images/code_promo/tuto_pomo_code_4.png",
     },
     {
       title: "Ouvrez l'interface des codes",
-      description: "Cliquez sur le bouton \"Saisir un code\" en bas à droite pour ouvrir l'interface qui permet de rentrer un code promotionnel.",
+      description: 'Cliquez sur le bouton "Saisir un code" en bas à droite pour ouvrir l\'interface qui permet de rentrer un code promotionnel.',
       image: "/images/code_promo/tuto_pomo_code_5.png",
     },
     {
       title: "Entrez votre code",
-      description: "Une fenêtre s'ouvre. Vous pouvez coller ou écrire le code promo, puis cliquer sur \"Utiliser\" pour valider.",
+      description: 'Une fenêtre s\'ouvre. Vous pouvez coller ou écrire le code promo, puis cliquer sur "Utiliser" pour valider.',
       image: "/images/code_promo/tuto_pomo_code_6.png",
     },
     {
@@ -99,6 +99,23 @@ const PromoCodes = () => {
       image: "/images/code_promo/tuto_pomo_code_7.png",
     },
   ];
+
+  // Fonction qui traite le texte pour mettre en surbrillance les mots entre guillemets
+  const formatDescription = (text: string) => {
+    // Diviser le texte en segments (texte normal et texte entre guillemets)
+    const segments = text.split(/(".*?")/g);
+    
+    return segments.map((segment, i) => {
+      // Si le segment commence et finit par des guillemets, c'est un texte à mettre en évidence
+      if (segment.startsWith('"') && segment.endsWith('"')) {
+        // Enlever les guillemets et mettre en évidence
+        const content = segment.slice(1, -1);
+        return <span key={i} style={{ color: 'rgb(155 135 245)' }}>{content}</span>;
+      }
+      // Sinon, retourner le texte tel quel
+      return segment;
+    });
+  };
 
   const copyToClipboard = (code: string) => {
     navigator.clipboard.writeText(code);
@@ -150,8 +167,8 @@ const PromoCodes = () => {
                 open={openStep === index} 
                 onOpenChange={() => toggleStep(index)}
               >
-                <CollapsibleTrigger className="w-full">
-                  <div className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50">
+                <CollapsibleTrigger className="w-full" showChevron={false}>
+                  <div className="flex items-center justify-between p-4 cursor-pointer hover:bg-transparent">
                     <div className="flex items-center">
                       <div className="flex items-center justify-center w-8 h-8 mr-3 text-white bg-solo-purple rounded-full">
                         {index + 1}
@@ -179,7 +196,7 @@ const PromoCodes = () => {
                         />
                       </div>
                       <div className="md:w-1/2">
-                        <p className="text-muted-foreground">{step.description}</p>
+                        <p className="text-muted-foreground">{formatDescription(step.description)}</p>
                       </div>
                     </div>
                   </div>

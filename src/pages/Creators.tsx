@@ -29,6 +29,25 @@ const getSocialIcon = (type: SocialLink["type"]) => {
   }
 };
 
+// Fonction pour formatter le texte avec mise en évidence des mots entre guillemets
+const formatDescription = (text: React.ReactNode) => {
+  if (typeof text !== 'string') return text;
+  
+  // Diviser le texte en segments (texte normal et texte entre guillemets)
+  const segments = text.split(/(".*?")/g);
+  
+  return segments.map((segment, i) => {
+    // Si le segment commence et finit par des guillemets, c'est un texte à mettre en évidence
+    if (segment.startsWith('"') && segment.endsWith('"')) {
+      // Enlever les guillemets et mettre en évidence
+      const content = segment.slice(1, -1);
+      return <span key={i} style={{ color: 'rgb(155 135 245)' }}>{content}</span>;
+    }
+    // Sinon, retourner le texte tel quel
+    return segment;
+  });
+};
+
 const Creators = () => {
   // Données pour les réseaux sociaux de Sohoven
   const socialLinks: SocialLink[] = [
@@ -43,11 +62,7 @@ const Creators = () => {
   const steps = [
     {
       title: "Se connecter au site Netmarble Creator",
-      description: (
-        <>
-          Accédez à la page Netmarble Creator puis connectez vous à votre compte.
-        </>
-      ),
+      description: "Accédez à la page Netmarble Creator puis connectez vous à votre compte.",
       action:
         "https://members.netmarble.com/auth/signin?idpViewType=B&redirectUrl=https%3A%2F%2Fcreator.netmarble.com%2Fcreator%2Fsignin%2Fcallback%3FredirectUrl%3Dhttps%3A%2F%2Fcreator.netmarble.com%2Fen%2Fsololv%2Franking%2Fsohoven",
       actionText: "Se connecter au site",
@@ -55,50 +70,22 @@ const Creators = () => {
     },
     {
       title: "Accéder à votre profil",
-      description: (
-        <>
-          Cliquez sur le bouton en haut à droite pour ouvrir le menu, puis allez
-          dans <span style={{ color: "rgb(155 135 245)" }}>"My Page"</span> pour
-          accéder aux paramètres.
-        </>
-      ),
+      description: 'Cliquez sur le bouton en haut à droite pour ouvrir le menu, puis allez dans "My Page" pour accéder aux paramètres.',
       image: "public/images/creator_images/tuto_creator_2.png",
     },
     {
       title: "Ouvrez la fenêtre qui permet de lier son compte",
-      description: (
-        <>
-          Cliquez sur le bouton{" "}
-          <span style={{ color: "rgb(155 135 245)" }}>"Link Game Account"</span>{" "}
-          pour ouvrir la fenêtre qui permet de lier son compte Solo Leveling au
-          site Netmarble Creator.
-        </>
-      ),
+      description: 'Cliquez sur le bouton "Link Game Account" pour ouvrir la fenêtre qui permet de lier son compte Solo Leveling au site Netmarble Creator.',
       image: "/images/creator_images/tuto_creator_3.png",
     },
     {
       title: "Lier votre compte",
-      description: (
-        <>
-          Cliquez sur le bouton{" "}
-          <span style={{ color: "rgb(155 135 245)" }}>"Link account"</span> pour
-          lier votre compte Solo Leveling au site Netmarble Creator. Si le site
-          vous demande une connexion quand vous cliquez sur le bouton,
-          reconnectez vous avec le même compte qu'au début.
-        </>
-      ),
+      description: 'Cliquez sur le bouton "Link account" pour lier votre compte Solo Leveling au site Netmarble Creator. Si le site vous demande une connexion quand vous cliquez sur le bouton, reconnectez vous avec le même compte qu\'au début.',
       image: "/images/creator_images/tuto_creator_4.png",
     },
     {
       title: "Supporter le créateur",
-      description: (
-        <>
-          Cliquez sur le bouton{" "}
-          <span style={{ color: "rgb(155 135 245)" }}>"Support"</span>, acceptez
-          les conditions et cliquez sur{" "}
-          <span style={{ color: "rgb(155 135 245)" }}>"Yes"</span>.
-        </>
-      ),
+      description: 'Cliquez sur le bouton "Support", acceptez les conditions et cliquez sur "Yes".',
       image: "/images/creator_images/tuto_creator_5.png",
     },
   ];
@@ -171,8 +158,8 @@ const Creators = () => {
         {steps.map((step, index) => (
           <Card key={index} className="overflow-hidden">
             <Collapsible open={openStep === index} onOpenChange={() => toggleStep(index)}>
-              <CollapsibleTrigger asChild>
-                <CardHeader className="p-6 cursor-pointer flex flex-row items-center justify-between hover:bg-muted/20">
+              <CollapsibleTrigger className="w-full" showChevron={false}>
+                <div className="p-6 cursor-pointer flex flex-row items-center justify-between hover:bg-transparent">
                   <div>
                     <CardTitle className="flex items-center">
                       <span className="bg-solo-purple text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">
@@ -188,7 +175,7 @@ const Creators = () => {
                     <ChevronUp className="h-5 w-5 text-muted-foreground" /> : 
                     <ChevronDown className="h-5 w-5 text-muted-foreground" />
                   }
-                </CardHeader>
+                </div>
               </CollapsibleTrigger>
               <CollapsibleContent>
                 <CardContent className="pb-6">
@@ -204,7 +191,7 @@ const Creators = () => {
                       />
                     </div>
                     <div className="flex-1">
-                      <p className="text-muted-foreground mb-4">{step.description}</p>
+                      <p className="text-muted-foreground mb-4">{formatDescription(step.description)}</p>
                       {step.action && (
                         <Button asChild>
                           <a href={step.action} target="_blank" rel="noopener noreferrer">
