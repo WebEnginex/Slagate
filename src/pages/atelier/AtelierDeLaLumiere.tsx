@@ -65,29 +65,31 @@ export default function AtelierDeLaLumiere() {
                     {boss.nom}
                   </h2>
                   
-                  <div className="mt-2 mb-4">
-                    <div className="text-sm text-muted-foreground mb-2">Faiblesses:</div>
-                    <div className="flex flex-wrap items-center gap-2">
-                      {boss.faiblesse1 && (
-                        <img
-                          src={boss.faiblesse1}
-                          alt="Faiblesse 1"
-                          className="h-5 w-5 object-contain"
-                        />
-                      )}
-                      {boss.faiblesse2 && (
-                        <img
-                          src={boss.faiblesse2}
-                          alt="Faiblesse 2"
-                          className="h-5 w-5 object-contain"
-                        />
-                      )}
+                  <div className="mt-auto pt-3 border-t border-sidebar-border flex items-center justify-between text-sm text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      <span className="whitespace-nowrap mr-1">Faiblesses:</span>
+                      <div className="flex gap-1">
+                        {boss.faiblesse1 && (
+                          <img
+                            src={boss.faiblesse1}
+                            alt="Faiblesse 1"
+                            className="h-5 w-5 object-contain"
+                          />
+                        )}
+                        {boss.faiblesse2 && (
+                          <img
+                            src={boss.faiblesse2}
+                            alt="Faiblesse 2"
+                            className="h-5 w-5 object-contain"
+                          />
+                        )}
+                      </div>
                     </div>
-                  </div>
-                  
-                  <div className="mt-auto pt-2 border-t border-sidebar-border flex items-center justify-end text-sm text-muted-foreground">
-                    <Sword className="mr-2 h-4 w-4 text-solo-purple" />
-                    {boss.puissance_facile}
+                    
+                    <div className="flex items-center ml-2">
+                      <Sword className="mr-1 h-4 w-4 text-solo-purple" />
+                      <span className="whitespace-nowrap">{boss.puissance_facile}</span>
+                    </div>
                   </div>
                 </div>
               </CardContent>
