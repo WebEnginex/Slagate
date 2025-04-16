@@ -2,14 +2,14 @@ export const teamChasseursTiers = {
   S: [
     {
       id: 1,
-      name: "Compo Crit Vent",
+      name: "NomDeTeam",
       hunters: [1, 2, 3],
     },
   ],
   A: [
     {
       id: 2,
-      name: "Tank + Support",
+      name: "NomDeTeam",
       hunters: [4, 5, 6],
     },
   ],

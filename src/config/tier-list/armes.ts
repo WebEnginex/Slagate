@@ -3,6 +3,6 @@ export const weaponTiers = {
     A: [3, 6],
     B: [2, 8],
     C: [9],
-    D: [],
+    D: [15],
   };
   
