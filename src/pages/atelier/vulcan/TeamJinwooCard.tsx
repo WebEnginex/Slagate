@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import type { Database } from "@/integrations/supabase/types";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -6,6 +5,7 @@ import { ChevronDown, ChevronUp, Star, Shield, Sword, BarChart } from "lucide-re
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { TeamVulcanJinwoo } from "@/config/atelier/vulcan/teamVulcanJinwoo";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { useExpandedTeam } from "@/contexts/ExpandedTeamContext";
 
 type Props = {
   team: TeamVulcanJinwoo;
@@ -32,10 +32,8 @@ export default function TeamJinwooCard({
   qtes,
   pierres,
 }: Props) {
-  const [expandedTeamId, setExpandedTeamId] = useState<number | null>(null);
-  const [selectedChasseurId, setSelectedChasseurId] = useState<number | null>(
-    null
-  );
+  const { expandedTeamId, setExpandedTeamId } = useExpandedTeam();
+  const [selectedChasseurId, setSelectedChasseurId] = useState<number | null>(null);
   const [openSections, setOpenSections] = useState<string[]>([]);
 
   // Reset openSections when team or chasseur changes
@@ -47,9 +45,14 @@ export default function TeamJinwooCard({
     list.find((i) => i.id.toString() === id.toString());
 
   const toggleTeam = (teamId: number) => {
-    setExpandedTeamId((prevId) => (prevId === teamId ? null : teamId));
-    const firstChasseurId = team.chasseurs[0]?.id ?? null;
-    setSelectedChasseurId(firstChasseurId);
+    if (expandedTeamId === teamId) {
+      setExpandedTeamId(null);
+      setSelectedChasseurId(null);
+    } else {
+      setExpandedTeamId(teamId);
+      const firstChasseurId = team.chasseurs[0]?.id ?? null;
+      setSelectedChasseurId(firstChasseurId);
+    }
   };
 
   const toggleSection = (section: string) => {
@@ -61,6 +64,7 @@ export default function TeamJinwooCard({
   };
 
   const isSectionOpen = (section: string) => openSections.includes(section);
+  const isExpanded = expandedTeamId === team.id;
 
   return (
     <Card className="mb-10 bg-sidebar border-sidebar-border overflow-hidden">
@@ -72,14 +76,14 @@ export default function TeamJinwooCard({
           <Sword className="h-5 w-5 text-solo-purple" />
           {team.nom}
         </CardTitle>
-        {expandedTeamId === team.id ? (
+        {isExpanded ? (
           <ChevronUp className="h-5 w-5 text-white" />
         ) : (
           <ChevronDown className="h-5 w-5 text-white" />
         )}
       </CardHeader>
 
-      {expandedTeamId !== team.id && (
+      {!isExpanded && (
         <CardContent className="p-4 bg-sidebar-accent">
           <div className="flex items-center justify-center gap-4 py-2">
             {team.chasseurs.map((ch, idx) => {
@@ -97,7 +101,7 @@ export default function TeamJinwooCard({
         </CardContent>
       )}
 
-      {expandedTeamId === team.id && (
+      {isExpanded && (
         <CardContent className="p-4 pt-6 bg-sidebar-accent">
           <div className="space-y-6">
             {/* Chasseurs selection */}
@@ -126,7 +130,6 @@ export default function TeamJinwooCard({
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      {/* Removed star icon here */}
                       <div className="opacity-0 group-hover:opacity-100 absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-sidebar-accent border border-sidebar-border text-xs py-1 px-2 rounded whitespace-nowrap transition-opacity text-white">
                         {chasseur?.nom}
                       </div>

@@ -13,6 +13,7 @@ import TeamChasseurCard from "@/pages/atelier/vulcan/TeamChasseurCard";
 import TeamJinwooCard from "./TeamJinwooCard";
 import { teamVulcanJinwoo } from "@/config/atelier/vulcan/teamVulcanJinwoo";
 import { Separator } from "@/components/ui/separator";
+import { ExpandedTeamProvider } from "@/contexts/ExpandedTeamContext";
 
 export default function VulcanPage() {
   type Boss = Database["public"]["Tables"]["bosses"]["Row"];
@@ -196,35 +197,39 @@ export default function VulcanPage() {
             </TabsList>
 
             <TabsContent value="chasseurs">
-              {teamVulcanChasseurs.map((team: TeamVulcanChasseur) => (
-                <TeamChasseurCard
-                  key={team.id}
-                  team={team}
-                  chasseurs={chasseurs}
-                  artefacts={artefacts}
-                  noyaux={noyaux}
-                  ombres={ombres}
-                  setsBonus={setsBonus}
-                />
-              ))}
+              <ExpandedTeamProvider>
+                {teamVulcanChasseurs.map((team: TeamVulcanChasseur) => (
+                  <TeamChasseurCard
+                    key={team.id}
+                    team={team}
+                    chasseurs={chasseurs}
+                    artefacts={artefacts}
+                    noyaux={noyaux}
+                    ombres={ombres}
+                    setsBonus={setsBonus}
+                  />
+                ))}
+              </ExpandedTeamProvider>
             </TabsContent>
 
             <TabsContent value="jinwoo">
-              {teamVulcanJinwoo.map((team, i) => (
-                <TeamJinwooCard
-                  key={team.id}
-                  team={team}
-                  chasseurs={chasseurs}
-                  artefacts={artefacts}
-                  noyaux={noyaux}
-                  ombres={ombres}
-                  setsBonus={setsBonus}
-                  armes={armes}
-                  competences={competences}
-                  qtes={qtes}
-                  pierres={pierres}
-                />
-              ))}
+              <ExpandedTeamProvider>
+                {teamVulcanJinwoo.map((team, i) => (
+                  <TeamJinwooCard
+                    key={team.id}
+                    team={team}
+                    chasseurs={chasseurs}
+                    artefacts={artefacts}
+                    noyaux={noyaux}
+                    ombres={ombres}
+                    setsBonus={setsBonus}
+                    armes={armes}
+                    competences={competences}
+                    qtes={qtes}
+                    pierres={pierres}
+                  />
+                ))}
+              </ExpandedTeamProvider>
             </TabsContent>
           </Tabs>
         </div>
