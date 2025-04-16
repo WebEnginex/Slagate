@@ -95,21 +95,23 @@ function HuntersTab() {
                   key={hunter.id}
                   className="relative bg-card rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition-transform border border-primary/10 hover:border-primary/30"
                 >
+                  {/* Element icon positioned at top-left of the card */}
+                  {hunter.element && (
+                    <div className="absolute top-2 left-2 z-10 w-7 h-7">
+                      <img
+                        src={hunter.element}
+                        alt="Élément"
+                        className="w-6 h-6"
+                      />
+                    </div>
+                  )}
+                  
                   <div className="relative mx-auto w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 mb-2">
                     <img
                       src={hunter.image || ""}
                       alt={hunter.nom}
                       className="w-full h-full mx-auto rounded-full object-cover border-2 border-primary/20"
                     />
-                    {hunter.element && (
-                      <div className="absolute -top-1 -left-1 w-7 h-7">
-                        <img
-                          src={hunter.element}
-                          alt="Élément"
-                          className="w-6 h-6"
-                        />
-                      </div>
-                    )}
                   </div>
                   <p className="font-medium mt-1 text-xs sm:text-sm truncate">{hunter.nom}</p>
                   <p className="text-xs text-gray-400">{hunter.rarete}</p>
@@ -155,21 +157,23 @@ function WeaponsTab() {
                   key={arme.id}
                   className="relative bg-card rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition-transform border border-primary/10 hover:border-primary/30"
                 >
+                  {/* Element icon positioned at top-left of the card */}
+                  {arme.arme_element && (
+                    <div className="absolute top-2 left-2 z-10 w-7 h-7">
+                      <img
+                        src={arme.arme_element}
+                        alt="Élément"
+                        className="w-6 h-6"
+                      />
+                    </div>
+                  )}
+                  
                   <div className="relative mx-auto w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 mb-2">
                     <img
                       src={arme.image || ""}
                       alt={arme.nom}
                       className="w-full h-full mx-auto rounded-full object-cover border-2 border-primary/20"
                     />
-                    {arme.arme_element && (
-                      <div className="absolute -top-1 -left-1 w-7 h-7">
-                        <img
-                          src={arme.arme_element}
-                          alt="Élément"
-                          className="w-6 h-6"
-                        />
-                      </div>
-                    )}
                   </div>
                   <p className="font-medium mt-1 text-xs sm:text-sm truncate">{arme.nom}</p>
                 </div>
@@ -229,21 +233,23 @@ function TeamsTab({
                             key={hunter.id}
                             className="relative bg-card rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition-transform border border-primary/10 hover:border-primary/30"
                           >
+                            {/* Element icon positioned at top-left of the card */}
+                            {hunter.element && (
+                              <div className="absolute top-2 left-2 z-10 w-7 h-7">
+                                <img
+                                  src={hunter.element}
+                                  alt="Élément"
+                                  className="w-6 h-6"
+                                />
+                              </div>
+                            )}
+                            
                             <div className="relative mx-auto w-16 sm:w-20 h-16 sm:h-20 mb-2">
                               <img
                                 src={hunter.image || ""}
                                 alt={hunter.nom}
                                 className="w-full h-full mx-auto rounded-full object-cover border-2 border-primary/20"
                               />
-                              {hunter.element && (
-                                <div className="absolute -top-1 -left-1 w-7 h-7">
-                                  <img
-                                    src={hunter.element}
-                                    alt="Élément"
-                                    className="w-6 h-6"
-                                  />
-                                </div>
-                              )}
                             </div>
                             <p className="font-medium mt-1 text-xs sm:text-sm truncate">{hunter.nom}</p>
                           </div>
