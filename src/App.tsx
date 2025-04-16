@@ -10,7 +10,7 @@ import AtelierDeLaLumiere from "@/pages/atelier/AtelierDeLaLumiere";
 import Vulcan from "@/pages/atelier/vulcan/Vulcan";
 import Baran from "@/pages/atelier/baran/Baran";
 import Deimos from "@/pages/atelier/deimos/Deimos";
-import PromoCodes from "./pages/PromoCodes";
+import PromoCodes from "./pages/test";
 import Creators from "./pages/Creators";
 import NotFound from "./pages/NotFound";
 

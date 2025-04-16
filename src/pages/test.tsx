@@ -90,46 +90,43 @@ const PromoCodes = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-  <div className="space-y-1">
-    <p className="font-medium">1. Lancez le jeu Solo Leveling: Arise</p>
-    <p className="text-sm text-muted-foreground">
-      Assurez-vous d'être connecté à votre compte.
-    </p>
-  </div>
-  <div className="space-y-1">
-    <p className="font-medium">2. Accédez au menu des paramètres</p>
-    <p className="text-sm text-muted-foreground">
-      Appuyez sur l'icône avec les quatre carrés dans le coin supérieur droit de l'écran. Ensuite, cliquez sur l'icône d'engrenage en bas à droite.
-    </p>
-  </div>
-  <div className="space-y-1">
-    <p className="font-medium">3. Accédez à la gestion du compte</p>
-    <p className="text-sm text-muted-foreground">
-      Cliquez sur "Comptes" dans le menu latéral à gauche.
-    </p>
-  </div>
-  <div className="space-y-1">
-    <p className="font-medium">4. Ouvrez l’interface des codes</p>
-    <p className="text-sm text-muted-foreground">
-      Cliquez sur le bouton "Saisir un code" en bas à droite.
-    </p>
-  </div>
-  <div className="space-y-1">
-    <p className="font-medium">5. Entrez votre code</p>
-    <p className="text-sm text-muted-foreground">
-      Une fenêtre s’ouvre. Vous pouvez coller ou écrire le code promo, puis cliquer sur "Utiliser" pour valider.
-    </p>
-  </div>
-  <div className="space-y-1">
-    <p className="font-medium">6. Récupérez vos récompenses</p>
-    <p className="text-sm text-muted-foreground">
-      Les récompenses seront envoyées directement dans votre messagerie en jeu. Ouvrez-la pour les récupérer.
-    </p>
-  </div>
-
-  
-</CardContent>
-
+          <div className="space-y-1">
+            <p className="font-medium">1. Lancez le jeu Solo Leveling: Arise</p>
+            <p className="text-sm text-muted-foreground">
+              Assurez-vous d'être connecté à votre compte.
+            </p>
+          </div>
+          <div className="space-y-1">
+            <p className="font-medium">2. Accédez au menu des paramètres</p>
+            <p className="text-sm text-muted-foreground">
+              Appuyez sur l'icône avec les quatre carrés dans le coin supérieur droit de l'écran. Ensuite, cliquez sur l'icône d'engrenage en bas à droite.
+            </p>
+          </div>
+          <div className="space-y-1">
+            <p className="font-medium">3. Accédez à la gestion du compte</p>
+            <p className="text-sm text-muted-foreground">
+              Cliquez sur "Comptes" dans le menu latéral à gauche.
+            </p>
+          </div>
+          <div className="space-y-1">
+            <p className="font-medium">4. Ouvrez l'interface des codes</p>
+            <p className="text-sm text-muted-foreground">
+              Cliquez sur le bouton "Saisir un code" en bas à droite.
+            </p>
+          </div>
+          <div className="space-y-1">
+            <p className="font-medium">5. Entrez votre code</p>
+            <p className="text-sm text-muted-foreground">
+              Une fenêtre s'ouvre. Vous pouvez coller ou écrire le code promo, puis cliquer sur "Utiliser" pour valider.
+            </p>
+          </div>
+          <div className="space-y-1">
+            <p className="font-medium">6. Récupérez vos récompenses</p>
+            <p className="text-sm text-muted-foreground">
+              Les récompenses seront envoyées directement dans votre messagerie en jeu. Ouvrez-la pour les récupérer.
+            </p>
+          </div>
+        </CardContent>
       </Card>
 
       <h2 className="mb-4 text-2xl font-bold">Codes Actifs</h2>
@@ -168,9 +165,6 @@ const PromoCodes = () => {
       </div>
     </Layout>
   );
-
-
-  
 };
 
 export default PromoCodes;
