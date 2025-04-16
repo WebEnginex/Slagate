@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
@@ -9,6 +10,8 @@ import Layout from "@/components/Layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Flame, Sword } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 // Types Supabase
 type Chasseur = Database["public"]["Tables"]["chasseurs"]["Row"];
@@ -24,7 +27,16 @@ export default function TierListPage() {
   return (
     <Layout>
       <div className="container max-w-6xl mx-auto px-4 py-6 text-white">
-        <h1 className="text-3xl font-bold mb-6">Tier List</h1>
+        <div className="mb-6 space-y-2">
+          <div className="flex items-center gap-2">
+            <Flame className="h-5 w-5 text-solo-purple sm:h-6 sm:w-6 md:h-7 md:w-7" />
+            <h1 className="text-3xl font-bold mb-1">Tier List</h1>
+          </div>
+          <Separator className="bg-sidebar-border" />
+          <p className="text-muted-foreground text-sm md:text-base">
+            Consultez les différentes tier lists
+          </p>
+        </div>
 
         {/* Tabs navigation using shadcn/ui */}
         <Tabs
@@ -33,12 +45,12 @@ export default function TierListPage() {
           onValueChange={setActiveTab}
           className="w-full"
         >
-          <TabsList className="w-full flex flex-wrap mb-6 bg-card/30 rounded-xl">
+          <TabsList className="w-full flex flex-wrap mb-6 bg-sidebar-accent/30 rounded-xl border border-sidebar-border">
             {tabs.map((tab) => (
               <TabsTrigger
                 key={tab}
                 value={tab}
-                className="flex-1 py-3 text-base data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg"
+                className="flex-1 py-3 text-base data-[state=active]:bg-solo-purple data-[state=active]:text-primary-foreground rounded-lg"
               >
                 {tab}
               </TabsTrigger>
@@ -83,16 +95,16 @@ function HuntersTab() {
   return (
     <div className="space-y-8">
       {Object.entries(huntersByTier).map(([tier, hunters]) => (
-        <Card key={tier} className="bg-card/50 border-primary/20 overflow-hidden rounded-xl">
-          <div className="bg-muted/30 py-3 px-5 border-b border-primary/10">
-            <h2 className="text-2xl font-bold">Tier {tier}</h2>
+        <Card key={tier} className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl">
+          <div className="bg-sidebar-accent py-3 px-5 border-b border-sidebar-border">
+            <h2 className="text-2xl font-bold text-white">Tier {tier}</h2>
           </div>
           <CardContent className="p-4 md:p-6">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
               {hunters.map((hunter) => (
                 <div
                   key={hunter.id}
-                  className="relative bg-card rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition-transform border border-primary/10 hover:border-primary/30"
+                  className="relative bg-sidebar-accent rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition-transform border border-sidebar-border hover:border-solo-purple"
                 >
                   {/* Element icon positioned at top-left of the card */}
                   {hunter.element && (
@@ -109,7 +121,7 @@ function HuntersTab() {
                     <img
                       src={hunter.image || ""}
                       alt={hunter.nom}
-                      className="w-full h-full mx-auto rounded-full object-cover border-2 border-primary/20"
+                      className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
                     />
                   </div>
                   <p className="font-medium mt-1 text-xs sm:text-sm truncate">{hunter.nom}</p>
@@ -144,16 +156,16 @@ function WeaponsTab() {
   return (
     <div className="space-y-8">
       {Object.entries(armesByTier).map(([tier, armes]) => (
-        <Card key={tier} className="bg-card/50 border-primary/20 overflow-hidden rounded-xl">
-          <div className="bg-muted/30 py-3 px-5 border-b border-primary/10">
-            <h2 className="text-2xl font-bold">Tier {tier}</h2>
+        <Card key={tier} className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl">
+          <div className="bg-sidebar-accent py-3 px-5 border-b border-sidebar-border">
+            <h2 className="text-2xl font-bold text-white">Tier {tier}</h2>
           </div>
           <CardContent className="p-4 md:p-6">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
               {armes.map((arme) => (
                 <div
                   key={arme.id}
-                  className="relative bg-card rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition-transform border border-primary/10 hover:border-primary/30"
+                  className="relative bg-sidebar-accent rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition-transform border border-sidebar-border hover:border-solo-purple"
                 >
                   {/* Element icon positioned at top-left of the card */}
                   {arme.arme_element && (
@@ -170,7 +182,7 @@ function WeaponsTab() {
                     <img
                       src={arme.image || ""}
                       alt={arme.nom}
-                      className="w-full h-full mx-auto rounded-full object-cover border-2 border-primary/20"
+                      className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
                     />
                   </div>
                   <p className="font-medium mt-1 text-xs sm:text-sm truncate">{arme.nom}</p>
@@ -209,25 +221,25 @@ function TeamsJinwooTab({
   return (
     <div className="space-y-8">
       {Object.entries(tiers).map(([tier, teams]) => (
-        <Card key={tier} className="bg-card/50 border-primary/20 overflow-hidden rounded-xl">
-          <div className="bg-muted/30 py-3 px-5 border-b border-primary/10">
-            <h2 className="text-2xl font-bold">Tier {tier}</h2>
+        <Card key={tier} className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl">
+          <div className="bg-sidebar-accent py-3 px-5 border-b border-sidebar-border">
+            <h2 className="text-2xl font-bold text-white">Tier {tier}</h2>
           </div>
           <CardContent className="p-4 md:p-6">
             <div className="space-y-6">
               {teams.map((team) => (
                 <div key={team.id} className="mb-5">
-                  <h3 className="text-lg font-semibold mb-3 px-2 py-1 bg-primary/10 inline-block rounded-lg">
+                  <h3 className="text-lg font-semibold mb-3 px-3 py-1.5 bg-sidebar-accent inline-block rounded-lg border border-sidebar-border">
                     {team.name}
                   </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     {/* Afficher Sung Jin Woo */}
-                    <div className="relative bg-card rounded-2xl shadow-md p-3 text-center border border-primary/10">
+                    <div className="relative bg-sidebar-accent rounded-2xl shadow-md p-3 text-center border border-sidebar-border hover:border-solo-purple hover:scale-[1.03] transition-transform">
                       <div className="relative mx-auto w-16 sm:w-20 h-16 sm:h-20 mb-2">
                         <img
                           src={jinwoo.image}
                           alt={jinwoo.nom}
-                          className="w-full h-full mx-auto rounded-full object-cover border-2 border-primary/20"
+                          className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
                         />
                       </div>
                       <p className="font-medium mt-1 text-xs sm:text-sm truncate">{jinwoo.nom}</p>
@@ -240,7 +252,7 @@ function TeamsJinwooTab({
                         hunter && (
                           <div
                             key={hunter.id}
-                            className="relative bg-card rounded-2xl shadow-md p-3 text-center border border-primary/10"
+                            className="relative bg-sidebar-accent rounded-2xl shadow-md p-3 text-center border border-sidebar-border hover:border-solo-purple hover:scale-[1.03] transition-transform"
                           >
                             {hunter.element && (
                               <div className="absolute top-2 left-2 z-10 w-7 h-7">
@@ -255,7 +267,7 @@ function TeamsJinwooTab({
                               <img
                                 src={hunter.image || ""}
                                 alt={hunter.nom}
-                                className="w-full h-full mx-auto rounded-full object-cover border-2 border-primary/20"
+                                className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
                               />
                             </div>
                             <p className="font-medium mt-1 text-xs sm:text-sm truncate">{hunter.nom}</p>
@@ -294,15 +306,15 @@ function TeamsTab({
   return (
     <div className="space-y-8">
       {Object.entries(tiers).map(([tier, teams]) => (
-        <Card key={tier} className="bg-card/50 border-primary/20 overflow-hidden rounded-xl">
-          <div className="bg-muted/30 py-3 px-5 border-b border-primary/10">
-            <h2 className="text-2xl font-bold">Tier {tier}</h2>
+        <Card key={tier} className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl">
+          <div className="bg-sidebar-accent py-3 px-5 border-b border-sidebar-border">
+            <h2 className="text-2xl font-bold text-white">Tier {tier}</h2>
           </div>
           <CardContent className="p-4 md:p-6">
             <div className="space-y-6">
               {teams.map((team) => (
                 <div key={team.id} className="mb-5">
-                  <h3 className="text-lg font-semibold mb-3 px-2 py-1 bg-primary/10 inline-block rounded-lg">
+                  <h3 className="text-lg font-semibold mb-3 px-3 py-1.5 bg-sidebar-accent inline-block rounded-lg border border-sidebar-border">
                     {team.name}
                   </h3>
                   <div
@@ -318,7 +330,7 @@ function TeamsTab({
                         hunter && (
                           <div
                             key={hunter.id}
-                            className="relative bg-card rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition-transform border border-primary/10 hover:border-primary/30"
+                            className="relative bg-sidebar-accent rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition-transform border border-sidebar-border hover:border-solo-purple"
                           >
                             {/* Element icon positioned at top-left of the card */}
                             {hunter.element && (
@@ -335,7 +347,7 @@ function TeamsTab({
                               <img
                                 src={hunter.image || ""}
                                 alt={hunter.nom}
-                                className="w-full h-full mx-auto rounded-full object-cover border-2 border-primary/20"
+                                className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
                               />
                             </div>
                             <p className="font-medium mt-1 text-xs sm:text-sm truncate">{hunter.nom}</p>

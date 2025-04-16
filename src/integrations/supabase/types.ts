@@ -92,17 +92,17 @@ export type Database = {
       }
       jinwoo: {
         Row: {
-          id: string
+          id: number
           image: string | null
           nom: string
         }
         Insert: {
-          id?: string
+          id?: number
           image?: string | null
           nom: string
         }
         Update: {
-          id?: string
+          id?: number
           image?: string | null
           nom?: string
         }
