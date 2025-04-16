@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check, ChevronDown, ChevronUp, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 // Types pour nos codes promo
 type PromoCode = {
@@ -17,6 +18,8 @@ type PromoCode = {
 const PromoCodes = () => {
   const { toast } = useToast();
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  const [openStep, setOpenStep] = useState<number | null>(0);
+  const [modalImage, setModalImage] = useState<string | null>(null);
 
   // Données fictives pour nos codes promo
   const promoCodes: PromoCode[] = [
@@ -58,6 +61,45 @@ const PromoCodes = () => {
     },
   ];
 
+  // Étapes pour utiliser un code promo
+  const steps = [
+    {
+      title: "Lancez le jeu Solo Leveling: Arise",
+      description: "Assurez-vous d'être connecté à votre compte. Pour cela il suffit de rentrer vos identifiants et de vous connecter au jeu.",
+      image: "/images/code_promo/tuto_pomo_code_1.png",
+    },
+    {
+      title: "Ouvrez le menu principal",
+      description: "Pour ouvrir le menu principal, appuyez sur l'icône avec les quatre carrés dans le coin supérieur droit de l'écran.",
+      image: "/images/code_promo/tuto_pomo_code_2.png",
+    },
+    {
+      title: "Accédez au menu des paramètres",
+      description: "Ensuite dans le menu principal, cliquez sur l'icône d'engrenage en bas à droite pour ouvrir le menu des paramètres.",
+      image: "/images/code_promo/tuto_pomo_code_3.png",
+    },
+    {
+      title: "Accédez à la gestion du compte",
+      description: "Cliquez sur \"Comptes\" dans le menu latéral à gauche pour accéder au menu de la gestion du compte.",
+      image: "/images/code_promo/tuto_pomo_code_4.png",
+    },
+    {
+      title: "Ouvrez l'interface des codes",
+      description: "Cliquez sur le bouton \"Saisir un code\" en bas à droite pour ouvrir l'interface qui permet de rentrer un code promotionnel.",
+      image: "/images/code_promo/tuto_pomo_code_5.png",
+    },
+    {
+      title: "Entrez votre code",
+      description: "Une fenêtre s'ouvre. Vous pouvez coller ou écrire le code promo, puis cliquer sur \"Utiliser\" pour valider.",
+      image: "/images/code_promo/tuto_pomo_code_6.png",
+    },
+    {
+      title: "Récupérez vos récompenses",
+      description: "Les récompenses seront envoyées directement dans votre messagerie en jeu. Ouvrez-la pour les récupérer.",
+      image: "/images/code_promo/tuto_pomo_code_7.png",
+    },
+  ];
+
   const copyToClipboard = (code: string) => {
     navigator.clipboard.writeText(code);
     setCopiedCode(code);
@@ -70,6 +112,18 @@ const PromoCodes = () => {
     setTimeout(() => {
       setCopiedCode(null);
     }, 3000);
+  };
+
+  const toggleStep = (index: number) => {
+    setOpenStep(openStep === index ? null : index);
+  };
+
+  const openModal = (image: string) => {
+    setModalImage(image);
+  };
+
+  const closeModal = () => {
+    setModalImage(null);
   };
 
   return (
@@ -90,42 +144,49 @@ const PromoCodes = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="space-y-1">
-            <p className="font-medium">1. Lancez le jeu Solo Leveling: Arise</p>
-            <p className="text-sm text-muted-foreground">
-              Assurez-vous d'être connecté à votre compte.
-            </p>
-          </div>
-          <div className="space-y-1">
-            <p className="font-medium">2. Accédez au menu des paramètres</p>
-            <p className="text-sm text-muted-foreground">
-              Appuyez sur l'icône avec les quatre carrés dans le coin supérieur droit de l'écran. Ensuite, cliquez sur l'icône d'engrenage en bas à droite.
-            </p>
-          </div>
-          <div className="space-y-1">
-            <p className="font-medium">3. Accédez à la gestion du compte</p>
-            <p className="text-sm text-muted-foreground">
-              Cliquez sur "Comptes" dans le menu latéral à gauche.
-            </p>
-          </div>
-          <div className="space-y-1">
-            <p className="font-medium">4. Ouvrez l'interface des codes</p>
-            <p className="text-sm text-muted-foreground">
-              Cliquez sur le bouton "Saisir un code" en bas à droite.
-            </p>
-          </div>
-          <div className="space-y-1">
-            <p className="font-medium">5. Entrez votre code</p>
-            <p className="text-sm text-muted-foreground">
-              Une fenêtre s'ouvre. Vous pouvez coller ou écrire le code promo, puis cliquer sur "Utiliser" pour valider.
-            </p>
-          </div>
-          <div className="space-y-1">
-            <p className="font-medium">6. Récupérez vos récompenses</p>
-            <p className="text-sm text-muted-foreground">
-              Les récompenses seront envoyées directement dans votre messagerie en jeu. Ouvrez-la pour les récupérer.
-            </p>
-          </div>
+          {steps.map((step, index) => (
+            <Card key={index} className="overflow-hidden border-l-4 border-solo-purple">
+              <Collapsible 
+                open={openStep === index} 
+                onOpenChange={() => toggleStep(index)}
+              >
+                <CollapsibleTrigger className="w-full">
+                  <div className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50">
+                    <div className="flex items-center">
+                      <div className="flex items-center justify-center w-8 h-8 mr-3 text-white bg-solo-purple rounded-full">
+                        {index + 1}
+                      </div>
+                      <p className="font-medium">{step.title}</p>
+                    </div>
+                    {openStep === index ? (
+                      <ChevronUp className="w-5 h-5 text-muted-foreground" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                    )}
+                  </div>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <div className="p-4 pt-0">
+                    <div className="flex flex-col md:flex-row gap-6">
+                      <div 
+                        className="cursor-pointer overflow-hidden rounded-md bg-muted w-full md:w-1/2 h-64"
+                        onClick={() => openModal(step.image)}
+                      >
+                        <img 
+                          src={step.image} 
+                          alt={`Étape ${index + 1}`} 
+                          className="object-cover w-full h-full"
+                        />
+                      </div>
+                      <div className="md:w-1/2">
+                        <p className="text-muted-foreground">{step.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            </Card>
+          ))}
         </CardContent>
       </Card>
 
@@ -163,6 +224,25 @@ const PromoCodes = () => {
             </Card>
           ))}
       </div>
+
+      {/* Modal pour afficher l'image en grand */}
+      {modalImage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+          <div className="relative max-w-4xl max-h-screen p-2">
+            <button
+              className="absolute top-2 right-2 p-2 bg-black bg-opacity-50 rounded-full text-white"
+              onClick={closeModal}
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <img 
+              src={modalImage} 
+              alt="Image agrandie" 
+              className="max-w-full max-h-[90vh] rounded-lg"
+            />
+          </div>
+        </div>
+      )}
     </Layout>
   );
 };
