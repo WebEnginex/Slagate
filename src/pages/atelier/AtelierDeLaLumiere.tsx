@@ -30,18 +30,18 @@ export default function AtelierDeLaLumiere() {
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8 space-y-2">
           <div className="flex items-center gap-2">
-            <Flame className="h-6 w-6 text-solo-purple" />
-            <h1 className="text-3xl font-bold text-white sm:text-4xl">
+            <Flame className="h-6 w-6 text-solo-purple sm:h-7 sm:w-7" />
+            <h1 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
               Atelier de la Lumière
             </h1>
           </div>
           <Separator className="bg-sidebar-border" />
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-sm sm:text-base">
             Sélectionnez un boss pour voir plus de détails
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {bosses.map((boss) => (
             <Card
               key={boss.id}
@@ -51,44 +51,46 @@ export default function AtelierDeLaLumiere() {
               <CardContent className="p-0 flex-grow flex flex-col">
                 <div className="relative">
                   <AspectRatio ratio={16 / 9}>
-                    <div className="flex h-full items-center justify-center bg-sidebar-accent p-6 transition-transform duration-500 group-hover:scale-105">
+                    <div className="flex h-full items-center justify-center bg-sidebar-accent p-4 transition-transform duration-500 group-hover:scale-105">
                       <img
                         src={boss.image || ""}
                         alt={boss.nom}
-                        className="h-full max-h-[160px] w-auto object-contain"
+                        className="h-full max-h-[140px] w-auto object-contain"
                       />
                     </div>
                   </AspectRatio>
                 </div>
                 <div className="p-4 flex flex-col flex-grow">
-                  <h2 className="text-xl font-semibold text-white transition-colors group-hover:text-solo-purple mb-3">
+                  <h2 className="text-lg sm:text-xl font-semibold text-white transition-colors group-hover:text-solo-purple mb-3">
                     {boss.nom}
                   </h2>
                   
-                  <div className="mt-auto pt-3 border-t border-sidebar-border flex items-center justify-between text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <span className="whitespace-nowrap mr-1">Faiblesses:</span>
-                      <div className="flex gap-1">
-                        {boss.faiblesse1 && (
-                          <img
-                            src={boss.faiblesse1}
-                            alt="Faiblesse 1"
-                            className="h-5 w-5 object-contain"
-                          />
-                        )}
-                        {boss.faiblesse2 && (
-                          <img
-                            src={boss.faiblesse2}
-                            alt="Faiblesse 2"
-                            className="h-5 w-5 object-contain"
-                          />
-                        )}
+                  <div className="mt-auto pt-3 border-t border-sidebar-border space-y-2 sm:space-y-0">
+                    <div className="flex items-center justify-between text-sm text-muted-foreground">
+                      <div className="flex items-center gap-1">
+                        <span className="mr-1 text-xs sm:text-sm">Faiblesses:</span>
+                        <div className="flex gap-1">
+                          {boss.faiblesse1 && (
+                            <img
+                              src={boss.faiblesse1}
+                              alt="Faiblesse 1"
+                              className="h-4 w-4 sm:h-5 sm:w-5 object-contain"
+                            />
+                          )}
+                          {boss.faiblesse2 && (
+                            <img
+                              src={boss.faiblesse2}
+                              alt="Faiblesse 2"
+                              className="h-4 w-4 sm:h-5 sm:w-5 object-contain"
+                            />
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    
-                    <div className="flex items-center ml-2">
-                      <Sword className="mr-1 h-4 w-4 text-solo-purple" />
-                      <span className="whitespace-nowrap">{boss.puissance_facile}</span>
+                      
+                      <div className="flex items-center">
+                        <Sword className="mr-1 h-3 w-3 sm:h-4 sm:w-4 text-solo-purple" />
+                        <span className="text-xs sm:text-sm whitespace-nowrap">{boss.puissance_facile}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -98,9 +100,9 @@ export default function AtelierDeLaLumiere() {
         </div>
         
         {bosses.length === 0 && (
-          <div className="mt-20 flex flex-col items-center justify-center">
-            <Flame className="h-16 w-16 text-muted-foreground/50" />
-            <p className="mt-4 text-center text-muted-foreground">
+          <div className="mt-16 flex flex-col items-center justify-center">
+            <Flame className="h-12 w-12 sm:h-16 sm:w-16 text-muted-foreground/50" />
+            <p className="mt-4 text-center text-muted-foreground text-sm sm:text-base">
               Chargement des boss...
             </p>
           </div>
