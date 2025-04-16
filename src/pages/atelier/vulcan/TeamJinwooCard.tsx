@@ -126,11 +126,7 @@ export default function TeamJinwooCard({
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <div className={`absolute -bottom-1 -right-1 rounded-full p-0.5 ${
-                        selectedChasseurId === ch.id ? "bg-solo-purple" : "bg-sidebar"
-                      }`}>
-                        <Star className="h-3 w-3 text-white" fill={selectedChasseurId === ch.id ? "currentColor" : "none"} />
-                      </div>
+                      {/* Removed star icon here */}
                       <div className="opacity-0 group-hover:opacity-100 absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-sidebar-accent border border-sidebar-border text-xs py-1 px-2 rounded whitespace-nowrap transition-opacity text-white">
                         {chasseur?.nom}
                       </div>
