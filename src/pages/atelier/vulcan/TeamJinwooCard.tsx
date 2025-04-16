@@ -241,7 +241,7 @@ export default function TeamJinwooCard({
                         if (!bonus) return null;
                         return (
                           <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border">
-                            <p className="font-semibold text-sm text-solo-purple">{bonus.nom} ({sb.pieces})</p>
+                            <p className="font-semibold text-sm text-solo-purple">{bonus.nom}</p>
                             <p className="text-xs text-gray-300 mt-2">
                               {bonus.description}
                             </p>
