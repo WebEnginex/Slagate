@@ -180,9 +180,19 @@ export default function VulcanPage() {
           </Card>
 
           <Tabs defaultValue="chasseurs" className="mt-8">
-            <TabsList className="mb-4">
-              <TabsTrigger value="chasseurs">Teams Chasseurs</TabsTrigger>
-              <TabsTrigger value="jinwoo">Teams Jinwoo</TabsTrigger>
+            <TabsList className="bg-sidebar-accent border border-sidebar-border">
+              <TabsTrigger 
+                value="chasseurs"
+                className="data-[state=active]:bg-solo-purple data-[state=active]:text-white"
+              >
+                Teams Chasseurs
+              </TabsTrigger>
+              <TabsTrigger 
+                value="jinwoo"
+                className="data-[state=active]:bg-solo-purple data-[state=active]:text-white"
+              >
+                Teams Jinwoo
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="chasseurs">
