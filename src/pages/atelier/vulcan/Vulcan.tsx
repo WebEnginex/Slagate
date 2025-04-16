@@ -12,7 +12,6 @@ import type { TeamVulcanChasseur } from "@/config/atelier/vulcan/teamVulcanChass
 import TeamChasseurCard from "@/pages/atelier/vulcan/TeamChasseurCard";
 import TeamJinwooCard from "./TeamJinwooCard";
 import { teamVulcanJinwoo } from "@/config/atelier/vulcan/teamVulcanJinwoo";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
 export default function VulcanPage() {
@@ -92,23 +91,34 @@ export default function VulcanPage() {
             Retour à l'Atelier de la Lumière
           </Link>
 
-          <h1 className="text-3xl font-bold mb-6">{boss?.nom}</h1>
-
           <Card className="bg-sidebar border-sidebar-border overflow-hidden mb-8">
-            <CardHeader className="pb-0 pt-6">
-              <CardTitle className="text-xl sm:text-2xl md:text-3xl text-white">
-                {boss?.nom}
-              </CardTitle>
-            </CardHeader>
-            
             <Tabs defaultValue="facile">
-              <div className="px-6 pt-4">
-                <TabsList className="bg-sidebar-accent">
-                  <TabsTrigger value="facile">Facile</TabsTrigger>
-                  <TabsTrigger value="normal">Normal</TabsTrigger>
-                  <TabsTrigger value="difficile">Difficile</TabsTrigger>
+              <CardHeader className="pb-0 pt-6 flex flex-col md:flex-row md:items-center md:justify-between">
+                <CardTitle className="text-xl sm:text-2xl md:text-3xl text-white mb-4 md:mb-0">
+                  {boss?.nom}
+                </CardTitle>
+
+                <TabsList className="bg-sidebar-accent border border-sidebar-border self-start md:self-center">
+                  <TabsTrigger 
+                    value="facile"
+                    className="data-[state=active]:bg-solo-purple data-[state=active]:text-white"
+                  >
+                    Facile
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="normal"
+                    className="data-[state=active]:bg-solo-purple data-[state=active]:text-white"
+                  >
+                    Normal
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="difficile"
+                    className="data-[state=active]:bg-solo-purple data-[state=active]:text-white"
+                  >
+                    Difficile
+                  </TabsTrigger>
                 </TabsList>
-              </div>
+              </CardHeader>
 
               {["facile", "normal", "difficile"].map((diff) => (
                 <TabsContent key={diff} value={diff}>
@@ -116,30 +126,31 @@ export default function VulcanPage() {
                     <div className="flex items-center justify-center bg-sidebar-accent rounded-md p-4">
                       <img 
                         src={boss?.image || ""} 
+                        alt={boss?.nom || "Boss"}
                         className="w-full max-h-[300px] object-contain" 
                       />
                     </div>
                     <div className="flex flex-col justify-center space-y-6">
                       <div className="space-y-4">
                         <div className="flex items-center gap-2 sm:gap-3">
-                          <Sword className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 text-solo-purple flex-shrink-0" />
+                          <Sword className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-solo-purple flex-shrink-0" />
                           <div className="flex flex-col">
-                            <p className="text-xs sm:text-sm text-muted-foreground">Puissance requise</p>
-                            <p className="text-base sm:text-lg md:text-xl font-semibold">
+                            <p className="text-xs sm:text-sm md:text-base text-muted-foreground font-medium">Puissance requise</p>
+                            <p className="text-base sm:text-xl md:text-2xl font-semibold text-white">
                               {boss?.[`puissance_${diff}` as keyof Boss]}
                             </p>
                           </div>
                         </div>
                         
-                        <Separator className="bg-sidebar-border" />
+                        <Separator className="bg-sidebar-border my-2" />
                         
-                        <div className="space-y-2">
+                        <div className="space-y-3">
                           <div className="flex items-center gap-2">
-                            <Shield className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 text-solo-purple flex-shrink-0" />
-                            <p className="text-xs sm:text-sm md:text-base">Faiblesses</p>
+                            <Shield className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-solo-purple flex-shrink-0" />
+                            <p className="text-xs sm:text-sm md:text-base font-medium">Faiblesses</p>
                           </div>
                           
-                          <div className="flex items-center gap-3 sm:gap-4 pl-8">
+                          <div className="flex items-center gap-4 pl-10">
                             {boss?.faiblesse1 && (
                               <div className="flex flex-col items-center">
                                 <img 
@@ -160,13 +171,6 @@ export default function VulcanPage() {
                             )}
                           </div>
                         </div>
-
-                        <Badge 
-                          variant="outline" 
-                          className="mt-2 border-solo-purple text-solo-purple w-fit"
-                        >
-                          {diff.charAt(0).toUpperCase() + diff.slice(1)}
-                        </Badge>
                       </div>
                     </div>
                   </CardContent>
