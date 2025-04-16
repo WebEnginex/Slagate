@@ -1,7 +1,8 @@
+
 import { useState, useEffect } from "react";
 import type { Database } from "@/integrations/supabase/types";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { ChevronDown, ChevronUp, Star, Shield, Sword, BarChart } from "lucide-react";
+import { ChevronDown, ChevronUp, Sparkles, GemIcon, Dna, Layers, BarChart2, User, Award, Swords, CirclePlay, FlaskConical } from "lucide-react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { TeamVulcanJinwoo } from "@/config/atelier/vulcan/teamVulcanJinwoo";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -73,7 +74,7 @@ export default function TeamJinwooCard({
         onClick={() => toggleTeam(team.id)}
       >
         <CardTitle className="text-xl font-bold flex items-center gap-2 text-white">
-          <Sword className="h-5 w-5 text-solo-purple" />
+          <User className="h-5 w-5 text-solo-purple" />
           {team.nom}
         </CardTitle>
         {isExpanded ? (
@@ -107,7 +108,7 @@ export default function TeamJinwooCard({
             {/* Chasseurs selection */}
             <div className="bg-sidebar/50 p-3 rounded-lg">
               <h4 className="text-sm font-medium mb-3 text-white flex items-center gap-1.5">
-                <Star className="h-4 w-4 text-solo-purple" />
+                <User className="h-4 w-4 text-solo-purple" />
                 Chasseurs
               </h4>
               <div className="flex flex-wrap gap-3 justify-center">
@@ -161,7 +162,7 @@ export default function TeamJinwooCard({
                   <div className="bg-sidebar/50 rounded-lg overflow-hidden">
                     <Collapsible open={isSectionOpen('stats')} onOpenChange={() => toggleSection('stats')}>
                       <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                        <BarChart className="h-4 w-4 text-solo-purple" />
+                        <BarChart2 className="h-4 w-4 text-solo-purple" />
                         <span className="flex-1 text-left">Statistiques</span>
                       </CollapsibleTrigger>
                       <CollapsibleContent>
@@ -184,7 +185,7 @@ export default function TeamJinwooCard({
                     <div className="bg-sidebar/50 rounded-lg overflow-hidden">
                       <Collapsible open={isSectionOpen('armes')} onOpenChange={() => toggleSection('armes')}>
                         <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                          <Sword className="h-4 w-4 text-solo-purple" />
+                          <Swords className="h-4 w-4 text-solo-purple" />
                           <span className="flex-1 text-left">Armes</span>
                         </CollapsibleTrigger>
                         <CollapsibleContent>
@@ -222,7 +223,7 @@ export default function TeamJinwooCard({
                   <div className="bg-sidebar/50 rounded-lg overflow-hidden">
                     <Collapsible open={isSectionOpen('artefacts')} onOpenChange={() => toggleSection('artefacts')}>
                       <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                        <Shield className="h-4 w-4 text-solo-purple" />
+                        <GemIcon className="h-4 w-4 text-solo-purple" />
                         <span className="flex-1 text-left">Artefacts</span>
                       </CollapsibleTrigger>
                       <CollapsibleContent>
@@ -266,7 +267,7 @@ export default function TeamJinwooCard({
                   <div className="bg-sidebar/50 rounded-lg overflow-hidden">
                     <Collapsible open={isSectionOpen('sets')} onOpenChange={() => toggleSection('sets')}>
                       <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                        <Star className="h-4 w-4 text-solo-purple" />
+                        <Layers className="h-4 w-4 text-solo-purple" />
                         <span className="flex-1 text-left">Sets Bonus</span>
                       </CollapsibleTrigger>
                       <CollapsibleContent>
@@ -294,7 +295,7 @@ export default function TeamJinwooCard({
                   <div className="bg-sidebar/50 rounded-lg overflow-hidden">
                     <Collapsible open={isSectionOpen('noyaux')} onOpenChange={() => toggleSection('noyaux')}>
                       <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                        <Shield className="h-4 w-4 text-solo-purple" />
+                        <Dna className="h-4 w-4 text-solo-purple" />
                         <span className="flex-1 text-left">Noyaux</span>
                       </CollapsibleTrigger>
                       <CollapsibleContent>
@@ -338,7 +339,7 @@ export default function TeamJinwooCard({
                   <div className="bg-sidebar/50 rounded-lg overflow-hidden">
                     <Collapsible open={isSectionOpen('ombres')} onOpenChange={() => toggleSection('ombres')}>
                       <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                        <Star className="h-4 w-4 text-solo-purple" />
+                        <Sparkles className="h-4 w-4 text-solo-purple" />
                         <span className="flex-1 text-left">Ombres</span>
                       </CollapsibleTrigger>
                       <CollapsibleContent>
@@ -380,7 +381,7 @@ export default function TeamJinwooCard({
                       <div className="bg-sidebar/50 rounded-lg overflow-hidden">
                         <Collapsible open={isSectionOpen('competences')} onOpenChange={() => toggleSection('competences')}>
                           <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                            <Sword className="h-4 w-4 text-solo-purple" />
+                            <Award className="h-4 w-4 text-solo-purple" />
                             <span className="flex-1 text-left">Compétences</span>
                           </CollapsibleTrigger>
                           <CollapsibleContent>
@@ -414,7 +415,7 @@ export default function TeamJinwooCard({
                       <div className="bg-sidebar/50 rounded-lg overflow-hidden">
                         <Collapsible open={isSectionOpen('qte')} onOpenChange={() => toggleSection('qte')}>
                           <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                            <Sword className="h-4 w-4 text-solo-purple" />
+                            <CirclePlay className="h-4 w-4 text-solo-purple" />
                             <span className="flex-1 text-left">QTE</span>
                           </CollapsibleTrigger>
                           <CollapsibleContent>
@@ -448,7 +449,7 @@ export default function TeamJinwooCard({
                       <div className="bg-sidebar/50 rounded-lg overflow-hidden">
                         <Collapsible open={isSectionOpen('pierres')} onOpenChange={() => toggleSection('pierres')}>
                           <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                            <Shield className="h-4 w-4 text-solo-purple" />
+                            <FlaskConical className="h-4 w-4 text-solo-purple" />
                             <span className="flex-1 text-left">Pierres de Bénédiction</span>
                           </CollapsibleTrigger>
                           <CollapsibleContent>
