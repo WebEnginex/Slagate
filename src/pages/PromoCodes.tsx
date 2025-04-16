@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -27,7 +28,7 @@ const getSocialIcon = (type: SocialLink["type"]) => {
   }
 };
 
-const Creators = () => {
+const PromoCodes = () => {
   const socialLinks: SocialLink[] = [
     { type: "youtube", url: "https://www.youtube.com/@Sohoven", label: "Sohoven" },
     { type: "twitch", url: "https://www.twitch.tv/sohoven", label: "sohoven" },
@@ -80,7 +81,7 @@ const Creators = () => {
       image: "/images/code_promo/tuto_pomo_code_4.png",
     },
     {
-      title: "Ouvrez l’interface pour saisir un code",
+      title: "Ouvrez l'interface pour saisir un code",
       description: (
         <>
           Cliquez sur le bouton{" "}
@@ -95,7 +96,7 @@ const Creators = () => {
       title: "Entrez votre code",
       description: (
         <>
-          Une fenêtre s’ouvre. Vous pouvez coller avec le code copié avec le
+          Une fenêtre s'ouvre. Vous pouvez coller avec le code copié avec le
           raccourci <span style={{ color: "rgb(155 135 245)" }}>"ctrl+v"</span> ou
           écrire le code vous-même, puis cliquer sur{" "}
           <span style={{ color: "rgb(155 135 245)" }}>"Utiliser"</span> pour
@@ -235,4 +236,4 @@ const Creators = () => {
   );
 };
 
-export default Creators;
+export default PromoCodes;
