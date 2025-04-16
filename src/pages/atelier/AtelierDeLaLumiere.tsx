@@ -1,3 +1,4 @@
+
 import Layout from "@/components/Layout";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -5,7 +6,7 @@ import type { Database } from "@/integrations/supabase/types";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Flame, Shield, Sword } from "lucide-react";
+import { Flame, Sword } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -60,26 +61,31 @@ export default function AtelierDeLaLumiere() {
                   </AspectRatio>
                 </div>
                 <div className="p-4 flex flex-col flex-grow">
-                  <h2 className="text-xl font-semibold text-white transition-colors group-hover:text-solo-purple mb-2">
+                  <h2 className="text-xl font-semibold text-white transition-colors group-hover:text-solo-purple mb-3">
                     {boss.nom}
                   </h2>
-                  <div className="mt-2 flex flex-wrap items-center gap-2 mb-4">
-                    {boss.faiblesse1 && (
-                      <img
-                        src={boss.faiblesse1}
-                        alt="Faiblesse 1"
-                        className="h-5 w-5 object-contain"
-                      />
-                    )}
-                    {boss.faiblesse2 && (
-                      <img
-                        src={boss.faiblesse2}
-                        alt="Faiblesse 2"
-                        className="h-5 w-5 object-contain"
-                      />
-                    )}
+                  
+                  <div className="mt-2 mb-4">
+                    <div className="text-sm text-muted-foreground mb-2">Faiblesses:</div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      {boss.faiblesse1 && (
+                        <img
+                          src={boss.faiblesse1}
+                          alt="Faiblesse 1"
+                          className="h-5 w-5 object-contain"
+                        />
+                      )}
+                      {boss.faiblesse2 && (
+                        <img
+                          src={boss.faiblesse2}
+                          alt="Faiblesse 2"
+                          className="h-5 w-5 object-contain"
+                        />
+                      )}
+                    </div>
                   </div>
-                  <div className="mt-auto flex items-center justify-end text-sm text-muted-foreground">
+                  
+                  <div className="mt-auto pt-2 border-t border-sidebar-border flex items-center justify-end text-sm text-muted-foreground">
                     <Sword className="mr-2 h-4 w-4 text-solo-purple" />
                     {boss.puissance_facile}
                   </div>
