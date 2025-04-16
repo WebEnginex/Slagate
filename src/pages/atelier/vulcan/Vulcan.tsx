@@ -1,6 +1,7 @@
+
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Flame, Shield, Sword } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
@@ -11,6 +12,8 @@ import type { TeamVulcanChasseur } from "@/config/atelier/vulcan/teamVulcanChass
 import TeamChasseurCard from "@/pages/atelier/vulcan/TeamChasseurCard";
 import TeamJinwooCard from "./TeamJinwooCard";
 import { teamVulcanJinwoo } from "@/config/atelier/vulcan/teamVulcanJinwoo";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 
 export default function VulcanPage() {
   type Boss = Database["public"]["Tables"]["bosses"]["Row"];
@@ -91,80 +94,124 @@ export default function VulcanPage() {
 
           <h1 className="text-3xl font-bold mb-6">{boss?.nom}</h1>
 
-          <Tabs defaultValue="facile">
-            <TabsList>
-              <TabsTrigger value="facile">Facile</TabsTrigger>
-              <TabsTrigger value="normal">Normal</TabsTrigger>
-              <TabsTrigger value="difficile">Difficile</TabsTrigger>
-            </TabsList>
+          <Card className="bg-sidebar border-sidebar-border overflow-hidden mb-8">
+            <CardHeader className="pb-0 pt-6">
+              <CardTitle className="text-xl sm:text-2xl md:text-3xl text-white">
+                {boss?.nom}
+              </CardTitle>
+            </CardHeader>
+            
+            <Tabs defaultValue="facile">
+              <div className="px-6 pt-4">
+                <TabsList className="bg-sidebar-accent">
+                  <TabsTrigger value="facile">Facile</TabsTrigger>
+                  <TabsTrigger value="normal">Normal</TabsTrigger>
+                  <TabsTrigger value="difficile">Difficile</TabsTrigger>
+                </TabsList>
+              </div>
 
-            {["facile", "normal", "difficile"].map((diff) => (
-              <TabsContent key={diff} value={diff}>
-                <Card className="bg-muted">
-                  <CardHeader>
-                    <CardTitle>
-                      {boss?.nom} ({diff.charAt(0).toUpperCase() + diff.slice(1)})
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="grid md:grid-cols-2 gap-6">
-                    <div className="flex items-center justify-center">
+              {["facile", "normal", "difficile"].map((diff) => (
+                <TabsContent key={diff} value={diff}>
+                  <CardContent className="grid md:grid-cols-2 gap-6 pt-6">
+                    <div className="flex items-center justify-center bg-sidebar-accent rounded-md p-4">
                       <img 
                         src={boss?.image || ""} 
                         className="w-full max-h-[300px] object-contain" 
                       />
                     </div>
-                    <div>
-                      <p className="mb-2">
-                        Puissance requise : {boss?.[`puissance_${diff}` as keyof Boss]}
-                      </p>
-                      <div className="flex gap-2">
-                        <img src={boss?.faiblesse1 || ""} className="h-10 w-10" />
-                        <img src={boss?.faiblesse2 || ""} className="h-10 w-10" />
+                    <div className="flex flex-col justify-center space-y-6">
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          <Sword className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 text-solo-purple flex-shrink-0" />
+                          <div className="flex flex-col">
+                            <p className="text-xs sm:text-sm text-muted-foreground">Puissance requise</p>
+                            <p className="text-base sm:text-lg md:text-xl font-semibold">
+                              {boss?.[`puissance_${diff}` as keyof Boss]}
+                            </p>
+                          </div>
+                        </div>
+                        
+                        <Separator className="bg-sidebar-border" />
+                        
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-2">
+                            <Shield className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 text-solo-purple flex-shrink-0" />
+                            <p className="text-xs sm:text-sm md:text-base">Faiblesses</p>
+                          </div>
+                          
+                          <div className="flex items-center gap-3 sm:gap-4 pl-8">
+                            {boss?.faiblesse1 && (
+                              <div className="flex flex-col items-center">
+                                <img 
+                                  src={boss.faiblesse1} 
+                                  className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain" 
+                                  alt="Faiblesse 1"
+                                />
+                              </div>
+                            )}
+                            {boss?.faiblesse2 && (
+                              <div className="flex flex-col items-center">
+                                <img 
+                                  src={boss.faiblesse2} 
+                                  className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain" 
+                                  alt="Faiblesse 2"
+                                />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        <Badge 
+                          variant="outline" 
+                          className="mt-2 border-solo-purple text-solo-purple w-fit"
+                        >
+                          {diff.charAt(0).toUpperCase() + diff.slice(1)}
+                        </Badge>
                       </div>
                     </div>
                   </CardContent>
-                </Card>
+                </TabsContent>
+              ))}
+            </Tabs>
+          </Card>
 
-                <Tabs defaultValue="chasseurs" className="mt-8">
-                  <TabsList className="mb-4">
-                    <TabsTrigger value="chasseurs">Teams Chasseurs</TabsTrigger>
-                    <TabsTrigger value="jinwoo">Teams Jinwoo</TabsTrigger>
-                  </TabsList>
+          <Tabs defaultValue="chasseurs" className="mt-8">
+            <TabsList className="mb-4">
+              <TabsTrigger value="chasseurs">Teams Chasseurs</TabsTrigger>
+              <TabsTrigger value="jinwoo">Teams Jinwoo</TabsTrigger>
+            </TabsList>
 
-                  <TabsContent value="chasseurs">
-                    {teamVulcanChasseurs.map((team: TeamVulcanChasseur) => (
-                      <TeamChasseurCard
-                        key={team.id}
-                        team={team}
-                        chasseurs={chasseurs}
-                        artefacts={artefacts}
-                        noyaux={noyaux}
-                        ombres={ombres}
-                        setsBonus={setsBonus}
-                      />
-                    ))}
-                  </TabsContent>
+            <TabsContent value="chasseurs">
+              {teamVulcanChasseurs.map((team: TeamVulcanChasseur) => (
+                <TeamChasseurCard
+                  key={team.id}
+                  team={team}
+                  chasseurs={chasseurs}
+                  artefacts={artefacts}
+                  noyaux={noyaux}
+                  ombres={ombres}
+                  setsBonus={setsBonus}
+                />
+              ))}
+            </TabsContent>
 
-                  <TabsContent value="jinwoo">
-                    {teamVulcanJinwoo.map((team, i) => (
-                      <TeamJinwooCard
-                        key={team.id}
-                        team={team}
-                        chasseurs={chasseurs}
-                        artefacts={artefacts}
-                        noyaux={noyaux}
-                        ombres={ombres}
-                        setsBonus={setsBonus}
-                        armes={armes}
-                        competences={competences}
-                        qtes={qtes}
-                        pierres={pierres}
-                      />
-                    ))}
-                  </TabsContent>
-                </Tabs>
-              </TabsContent>
-            ))}
+            <TabsContent value="jinwoo">
+              {teamVulcanJinwoo.map((team, i) => (
+                <TeamJinwooCard
+                  key={team.id}
+                  team={team}
+                  chasseurs={chasseurs}
+                  artefacts={artefacts}
+                  noyaux={noyaux}
+                  ombres={ombres}
+                  setsBonus={setsBonus}
+                  armes={armes}
+                  competences={competences}
+                  qtes={qtes}
+                  pierres={pierres}
+                />
+              ))}
+            </TabsContent>
           </Tabs>
         </div>
       </div>
