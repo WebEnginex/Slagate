@@ -1,8 +1,7 @@
-
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { Home, Award, Gift, Users, Menu, X } from "lucide-react";
+import { Home, Award, Gift, Users, Menu, X, Flame } from "lucide-react";
 
 type NavItemProps = {
   to: string;
@@ -38,6 +37,7 @@ const SideNav = ({ isMobileOpen, setIsMobileOpen }: SideNavProps) => {
   const navItems = [
     { to: "/", icon: <Home size={20} />, label: "Accueil" },
     { to: "/tier-list", icon: <Award size={20} />, label: "Tier List" },
+    { to: "/atelier", icon: <Flame size={20} />, label: "Atelier" },
     { to: "/promo-codes", icon: <Gift size={20} />, label: "Code Promo" },
     { to: "/creators", icon: <Users size={20} />, label: "Creators" },
   ];
@@ -56,7 +56,9 @@ const SideNav = ({ isMobileOpen, setIsMobileOpen }: SideNavProps) => {
       <nav
         className={cn(
           "fixed top-0 left-0 bottom-0 z-50 w-64 flex-col bg-sidebar p-4 transition-transform duration-200 lg:relative lg:flex lg:transform-none",
-          isMobileOpen ? "flex translate-x-0" : "-translate-x-full lg:translate-x-0"
+          isMobileOpen
+            ? "flex translate-x-0"
+            : "-translate-x-full lg:translate-x-0"
         )}
       >
         {/* Mobile close button */}
@@ -69,12 +71,17 @@ const SideNav = ({ isMobileOpen, setIsMobileOpen }: SideNavProps) => {
 
         {/* Logo */}
         <div className="flex items-center gap-3 px-3 py-4">
-          <div className="flex h-8 w-8 items-center justify-center rounded bg-solo-purple text-white font-bold">
-            SL
-          </div>
+          <img
+            src="/logo/Sohoven_Logo.jpg"
+            alt="Sohoven Logo"
+            className="h-8 w-8 rounded object-cover"
+          />
+
           <div className="flex flex-col">
-            <span className="font-bold text-sidebar-foreground">Solo Leveling</span>
-            <span className="text-xs text-muted-foreground">Arise Guides</span>
+            <span className="font-bold text-sidebar-foreground">
+              Solo Leveling : Arise
+            </span>
+            <span className="text-xs text-muted-foreground">Guides</span>
           </div>
         </div>
 
@@ -93,7 +100,7 @@ const SideNav = ({ isMobileOpen, setIsMobileOpen }: SideNavProps) => {
 
         {/* Footer */}
         <div className="mt-auto border-t border-sidebar-border pt-4 text-xs text-muted-foreground">
-          <p>Solo Leveling: Arise Guides v1.0</p>
+          <p>WebEngine</p>
         </div>
       </nav>
     </>

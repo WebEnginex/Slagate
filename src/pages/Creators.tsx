@@ -28,8 +28,8 @@ const Creators = () => {
     },
     { 
       type: "twitter", 
-      url: "https://twitter.com/SohovenYT", 
-      label: "@SohovenYT" 
+      url: "https://x.com/Soho_ven", 
+      label: "@Soho_ven" 
     },
     { 
       type: "instagram", 
