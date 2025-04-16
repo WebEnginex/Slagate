@@ -66,9 +66,16 @@ export default function AtelierDeLaLumiere() {
                   </h2>
                   
                   <div className="mt-auto pt-2 border-t border-sidebar-border">
-                    <div className="flex items-center justify-between text-xs sm:text-sm text-muted-foreground gap-1">
-                      <div className="flex items-center gap-1 min-w-0">
-                        <span className="whitespace-nowrap">Faiblesses:</span>
+                    <div className="flex flex-col space-y-2 text-xs sm:text-sm text-muted-foreground">
+                      {/* Puissance section */}
+                      <div className="flex items-center gap-1">
+                        <Sword className="h-3 w-3 flex-shrink-0 text-solo-purple" />
+                        <span className="whitespace-nowrap">{boss.puissance_facile}</span>
+                      </div>
+                      
+                      {/* Faiblesses section */}
+                      <div className="flex items-center flex-wrap gap-1">
+                        <span className="whitespace-nowrap mr-1">Faiblesses:</span>
                         <div className="flex flex-shrink-0 gap-1">
                           {boss.faiblesse1 && (
                             <img
@@ -85,11 +92,6 @@ export default function AtelierDeLaLumiere() {
                             />
                           )}
                         </div>
-                      </div>
-                      
-                      <div className="flex items-center flex-shrink-0">
-                        <Sword className="mr-1 h-3 w-3 text-solo-purple" />
-                        <span className="whitespace-nowrap">{boss.puissance_facile}</span>
                       </div>
                     </div>
                   </div>
