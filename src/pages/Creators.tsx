@@ -1,10 +1,9 @@
-
-import React from "react";
+import React, { useState } from "react";
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ExternalLink, Youtube, Twitch, Twitter, Instagram, ChevronDown, ChevronUp } from "lucide-react";
+import { ExternalLink, Youtube, Twitch, Twitter, Instagram, ChevronDown, ChevronUp, X } from "lucide-react";
 
 // Types pour les réseaux sociaux
 type SocialLink = {
@@ -13,89 +12,109 @@ type SocialLink = {
   label: string;
 };
 
+// Fonction pour afficher l'icône correspondant au type de lien social
+const getSocialIcon = (type: SocialLink["type"]) => {
+  switch (type) {
+    case "youtube":
+      return <Youtube className="h-5 w-5" />;
+    case "twitch":
+      return <Twitch className="h-5 w-5" />;
+    case "twitter":
+      return <Twitter className="h-5 w-5" />;
+    case "instagram":
+      return <Instagram className="h-5 w-5" />;
+    case "website":
+      return <ExternalLink className="h-5 w-5" />;
+  }
+};
+
 const Creators = () => {
   // Données pour les réseaux sociaux de Sohoven
   const socialLinks: SocialLink[] = [
-    { 
-      type: "youtube", 
-      url: "https://www.youtube.com/@Sohoven", 
-      label: "Sohoven" 
-    },
-    { 
-      type: "twitch", 
-      url: "https://www.twitch.tv/sohoven", 
-      label: "sohoven" 
-    },
-    { 
-      type: "twitter", 
-      url: "https://x.com/Soho_ven", 
-      label: "@Soho_ven" 
-    },
-    { 
-      type: "instagram", 
-      url: "https://www.instagram.com/sohoven", 
-      label: "sohoven" 
-    },
-    { 
-      type: "website", 
-      url: "https://creator.netmarble.com/en/sololv/ranking/sohoven", 
-      label: "Page créateur" 
-    },
+    { type: "youtube", url: "https://www.youtube.com/@Sohoven", label: "Sohoven" },
+    { type: "twitch", url: "https://www.twitch.tv/sohoven", label: "sohoven" },
+    { type: "twitter", url: "https://x.com/Soho_ven", label: "@Soho_ven" },
+    { type: "instagram", url: "https://www.instagram.com/sohoven", label: "sohoven" },
+    { type: "website", url: "https://creator.netmarble.com/en/sololv/ranking/sohoven", label: "Page créateur" },
   ];
 
   // Étapes du guide
   const steps = [
     {
       title: "Se connecter au site Netmarble Creator",
-      description: "Accédez à la page du créateur que vous souhaitez supporter. Par exemple, pour Sohoven :",
-      action: "https://creator.netmarble.com/en/sololv/ranking/sohoven",
-      actionText: "Visiter la page de Sohoven",
-      image: "/placeholder.svg"
+      description: (
+        <>
+          Accédez à la page Netmarble Creator puis connectez vous à votre compte.
+        </>
+      ),
+      action:
+        "https://members.netmarble.com/auth/signin?idpViewType=B&redirectUrl=https%3A%2F%2Fcreator.netmarble.com%2Fcreator%2Fsignin%2Fcallback%3FredirectUrl%3Dhttps%3A%2F%2Fcreator.netmarble.com%2Fen%2Fsololv%2Franking%2Fsohoven",
+      actionText: "Se connecter au site",
+      image: "public/images/creator_images/tuto_creator_1.png",
     },
     {
       title: "Accéder à votre profil",
-      description: "Cliquez sur le bouton en haut à droite pour ouvrir le menu, puis allez dans \"My Page\".",
-      image: "/placeholder.svg"
+      description: (
+        <>
+          Cliquez sur le bouton en haut à droite pour ouvrir le menu, puis allez
+          dans <span style={{ color: "rgb(155 135 245)" }}>"My Page"</span> pour
+          accéder aux paramètres.
+        </>
+      ),
+      image: "public/images/creator_images/tuto_creator_2.png",
     },
     {
-      title: "Lier votre compte de jeu",
-      description: "Cliquez sur le bouton \"Link Game Account\" puis \"Link account\" pour lier votre compte Solo Leveling: Arise.",
-      image: "/placeholder.svg"
+      title: "Ouvrez la fenêtre qui permet de lier son compte",
+      description: (
+        <>
+          Cliquez sur le bouton{" "}
+          <span style={{ color: "rgb(155 135 245)" }}>"Link Game Account"</span>{" "}
+          pour ouvrir la fenêtre qui permet de lier son compte Solo Leveling au
+          site Netmarble Creator.
+        </>
+      ),
+      image: "/images/creator_images/tuto_creator_3.png",
     },
     {
-      title: "Retourner sur la page du créateur",
-      description: "Revenez sur la page du créateur que vous souhaitez supporter.",
-      action: "https://creator.netmarble.com/en/sololv/ranking/sohoven",
-      actionText: "Retour à la page de Sohoven",
-      image: "/placeholder.svg"
+      title: "Lier votre compte",
+      description: (
+        <>
+          Cliquez sur le bouton{" "}
+          <span style={{ color: "rgb(155 135 245)" }}>"Link account"</span> pour
+          lier votre compte Solo Leveling au site Netmarble Creator. Si le site
+          vous demande une connexion quand vous cliquez sur le bouton,
+          reconnectez vous avec le même compte qu'au début.
+        </>
+      ),
+      image: "/images/creator_images/tuto_creator_4.png",
     },
     {
       title: "Supporter le créateur",
-      description: "Cliquez sur le bouton \"Support\", acceptez les conditions et cliquez sur \"Yes\".",
-      image: "/placeholder.svg"
-    }
+      description: (
+        <>
+          Cliquez sur le bouton{" "}
+          <span style={{ color: "rgb(155 135 245)" }}>"Support"</span>, acceptez
+          les conditions et cliquez sur{" "}
+          <span style={{ color: "rgb(155 135 245)" }}>"Yes"</span>.
+        </>
+      ),
+      image: "/images/creator_images/tuto_creator_5.png",
+    },
   ];
 
-  // Fonction pour afficher l'icône correspondant au type de lien social
-  const getSocialIcon = (type: SocialLink["type"]) => {
-    switch (type) {
-      case "youtube":
-        return <Youtube className="h-5 w-5" />;
-      case "twitch":
-        return <Twitch className="h-5 w-5" />;
-      case "twitter":
-        return <Twitter className="h-5 w-5" />;
-      case "instagram":
-        return <Instagram className="h-5 w-5" />;
-      case "website":
-        return <ExternalLink className="h-5 w-5" />;
-    }
-  };
-
   const [openStep, setOpenStep] = React.useState<number | null>(0);
+  const [modalImage, setModalImage] = useState<string | null>(null);
 
   const toggleStep = (index: number) => {
     setOpenStep(openStep === index ? null : index);
+  };
+
+  const openModal = (image: string) => {
+    setModalImage(image);
+  };
+
+  const closeModal = () => {
+    setModalImage(null);
   };
 
   return (
@@ -112,11 +131,7 @@ const Creators = () => {
         <div className="p-6">
           <div className="flex flex-col sm:flex-row items-center gap-6">
             <div className="aspect-square w-32 h-32 overflow-hidden rounded-full bg-muted border-4 border-white/10">
-              <img
-                src="/placeholder.svg"
-                alt="Sohoven"
-                className="h-full w-full object-cover"
-              />
+            <img src="/images/logo/Sohoven_Logo.png" alt="Sohoven" className="h-full w-full object-cover" />
             </div>
             <div className="flex-1 text-center sm:text-left">
               <h2 className="text-2xl font-bold mb-2">Sohoven</h2>
@@ -177,7 +192,10 @@ const Creators = () => {
               <CollapsibleContent>
                 <CardContent className="pb-6">
                   <div className="flex flex-col md:flex-row gap-6">
-                    <div className="w-full md:w-1/3 aspect-video bg-muted rounded-lg overflow-hidden">
+                    <div
+                      className="w-full md:w-1/3 aspect-video bg-muted rounded-lg overflow-hidden cursor-pointer"
+                      onClick={() => openModal(step.image)}
+                    >
                       <img
                         src={step.image}
                         alt={`Étape ${index + 1}`}
@@ -203,21 +221,20 @@ const Creators = () => {
         ))}
       </div>
 
-      <Card className="mt-8">
-        <CardHeader>
-          <CardTitle>Avantages de supporter un créateur</CardTitle>
-          <CardDescription>
-            Supporter un créateur permet non seulement de l'aider financièrement, mais aussi de bénéficier d'avantages dans le jeu.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-            <li>Le créateur obtient une commission sur vos achats dans le jeu</li>
-            <li>Vous recevez des récompenses en jeu pour votre soutien</li>
-            <li>Vous contribuez à la création de contenu de qualité pour la communauté</li>
-          </ul>
-        </CardContent>
-      </Card>
+      {/* Modal pour afficher l'image en grand */}
+      {modalImage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+          <div className="relative">
+            <button
+              className="absolute top-2 right-2 text-white bg-black bg-opacity-50 rounded-full p-2"
+              onClick={closeModal}
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <img src={modalImage} alt="Agrandissement" className="max-w-full max-h-screen rounded-lg" />
+          </div>
+        </div>
+      )}
     </Layout>
   );
 };
