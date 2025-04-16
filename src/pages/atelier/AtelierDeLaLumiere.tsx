@@ -1,4 +1,3 @@
-
 import Layout from "@/components/Layout";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -74,19 +73,19 @@ export default function AtelierDeLaLumiere() {
                       
                       <div className="flex items-center flex-wrap gap-1">
                         <span className="whitespace-nowrap mr-1">Faiblesses:</span>
-                        <div className="flex flex-shrink-0 gap-1">
+                        <div className="flex flex-shrink-0 gap-2">
                           {boss.faiblesse1 && (
                             <img
                               src={boss.faiblesse1}
                               alt="Faiblesse 1"
-                              className="h-4 w-4 object-contain"
+                              className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 object-contain"
                             />
                           )}
                           {boss.faiblesse2 && (
                             <img
                               src={boss.faiblesse2}
                               alt="Faiblesse 2"
-                              className="h-4 w-4 object-contain"
+                              className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 object-contain"
                             />
                           )}
                         </div>
