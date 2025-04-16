@@ -152,29 +152,28 @@ const Creators = () => {
       </Card>
 
       {/* Guide étape par étape */}
-      <div className="space-y-4">
+      <div className="space-y-4 mb-8">
         <h2 className="text-2xl font-bold">Guide étape par étape</h2>
         
         {steps.map((step, index) => (
           <Card key={index} className="overflow-hidden">
             <Collapsible open={openStep === index} onOpenChange={() => toggleStep(index)}>
-              <CollapsibleTrigger className="w-full" showChevron={false}>
-                <div className="p-6 cursor-pointer flex flex-row items-center justify-between hover:bg-transparent">
-                  <div>
+              <CollapsibleTrigger className="w-full">
+                <div className="p-6 cursor-pointer flex flex-row items-center justify-between hover:bg-transparent transition-colors">
+                  <div className="flex-1">
                     <CardTitle className="flex items-center">
                       <span className="bg-solo-purple text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">
                         {index + 1}
                       </span>
-                      {step.title}
+                      <span className="flex-1">{step.title}</span>
                     </CardTitle>
-                    <CardDescription className="mt-1">
-                      Cliquez pour voir les détails
-                    </CardDescription>
                   </div>
-                  {openStep === index ? 
-                    <ChevronUp className="h-5 w-5 text-muted-foreground" /> : 
-                    <ChevronDown className="h-5 w-5 text-muted-foreground" />
-                  }
+                  <div className="ml-4">
+                    {openStep === index ? 
+                      <ChevronUp className="h-5 w-5 text-muted-foreground" /> : 
+                      <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                    }
+                  </div>
                 </div>
               </CollapsibleTrigger>
               <CollapsibleContent>
@@ -209,17 +208,52 @@ const Creators = () => {
         ))}
       </div>
 
+      {/* Section sur les avantages du support créateur */}
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>Avantages du support créateur</CardTitle>
+          <CardDescription>
+            Découvrez ce qu'apporte le soutien à un créateur dans Solo Leveling: Arise
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-3">
+              <h3 className="text-lg font-medium">Pour vous</h3>
+              <ul className="space-y-2 list-disc pl-5">
+                <li>Soutenez vos créateurs de contenu préférés sans frais supplémentaires</li>
+                <li>Contribuez directement à la croissance de la communauté Solo Leveling</li>
+                <li>Restez connecté avec les dernières actualités et guides via votre créateur</li>
+                <li>Possibilité de recevoir des codes promotionnels exclusifs partagés par les créateurs</li>
+                <li>Participez à des événements spéciaux organisés par les créateurs supportés</li>
+              </ul>
+            </div>
+            
+            <div className="space-y-3">
+              <h3 className="text-lg font-medium">Pour le créateur</h3>
+              <ul className="space-y-2 list-disc pl-5">
+                <li>Reçoit une reconnaissance officielle de Netmarble comme créateur de contenu</li>
+                <li>Obtient une part des achats effectués dans le jeu par leurs supporters</li>
+                <li>Accès à des statistiques détaillées sur leur communauté de supporters</li>
+                <li>Possibilité de participer à des événements exclusifs organisés par Netmarble</li>
+                <li>Opportunités de collaboration avec d'autres créateurs et avec Netmarble</li>
+              </ul>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Modal pour afficher l'image en grand */}
       {modalImage && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
-          <div className="relative">
+          <div className="relative max-w-4xl max-h-screen p-2">
             <button
               className="absolute top-2 right-2 text-white bg-black bg-opacity-50 rounded-full p-2"
               onClick={closeModal}
             >
               <X className="h-6 w-6" />
             </button>
-            <img src={modalImage} alt="Agrandissement" className="max-w-full max-h-screen rounded-lg" />
+            <img src={modalImage} alt="Agrandissement" className="max-w-full max-h-[90vh] rounded-lg" />
           </div>
         </div>
       )}

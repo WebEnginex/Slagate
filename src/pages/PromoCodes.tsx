@@ -28,6 +28,25 @@ const getSocialIcon = (type: SocialLink["type"]) => {
   }
 };
 
+// Fonction pour formatter le texte avec mise en évidence des mots entre guillemets
+const formatDescription = (text: React.ReactNode) => {
+  if (typeof text !== 'string') return text;
+  
+  // Diviser le texte en segments (texte normal et texte entre guillemets)
+  const segments = text.split(/(".*?")/g);
+  
+  return segments.map((segment, i) => {
+    // Si le segment commence et finit par des guillemets, c'est un texte à mettre en évidence
+    if (segment.startsWith('"') && segment.endsWith('"')) {
+      // Enlever les guillemets et mettre en évidence
+      const content = segment.slice(1, -1);
+      return <span key={i} style={{ color: 'rgb(155 135 245)' }}>{content}</span>;
+    }
+    // Sinon, retourner le texte tel quel
+    return segment;
+  });
+};
+
 const PromoCodes = () => {
   const socialLinks: SocialLink[] = [
     { type: "youtube", url: "https://www.youtube.com/@Sohoven", label: "Sohoven" },
@@ -40,80 +59,37 @@ const PromoCodes = () => {
   const steps = [
     {
       title: "Lancez le jeu Solo Leveling: Arise",
-      description: (
-        <>
-          Assurez-vous d'être connecté à votre compte. Pour cela il suffit de
-          rentrer vos identifiants et de vous connecter au jeu.
-        </>
-      ),
+      description: "Assurez-vous d'être connecté à votre compte. Pour cela il suffit de rentrer vos identifiants et de vous connecter au jeu.",
       image: "/images/code_promo/tuto_pomo_code_1.png",
     },
     {
       title: "Ouvrez le menu principal",
-      description: (
-        <>
-          Pour ouvrir le menu principal, appuyez sur l'icône avec les quatre
-          carrés dans le coin supérieur droit de l'écran.
-        </>
-      ),
+      description: "Pour ouvrir le menu principal, appuyez sur l'icône avec les quatre carrés dans le coin supérieur droit de l'écran.",
       image: "/images/code_promo/tuto_pomo_code_2.png",
     },
     {
       title: "Accédez au menu des paramètres",
-      description: (
-        <>
-          Ensuite dans le menu principal, cliquez sur l'icône{" "}
-          <span style={{ color: "rgb(155 135 245)" }}>"d'engrenage"</span> en bas
-          à droite pour ouvrir le menu des paramètres.
-        </>
-      ),
+      description: "Ensuite dans le menu principal, cliquez sur l'icône \"d'engrenage\" en bas à droite pour ouvrir le menu des paramètres.",
       image: "/images/code_promo/tuto_pomo_code_3.png",
     },
     {
       title: "Accédez à la gestion du compte",
-      description: (
-        <>
-          Cliquez sur <span style={{ color: "rgb(155 135 245)" }}>"Comptes"</span>{" "}
-          dans le menu latéral à gauche pour accéder au menu de la gestion du
-          compte.
-        </>
-      ),
+      description: "Cliquez sur \"Comptes\" dans le menu latéral à gauche pour accéder au menu de la gestion du compte.",
       image: "/images/code_promo/tuto_pomo_code_4.png",
     },
     {
       title: "Ouvrez l'interface pour saisir un code",
-      description: (
-        <>
-          Cliquez sur le bouton{" "}
-          <span style={{ color: "rgb(155 135 245)" }}>"Saisir un code"</span> en
-          bas à droite pour ouvrir l'interface qui permet de rentrer et valider un
-          code promotionnel.
-        </>
-      ),
+      description: "Cliquez sur le bouton \"Saisir un code\" en bas à droite pour ouvrir l'interface qui permet de rentrer et valider un code promotionnel.",
       image: "/images/code_promo/tuto_pomo_code_5.png",
     },
     {
       title: "Entrez votre code",
-      description: (
-        <>
-          Une fenêtre s'ouvre. Vous pouvez coller avec le code copié avec le
-          raccourci <span style={{ color: "rgb(155 135 245)" }}>"ctrl+v"</span> ou
-          écrire le code vous-même, puis cliquer sur{" "}
-          <span style={{ color: "rgb(155 135 245)" }}>"Utiliser"</span> pour
-          valider le code.
-        </>
-      ),
+      description: "Une fenêtre s'ouvre. Vous pouvez coller avec le code copié avec le raccourci \"ctrl+v\" ou écrire le code vous-même, puis cliquer sur \"Utiliser\" pour valider le code.",
       image: "/images/code_promo/tuto_pomo_code_6.png",
     },
     {
       title: "Récupérez vos récompenses",
-      description: (
-        <>
-          Les récompenses seront envoyées directement dans votre{" "}
-          <span style={{ color: "rgb(155 135 245)" }}>"messagerie"</span> en jeu.
-          Ouvrez-la pour les récupérer.
-        </>
-      ),
+      description: "Les récompenses seront envoyées directement dans votre \"messagerie\" en jeu. Ouvrez-la pour les récupérer.",
       image: "/images/code_promo/tuto_pomo_code_7.png",
     },
   ];
@@ -174,29 +150,30 @@ const PromoCodes = () => {
       </Card>
 
       {/* Guide étape par étape */}
-      <div className="space-y-4">
+      <div className="space-y-4 mb-8">
         <h2 className="text-2xl font-bold">Guide étape par étape</h2>
 
         {steps.map((step, index) => (
           <Card key={index} className="overflow-hidden">
             <Collapsible open={openStep === index} onOpenChange={() => toggleStep(index)}>
-              <CollapsibleTrigger asChild>
-                <CardHeader className="p-6 cursor-pointer flex flex-row items-center justify-between hover:bg-muted/20">
-                  <div>
+              <CollapsibleTrigger className="w-full">
+                <div className="p-6 cursor-pointer flex flex-row items-center justify-between hover:bg-transparent transition-colors">
+                  <div className="flex-1">
                     <CardTitle className="flex items-center">
                       <span className="bg-solo-purple text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">
                         {index + 1}
                       </span>
-                      {step.title}
+                      <span className="flex-1">{step.title}</span>
                     </CardTitle>
-                    <CardDescription className="mt-1">Cliquez pour voir les détails</CardDescription>
                   </div>
-                  {openStep === index ? (
-                    <ChevronUp className="h-5 w-5 text-muted-foreground" />
-                  ) : (
-                    <ChevronDown className="h-5 w-5 text-muted-foreground" />
-                  )}
-                </CardHeader>
+                  <div className="ml-4">
+                    {openStep === index ? (
+                      <ChevronUp className="h-5 w-5 text-muted-foreground" />
+                    ) : (
+                      <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                    )}
+                  </div>
+                </div>
               </CollapsibleTrigger>
               <CollapsibleContent>
                 <CardContent className="pb-6">
@@ -208,7 +185,7 @@ const PromoCodes = () => {
                       <img src={step.image} alt={`Étape ${index + 1}`} className="h-full w-full object-cover" />
                     </div>
                     <div className="flex-1">
-                      <p className="text-muted-foreground mb-4">{step.description}</p>
+                      <p className="text-muted-foreground mb-4">{formatDescription(step.description)}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -221,14 +198,14 @@ const PromoCodes = () => {
       {/* Modal pour afficher l'image en grand */}
       {modalImage && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
-          <div className="relative">
+          <div className="relative max-w-4xl max-h-screen p-2">
             <button
               className="absolute top-2 right-2 text-white bg-black bg-opacity-50 rounded-full p-2"
               onClick={closeModal}
             >
               <X className="h-6 w-6" />
             </button>
-            <img src={modalImage} alt="Agrandissement" className="max-w-full max-h-screen rounded-lg" />
+            <img src={modalImage} alt="Agrandissement" className="max-w-full max-h-[90vh] rounded-lg" />
           </div>
         </div>
       )}
