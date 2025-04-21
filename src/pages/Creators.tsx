@@ -66,12 +66,12 @@ const Creators = () => {
       action:
         "https://members.netmarble.com/auth/signin?idpViewType=B&redirectUrl=https%3A%2F%2Fcreator.netmarble.com%2Fcreator%2Fsignin%2Fcallback%3FredirectUrl%3Dhttps%3A%2F%2Fcreator.netmarble.com%2Fen%2Fsololv%2Franking%2Fsohoven",
       actionText: "Se connecter au site",
-      image: "public/images/creator_images/tuto_creator_1.png",
+      image: "/images/creator_images/tuto_creator_1.png",
     },
     {
       title: "Accéder à votre profil",
       description: 'Cliquez sur le bouton en haut à droite pour ouvrir le menu, puis allez dans "My Page" pour accéder aux paramètres.',
-      image: "public/images/creator_images/tuto_creator_2.png",
+      image: "/images/creator_images/tuto_creator_2.png",
     },
     {
       title: "Ouvrez la fenêtre qui permet de lier son compte",
