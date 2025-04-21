@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -209,6 +208,18 @@ const PromoCodes = () => {
           </div>
         </div>
       )}
+
+      {/* New Section */}
+      <div
+        className="relative bg-card rounded-lg shadow-md p-3 text-center border border-solo-purple"
+      >
+        {/* Remplacez la classe `border-solo-purple` */}
+        <div
+          className="relative bg-card rounded-lg shadow-md p-3 text-center border border-card-border"
+        >
+          {/* Contenu */}
+        </div>
+      </div>
     </Layout>
   );
 };

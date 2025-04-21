@@ -337,7 +337,10 @@ export default function TeamJinwooCard({
 
                   {/* Ombres Section */}
                   <div className="bg-sidebar/50 rounded-lg overflow-hidden">
-                    <Collapsible open={isSectionOpen('ombres')} onOpenChange={() => toggleSection('ombres')}>
+                    <Collapsible
+                      open={isSectionOpen("ombres")}
+                      onOpenChange={() => toggleSection("ombres")}
+                    >
                       <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
                         <Sparkles className="h-4 w-4 text-solo-purple" />
                         <span className="flex-1 text-left">Ombres</span>
@@ -349,7 +352,10 @@ export default function TeamJinwooCard({
                               const ombre = getFromList(ombres, o.id);
                               if (!ombre) return null;
                               return (
-                                <div key={i} className="bg-sidebar p-4 rounded-lg border border-sidebar-border flex flex-col items-center">
+                                <div
+                                  key={i}
+                                  className="bg-sidebar p-4 rounded-lg border border-sidebar-border flex flex-col items-center"
+                                >
                                   <div className="relative mb-2">
                                     <img
                                       src={ombre.image || ""}
@@ -359,10 +365,12 @@ export default function TeamJinwooCard({
                                       {i + 1}
                                     </div>
                                   </div>
-                                  <p className="text-sm font-medium text-white text-center">{ombre.nom}</p>
-                                  {o.description && (
-                                    <p className="text-xs text-gray-300 mt-3 text-center">
-                                      <span className="text-solo-purple font-medium">{ombre.nom}:</span> {o.description}
+                                  <p className="text-sm font-medium text-white text-center">
+                                    {ombre.nom}
+                                  </p>
+                                  {ombre.description && (
+                                    <p className="text-xs text-gray-300 mt-3 text-center">                             
+                                      {ombre.description}
                                     </p>
                                   )}
                                 </div>

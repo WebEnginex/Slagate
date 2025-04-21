@@ -72,7 +72,7 @@ const SideNav = ({ isMobileOpen, setIsMobileOpen }: SideNavProps) => {
         {/* Logo */}
         <div className="flex items-center gap-3 px-3 py-4">
           <img
-            src="/images/logo/Sohoven_Logo2.png"
+            src="/images/logo/Sohoven_Logo.png"
             alt="Sohoven Logo"
             className="h-8 w-8 rounded object-cover"
           />

@@ -198,24 +198,18 @@ function WeaponsTab() {
 function TeamsJinwooTab({
   tiers,
 }: {
-  tiers: Record<string, { id: number; name: string; jinwoo: number; hunters: number[] }[]>;
+  tiers: Record<string, { id: number; name: string; hunters: number[] }[]>;
 }) {
   const [chasseurs, setChasseurs] = useState<Chasseur[]>([]);
-  const [jinwoo, setJinwoo] = useState<Jinwoo | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchChasseurs = async () => {
       const { data: chasseursData } = await supabase.from("chasseurs").select("*");
-      const { data: jinwooData } = await supabase.from("jinwoo").select("*").single();
-
       if (chasseursData) setChasseurs(chasseursData);
-      if (jinwooData) setJinwoo(jinwooData);
     };
 
-    fetchData();
+    fetchChasseurs();
   }, []);
-
-  if (!jinwoo) return <p>Chargement...</p>;
 
   return (
     <div className="space-y-8">
@@ -232,19 +226,6 @@ function TeamsJinwooTab({
                     {team.name}
                   </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {/* Afficher Sung Jin Woo */}
-                    <div className="relative bg-sidebar-accent rounded-2xl shadow-md p-3 text-center border border-sidebar-border hover:border-solo-purple hover:scale-[1.03] transition-transform">
-                      <div className="relative mx-auto w-16 sm:w-20 h-16 sm:h-20 mb-2">
-                        <img
-                          src={jinwoo.image}
-                          alt={jinwoo.nom}
-                          className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
-                        />
-                      </div>
-                      <p className="font-medium mt-1 text-xs sm:text-sm truncate">{jinwoo.nom}</p>
-                    </div>
-
-                    {/* Afficher les chasseurs */}
                     {team.hunters.map((hunterId) => {
                       const hunter = chasseurs.find((h) => h.id === hunterId);
                       return (

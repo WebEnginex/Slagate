@@ -46,7 +46,7 @@ export type TeamVulcanJinwoo = {
       nom: "Team Jinwoo #1",
       chasseurs: [
         {
-          id: 1,
+          id: 40,
           stats: {
             "PV": "25000",
             "Attaque": "30000",
@@ -260,7 +260,7 @@ export type TeamVulcanJinwoo = {
         { id: 3 },
       ],
       arme1: 1,
-      arme2: 1,
+      arme2: 2,
       competence1: 1,
       competence2: 1,
       qte1: 1,
@@ -283,7 +283,7 @@ export type TeamVulcanJinwoo = {
       nom: "Team Jinwoo 2",
       chasseurs: [
         {
-          id: 1,
+          id: 40,
           stats: {
             "PV": "25000",
             "Attaque": "30000",

@@ -1,10 +1,22 @@
-
 import { useState, useEffect } from "react";
 import type { Database } from "@/integrations/supabase/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChevronDown, ChevronUp, Dna, GemIcon, Layers, Sparkles, BarChart2, User } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronUp,
+  Dna,
+  GemIcon,
+  Layers,
+  Sparkles,
+  BarChart2,
+  User,
+} from "lucide-react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { useExpandedTeam } from "@/contexts/ExpandedTeamContext";
 
 type TeamVulcanChasseur = {
@@ -69,7 +81,9 @@ export default function TeamChasseurCard({
   setsBonus,
 }: Props) {
   const { expandedTeamId, setExpandedTeamId } = useExpandedTeam();
-  const [selectedChasseurId, setSelectedChasseurId] = useState<number | null>(null);
+  const [selectedChasseurId, setSelectedChasseurId] = useState<number | null>(
+    null
+  );
   const [openSections, setOpenSections] = useState<string[]>([]);
 
   // Reset openSections when team or chasseur changes
@@ -92,9 +106,9 @@ export default function TeamChasseurCard({
   };
 
   const toggleSection = (section: string) => {
-    setOpenSections(prevSections => 
+    setOpenSections((prevSections) =>
       prevSections.includes(section)
-        ? prevSections.filter(s => s !== section)
+        ? prevSections.filter((s) => s !== section)
         : [...prevSections, section]
     );
   };
@@ -104,7 +118,7 @@ export default function TeamChasseurCard({
 
   return (
     <Card className="mb-10 bg-sidebar border-sidebar-border overflow-hidden">
-      <CardHeader 
+      <CardHeader
         className={`p-4 flex flex-row items-center justify-between bg-sidebar cursor-pointer transition-colors hover:bg-sidebar/90`}
         onClick={() => toggleTeam(team.id)}
       >
@@ -127,9 +141,14 @@ export default function TeamChasseurCard({
               return (
                 <div key={idx} className="flex flex-col items-center">
                   <Avatar className="w-20 h-20 border-2 border-sidebar-border shadow-md">
-                    <AvatarImage src={chasseur?.image || ""} alt={chasseur?.nom} />
+                    <AvatarImage
+                      src={chasseur?.image || ""}
+                      alt={chasseur?.nom}
+                    />
                   </Avatar>
-                  <p className="mt-2 text-xs text-white text-center">{chasseur?.nom}</p>
+                  <p className="mt-2 text-xs text-white text-center">
+                    {chasseur?.nom}
+                  </p>
                 </div>
               );
             })}
@@ -150,16 +169,18 @@ export default function TeamChasseurCard({
                 {team.chasseurs.map((ch, idx) => {
                   const chasseur = getFromList(chasseurs, ch.id);
                   return (
-                    <div 
-                      key={idx} 
+                    <div
+                      key={idx}
                       className={`relative group cursor-pointer transition-all duration-200 hover:scale-105`}
                       onClick={() => setSelectedChasseurId(ch.id)}
                     >
-                      <div className={`w-20 h-20 rounded-full overflow-hidden border-2 ${
-                        selectedChasseurId === ch.id
-                          ? "border-solo-purple shadow-lg shadow-solo-purple/30"
-                          : "border-transparent"
-                      }`}>
+                      <div
+                        className={`w-20 h-20 rounded-full overflow-hidden border-2 ${
+                          selectedChasseurId === ch.id
+                            ? "border-solo-purple shadow-lg shadow-solo-purple/30"
+                            : "border-transparent"
+                        }`}
+                      >
                         <img
                           src={chasseur?.image || ""}
                           alt={chasseur?.nom}
@@ -184,10 +205,10 @@ export default function TeamChasseurCard({
                 <div key={index} className="space-y-4">
                   <div className="flex items-center justify-between">
                     <h4 className="text-lg font-bold flex items-center gap-2 text-white">
-                      <img 
-                        src={chasseur.image} 
-                        alt={chasseur.nom} 
-                        className="w-8 h-8 rounded-full border border-sidebar-border" 
+                      <img
+                        src={chasseur.image}
+                        alt={chasseur.nom}
+                        className="w-8 h-8 rounded-full border border-sidebar-border"
                       />
                       {chasseur.nom}
                     </h4>
@@ -195,7 +216,10 @@ export default function TeamChasseurCard({
 
                   {/* Stats Section */}
                   <div className="bg-sidebar/50 rounded-lg overflow-hidden">
-                    <Collapsible open={isSectionOpen('stats')} onOpenChange={() => toggleSection('stats')}>
+                    <Collapsible
+                      open={isSectionOpen("stats")}
+                      onOpenChange={() => toggleSection("stats")}
+                    >
                       <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
                         <BarChart2 className="h-4 w-4 text-solo-purple" />
                         <span className="flex-1 text-left">Statistiques</span>
@@ -204,9 +228,16 @@ export default function TeamChasseurCard({
                         <div className="p-4">
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                             {Object.entries(ch.stats).map(([label, val]) => (
-                              <div key={label} className="bg-sidebar p-3 rounded border border-sidebar-border">
-                                <div className="text-xs text-solo-light-purple mb-1">{label}</div>
-                                <div className="font-medium text-white">{val}</div>
+                              <div
+                                key={label}
+                                className="bg-sidebar p-3 rounded border border-sidebar-border"
+                              >
+                                <div className="text-xs text-solo-light-purple mb-1">
+                                  {label}
+                                </div>
+                                <div className="font-medium text-white">
+                                  {val}
+                                </div>
                               </div>
                             ))}
                           </div>
@@ -217,7 +248,10 @@ export default function TeamChasseurCard({
 
                   {/* Artefacts Section */}
                   <div className="bg-sidebar/50 rounded-lg overflow-hidden">
-                    <Collapsible open={isSectionOpen('artefacts')} onOpenChange={() => toggleSection('artefacts')}>
+                    <Collapsible
+                      open={isSectionOpen("artefacts")}
+                      onOpenChange={() => toggleSection("artefacts")}
+                    >
                       <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
                         <GemIcon className="h-4 w-4 text-solo-purple" />
                         <span className="flex-1 text-left">Artefacts</span>
@@ -225,25 +259,37 @@ export default function TeamChasseurCard({
                       <CollapsibleContent>
                         <div className="p-4">
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            {Object.entries(ch.artefacts as Record<string, ArtefactConfig>).map(([slot, data]) => {
+                            {Object.entries(
+                              ch.artefacts as Record<string, ArtefactConfig>
+                            ).map(([slot, data]) => {
                               const art = getFromList(artefacts, data.id);
                               return (
-                                <div key={slot} className="bg-sidebar p-3 rounded-lg border border-sidebar-border">
+                                <div
+                                  key={slot}
+                                  className="bg-sidebar p-3 rounded-lg border border-sidebar-border"
+                                >
                                   <div className="flex flex-col items-center">
-                                    <p className="mb-2 text-xs font-semibold text-solo-light-purple">{slot}</p>
+                                    <p className="mb-2 text-xs font-semibold text-solo-light-purple">
+                                      {slot}
+                                    </p>
                                     <img
                                       src={art?.image || ""}
                                       className="w-16 h-16 mx-auto object-contain"
                                     />
-                                    <p className="mt-1 text-xs font-medium text-center text-white">{art?.nom}</p>
-                                    
+                                    <p className="mt-1 text-xs font-medium text-center text-white">
+                                      {art?.nom}
+                                    </p>
+
                                     <div className="w-full mt-2">
                                       <div className="text-xs bg-solo-purple/20 text-white px-2 py-1 rounded mb-2 font-medium text-center">
                                         {data.statPrincipale}
                                       </div>
                                       <div className="space-y-1">
                                         {data.statsSecondaires.map((s, i) => (
-                                          <div key={i} className="text-xs text-gray-300 px-2 py-0.5 bg-sidebar-accent rounded text-center">
+                                          <div
+                                            key={i}
+                                            className="text-xs text-gray-300 px-2 py-0.5 bg-sidebar-accent rounded text-center"
+                                          >
                                             {s}
                                           </div>
                                         ))}
@@ -261,7 +307,10 @@ export default function TeamChasseurCard({
 
                   {/* Sets Bonus Section */}
                   <div className="bg-sidebar/50 rounded-lg overflow-hidden">
-                    <Collapsible open={isSectionOpen('sets')} onOpenChange={() => toggleSection('sets')}>
+                    <Collapsible
+                      open={isSectionOpen("sets")}
+                      onOpenChange={() => toggleSection("sets")}
+                    >
                       <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
                         <Layers className="h-4 w-4 text-solo-purple" />
                         <span className="flex-1 text-left">Sets Bonus</span>
@@ -273,8 +322,13 @@ export default function TeamChasseurCard({
                               const bonus = getFromList(setsBonus, sb.id);
                               if (!bonus) return null;
                               return (
-                                <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border">
-                                  <p className="font-semibold text-sm text-solo-purple">{bonus.nom}</p>
+                                <div
+                                  key={i}
+                                  className="bg-sidebar p-3 rounded-lg border border-sidebar-border"
+                                >
+                                  <p className="font-semibold text-sm text-solo-purple">
+                                    {bonus.nom}
+                                  </p>
                                   <p className="text-xs text-gray-300 mt-2">
                                     {bonus.description}
                                   </p>
@@ -289,7 +343,10 @@ export default function TeamChasseurCard({
 
                   {/* Noyaux Section */}
                   <div className="bg-sidebar/50 rounded-lg overflow-hidden">
-                    <Collapsible open={isSectionOpen('noyaux')} onOpenChange={() => toggleSection('noyaux')}>
+                    <Collapsible
+                      open={isSectionOpen("noyaux")}
+                      onOpenChange={() => toggleSection("noyaux")}
+                    >
                       <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
                         <Dna className="h-4 w-4 text-solo-purple" />
                         <span className="flex-1 text-left">Noyaux</span>
@@ -300,27 +357,34 @@ export default function TeamChasseurCard({
                             {ch.noyaux.map((n, i) => {
                               const noyau = getFromList(noyaux, n.id);
                               return (
-                                <div key={i} className="bg-sidebar p-4 rounded-lg border border-sidebar-border">
+                                <div
+                                  key={i}
+                                  className="bg-sidebar p-4 rounded-lg border border-sidebar-border"
+                                >
                                   <div className="flex flex-col">
                                     <div className="flex flex-col items-center mb-3">
                                       <img
                                         src={noyau?.image || ""}
                                         className="w-16 h-16 object-contain mb-2"
                                       />
-                                      <p className="text-sm font-semibold text-white text-center">{noyau?.nom}</p>
+                                      <p className="text-sm font-semibold text-white text-center">
+                                        {noyau?.nom}
+                                      </p>
                                     </div>
-                                    
+
                                     <div className="bg-solo-purple/20 text-white text-xs px-3 py-1.5 rounded-md mb-2 text-center font-medium">
                                       {n.statPrincipale}
                                     </div>
-                                    
+
                                     {n.statSecondaire && (
                                       <div className="bg-sidebar-accent text-gray-300 text-xs px-3 py-1.5 rounded-md mb-2 text-center">
                                         {n.statSecondaire}
                                       </div>
                                     )}
-                                    
-                                    <p className="text-xs text-gray-300 mt-1.5 text-center">{noyau?.description}</p>
+
+                                    <p className="text-xs text-gray-300 mt-1.5 text-center">
+                                      {noyau?.description}
+                                    </p>
                                   </div>
                                 </div>
                               );
@@ -333,7 +397,10 @@ export default function TeamChasseurCard({
 
                   {/* Ombres Section */}
                   <div className="bg-sidebar/50 rounded-lg overflow-hidden">
-                    <Collapsible open={isSectionOpen('ombres')} onOpenChange={() => toggleSection('ombres')}>
+                    <Collapsible
+                      open={isSectionOpen("ombres")}
+                      onOpenChange={() => toggleSection("ombres")}
+                    >
                       <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
                         <Sparkles className="h-4 w-4 text-solo-purple" />
                         <span className="flex-1 text-left">Ombres</span>
@@ -345,7 +412,10 @@ export default function TeamChasseurCard({
                               const ombre = getFromList(ombres, o.id);
                               if (!ombre) return null;
                               return (
-                                <div key={i} className="bg-sidebar p-4 rounded-lg border border-sidebar-border flex flex-col items-center">
+                                <div
+                                  key={i}
+                                  className="bg-sidebar p-4 rounded-lg border border-sidebar-border flex flex-col items-center"
+                                >
                                   <div className="relative mb-2">
                                     <img
                                       src={ombre.image || ""}
@@ -355,10 +425,12 @@ export default function TeamChasseurCard({
                                       {i + 1}
                                     </div>
                                   </div>
-                                  <p className="text-sm font-medium text-white text-center">{ombre.nom}</p>
-                                  {o.description && (
-                                    <p className="text-xs text-gray-300 mt-3 text-center">
-                                      <span className="text-solo-purple font-medium">{ombre.nom}:</span> {o.description}
+                                  <p className="text-sm font-medium text-white text-center">
+                                    {ombre.nom}
+                                  </p>
+                                  {ombre.description && (
+                                    <p className="text-xs text-gray-300 mt-3 text-center">                             
+                                      {ombre.description}
                                     </p>
                                   )}
                                 </div>
@@ -369,6 +441,7 @@ export default function TeamChasseurCard({
                       </CollapsibleContent>
                     </Collapsible>
                   </div>
+
                 </div>
               );
             })}
