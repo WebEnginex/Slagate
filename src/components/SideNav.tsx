@@ -37,6 +37,7 @@ const SideNav = ({ isMobileOpen, setIsMobileOpen }: SideNavProps) => {
   const navItems = [
     { to: "/", icon: <Home size={20} />, label: "Accueil" },
     { to: "/tier-list", icon: <Award size={20} />, label: "Tier List" },
+    { to: "/builds", icon: <Flame size={20} />, label: "Builds" }, // Nouveau lien pour Builds
     { to: "/atelier", icon: <Flame size={20} />, label: "Atelier" },
     { to: "/promo-codes", icon: <Gift size={20} />, label: "Code Promo" },
     { to: "/creators", icon: <Users size={20} />, label: "Creators" },
