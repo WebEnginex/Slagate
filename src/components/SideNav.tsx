@@ -80,7 +80,7 @@ const SideNav = ({ isMobileOpen, setIsMobileOpen }: SideNavProps) => {
 
           <div className="flex flex-col">
             <span className="font-bold text-sidebar-foreground">
-            Soho Leveling
+            SLAGATE
             </span>
           </div>
         </div>
