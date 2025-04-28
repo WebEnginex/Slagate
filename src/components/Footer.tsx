@@ -8,7 +8,7 @@ const Footer = () => {
         <p className="text-sm text-muted-foreground mb-4">Suivez-moi sur :</p>
         <div className="flex justify-center gap-6">
           <a
-            href="https://www.youtube.com/channel/ID_YOUTUBE"
+            href="https://www.youtube.com/@Sohoven"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-white transition-colors"
@@ -16,7 +16,7 @@ const Footer = () => {
             <Youtube className="h-6 w-6" />
           </a>
           <a
-            href="https://www.twitch.tv/NOM_STREAMER"
+            href="https://www.twitch.tv/sohoven"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-white transition-colors"
@@ -24,7 +24,7 @@ const Footer = () => {
             <Twitch className="h-6 w-6" />
           </a>
           <a
-            href="https://twitter.com/NOM_TWITTER"
+            href="https://x.com/Soho_ven"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-white transition-colors"
@@ -32,7 +32,7 @@ const Footer = () => {
             <Twitter className="h-6 w-6" />
           </a>
           <a
-            href="https://www.instagram.com/NOM_INSTAGRAM"
+            href="https://www.instagram.com/sohoven"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-white transition-colors"
