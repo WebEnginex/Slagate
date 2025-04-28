@@ -1,0 +1,55 @@
+Salut ! Du coup si j'ai bien compris ton message, voilà un petit récap pour être sûr qu'on est sur la même longueur d’onde :
+
+1) Page Tier List
+On supprime l'onglet team Jinwoo et on aura trois onglets qui le remplaceront : Teams chasseurs, POD et BDG.
+
+Dans chaque onglet, on affichera une tier list de teams :
+
+Teams de 4 avec Jinwoo pour le POD.
+
+Teams de 7 (Jinwoo + 6 chasseurs) pour le BDG.
+
+2) Page Builds
+Pour chaque perso, on affichera :
+
+Un build Général.
+
+Un build POD.
+
+Un build BDG.
+
+3) Page de chaque boss (Vulcan etc.) &amp; Builds généraux (page "Builds")
+On affiche les stats en flat 
+
+Tu m’as dit de retirer l’onglet artefact, mais :
+
+Comme la page build sert aussi pour le POD et le BDG, si ces stuffs sont utilisés dans Vulcan &amp; co, c’est ok.
+
+Sinon, je pense qu’il vaut mieux le laisser, comme ça on sait précisément quel stuff est recommandé pour chaque contenu.
+
+J'avais aussi affiché :
+
+La stat principale à focus.
+
+Et les 4 stats secondaires BIS à viser sur chaque item.
+
+
+
+
+
+
+A faire : 
+
+- Changer nom de "Set bonus" en "Bonus de set" ✅
+- Retirer les 4 stats secondaire en dessous des artéfacts ✅
+- Retirer les ombres dans les builds chasseurs ✅
+- Retirer les stats secondaires des noyaux ✅
+- Changer les onglets de tier list ✅
+- Retirer les bords violet dans la page code promo ✅
+- Mettre les notes de mise à jour (dates) pour que les gens sachent quand la page a été éditer. ✅
+- Dans builds et les pages vulcan etc... Elargir le composant parent principal pour qu'il prenne plus de largeur ✅
+
+Accueil : 
+- Mettre les 2 derniers chasseurs sortit avec celui qui va sortir en 3ème.
+- Voir pour le embed twitch
+- Derniere vidéo youtube

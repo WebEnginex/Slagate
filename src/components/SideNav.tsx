@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { Home, Award, Gift, Users, Menu, X, Flame } from "lucide-react";
+import { Home, Award, Gift, Users, Menu, X, Flame, Shield } from "lucide-react";
 
 type NavItemProps = {
   to: string;
@@ -37,7 +37,7 @@ const SideNav = ({ isMobileOpen, setIsMobileOpen }: SideNavProps) => {
   const navItems = [
     { to: "/", icon: <Home size={20} />, label: "Accueil" },
     { to: "/tier-list", icon: <Award size={20} />, label: "Tier List" },
-    { to: "/builds", icon: <Flame size={20} />, label: "Builds" }, // Nouveau lien pour Builds
+    { to: "/builds", icon: <Shield size={20} />, label: "Builds" }, 
     { to: "/atelier", icon: <Flame size={20} />, label: "Atelier" },
     { to: "/promo-codes", icon: <Gift size={20} />, label: "Code Promo" },
     { to: "/creators", icon: <Users size={20} />, label: "Creators" },
@@ -80,9 +80,8 @@ const SideNav = ({ isMobileOpen, setIsMobileOpen }: SideNavProps) => {
 
           <div className="flex flex-col">
             <span className="font-bold text-sidebar-foreground">
-              Solo Leveling : Arise
+            Soho Leveling
             </span>
-            <span className="text-xs text-muted-foreground">Guides</span>
           </div>
         </div>
 

@@ -4,6 +4,8 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 import { buildsChasseurs } from "@/config/builds/buildsChasseurs";
 import BuildChasseurCard from "./BuildsChasseursCard";
+import LastModified from "@/components/LastModified";
+import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
 
 export default function BuildsPage() {
   type Chasseur = Database["public"]["Tables"]["chasseurs"]["Row"];
@@ -22,22 +24,43 @@ export default function BuildsPage() {
   const [selectedElement, setSelectedElement] = useState<string | null>(null);
 
   const elementIcons = [
-    { id: "feu", image: "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Feu_element.webp" },
-    { id: "eau", image: "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Eau_element.webp" },
-    { id: "vent", image: "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Vent_element.webp" },
-    { id: "lumiere", image: "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Lumiere_element.webp" },
-    { id: "tenebres", image: "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Tenebre_element.webp" },
+    {
+      id: "feu",
+      image:
+        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Feu_element.webp",
+    },
+    {
+      id: "eau",
+      image:
+        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Eau_element.webp",
+    },
+    {
+      id: "vent",
+      image:
+        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Vent_element.webp",
+    },
+    {
+      id: "lumiere",
+      image:
+        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Lumiere_element.webp",
+    },
+    {
+      id: "tenebres",
+      image:
+        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Tenebre_element.webp",
+    },
   ];
 
   useEffect(() => {
     const fetchData = async () => {
-      const [chasseurData, artefactData, noyauData, ombreData, setBonusData] = await Promise.all([
-        supabase.from("chasseurs").select("*"),
-        supabase.from("artefacts").select("*"),
-        supabase.from("noyaux").select("*"),
-        supabase.from("ombres").select("*"),
-        supabase.from("sets_bonus").select("*"),
-      ]);
+      const [chasseurData, artefactData, noyauData, ombreData, setBonusData] =
+        await Promise.all([
+          supabase.from("chasseurs").select("*"),
+          supabase.from("artefacts").select("*"),
+          supabase.from("noyaux").select("*"),
+          supabase.from("ombres").select("*"),
+          supabase.from("sets_bonus").select("*"),
+        ]);
 
       if (chasseurData.data) setChasseurs(chasseurData.data);
       if (artefactData.data) setArtefacts(artefactData.data);
@@ -53,7 +76,9 @@ export default function BuildsPage() {
     const chasseur = chasseurs.find((c) => c.id === entry.chasseurId);
     if (!chasseur) return false;
 
-    const matchSearch = chasseur.nom.toLowerCase().includes(search.toLowerCase());
+    const matchSearch = chasseur.nom
+      .toLowerCase()
+      .includes(search.toLowerCase());
     const matchElement = !selectedElement || entry.element === selectedElement;
 
     return matchSearch && matchElement;
@@ -80,7 +105,9 @@ export default function BuildsPage() {
                 <div
                   key={el.id}
                   onClick={() =>
-                    setSelectedElement((prev) => (prev === el.id ? null : el.id))
+                    setSelectedElement((prev) =>
+                      prev === el.id ? null : el.id
+                    )
                   }
                   className={`w-10 h-10 rounded-full border-2 cursor-pointer transition ${
                     selectedElement === el.id
@@ -109,6 +136,11 @@ export default function BuildsPage() {
               )}
             </div>
           </div>
+
+          <p>
+            {/* Ajout de la date de dernière modification */}
+            <LastModified date={lastModifiedDates.builds} />
+          </p>
 
           {/* Cartes des builds */}
           {filteredBuilds.map((entry) => {

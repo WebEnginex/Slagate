@@ -3,21 +3,24 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 import { hunterTiers } from "@/config/tier-list/chasseurs";
 import { weaponTiers } from "@/config/tier-list/armes";
-import { teamJinwooTiers } from "@/config/tier-list/teamsJinwoo";
 import { teamChasseursTiers } from "@/config/tier-list/teamsChasseurs";
+import { teamPodTiers } from "@/config/tier-list/teamsPod";
+import { teamBdgTiers } from "@/config/tier-list/teamBdg"; 
 import Layout from "@/components/Layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Flame, Sword } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import LastModified from "@/components/LastModified";
+import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
 
 // Types Supabase
 type Chasseur = Database["public"]["Tables"]["chasseurs"]["Row"];
 type Arme = Database["public"]["Tables"]["jinwoo_armes"]["Row"];
 type Jinwoo = Database["public"]["Tables"]["jinwoo"]["Row"];
 
-const tabs = ["Chasseurs", "Armes", "Teams Jinwoo", "Teams Chasseurs"];
+const tabs = ["Chasseurs", "Armes", "Teams Chasseurs", "Teams POD", "Teams BDG"];
 
 export default function TierListPage() {
   const [activeTab, setActiveTab] = useState("Chasseurs");
@@ -35,6 +38,12 @@ export default function TierListPage() {
           <p className="text-muted-foreground text-sm md:text-base">
             Consultez les différentes tier lists
           </p>
+          <p>
+            {/* Ajout de la date de dernière modification */}
+      <LastModified date={lastModifiedDates.tierList} />
+          </p>
+          
+          
         </div>
 
         {/* Tabs navigation using shadcn/ui */}
@@ -62,12 +71,15 @@ export default function TierListPage() {
           <TabsContent value="Armes">
             <WeaponsTab />
           </TabsContent>
-          <TabsContent value="Teams Jinwoo">
-            <TeamsJinwooTab tiers={teamJinwooTiers} />
-          </TabsContent>
           <TabsContent value="Teams Chasseurs">
             <TeamsTab tiers={teamChasseursTiers} teamSize={3} />
           </TabsContent>
+          <TabsContent value="Teams POD">
+            <TeamsPodTab tiers={teamPodTiers} />
+          </TabsContent>
+          <TabsContent value="Teams BDG">
+  <TeamsBdgTab tiers={teamBdgTiers} />
+</TabsContent>
         </Tabs>
       </div>
     </Layout>
@@ -195,76 +207,7 @@ function WeaponsTab() {
   );
 }
 
-function TeamsJinwooTab({
-  tiers,
-}: {
-  tiers: Record<string, { id: number; name: string; hunters: number[] }[]>;
-}) {
-  const [chasseurs, setChasseurs] = useState<Chasseur[]>([]);
 
-  useEffect(() => {
-    const fetchChasseurs = async () => {
-      const { data: chasseursData } = await supabase.from("chasseurs").select("*");
-      if (chasseursData) setChasseurs(chasseursData);
-    };
-
-    fetchChasseurs();
-  }, []);
-
-  return (
-    <div className="space-y-8">
-      {Object.entries(tiers).map(([tier, teams]) => (
-        <Card key={tier} className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl">
-          <div className="bg-sidebar-accent py-3 px-5 border-b border-sidebar-border">
-            <h2 className="text-2xl font-bold text-white">Tier {tier}</h2>
-          </div>
-          <CardContent className="p-4 md:p-6">
-            <div className="space-y-6">
-              {teams.map((team) => (
-                <div key={team.id} className="mb-5">
-                  <h3 className="text-lg font-semibold mb-3 px-3 py-1.5 bg-sidebar-accent inline-block rounded-lg border border-sidebar-border">
-                    {team.name}
-                  </h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {team.hunters.map((hunterId) => {
-                      const hunter = chasseurs.find((h) => h.id === hunterId);
-                      return (
-                        hunter && (
-                          <div
-                            key={hunter.id}
-                            className="relative bg-sidebar-accent rounded-2xl shadow-md p-3 text-center border border-sidebar-border hover:border-solo-purple hover:scale-[1.03] transition-transform"
-                          >
-                            {hunter.element && (
-                              <div className="absolute top-2 left-2 z-10 w-7 h-7">
-                                <img
-                                  src={hunter.element}
-                                  alt="Élément"
-                                  className="w-6 h-6"
-                                />
-                              </div>
-                            )}
-                            <div className="relative mx-auto w-16 sm:w-20 h-16 sm:h-20 mb-2">
-                              <img
-                                src={hunter.image || ""}
-                                alt={hunter.nom}
-                                className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
-                              />
-                            </div>
-                            <p className="font-medium mt-1 text-xs sm:text-sm truncate">{hunter.nom}</p>
-                          </div>
-                        )
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  );
-}
 
 function TeamsTab({
   tiers,
@@ -345,3 +288,152 @@ function TeamsTab({
     </div>
   );
 }
+
+
+
+function TeamsPodTab({
+  tiers,
+}: {
+  tiers: Record<string, { id: number; name: string; hunters: number[] }[]>;
+}) {
+  const [chasseurs, setChasseurs] = useState<Chasseur[]>([]);
+
+  useEffect(() => {
+    const fetchChasseurs = async () => {
+      const { data: chasseursData } = await supabase.from("chasseurs").select("*");
+      if (chasseursData) setChasseurs(chasseursData);
+    };
+
+    fetchChasseurs();
+  }, []);
+
+  return (
+    <div className="space-y-8">
+      {Object.entries(tiers).map(([tier, teams]) => (
+        <Card key={tier} className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl">
+          <div className="bg-sidebar-accent py-3 px-5 border-b border-sidebar-border">
+            <h2 className="text-2xl font-bold text-white">Tier {tier}</h2>
+          </div>
+          <CardContent className="p-4 md:p-6">
+            <div className="space-y-6">
+              {teams.map((team) => (
+                <div key={team.id} className="mb-5">
+                  <h3 className="text-lg font-semibold mb-3 px-3 py-1.5 bg-sidebar-accent inline-block rounded-lg border border-sidebar-border">
+                    {team.name}
+                  </h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {team.hunters.map((hunterId) => {
+                      const hunter = chasseurs.find((h) => h.id === hunterId);
+                      return (
+                        hunter && (
+                          <div
+                            key={hunter.id}
+                            className="relative bg-sidebar-accent rounded-2xl shadow-md p-3 text-center border border-sidebar-border hover:border-solo-purple hover:scale-[1.03] transition-transform"
+                          >
+                            {hunter.element && (
+                              <div className="absolute top-2 left-2 z-10 w-7 h-7">
+                                <img
+                                  src={hunter.element}
+                                  alt="Élément"
+                                  className="w-6 h-6"
+                                />
+                              </div>
+                            )}
+                            <div className="relative mx-auto w-16 sm:w-20 h-16 sm:h-20 mb-2">
+                              <img
+                                src={hunter.image || ""}
+                                alt={hunter.nom}
+                                className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
+                              />
+                            </div>
+                            <p className="font-medium mt-1 text-xs sm:text-sm truncate">{hunter.nom}</p>
+                          </div>
+                        )
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+}
+
+
+
+
+function TeamsBdgTab({
+  tiers,
+}: {
+  tiers: Record<string, { id: number; name: string; hunters: number[] }[]>;
+}) {
+  const [chasseurs, setChasseurs] = useState<Chasseur[]>([]);
+
+  useEffect(() => {
+    const fetchChasseurs = async () => {
+      const { data: chasseursData } = await supabase.from("chasseurs").select("*");
+      if (chasseursData) setChasseurs(chasseursData);
+    };
+
+    fetchChasseurs();
+  }, []);
+
+  return (
+    <div className="space-y-8">
+      {Object.entries(tiers).map(([tier, teams]) => (
+        <Card key={tier} className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl">
+          <div className="bg-sidebar-accent py-3 px-5 border-b border-sidebar-border">
+            <h2 className="text-2xl font-bold text-white">Tier {tier}</h2>
+          </div>
+          <CardContent className="p-4 md:p-6">
+            <div className="space-y-6">
+              {teams.map((team) => (
+                <div key={team.id} className="mb-5">
+                  <h3 className="text-lg font-semibold mb-3 px-3 py-1.5 bg-sidebar-accent inline-block rounded-lg border border-sidebar-border">
+                    {team.name}
+                  </h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {team.hunters.map((hunterId) => {
+                      const hunter = chasseurs.find((h) => h.id === hunterId);
+                      return (
+                        hunter && (
+                          <div
+                            key={hunter.id}
+                            className="relative bg-sidebar-accent rounded-2xl shadow-md p-3 text-center border border-sidebar-border hover:border-solo-purple hover:scale-[1.03] transition-transform"
+                          >
+                            {hunter.element && (
+                              <div className="absolute top-2 left-2 z-10 w-7 h-7">
+                                <img
+                                  src={hunter.element}
+                                  alt="Élément"
+                                  className="w-6 h-6"
+                                />
+                              </div>
+                            )}
+                            <div className="relative mx-auto w-16 sm:w-20 h-16 sm:h-20 mb-2">
+                              <img
+                                src={hunter.image || ""}
+                                alt={hunter.nom}
+                                className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
+                              />
+                            </div>
+                            <p className="font-medium mt-1 text-xs sm:text-sm truncate">{hunter.nom}</p>
+                          </div>
+                        )
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+}
+
+

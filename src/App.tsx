@@ -11,8 +11,8 @@ import AtelierDeLaLumiere from "@/pages/atelier/AtelierDeLaLumiere";
 import Vulcan from "@/pages/atelier/vulcan/Vulcan";
 import Baran from "@/pages/atelier/baran/Baran";
 import Deimos from "@/pages/atelier/deimos/Deimos";
-import PromoCodes from "./pages/test";
 import Creators from "./pages/Creators";
+import PromoCodes from "./pages/PromoCodes";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();

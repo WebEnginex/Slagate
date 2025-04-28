@@ -247,63 +247,53 @@ export default function TeamChasseurCard({
                   </div>
 
                   {/* Artefacts Section */}
-                  <div className="bg-sidebar/50 rounded-lg overflow-hidden">
-                    <Collapsible
-                      open={isSectionOpen("artefacts")}
-                      onOpenChange={() => toggleSection("artefacts")}
-                    >
-                      <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                        <GemIcon className="h-4 w-4 text-solo-purple" />
-                        <span className="flex-1 text-left">Artefacts</span>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <div className="p-4">
-                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            {Object.entries(
-                              ch.artefacts as Record<string, ArtefactConfig>
-                            ).map(([slot, data]) => {
-                              const art = getFromList(artefacts, data.id);
-                              return (
-                                <div
-                                  key={slot}
-                                  className="bg-sidebar p-3 rounded-lg border border-sidebar-border"
-                                >
-                                  <div className="flex flex-col items-center">
-                                    <p className="mb-2 text-xs font-semibold text-solo-light-purple">
-                                      {slot}
-                                    </p>
-                                    <img
-                                      src={art?.image || ""}
-                                      className="w-16 h-16 mx-auto object-contain"
-                                    />
-                                    <p className="mt-1 text-xs font-medium text-center text-white">
-                                      {art?.nom}
-                                    </p>
-
-                                    <div className="w-full mt-2">
-                                      <div className="text-xs bg-solo-purple/20 text-white px-2 py-1 rounded mb-2 font-medium text-center">
-                                        {data.statPrincipale}
-                                      </div>
-                                      <div className="space-y-1">
-                                        {data.statsSecondaires.map((s, i) => (
-                                          <div
-                                            key={i}
-                                            className="text-xs text-gray-300 px-2 py-0.5 bg-sidebar-accent rounded text-center"
-                                          >
-                                            {s}
-                                          </div>
-                                        ))}
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      </CollapsibleContent>
-                    </Collapsible>
+<div className="bg-sidebar/50 rounded-lg overflow-hidden">
+  <Collapsible
+    open={isSectionOpen("artefacts")}
+    onOpenChange={() => toggleSection("artefacts")}
+  >
+    <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
+      <GemIcon className="h-4 w-4 text-solo-purple" />
+      <span className="flex-1 text-left">Artefacts</span>
+    </CollapsibleTrigger>
+    <CollapsibleContent>
+      <div className="p-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {Object.entries(
+            ch.artefacts as Record<string, ArtefactConfig>
+          ).map(([slot, data]) => {
+            const art = getFromList(artefacts, data.id);
+            return (
+              <div
+                key={slot}
+                className="bg-sidebar p-3 rounded-lg border border-sidebar-border"
+              >
+                <div className="flex flex-col items-center">
+                  <p className="mb-2 text-xs font-semibold text-solo-light-purple">
+                    {slot}
+                  </p>
+                  <img
+                    src={art?.image || ""}
+                    className="w-16 h-16 mx-auto object-contain"
+                    alt={art?.nom || "Artefact"}
+                  />
+                  <p className="mt-1 text-xs font-medium text-center text-white">
+                    {art?.nom}
+                  </p>
+                  <div className="w-full mt-2">
+                    <div className="text-xs bg-solo-purple/20 text-white px-2 py-1 rounded font-medium text-center">
+                      {data.statPrincipale}
+                    </div>
                   </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </CollapsibleContent>
+  </Collapsible>
+</div>
 
                   {/* Sets Bonus Section */}
                   <div className="bg-sidebar/50 rounded-lg overflow-hidden">
@@ -313,7 +303,7 @@ export default function TeamChasseurCard({
                     >
                       <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
                         <Layers className="h-4 w-4 text-solo-purple" />
-                        <span className="flex-1 text-left">Sets Bonus</span>
+                        <span className="flex-1 text-left">Bonus de Sets</span>
                       </CollapsibleTrigger>
                       <CollapsibleContent>
                         <div className="p-4">
@@ -342,58 +332,53 @@ export default function TeamChasseurCard({
                   </div>
 
                   {/* Noyaux Section */}
-                  <div className="bg-sidebar/50 rounded-lg overflow-hidden">
-                    <Collapsible
-                      open={isSectionOpen("noyaux")}
-                      onOpenChange={() => toggleSection("noyaux")}
-                    >
-                      <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                        <Dna className="h-4 w-4 text-solo-purple" />
-                        <span className="flex-1 text-left">Noyaux</span>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <div className="p-4">
-                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            {ch.noyaux.map((n, i) => {
-                              const noyau = getFromList(noyaux, n.id);
-                              return (
-                                <div
-                                  key={i}
-                                  className="bg-sidebar p-4 rounded-lg border border-sidebar-border"
-                                >
-                                  <div className="flex flex-col">
-                                    <div className="flex flex-col items-center mb-3">
-                                      <img
-                                        src={noyau?.image || ""}
-                                        className="w-16 h-16 object-contain mb-2"
-                                      />
-                                      <p className="text-sm font-semibold text-white text-center">
-                                        {noyau?.nom}
-                                      </p>
-                                    </div>
-
-                                    <div className="bg-solo-purple/20 text-white text-xs px-3 py-1.5 rounded-md mb-2 text-center font-medium">
-                                      {n.statPrincipale}
-                                    </div>
-
-                                    {n.statSecondaire && (
-                                      <div className="bg-sidebar-accent text-gray-300 text-xs px-3 py-1.5 rounded-md mb-2 text-center">
-                                        {n.statSecondaire}
-                                      </div>
-                                    )}
-
-                                    <p className="text-xs text-gray-300 mt-1.5 text-center">
-                                      {noyau?.description}
-                                    </p>
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      </CollapsibleContent>
-                    </Collapsible>
+<div className="bg-sidebar/50 rounded-lg overflow-hidden">
+  <Collapsible
+    open={isSectionOpen("noyaux")}
+    onOpenChange={() => toggleSection("noyaux")}
+  >
+    <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
+      <Dna className="h-4 w-4 text-solo-purple" />
+      <span className="flex-1 text-left">Noyaux</span>
+    </CollapsibleTrigger>
+    <CollapsibleContent>
+      <div className="p-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {ch.noyaux.map((n, i) => {
+            const noyau = getFromList(noyaux, n.id);
+            return (
+              <div
+                key={i}
+                className="bg-sidebar p-4 rounded-lg border border-sidebar-border"
+              >
+                <div className="flex flex-col">
+                  <div className="flex flex-col items-center mb-3">
+                    <img
+                      src={noyau?.image || ""}
+                      className="w-16 h-16 object-contain mb-2"
+                      alt={noyau?.nom || "Noyau"}
+                    />
+                    <p className="text-sm font-semibold text-white text-center">
+                      {noyau?.nom}
+                    </p>
                   </div>
+
+                  <div className="bg-solo-purple/20 text-white text-xs px-3 py-1.5 rounded-md text-center font-medium">
+                    {n.statPrincipale}
+                  </div>
+
+                  <p className="text-xs text-gray-300 mt-1.5 text-center">
+                    {noyau?.description}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </CollapsibleContent>
+  </Collapsible>
+</div>
 
                   {/* Ombres Section */}
                   <div className="bg-sidebar/50 rounded-lg overflow-hidden">

@@ -158,56 +158,47 @@ export default function BuildChasseurCard({
           </SectionCollapsible>
 
           {/* Artefacts */}
-          <SectionCollapsible
-            label="Artefacts"
-            icon={<GemIcon className="h-4 w-4 text-solo-purple" />}
-            isOpen={isSectionOpen("artefacts")}
-            onToggle={() => toggleSection("artefacts")}
-          >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {Object.entries(build.artefacts).map(([slot, conf]) => {
-                const artefact = getById(artefacts, conf.id);
-                return (
-                  <div
-                    key={slot}
-                    className="bg-sidebar p-3 rounded-lg border border-sidebar-border"
-                  >
-                    <div className="flex flex-col items-center">
-                      <p className="mb-2 text-xs font-semibold text-solo-light-purple">
-                        {slot}
-                      </p>
-                      <img
-                        src={artefact?.image || ""}
-                        className="w-16 h-16 object-contain"
-                      />
-                      <p className="mt-1 text-xs font-medium text-center text-white">
-                        {artefact?.nom}
-                      </p>
-                      <div className="w-full mt-2">
-                        <div className="text-xs bg-solo-purple/20 text-white px-2 py-1 rounded mb-2 font-medium text-center">
-                          {conf.statPrincipale}
-                        </div>
-                        <div className="space-y-1">
-                          {conf.statsSecondaires.map((s, i) => (
-                            <div
-                              key={i}
-                              className="text-xs text-gray-300 px-2 py-0.5 bg-sidebar-accent rounded text-center"
-                            >
-                              {s}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+<SectionCollapsible
+  label="Artefacts"
+  icon={<GemIcon className="h-4 w-4 text-solo-purple" />}
+  isOpen={isSectionOpen("artefacts")}
+  onToggle={() => toggleSection("artefacts")}
+>
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    {Object.entries(build.artefacts).map(([slot, conf]) => {
+      const artefact = getById(artefacts, conf.id);
+      return (
+        <div
+          key={slot}
+          className="bg-sidebar p-3 rounded-lg border border-sidebar-border"
+        >
+          <div className="flex flex-col items-center">
+            <p className="mb-2 text-xs font-semibold text-solo-light-purple">
+              {slot}
+            </p>
+            <img
+              src={artefact?.image || ""}
+              className="w-16 h-16 object-contain"
+              alt={artefact?.nom || "Artefact"}
+            />
+            <p className="mt-1 text-xs font-medium text-center text-white">
+              {artefact?.nom}
+            </p>
+            <div className="w-full mt-2">
+              <div className="text-xs bg-solo-purple/20 text-white px-2 py-1 rounded font-medium text-center">
+                {conf.statPrincipale}
+              </div>
             </div>
-          </SectionCollapsible>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</SectionCollapsible>
 
           {/* Sets Bonus */}
           <SectionCollapsible
-            label="Sets Bonus"
+            label="Bonus de Sets"
             icon={<Layers className="h-4 w-4 text-solo-purple" />}
             isOpen={isSectionOpen("sets")}
             onToggle={() => toggleSection("sets")}
@@ -234,79 +225,43 @@ export default function BuildChasseurCard({
           </SectionCollapsible>
 
           {/* Noyaux */}
-          <SectionCollapsible
-            label="Noyaux"
-            icon={<Dna className="h-4 w-4 text-solo-purple" />}
-            isOpen={isSectionOpen("noyaux")}
-            onToggle={() => toggleSection("noyaux")}
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {build.noyaux.map((n, i) => {
-                const noyau = getById(noyaux, n.id);
-                return (
-                  <div
-                    key={i}
-                    className="bg-sidebar p-4 rounded-lg border border-sidebar-border"
-                  >
-                    <div className="flex flex-col items-center mb-3">
-                      <img
-                        src={noyau?.image || ""}
-                        className="w-16 h-16 object-contain mb-2"
-                      />
-                      <p className="text-sm font-semibold text-white text-center">
-                        {noyau?.nom}
-                      </p>
-                    </div>
-                    <div className="bg-solo-purple/20 text-white text-xs px-3 py-1.5 rounded-md mb-2 text-center font-medium">
-                      {n.statPrincipale}
-                    </div>
-                    {n.statSecondaire && (
-                      <div className="bg-sidebar-accent text-gray-300 text-xs px-3 py-1.5 rounded-md mb-2 text-center">
-                        {n.statSecondaire}
-                      </div>
-                    )}
-                    <p className="text-xs text-gray-300 mt-1.5 text-center">
-                      {noyau?.description}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </SectionCollapsible>
+<SectionCollapsible
+  label="Noyaux"
+  icon={<Dna className="h-4 w-4 text-solo-purple" />}
+  isOpen={isSectionOpen("noyaux")}
+  onToggle={() => toggleSection("noyaux")}
+>
+  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    {build.noyaux.map((n, i) => {
+      const noyau = getById(noyaux, n.id);
+      return (
+        <div
+          key={i}
+          className="bg-sidebar p-4 rounded-lg border border-sidebar-border"
+        >
+          <div className="flex flex-col items-center mb-3">
+            <img
+              src={noyau?.image || ""}
+              className="w-16 h-16 object-contain mb-2"
+              alt={noyau?.nom || "Noyau"}
+            />
+            <p className="text-sm font-semibold text-white text-center">
+              {noyau?.nom}
+            </p>
+          </div>
+          <div className="bg-solo-purple/20 text-white text-xs px-3 py-1.5 rounded-md text-center font-medium">
+            {n.statPrincipale}
+          </div>
+          <p className="text-xs text-gray-300 mt-1.5 text-center">
+            {noyau?.description}
+          </p>
+        </div>
+      );
+    })}
+  </div>
+</SectionCollapsible>
 
-          {/* Ombres */}
-          <SectionCollapsible
-            label="Ombres"
-            icon={<Sparkles className="h-4 w-4 text-solo-purple" />}
-            isOpen={isSectionOpen("ombres")}
-            onToggle={() => toggleSection("ombres")}
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {build.ombres.map((o, i) => {
-                const ombre = getById(ombres, o.id);
-                if (!ombre) return null;
-                return (
-                  <div
-                    key={i}
-                    className="bg-sidebar p-4 rounded-lg border border-sidebar-border flex flex-col items-center"
-                  >
-                    <img
-                      src={ombre.image || ""}
-                      className="w-16 h-16 object-contain mb-2"
-                    />
-                    <p className="text-sm font-medium text-white text-center">
-                      {ombre.nom}
-                    </p>
-                    {ombre.description && (
-                      <p className="text-xs text-gray-300 mt-3 text-center">
-                        {ombre.description}
-                      </p>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </SectionCollapsible>
+          
         </CardContent>
       )}
     </Card>

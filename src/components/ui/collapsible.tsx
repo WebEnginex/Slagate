@@ -1,4 +1,3 @@
-
 import * as React from "react"
 import * as CollapsiblePrimitive from "@radix-ui/react-collapsible"
 import { ChevronDown } from "lucide-react"
@@ -9,9 +8,9 @@ const Collapsible = CollapsiblePrimitive.Root
 const CollapsibleTrigger = React.forwardRef<
   React.ElementRef<typeof CollapsiblePrimitive.CollapsibleTrigger>,
   React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.CollapsibleTrigger> & {
-    showChevron?: boolean
+    showChevron?: boolean // Option pour afficher ou non le chevron
   }
->(({ className, children, showChevron = true, ...props }, ref) => (
+>(({ className, children, showChevron = false, ...props }, ref) => (
   <CollapsiblePrimitive.CollapsibleTrigger
     ref={ref}
     className={cn("flex w-full items-center justify-between", className)}

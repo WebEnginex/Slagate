@@ -1,4 +1,3 @@
-
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Flame, Shield, Sword } from "lucide-react";
@@ -14,6 +13,8 @@ import TeamJinwooCard from "./TeamJinwooCard";
 import { teamVulcanJinwoo } from "@/config/atelier/vulcan/teamVulcanJinwoo";
 import { Separator } from "@/components/ui/separator";
 import { ExpandedTeamProvider } from "@/contexts/ExpandedTeamContext";
+import LastModified from "@/components/LastModified";
+import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
 
 export default function VulcanPage() {
   type Boss = Database["public"]["Tables"]["bosses"]["Row"];
@@ -23,9 +24,11 @@ export default function VulcanPage() {
   type Ombre = Database["public"]["Tables"]["ombres"]["Row"];
   type SetBonus = Database["public"]["Tables"]["sets_bonus"]["Row"];
   type JinwooArme = Database["public"]["Tables"]["jinwoo_armes"]["Row"];
-  type JinwooCompetence = Database["public"]["Tables"]["jinwoo_competences"]["Row"];
+  type JinwooCompetence =
+    Database["public"]["Tables"]["jinwoo_competences"]["Row"];
   type JinwooQte = Database["public"]["Tables"]["jinwoo_qte"]["Row"];
-  type PierreBenediction = Database["public"]["Tables"]["pierres_benediction"]["Row"];
+  type PierreBenediction =
+    Database["public"]["Tables"]["pierres_benediction"]["Row"];
 
   const bossName = "Vulcan";
   const [boss, setBoss] = useState<Boss | null>(null);
@@ -82,8 +85,9 @@ export default function VulcanPage() {
 
   return (
     <Layout>
-      <div className="w-full px-4 py-6">
-        <div className="max-w-7xl mx-auto">
+      <div className="w-full max-w-[90rem] 2xl:max-w-[100%] mx-auto px-6 py-6">
+        {" "}
+        <div className="max-w-[100%] mx-auto">
           <Link
             to="/atelier"
             className="mb-6 inline-flex items-center text-sm font-medium text-solo-purple hover:underline"
@@ -100,7 +104,7 @@ export default function VulcanPage() {
                 </CardTitle>
 
                 <TabsList className="bg-sidebar-accent border border-sidebar-border self-start md:self-center">
-                  <TabsTrigger 
+                  <TabsTrigger
                     value="facile"
                     className="data-[state=active]:bg-solo-purple data-[state=active]:text-white"
                   >
@@ -125,10 +129,10 @@ export default function VulcanPage() {
                 <TabsContent key={diff} value={diff}>
                   <CardContent className="grid md:grid-cols-2 gap-6 pt-6">
                     <div className="flex items-center justify-center bg-sidebar-accent rounded-md p-4">
-                      <img 
-                        src={boss?.image || ""} 
+                      <img
+                        src={boss?.image || ""}
                         alt={boss?.nom || "Boss"}
-                        className="w-full max-h-[300px] object-contain" 
+                        className="w-full max-h-[300px] object-contain"
                       />
                     </div>
                     <div className="flex flex-col justify-center space-y-6">
@@ -136,36 +140,40 @@ export default function VulcanPage() {
                         <div className="flex items-center gap-2 sm:gap-3">
                           <Sword className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-solo-purple flex-shrink-0" />
                           <div className="flex flex-col">
-                            <p className="text-xs sm:text-sm md:text-base text-muted-foreground font-medium">Puissance requise</p>
+                            <p className="text-xs sm:text-sm md:text-base text-muted-foreground font-medium">
+                              Puissance requise
+                            </p>
                             <p className="text-base sm:text-xl md:text-2xl font-semibold text-white">
                               {boss?.[`puissance_${diff}` as keyof Boss]}
                             </p>
                           </div>
                         </div>
-                        
+
                         <Separator className="bg-sidebar-border my-2" />
-                        
+
                         <div className="space-y-3">
                           <div className="flex items-center gap-2">
                             <Shield className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-solo-purple flex-shrink-0" />
-                            <p className="text-xs sm:text-sm md:text-base font-medium">Faiblesses</p>
+                            <p className="text-xs sm:text-sm md:text-base font-medium">
+                              Faiblesses
+                            </p>
                           </div>
-                          
+
                           <div className="flex items-center gap-4 pl-10">
                             {boss?.faiblesse1 && (
                               <div className="flex flex-col items-center">
-                                <img 
-                                  src={boss.faiblesse1} 
-                                  className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain" 
+                                <img
+                                  src={boss.faiblesse1}
+                                  className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain"
                                   alt="Faiblesse 1"
                                 />
                               </div>
                             )}
                             {boss?.faiblesse2 && (
                               <div className="flex flex-col items-center">
-                                <img 
-                                  src={boss.faiblesse2} 
-                                  className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain" 
+                                <img
+                                  src={boss.faiblesse2}
+                                  className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain"
                                   alt="Faiblesse 2"
                                 />
                               </div>
@@ -174,6 +182,10 @@ export default function VulcanPage() {
                         </div>
                       </div>
                     </div>
+                    <p>
+                      {/* Ajout de la date de dernière modification */}
+                      <LastModified date={lastModifiedDates.tierList} />
+                    </p>
                   </CardContent>
                 </TabsContent>
               ))}
@@ -182,13 +194,13 @@ export default function VulcanPage() {
 
           <Tabs defaultValue="chasseurs" className="mt-8">
             <TabsList className="bg-sidebar-accent border border-sidebar-border">
-              <TabsTrigger 
+              <TabsTrigger
                 value="chasseurs"
                 className="data-[state=active]:bg-solo-purple data-[state=active]:text-white"
               >
                 Teams Chasseurs
               </TabsTrigger>
-              <TabsTrigger 
+              <TabsTrigger
                 value="jinwoo"
                 className="data-[state=active]:bg-solo-purple data-[state=active]:text-white"
               >

@@ -40,7 +40,7 @@ export type ChasseurBuild = {
             "PM ": "500",
             "Attaque ": "32000",
             "Précision (%) ": "18",
-            "Taux de coup critique ": "22",
+            "Taux de coup critique ": "-",
             "Dégâts de coup critique (%) ": "108",
             "Hausse des dégâts (%) ": "20",
             "Pénétration de défense (%) ": "8",
@@ -111,7 +111,7 @@ export type ChasseurBuild = {
         },
         {
           id: 10,
-          nom: "Support",
+          nom: "test",
           stats: {
             "PV ": "25000",
             "Défense ": "10000",
@@ -131,44 +131,44 @@ export type ChasseurBuild = {
           },
           artefacts: {
             casque: {
-              id: 57,
+              id: 20,
               statPrincipale: "Attaque (%)",
-              statsSecondaires: ["PV", "PM", "Taux de coup critique", "Défense"],
+              statsSecondaires: [],
             },
             armure: {
               id: 1,
               statPrincipale: "Défense",
-              statsSecondaires: ["PV", "Attaque", "Réduction des dégâts", "PM"],
+              statsSecondaires: [],
             },
             gants: {
               id: 78,
               statPrincipale: "Taux de coup critique",
-              statsSecondaires: ["Précision", "Dégâts de coup critique", "Attaque", "Défense"],
+              statsSecondaires: [],
             },
             bottes: {
               id: 22,
               statPrincipale: "Précision (%)",
-              statsSecondaires: ["PM", "Attaque", "Réduction du temps de rechargement", "PV"],
+              statsSecondaires: [],
             },
             collier: {
               id: 68,
               statPrincipale: "Hausse des dégâts",
-              statsSecondaires: ["Défense", "Attaque", "Taux de coup critique", "PM"],
+              statsSecondaires: [],
             },
             bracelet: {
               id: 47,
               statPrincipale: "Attaque",
-              statsSecondaires: ["PV", "Précision (%)", "PM", "Réduction des dégâts"],
+              statsSecondaires: [],
             },
             bague: {
               id: 12,
               statPrincipale: "Précision (%)",
-              statsSecondaires: ["Attaque", "PM", "Défense"],
+              statsSecondaires: [],
             },
             boucles: {
               id: 36,
               statPrincipale: "Précision (%)",
-              statsSecondaires: ["Attaque", "PM", "Défense"],
+              statsSecondaires: [],
             },
           },
           noyaux: [
