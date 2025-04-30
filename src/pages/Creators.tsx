@@ -123,7 +123,7 @@ const Creators = () => {
             </div>
             <div className="flex-1 text-center sm:text-left">
               <h2 className="text-2xl font-bold mb-2">Sohoven</h2>
-              <p className="text-muted-foreground mb-4">
+              <p className="mb-4">
                 Créateur de contenu français pour Solo Leveling: Arise
               </p>
               <div className="flex flex-wrap justify-center sm:justify-start gap-3">

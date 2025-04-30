@@ -16,3 +16,27 @@ Il manque :
 - Park Heejin
 - Song Chiyul
 - Yoo Soohyun
+
+
+
+
+
+
+
+
+Dernières modifications (présente actuellement sur le site) : 
+
+- Mise en place de la date de dernière modifications sur toutes les pages sauf creators qui ne changera pas.
+- Mise en place des 3 derniers chasseurs sortis (j'ai mis les 3 derniers sortis avec un code commenté pour l'afficher quand je veux,
+  tant qu'on ne connait pas le prochain ça montrera les 3 derniers chasseurs et quand on connaîtra le prochain on pourra l'afficher avec "prochainement...")
+- Mise en place du système de filtre par texte (barre de recherche) et par élément avec un bouton pour reinitialiser le(s) filtres.
+- Mise en place d'une fonction pour afficher les couleurs des descriptions des Bonus de sets et Noyaux comme dans le jeu.
+- Modification de la page Code promo et Creators pour que quand on clique sur l'image du tutoriel de chaque page, 
+elle s'affiche en pleine écran avec un bouton pour fermer car on ne voyait pas trop.
+
+Ce qu'il reste à faire pour qu'on puisse déployer le site vraiment sans problèmes : 
+
+- Faire les différentes Tier-List
+- Finir de remplir tout les builds (ceux manquant et les stats | Stat primaire des artefacts de chaque builds | Stat primaire de chaque noyaux de chaque build).
+- Afficher les codes promos actuel avec leurs récompenses et date de fin.
+- 

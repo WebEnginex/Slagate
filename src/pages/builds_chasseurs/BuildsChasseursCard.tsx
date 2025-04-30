@@ -260,7 +260,7 @@ export default function BuildChasseurCard({
           key={i}
           className="bg-sidebar p-3 rounded-lg border border-sidebar-border"
         >
-          <p className="font-semibold text-sm text-yellow-500">
+          <p className="font-semibold text-sm text-solo-purple">
             {bonus.nom}
           </p>
           <p className="text-xs text-gray-300 mt-2">

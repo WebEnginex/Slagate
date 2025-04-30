@@ -76,17 +76,17 @@ const Index = () => {
 
         {/* Section Twitch */}
         <div className="mb-12">
-          <h2 className="text-3xl font-bold text-white mb-6">Stream en direct</h2>
-          <div className="aspect-w-16 aspect-h-9">
-            <iframe
-              src="https://player.twitch.tv/?channel=nom_du_streamer&parent=localhost"
-              frameBorder="0"
-              allowFullScreen={true}
-              scrolling="no"
-              className="w-full h-full rounded-md"
-            ></iframe>
-          </div>
-        </div>
+  <h2 className="text-3xl font-bold text-white mb-6">Stream en direct</h2>
+  <div className="aspect-w-16 aspect-h-9">
+    <iframe
+      src="https://player.twitch.tv/?channel=sohoven&parent=slagate.netlify.app"
+      frameBorder="0"
+      allowFullScreen={true}
+      scrolling="no"
+      className="w-full h-full rounded-md"
+    ></iframe>
+  </div>
+</div>
 
         {/* Section YouTube */}
         <div className="mb-12">
