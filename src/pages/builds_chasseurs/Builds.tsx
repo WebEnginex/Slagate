@@ -6,6 +6,7 @@ import { buildsChasseurs } from "@/config/builds/buildsChasseurs";
 import BuildChasseurCard from "./BuildsChasseursCard";
 import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
+import { FiRefreshCw } from "react-icons/fi"; //
 
 export default function BuildsPage() {
   type Chasseur = Database["public"]["Tables"]["chasseurs"]["Row"];
@@ -88,78 +89,86 @@ export default function BuildsPage() {
     <Layout>
       <div className="w-full px-4 py-6">
         <div className="max-w-7xl mx-auto space-y-10">
-          {/* Filtres */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            {/* Recherche */}
-            <input
-              type="text"
-              placeholder="Rechercher un chasseur..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full md:w-1/3 px-4 py-2 bg-sidebar-accent border border-sidebar-border rounded-md text-white placeholder:text-gray-400"
-            />
+          <div className="space-y-4">
+            {/* Dernières modifications */}
+            <div className="text-center md:text-left">
+              <p className="text-sm text-gray-400 italic">
+                <span className="text-white font-medium">
+                  <LastModified date={lastModifiedDates.builds} />
+                </span>
+              </p>
+            </div>
 
-            {/* Filtres éléments */}
-            <div className="flex items-center gap-2">
-              {elementIcons.map((el) => (
-                <div
-                  key={el.id}
-                  onClick={() =>
-                    setSelectedElement((prev) =>
-                      prev === el.id ? null : el.id
-                    )
-                  }
-                  className={`w-10 h-10 rounded-full border-2 cursor-pointer transition ${
-                    selectedElement === el.id
-                      ? "border-solo-purple shadow-md"
-                      : "border-transparent"
-                  }`}
-                >
-                  <img
-                    src={el.image}
-                    alt={el.id}
-                    className="w-full h-full object-contain rounded-full"
-                  />
-                </div>
-              ))}
-              {/* Bouton reset */}
-              {(search || selectedElement) && (
+            {/* Barre de recherche et filtres */}
+            <div className="flex flex-col items-center justify-center space-y-4">
+              {/* Barre de recherche avec bouton reset */}
+              <div className="flex items-center w-3/4 md:w-1/3 space-x-3">
+                <input
+                  type="text"
+                  placeholder="Rechercher un chasseur..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="flex-1 px-4 py-2 bg-sidebar-accent border border-sidebar-border rounded-md text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-solo-purple"
+                />
                 <button
                   onClick={() => {
                     setSearch("");
                     setSelectedElement(null);
                   }}
-                  className="text-sm text-white bg-red-600 px-3 py-1 rounded-md"
+                  className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center bg-solo-purple rounded-full shadow-md border border-solo-purple hover:bg-solo-purple-dark transition-transform duration-300 hover:rotate-180"
                 >
-                  Réinitialiser
+                  <FiRefreshCw className="w-4 h-4 md:w-6 md:h-6" />
                 </button>
-              )}
+              </div>
+
+              {/* Filtres d'éléments */}
+              <div className="flex items-center gap-3">
+                {elementIcons.map((el) => (
+                  <div
+                    key={el.id}
+                    onClick={() =>
+                      setSelectedElement((prev) =>
+                        prev === el.id ? null : el.id
+                      )
+                    }
+                    className="relative w-8 h-8 md:w-10 md:h-10 cursor-pointer transition-all duration-200 hover:scale-105"
+                  >
+                    <img
+                      src={el.image}
+                      alt={el.id}
+                      className="w-full h-full object-contain"
+                    />
+                    {selectedElement === el.id && (
+                      <div className="absolute bottom-[-6px] left-1/3 w-1/3 h-[1px] bg-solo-purple"></div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Cartes des builds */}
+            <div className="mt-6">
+              {filteredBuilds.map((entry) => {
+                const chasseur = chasseurs.find(
+                  (c) => c.id === entry.chasseurId
+                );
+                if (!chasseur) return null;
+
+                return (
+                  <BuildChasseurCard
+                    key={entry.chasseurId}
+                    chasseur={chasseur}
+                    builds={entry.builds}
+                    artefacts={artefacts}
+                    noyaux={noyaux}
+                    ombres={ombres}
+                    setsBonus={setsBonus}
+                    elementId={entry.element}
+                  />
+                );
+              })}
             </div>
           </div>
-
-          <p>
-            {/* Ajout de la date de dernière modification */}
-            <LastModified date={lastModifiedDates.builds} />
-          </p>
-
-          {/* Cartes des builds */}
-          {filteredBuilds.map((entry) => {
-            const chasseur = chasseurs.find((c) => c.id === entry.chasseurId);
-            if (!chasseur) return null;
-
-            return (
-              <BuildChasseurCard
-                key={entry.chasseurId}
-                chasseur={chasseur}
-                builds={entry.builds}
-                artefacts={artefacts}
-                noyaux={noyaux}
-                ombres={ombres}
-                setsBonus={setsBonus}
-                elementId={entry.element} // on transmet l'élément ici
-              />
-            );
-          })}
         </div>
       </div>
     </Layout>

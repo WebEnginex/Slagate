@@ -245,18 +245,22 @@ const Creators = () => {
 
       {/* Modal pour afficher l'image en grand */}
       {modalImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
-          <div className="relative max-w-4xl max-h-screen p-2">
-            <button
-              className="absolute top-2 right-2 text-white bg-black bg-opacity-50 rounded-full p-2"
-              onClick={closeModal}
-            >
-              <X className="h-6 w-6" />
-            </button>
-            <img src={modalImage} alt="Agrandissement" className="max-w-full max-h-[90vh] rounded-lg" />
-          </div>
-        </div>
-      )}
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+    <div className="relative w-full h-full p-2 flex items-center justify-center">
+      <button
+        className="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 z-10"
+        onClick={closeModal}
+      >
+        <X className="h-6 w-6" />
+      </button>
+      <img
+        src={modalImage}
+        alt="Agrandissement"
+        className="max-w-full max-h-full object-contain rounded-lg"
+      />
+    </div>
+  </div>
+)}
     </Layout>
   );
 };

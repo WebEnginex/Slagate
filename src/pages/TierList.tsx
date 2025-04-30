@@ -46,7 +46,7 @@ export default function TierListPage() {
           
         </div>
 
-        {/* Tabs navigation using shadcn/ui */}
+        {/* Tabs navigation */}
         <Tabs
           defaultValue="Chasseurs"
           value={activeTab}

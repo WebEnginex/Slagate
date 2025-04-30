@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import type { Database } from "@/integrations/supabase/types";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -40,7 +41,6 @@ type Build = {
     statSecondaire?: string;
   }[];
   sets_bonus: { id: number }[];
-  ombres: { id: number; description?: string }[];
 };
 
 type Props = {
@@ -52,6 +52,53 @@ type Props = {
   setsBonus: SetBonus[];
   elementId?: string;
 };
+
+function formatTextWithBrackets(text: string) {
+  const regex = /(\[[^\]]+\])|(\d+(\.\d+)? ?%?)|(\bseconde(?:s)?\b)/gi;
+
+  return text.split(regex).map((part, index) => {
+    if (!part) return null;
+
+    // Texte entre crochets
+    if (part.startsWith("[") && part.endsWith("]")) {
+      const content = part.slice(1, -1); // Retirer les crochets
+      if (content === "Bris") {
+        return (
+          <span key={index} className="text-orange-500">
+            {part}
+          </span>
+        );
+      } else {
+        return (
+          <span key={index} className="text-teal-500">
+            {part}
+          </span>
+        );
+      }
+    }
+
+    // Chiffres ou pourcentages
+    if (/^\d+(\.\d+)? ?%?$/.test(part)) {
+      return (
+        <span key={index} className="text-yellow-500">
+          {part}
+        </span>
+      );
+    }
+
+    // Mots "seconde" ou "secondes"
+    if (/^seconde(?:s)?$/.test(part)) {
+      return (
+        <span key={index} className="text-yellow-500">
+          {part}
+        </span>
+      );
+    }
+
+    // Texte normal
+    return part;
+  });
+}
 
 export default function BuildChasseurCard({
   chasseur,
@@ -89,12 +136,12 @@ export default function BuildChasseurCard({
         className="p-4 flex flex-row items-center justify-between bg-sidebar cursor-pointer"
         onClick={() => setIsExpanded((prev) => !prev)}
       >
-        <CardTitle className="text-xl font-bold flex items-center gap-2 text-white">
-          <Avatar className="w-10 h-10">
-            <AvatarImage src={chasseur.image} alt={chasseur.nom} />
-          </Avatar>
-          {chasseur.nom}
-        </CardTitle>
+        <CardTitle className="text-xl font-bold flex items-center gap-4 text-white">
+  <Avatar className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24">
+    <AvatarImage src={chasseur.image} alt={chasseur.nom} />
+  </Avatar>
+  {chasseur.nom}
+</CardTitle>
 
         {isExpanded ? (
           <ChevronUp className="h-5 w-5 text-white" />
@@ -105,6 +152,7 @@ export default function BuildChasseurCard({
 
       {isExpanded && (
         <CardContent className="p-4 pt-6 bg-sidebar-accent space-y-6">
+
           {/* Sélecteur de build */}
           <div className="flex gap-4 overflow-x-auto">
             {builds.map((b, i) => {
@@ -173,9 +221,9 @@ export default function BuildChasseurCard({
           className="bg-sidebar p-3 rounded-lg border border-sidebar-border"
         >
           <div className="flex flex-col items-center">
-            <p className="mb-2 text-xs font-semibold text-solo-light-purple">
-              {slot}
-            </p>
+          <p className="mb-2 text-xs font-semibold text-solo-light-purple">
+  {slot.charAt(0).toUpperCase() + slot.slice(1)}
+</p>
             <img
               src={artefact?.image || ""}
               className="w-16 h-16 object-contain"
@@ -197,32 +245,32 @@ export default function BuildChasseurCard({
 </SectionCollapsible>
 
           {/* Sets Bonus */}
-          <SectionCollapsible
-            label="Bonus de Sets"
-            icon={<Layers className="h-4 w-4 text-solo-purple" />}
-            isOpen={isSectionOpen("sets")}
-            onToggle={() => toggleSection("sets")}
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-              {build.sets_bonus.map((sb, i) => {
-                const bonus = getById(setsBonus, sb.id);
-                if (!bonus) return null;
-                return (
-                  <div
-                    key={i}
-                    className="bg-sidebar p-3 rounded-lg border border-sidebar-border"
-                  >
-                    <p className="font-semibold text-sm text-solo-purple">
-                      {bonus.nom}
-                    </p>
-                    <p className="text-xs text-gray-300 mt-2">
-                      {bonus.description}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </SectionCollapsible>
+<SectionCollapsible
+  label="Bonus de Sets"
+  icon={<Layers className="h-4 w-4 text-solo-purple" />}
+  isOpen={isSectionOpen("sets")}
+  onToggle={() => toggleSection("sets")}
+>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+    {build.sets_bonus.map((sb, i) => {
+      const bonus = getById(setsBonus, sb.id);
+      if (!bonus) return null;
+      return (
+        <div
+          key={i}
+          className="bg-sidebar p-3 rounded-lg border border-sidebar-border"
+        >
+          <p className="font-semibold text-sm text-yellow-500">
+            {bonus.nom}
+          </p>
+          <p className="text-xs text-gray-300 mt-2">
+            {formatTextWithBrackets(bonus.description || "")}
+          </p>
+        </div>
+      );
+    })}
+  </div>
+</SectionCollapsible>
 
           {/* Noyaux */}
 <SectionCollapsible
@@ -253,7 +301,7 @@ export default function BuildChasseurCard({
             {n.statPrincipale}
           </div>
           <p className="text-xs text-gray-300 mt-1.5 text-center">
-            {noyau?.description}
+            {formatTextWithBrackets(noyau?.description || "")}
           </p>
         </div>
       );

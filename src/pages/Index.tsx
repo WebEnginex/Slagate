@@ -7,7 +7,10 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   // IDs des chasseurs à afficher
-  const featuredHunterIds = [1, 2, 3]; // Remplacez par les IDs des chasseurs à afficher
+  const chasseur1 = 35; // ID du premier chasseur
+  const chasseur2 = 13; // ID du deuxième chasseur
+  const chasseur3 = 41; // ID du troisième chasseur
+
   const [hunters, setHunters] = useState([]);
 
   useEffect(() => {
@@ -15,10 +18,21 @@ const Index = () => {
       const { data, error } = await supabase
         .from("chasseurs")
         .select("*")
-        .in("id", featuredHunterIds);
+        .in("id", [chasseur1, chasseur2, chasseur3]);
 
-      if (data) setHunters(data);
-      if (error) console.error("Erreur lors de la récupération des chasseurs :", error);
+      if (data) {
+        // Organiser les chasseurs dans l'ordre des IDs
+        const sortedHunters = [
+          data.find((hunter) => hunter.id === chasseur1) || { id: chasseur1, nom: "Prochainement", image_body: "" },
+          data.find((hunter) => hunter.id === chasseur2) || { id: chasseur2, nom: "Prochainement", image_body: "" },
+          data.find((hunter) => hunter.id === chasseur3) || { id: chasseur3, nom: "Prochainement", image_body: "" },
+        ];
+        setHunters(sortedHunters);
+      }
+
+      if (error) {
+        console.error("Erreur lors de la récupération des chasseurs :", error);
+      }
     };
 
     fetchHunters();
@@ -26,33 +40,39 @@ const Index = () => {
 
   return (
     <Layout>
-      <div className="w-full px-6 py-8">
-        {/* Section des chasseurs */}
-        <div className="mb-12">
-  <h1 className="text-3xl font-bold text-white mb-6">Derniers chasseurs sortis</h1>
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {hunters.map((hunter, index) => (
-      <Card key={hunter.id} className="bg-sidebar border-sidebar-border flex flex-col items-center relative">
-        <CardHeader>
-          <CardTitle className="text-xl text-white text-center">{hunter.nom}</CardTitle>
-        </CardHeader>
-        <CardContent className="flex justify-center items-center h-64">
-          <img
-            src={hunter.image_body}
-            alt={hunter.nom}
-            className="h-full max-h-full object-contain rounded-md"
-          />
-        </CardContent>
-        {/* Badge pour le chasseur prochainement */}
-        {index === 2 && (
-          <div className="absolute top-2 right-2 bg-solo-purple text-white text-xs font-bold px-2 py-1 rounded">
-            Prochainement
-          </div>
-        )}
-      </Card>
-    ))}
-  </div>
-</div>
+    <div className="w-full px-6 py-8">
+      {/* Section des chasseurs */}
+      <div className="mb-12">
+        <h1 className="text-3xl font-bold text-white mb-6">Derniers chasseurs sortis</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {hunters.map((hunter, index) => (
+            <Card key={hunter.id} className="bg-sidebar border-sidebar-border flex flex-col items-center relative">
+              <CardHeader>
+                <CardTitle className="text-xl text-white text-center">
+                  {hunter.nom === "Prochainement" ? "Prochainement" : hunter.nom}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex justify-center items-center h-64">
+                {hunter.nom === "Prochainement" ? (
+                  <div className="text-white text-center">Image bientôt disponible</div>
+                ) : (
+                  <img
+                    src={hunter.image_body}
+                    alt={hunter.nom}
+                    className="h-full max-h-full object-contain rounded-md"
+                  />
+                )}
+              </CardContent>
+              {/* Ajouter une étiquette "Prochainement" uniquement à la troisième carte */}
+              {/* {index === 2 && (
+                <div className="absolute top-2 right-2 bg-solo-purple text-white text-xs font-bold px-2 py-1 rounded">
+                  Prochainement
+                </div>
+              )} */}
+            </Card>
+          ))}
+        </div>
+      </div>
 
         {/* Section Twitch */}
         <div className="mb-12">
