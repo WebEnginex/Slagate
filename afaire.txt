@@ -39,4 +39,4 @@ Ce qu'il reste à faire pour qu'on puisse déployer le site vraiment sans probl�
 - Faire les différentes Tier-List
 - Finir de remplir tout les builds (ceux manquant et les stats | Stat primaire des artefacts de chaque builds | Stat primaire de chaque noyaux de chaque build).
 - Afficher les codes promos actuel avec leurs récompenses et date de fin.
-- 
+- Générer la clé API youtube de ta chaine pour afficher la dernière vidéo sortit automatiquement.

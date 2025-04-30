@@ -23,9 +23,21 @@ const Index = () => {
       if (data) {
         // Organiser les chasseurs dans l'ordre des IDs
         const sortedHunters = [
-          data.find((hunter) => hunter.id === chasseur1) || { id: chasseur1, nom: "Prochainement", image_body: "" },
-          data.find((hunter) => hunter.id === chasseur2) || { id: chasseur2, nom: "Prochainement", image_body: "" },
-          data.find((hunter) => hunter.id === chasseur3) || { id: chasseur3, nom: "Prochainement", image_body: "" },
+          data.find((hunter) => hunter.id === chasseur1) || {
+            id: chasseur1,
+            nom: "Prochainement",
+            image_body: "",
+          },
+          data.find((hunter) => hunter.id === chasseur2) || {
+            id: chasseur2,
+            nom: "Prochainement",
+            image_body: "",
+          },
+          data.find((hunter) => hunter.id === chasseur3) || {
+            id: chasseur3,
+            nom: "Prochainement",
+            image_body: "",
+          },
         ];
         setHunters(sortedHunters);
       }
@@ -40,57 +52,72 @@ const Index = () => {
 
   return (
     <Layout>
-    <div className="w-full px-6 py-8">
-      {/* Section des chasseurs */}
-      <div className="mb-12">
-        <h1 className="text-3xl font-bold text-white mb-6">Derniers chasseurs sortis</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {hunters.map((hunter, index) => (
-            <Card key={hunter.id} className="bg-sidebar border-sidebar-border flex flex-col items-center relative">
-              <CardHeader>
-                <CardTitle className="text-xl text-white text-center">
-                  {hunter.nom === "Prochainement" ? "Prochainement" : hunter.nom}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="flex justify-center items-center h-64">
-                {hunter.nom === "Prochainement" ? (
-                  <div className="text-white text-center">Image bientôt disponible</div>
-                ) : (
-                  <img
-                    src={hunter.image_body}
-                    alt={hunter.nom}
-                    className="h-full max-h-full object-contain rounded-md"
-                  />
-                )}
-              </CardContent>
-              {/* Ajouter une étiquette "Prochainement" uniquement à la troisième carte */}
-              {/* {index === 2 && (
+      <div className="w-full px-6 py-8">
+        {/* Section des chasseurs */}
+        <div className="mb-12">
+          <h1 className="text-3xl font-bold text-white mb-6">
+            Derniers chasseurs sortis
+          </h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {hunters.map((hunter, index) => (
+              <Card
+                key={hunter.id}
+                className="bg-sidebar border-sidebar-border flex flex-col items-center relative"
+              >
+                <CardHeader>
+                  <CardTitle className="text-xl text-white text-center">
+                    {hunter.nom === "Prochainement"
+                      ? "Prochainement"
+                      : hunter.nom}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="flex justify-center items-center h-64">
+                  {hunter.nom === "Prochainement" ? (
+                    <div className="text-white text-center">
+                      Image bientôt disponible
+                    </div>
+                  ) : (
+                    <img
+                      src={hunter.image_body}
+                      alt={hunter.nom}
+                      className="h-full max-h-full object-contain rounded-md"
+                    />
+                  )}
+                </CardContent>
+                {/* Ajouter une étiquette "Prochainement" uniquement à la troisième carte */}
+                {/* {index === 2 && (
                 <div className="absolute top-2 right-2 bg-solo-purple text-white text-xs font-bold px-2 py-1 rounded">
                   Prochainement
                 </div>
               )} */}
-            </Card>
-          ))}
+              </Card>
+            ))}
+          </div>
         </div>
-      </div>
 
         {/* Section Twitch */}
         <div className="mb-12">
-  <h2 className="text-3xl font-bold text-white mb-6">Stream en direct</h2>
-  <div className="aspect-w-16 aspect-h-9">
-    <iframe
-      src="https://player.twitch.tv/?channel=aloonea&parent=slagate.netlify.app"
-      frameBorder="0"
-      allowFullScreen={true}
-      scrolling="no"
-      className="w-full h-full rounded-md"
-    ></iframe>
-  </div>
-</div>
+          <h2 className="text-3xl font-bold text-white mb-6">
+            Stream en direct
+          </h2>
+          <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
+            {" "}
+            {/* Ratio 16:9 */}
+            <iframe
+              src="https://player.twitch.tv/?channel=sohoven&parent=slagate.netlify.app"
+              frameBorder="0"
+              allowFullScreen={true}
+              scrolling="no"
+              className="absolute top-0 left-0 w-full h-full rounded-md"
+            ></iframe>
+          </div>
+        </div>
 
         {/* Section YouTube */}
         <div className="mb-12">
-          <h2 className="text-3xl font-bold text-white mb-6">Dernière vidéo YouTube</h2>
+          <h2 className="text-3xl font-bold text-white mb-6">
+            Dernière vidéo YouTube
+          </h2>
           <div className="aspect-w-16 aspect-h-9">
             <iframe
               src="https://www.youtube.com/embed/ID_DE_LA_VIDEO"
