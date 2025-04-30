@@ -104,7 +104,7 @@ const Index = () => {
             {" "}
             {/* Ratio 16:9 */}
             <iframe
-              src="https://player.twitch.tv/?channel=sohoven&parent=slagate.netlify.app"
+              src="https://player.twitch.tv/?channel=aloonea&parent=slagate.netlify.app"
               frameBorder="0"
               allowFullScreen={true}
               scrolling="no"
