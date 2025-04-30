@@ -60,3 +60,22 @@
     @apply rounded-lg bg-card p-6 transition-all hover:shadow-md hover:shadow-solo-purple/20 hover:-translate-y-1;
   }
 }
+
+/* Scrollbar stylisée (onglets horizontaux uniquement) */
+.tabs-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.tabs-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tabs-scroll::-webkit-scrollbar-thumb {
+  background-color: #8B78F0; /* Violet doux */
+  border-radius: 4px;
+}
+
+.tabs-scroll {
+  scrollbar-color: #8B78F0 transparent;
+  scrollbar-width: thin;
+}

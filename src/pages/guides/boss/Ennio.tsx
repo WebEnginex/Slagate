@@ -7,7 +7,7 @@ const tabs = [
     label: "Informations",
     content: (
       <div>
-        <h2 className="text-2xl font-bold mb-4">Informations générales</h2>
+        <h2 className="text-2xl md:text-3xl font-bold mb-4">Informations générales</h2>
         <p className="mb-4">
           Ennio est un boss redoutable connu pour sa puissance et son rôle central dans le lore. 
           Il est le gardien de nombreux trésors et représente un défi majeur pour les aventuriers.
@@ -105,41 +105,43 @@ const Ennio = () => {
 
   return (
     <Layout>
-      <div className="w-full">
-        {/* Image du boss en pleine largeur */}
-        <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen">
-  <img
-    src="https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/boss//BG_ContentsMenu_Unlock_WorldBoss.png"
-    alt="Ennio"
-    className="w-full h-72 object-cover"
-  />
+      {/* Image du boss en pleine largeur sans overflow */}
+      <div className="-mx-4 sm:mx-0">
+        <img
+          src="https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/boss//BG_ContentsMenu_Unlock_WorldBoss.png"
+          alt="Ennio"
+          className="w-full h-64 sm:h-72 md:h-96 object-cover"
+        />
+      </div>
+
+      {/* Contenu principal */}
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Onglets avec scroll horizontal mobile/tablette fluide */}
+        <div
+  className="mb-8 border-b border-gray-700 overflow-x-auto tabs-scroll"
+  style={{ WebkitOverflowScrolling: "touch" }}
+>
+  <ul className="flex w-max space-x-2 sm:space-x-3 md:space-x-4 px-2 sm:px-0">
+    {tabs.map((tab) => (
+      <li
+        key={tab.id}
+        className={`cursor-pointer px-4 py-2 text-sm sm:text-base rounded-t-lg whitespace-nowrap transition-colors duration-200 ${
+          activeTab === tab.id
+            ? "bg-solo-purple text-white font-bold"
+            : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white"
+        }`}
+        onClick={() => setActiveTab(tab.id)}
+      >
+        {tab.label}
+      </li>
+    ))}
+  </ul>
 </div>
 
-        {/* Contenu principal */}
-        <div className="px-6 py-8">
-          {/* Onglets */}
-          <div className="mb-8 border-b border-gray-700">
-            <ul className="flex justify-center space-x-4">
-              {tabs.map((tab) => (
-                <li
-                  key={tab.id}
-                  className={`cursor-pointer px-6 py-2 rounded-t-lg transition-colors duration-200 ${
-                    activeTab === tab.id
-                      ? "bg-solo-purple text-white font-bold"
-                      : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white"
-                  }`}
-                  onClick={() => setActiveTab(tab.id)}
-                >
-                  {tab.label}
-                </li>
-              ))}
-            </ul>
-          </div>
 
-          {/* Contenu de l'onglet actif */}
-          <div className="text-white text-left bg-gray-900 p-6 rounded-lg shadow-md">
-            {tabs.find((tab) => tab.id === activeTab)?.content}
-          </div>
+        {/* Contenu de l'onglet actif */}
+        <div className="text-white text-left bg-gray-900 p-4 sm:p-6 rounded-lg shadow-md">
+          {tabs.find((tab) => tab.id === activeTab)?.content}
         </div>
       </div>
     </Layout>
