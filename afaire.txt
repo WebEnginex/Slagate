@@ -40,3 +40,6 @@ Ce qu'il reste à faire pour qu'on puisse déployer le site vraiment sans probl�
 - Finir de remplir tout les builds (ceux manquant et les stats | Stat primaire des artefacts de chaque builds | Stat primaire de chaque noyaux de chaque build).
 - Afficher les codes promos actuel avec leurs récompenses et date de fin.
 - Générer la clé API youtube de ta chaine pour afficher la dernière vidéo sortit automatiquement.
+
+Il faudra voir également si on change pa la page atelier de la lumière. Comme on devait faire une page enio, une bdg etc et qu'on utilise
+la page build a la place, ça serait peut-être judicieux de rajouter un build Baran, Vulcan et Deimos dans Builds et supprimer la page vulcan baran et deimos pour tout gérer dans une seule page ?

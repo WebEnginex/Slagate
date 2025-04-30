@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="bg-sidebar-accent border-t border-sidebar-border py-6">
       <div className="container mx-auto text-center">
-        <p className="text-sm text-muted-foreground mb-4">Suivez-moi sur :</p>
+        <p className="text-m mb-4">Suivez-moi sur :</p>
         <div className="flex justify-center gap-6">
           <a
             href="https://www.youtube.com/@Sohoven"
