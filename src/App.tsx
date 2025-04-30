@@ -6,15 +6,20 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
-import TierList from "./pages/TierList";
+
+import Guides from "@/pages/Guides"; 
+import Boss from "@/pages/guides/boss/Boss";
+import Ennio from "@/pages/guides/boss/Ennio";
+
+import TierList from "@/pages/TierList";
 import Builds from "@/pages/builds_chasseurs/Builds";
-import AtelierDeLaLumiere from "@/pages/atelier/AtelierDeLaLumiere";
+import AtelierDeLaLumiere from "@/pages/AtelierDeLaLumiere";
 import Vulcan from "@/pages/atelier/vulcan/Vulcan";
 import Baran from "@/pages/atelier/baran/Baran";
 import Deimos from "@/pages/atelier/deimos/Deimos";
-import Creators from "./pages/Creators";
-import PromoCodes from "./pages/PromoCodes";
-import NotFound from "./pages/NotFound";
+import Creators from "@/pages/Creators";
+import PromoCodes from "@/pages/PromoCodes";
+import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +32,9 @@ const App = () => (
       <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/guides" element={<Guides />} />
+          <Route path="/guides/boss" element={<Boss />} />
+          <Route path="/guides/boss/ennio" element={<Ennio />} />
           <Route path="/tier-list" element={<TierList />} />
           <Route path="/builds" element={<Builds />} />;
           <Route path="/atelier" element={<AtelierDeLaLumiere />} />
