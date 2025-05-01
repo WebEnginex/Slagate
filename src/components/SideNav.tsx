@@ -99,10 +99,6 @@ const SideNav = ({ isMobileOpen, setIsMobileOpen }: SideNavProps) => {
           ))}
         </div>
 
-        {/* Footer */}
-        <div className="mt-auto border-t border-sidebar-border pt-4 text-xs text-muted-foreground">
-          <p>WebEngine</p>
-        </div>
       </nav>
     </>
   );

@@ -1,46 +1,98 @@
 import React from "react";
-import { Youtube, Twitch, Twitter, Instagram } from "lucide-react";
+import { Youtube, Twitch, Twitter, Instagram, ArrowUp } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer className="bg-sidebar-accent border-t border-sidebar-border py-6">
-      <div className="container mx-auto text-center">
-        <p className="text-m mb-4">Suivez-moi sur :</p>
-        <div className="flex justify-center gap-6">
-          <a
-            href="https://www.youtube.com/@Sohoven"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-white transition-colors"
-          >
-            <Youtube className="h-6 w-6" />
-          </a>
-          <a
-            href="https://www.twitch.tv/sohoven"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-white transition-colors"
-          >
-            <Twitch className="h-6 w-6" />
-          </a>
-          <a
-            href="https://x.com/Soho_ven"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-white transition-colors"
-          >
-            <Twitter className="h-6 w-6" />
-          </a>
-          <a
-            href="https://www.instagram.com/sohoven"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-white transition-colors"
-          >
-            <Instagram className="h-6 w-6" />
-          </a>
+    <footer className="bg-sidebar-accent border-t border-sidebar-border py-8 mt-10 relative">
+      <div className="container mx-auto px-4 text-center space-y-6">
+        <div>
+          <p className="text-base font-medium text-white mb-2">
+            Suivez-moi sur :
+          </p>
+          <div className="flex justify-center gap-6">
+            <a
+              href="https://www.youtube.com/@Sohoven"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-white transition-colors"
+            >
+              <Youtube className="h-6 w-6" />
+            </a>
+            <a
+              href="https://www.twitch.tv/sohoven"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-white transition-colors"
+            >
+              <Twitch className="h-6 w-6" />
+            </a>
+            <a
+              href="https://x.com/Soho_ven"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-white transition-colors"
+            >
+              <Twitter className="h-6 w-6" />
+            </a>
+            <a
+              href="https://www.instagram.com/sohoven"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-white transition-colors"
+            >
+              <Instagram className="h-6 w-6" />
+            </a>
+          </div>
         </div>
+
+        <div className="text-sm text-muted-foreground flex flex-wrap justify-center gap-4">
+          <Link
+            to="/mentions-legales"
+            className="hover:underline hover:text-white"
+          >
+            Mentions légales
+          </Link>
+          <Link to="/cgu" className="hover:underline hover:text-white">
+            Conditions d’utilisation
+          </Link>
+          <Link
+            to="/confidentialite"
+            className="hover:underline hover:text-white"
+          >
+            Confidentialité
+          </Link>
+          <Link to="/cookies" className="hover:underline hover:text-white">
+            Cookies
+          </Link>
+        </div>
+
+        <p className="text-xs text-muted-foreground mt-4">
+          © {new Date().getFullYear()}{" "}
+          <a
+            href="https://webengine.fr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline hover:text-white font-medium"
+          >
+            WebEngine
+          </a>{" "}
+          – Développé avec passion pour les fans de Solo Leveling: ARISE
+        </p>
       </div>
+
+      {/* Flèche pour remonter en haut */}
+      <button
+        onClick={scrollToTop}
+        className="absolute right-4 bottom-4 bg-violet-500 hover:bg-violet-600 text-white p-3 rounded-full shadow-lg transition-all duration-300"
+        aria-label="Remonter en haut"
+      >
+        <ArrowUp className="h-5 w-5" />
+      </button>
     </footer>
   );
 };

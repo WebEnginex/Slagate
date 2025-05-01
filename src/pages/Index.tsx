@@ -25,17 +25,17 @@ const Index = () => {
         const sortedHunters = [
           data.find((hunter) => hunter.id === chasseur1) || {
             id: chasseur1,
-            nom: "Prochainement",
+            nom: "",
             image_body: "",
           },
           data.find((hunter) => hunter.id === chasseur2) || {
             id: chasseur2,
-            nom: "Prochainement",
+            nom: "",
             image_body: "",
           },
           data.find((hunter) => hunter.id === chasseur3) || {
             id: chasseur3,
-            nom: "Prochainement",
+            nom: "",
             image_body: "",
           },
         ];
@@ -52,84 +52,91 @@ const Index = () => {
 
   return (
     <Layout>
-      <div className="w-full px-6 py-8">
+      <div className="w-full px-6 py-12 text-gray-100">
         {/* Section des chasseurs */}
-        <div className="mb-12">
-          <h1 className="text-3xl font-bold text-white mb-6">
+        <div className="mb-16">
+          <h1 className="text-4xl font-extrabold text-center text-violet-400 mb-10">
             Derniers chasseurs sortis
           </h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {hunters.map((hunter, index) => (
               <Card
                 key={hunter.id}
-                className="bg-sidebar border-sidebar-border flex flex-col items-center relative"
+                className="bg-gray-800 border border-gray-700 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg overflow-hidden"
               >
-                <CardHeader>
-                  <CardTitle className="text-xl text-white text-center">
-                    {hunter.nom === "Prochainement"
-                      ? "Prochainement"
-                      : hunter.nom}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex justify-center items-center h-64">
+                <CardContent
+                  className="relative flex justify-center items-end h-64 bg-gray-700 p-0"
+                  style={{
+                    backgroundImage: "url('https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Bg_AchievePage_1.png')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                >
                   {hunter.nom === "Prochainement" ? (
-                    <div className="text-white text-center">
+                    <div className="text-gray-300 text-center">
                       Image bientôt disponible
                     </div>
                   ) : (
                     <img
                       src={hunter.image_body}
                       alt={hunter.nom}
-                      className="h-full max-h-full object-contain rounded-md"
+                      className="w-full h-full object-contain"
                     />
                   )}
+                  <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/70 to-transparent text-center p-2">
+                    <h3 className="text-lg font-bold text-white">{hunter.nom}</h3>
+                  </div>
                 </CardContent>
-                {/* Ajouter une étiquette "Prochainement" uniquement à la troisième carte */}
-                {/* {index === 2 && (
-                <div className="absolute top-2 right-2 bg-solo-purple text-white text-xs font-bold px-2 py-1 rounded">
-                  Prochainement
-                </div>
-              )} */}
               </Card>
             ))}
           </div>
         </div>
 
+        {/* Section de bienvenue */}
+        <div className="my-16 text-center">
+          <h2 className="text-3xl font-bold mb-4 text-violet-400">
+            Bienvenue sur SLAGATE, votre portail Solo Leveling: ARISE
+          </h2>
+          <p className="text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto">
+            Explorez des guides stratégiques, des builds optimisés et les différentes informations autour du jeu. 
+            SLAGATE est conçu pour vous accompagner dans vos progrès, que vous soyez nouveau joueur ou vétéran du terrain.
+            N'hésitez pas à consulter nos tier lists, nos compositions de teams ou encore les codes promotionnels à ne pas manquer !
+          </p>
+        </div>
+
         {/* Section Twitch */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-white mb-6">
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-center text-violet-400 mb-8">
             Stream en direct
           </h2>
-          <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
-            {" "}
+          <div className="relative w-full max-w-4xl mx-auto" style={{ paddingTop: "56.25%" }}>
             {/* Ratio 16:9 */}
             <iframe
               src="https://player.twitch.tv/?channel=sohoven&parent=slagate.netlify.app"
               frameBorder="0"
               allowFullScreen={true}
               scrolling="no"
-              className="absolute top-0 left-0 w-full h-full rounded-md"
+              className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
             ></iframe>
           </div>
         </div>
 
         {/* Section YouTube */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-white mb-6">
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-center text-violet-400 mb-8">
             Dernière vidéo YouTube
           </h2>
-          <div className="aspect-w-16 aspect-h-9">
+          <div className="relative w-full max-w-4xl mx-auto" style={{ paddingTop: "56.25%" }}>
             <iframe
               src="https://www.youtube.com/embed/ID_DE_LA_VIDEO"
               frameBorder="0"
               allowFullScreen={true}
-              className="w-full h-full rounded-md"
+              className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
             ></iframe>
           </div>
         </div>
 
-        {/* Footer */}
-        <Footer />
+        
       </div>
     </Layout>
   );

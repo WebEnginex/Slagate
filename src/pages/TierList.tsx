@@ -42,8 +42,11 @@ export default function TierListPage() {
           </div>
           <Separator className="bg-sidebar-border" />
           <p className="text-muted-foreground text-sm md:text-base">
-            Consultez les différentes tier lists
-          </p>
+  Découvrez notre classement complet des chasseurs, armes et compositions d'équipe dans Solo Leveling: ARISE.
+  Chaque tier list est régulièrement mise à jour pour refléter les dernières évolutions du jeu, les équilibrages et les nouvelles sorties. 
+  Utilisez cette section pour optimiser vos choix et former les meilleures équipes possibles en fonction des défis du moment.
+</p>
+
           <p>
             {/* Ajout de la date de dernière modification */}
             <LastModified date={lastModifiedDates.tierList} />
