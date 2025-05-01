@@ -115,9 +115,9 @@ export default function BuildsPage() {
                     setSearch("");
                     setSelectedElement(null);
                   }}
-                  className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center bg-solo-purple rounded-full shadow-md border border-solo-purple hover:bg-solo-purple-dark transition-transform duration-300 hover:rotate-180"
+                  className="px-3 py-2 text-sm md:text-base bg-solo-purple text-white rounded-md shadow-md border border-solo-purple hover:bg-solo-purple-dark transition-colors duration-300"
                 >
-                  <FiRefreshCw className="w-4 h-4 md:w-6 md:h-6" />
+                  Réinitialiser
                 </button>
               </div>
 
