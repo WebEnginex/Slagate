@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -62,20 +61,72 @@
 }
 
 /* Scrollbar stylisée (onglets horizontaux uniquement) */
+.tabs-scroll {
+  overflow-x: auto; /* Permet le défilement horizontal */
+  scroll-padding-left: 1rem; /* Ajoute un espace à gauche */
+  scroll-padding-right: 1rem; /* Ajoute un espace à droite */
+  scrollbar-width: thin; /* Barre fine pour Firefox */
+  scrollbar-color: #8078f8 transparent; /* Couleur pour Firefox */
+}
+
 .tabs-scroll::-webkit-scrollbar {
-  height: 6px;
+  height: 6px; /* Hauteur de la barre de défilement */
 }
 
 .tabs-scroll::-webkit-scrollbar-track {
-  background: transparent;
+  background: transparent; /* Fond transparent */
 }
 
 .tabs-scroll::-webkit-scrollbar-thumb {
-  background-color: #8B78F0; /* Violet doux */
-  border-radius: 4px;
+  background-color: #8078f8; /* Couleur violette douce */
+  border-radius: 4px; /* Coins arrondis */
 }
 
-.tabs-scroll {
-  scrollbar-color: #8B78F0 transparent;
-  scrollbar-width: thin;
+/* Masquer la barre de défilement sur certains navigateurs si nécessaire */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+/* Tabs navigation */
+.relative {
+  position: relative;
+}
+
+.tabs {
+  width: 100%;
+}
+
+.tabs-list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  background-color: rgba(var(--sidebar-accent), 0.3);
+  border-radius: 1rem;
+  border: 1px solid var(--sidebar-border);
+  padding: 0 0.5rem;
+}
+
+.tabs-trigger {
+  flex-shrink: 0;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  white-space: nowrap;
+  border-radius: 0.5rem;
+}
+
+.tabs-trigger.active {
+  background-color: var(--solo-purple);
+  color: var(--primary-foreground);
+}
+
+.tabs-trigger.inactive {
+  background-color: transparent;
+  color: var(--muted-foreground);
 }

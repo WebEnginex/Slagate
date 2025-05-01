@@ -6,6 +6,11 @@ export const teamChasseursTiers = {
       name: "Team S-Rank",
       hunters: [1, 2, 3],
     },
+    {
+      id: 1,
+      name: "Team S-Rank",
+      hunters: [1, 2, 3],
+    },
   ],
   A: [
     {

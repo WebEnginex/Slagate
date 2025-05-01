@@ -9,7 +9,7 @@ const guides = [
     {
       id: 1,
       title: "Guide des Chasseurs",
-      description: "Découvrez les meilleurs chasseurs et leurs builds.",
+      description: "Découvrez les meilleurs chasseurs à recruter et d'autres informations à propos des chasseurs.",
       image: "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Guide_Chasseur.png",
       link: "/guides/hunters",
     },
@@ -23,7 +23,7 @@ const guides = [
     {
       id: 3,
       title: "Guide des Portails",
-      description: "Découvrez comment maîtriser les ombres.",
+      description: "Découvrez comment fonctionne les portails.",
       image: "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Guide_Portails.png",
       link: "/guides/cores",
     },

@@ -5,7 +5,7 @@ import { hunterTiers } from "@/config/tier-list/chasseurs";
 import { weaponTiers } from "@/config/tier-list/armes";
 import { teamChasseursTiers } from "@/config/tier-list/teamsChasseurs";
 import { teamPodTiers } from "@/config/tier-list/teamsPod";
-import { teamBdgTiers } from "@/config/tier-list/teamBdg"; 
+import { teamBdgTiers } from "@/config/tier-list/teamBdg";
 import Layout from "@/components/Layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
@@ -20,7 +20,13 @@ type Chasseur = Database["public"]["Tables"]["chasseurs"]["Row"];
 type Arme = Database["public"]["Tables"]["jinwoo_armes"]["Row"];
 type Jinwoo = Database["public"]["Tables"]["jinwoo"]["Row"];
 
-const tabs = ["Chasseurs", "Armes", "Teams Chasseurs", "Teams POD", "Teams BDG"];
+const tabs = [
+  "Chasseurs",
+  "Armes",
+  "Teams Chasseurs",
+  "Teams POD",
+  "Teams BDG",
+];
 
 export default function TierListPage() {
   const [activeTab, setActiveTab] = useState("Chasseurs");
@@ -40,47 +46,45 @@ export default function TierListPage() {
           </p>
           <p>
             {/* Ajout de la date de dernière modification */}
-      <LastModified date={lastModifiedDates.tierList} />
+            <LastModified date={lastModifiedDates.tierList} />
           </p>
-          
-          
         </div>
 
         {/* Tabs navigation */}
-        <Tabs
-          defaultValue="Chasseurs"
-          value={activeTab}
-          onValueChange={setActiveTab}
-          className="w-full"
-        >
-          <TabsList className="w-full flex flex-wrap mb-6 bg-sidebar-accent/30 rounded-xl border border-sidebar-border">
-            {tabs.map((tab) => (
-              <TabsTrigger
-                key={tab}
-                value={tab}
-                className="flex-1 py-3 text-base data-[state=active]:bg-solo-purple data-[state=active]:text-primary-foreground rounded-lg"
-              >
-                {tab}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+        <div className="relative">
+          {/* Conteneur défilable pour les onglets */}
+          <div
+            className="mb-8 border-b border-gray-700 overflow-x-auto tabs-scroll"
+            style={{ WebkitOverflowScrolling: "touch" }}
+          >
+            <ul className="flex w-max space-x-2 sm:space-x-3 md:space-x-4 px-2 sm:px-0">
+              {tabs.map((tab) => (
+                <li
+                  key={tab}
+                  className={`cursor-pointer px-4 py-2 text-sm sm:text-base rounded-t-lg whitespace-nowrap transition-colors duration-200 ${
+                    activeTab === tab
+                      ? "bg-solo-purple text-white font-bold"
+                      : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white"
+                  }`}
+                  onClick={() => setActiveTab(tab)}
+                >
+                  {tab}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          <TabsContent value="Chasseurs">
-            <HuntersTab />
-          </TabsContent>
-          <TabsContent value="Armes">
-            <WeaponsTab />
-          </TabsContent>
-          <TabsContent value="Teams Chasseurs">
-            <TeamsTab tiers={teamChasseursTiers} teamSize={3} />
-          </TabsContent>
-          <TabsContent value="Teams POD">
-            <TeamsPodTab tiers={teamPodTiers} />
-          </TabsContent>
-          <TabsContent value="Teams BDG">
-  <TeamsBdgTab tiers={teamBdgTiers} />
-</TabsContent>
-        </Tabs>
+          {/* Contenu des onglets */}
+          <div className="text-white text-left bg-transparent p-4 sm:p-6 rounded-lg shadow-md">
+            {activeTab === "Chasseurs" && <HuntersTab />}
+            {activeTab === "Armes" && <WeaponsTab />}
+            {activeTab === "Teams Chasseurs" && (
+              <TeamsTab tiers={teamChasseursTiers} teamSize={3} />
+            )}
+            {activeTab === "Teams POD" && <TeamsPodTab tiers={teamPodTiers} />}
+            {activeTab === "Teams BDG" && <TeamsBdgTab tiers={teamBdgTiers} />}
+          </div>
+        </div>
       </div>
     </Layout>
   );
@@ -98,44 +102,55 @@ function HuntersTab() {
     fetchChasseurs();
   }, []);
 
-  const huntersByTier = Object.entries(hunterTiers).reduce((acc, [tier, ids]) => {
-    acc[tier] = chasseurs.filter((h) => ids.includes(Number(h.id)));
-    return acc;
-  }, {} as Record<string, Chasseur[]>);
+  const huntersByTier = Object.entries(hunterTiers).reduce(
+    (acc, [tier, ids]) => {
+      acc[tier] = chasseurs.filter((h) => ids.includes(Number(h.id)));
+      return acc;
+    },
+    {} as Record<string, Chasseur[]>
+  );
 
   return (
     <div className="space-y-8">
       {Object.entries(huntersByTier).map(([tier, hunters]) => (
-        <Card key={tier} className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl">
+        <Card
+          key={tier}
+          className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl"
+        >
           <div className="bg-sidebar-accent py-3 px-5 border-b border-sidebar-border">
             <h2 className="text-2xl font-bold text-white">Tier {tier}</h2>
           </div>
           <CardContent className="p-4 md:p-6">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
               {hunters.map((hunter) => (
                 <div
                   key={hunter.id}
-                  className="relative bg-sidebar-accent rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition-transform border border-sidebar-border hover:border-solo-purple"
+                  className="relative bg-sidebar-accent rounded-lg shadow-md p-2 text-center hover:scale-[1.03] transition-transform border border-sidebar-border hover:border-solo-purple"
                 >
-                  {/* Element icon positioned at top-left of the card */}
+                  {/* Élément icon en haut à gauche */}
                   {hunter.element && (
-                    <div className="absolute top-2 left-2 z-10 w-7 h-7">
+                    <div className="absolute top-2 left-2 z-10 w-6 h-6">
                       <img
                         src={hunter.element}
                         alt="Élément"
-                        className="w-6 h-6"
+                        className="w-full h-full"
                       />
                     </div>
                   )}
-                  
-                  <div className="relative mx-auto w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 mb-2">
+
+                  {/* Image du chasseur */}
+                  <div className="relative mx-auto w-14 sm:w-16 md:w-20 h-14 sm:h-16 md:h-20 mb-2">
                     <img
                       src={hunter.image || ""}
                       alt={hunter.nom}
                       className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
                     />
                   </div>
-                  <p className="font-medium mt-1 text-xs sm:text-sm truncate">{hunter.nom}</p>
+
+                  {/* Nom et rareté */}
+                  <p className="font-medium mt-1 text-xs sm:text-sm truncate">
+                    {hunter.nom}
+                  </p>
                   <p className="text-xs text-gray-400">{hunter.rarete}</p>
                 </div>
               ))}
@@ -167,7 +182,10 @@ function WeaponsTab() {
   return (
     <div className="space-y-8">
       {Object.entries(armesByTier).map(([tier, armes]) => (
-        <Card key={tier} className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl">
+        <Card
+          key={tier}
+          className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl"
+        >
           <div className="bg-sidebar-accent py-3 px-5 border-b border-sidebar-border">
             <h2 className="text-2xl font-bold text-white">Tier {tier}</h2>
           </div>
@@ -188,7 +206,7 @@ function WeaponsTab() {
                       />
                     </div>
                   )}
-                  
+
                   <div className="relative mx-auto w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 mb-2">
                     <img
                       src={arme.image || ""}
@@ -196,7 +214,9 @@ function WeaponsTab() {
                       className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
                     />
                   </div>
-                  <p className="font-medium mt-1 text-xs sm:text-sm truncate">{arme.nom}</p>
+                  <p className="font-medium mt-1 text-xs sm:text-sm truncate">
+                    {arme.nom}
+                  </p>
                 </div>
               ))}
             </div>
@@ -206,8 +226,6 @@ function WeaponsTab() {
     </div>
   );
 }
-
-
 
 function TeamsTab({
   tiers,
@@ -229,7 +247,10 @@ function TeamsTab({
   return (
     <div className="space-y-8">
       {Object.entries(tiers).map(([tier, teams]) => (
-        <Card key={tier} className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl">
+        <Card
+          key={tier}
+          className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl"
+        >
           <div className="bg-sidebar-accent py-3 px-5 border-b border-sidebar-border">
             <h2 className="text-2xl font-bold text-white">Tier {tier}</h2>
           </div>
@@ -240,40 +261,41 @@ function TeamsTab({
                   <h3 className="text-lg font-semibold mb-3 px-3 py-1.5 bg-sidebar-accent inline-block rounded-lg border border-sidebar-border">
                     {team.name}
                   </h3>
-                  <div
-                    className={`grid gap-3 ${
-                      teamSize === 4 
-                        ? "grid-cols-2 sm:grid-cols-4" 
-                        : "grid-cols-1 sm:grid-cols-3"
-                    }`}
-                  >
+                  <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
                     {team.hunters.map((hunterId) => {
-                      const hunter = chasseurs.find((h) => Number(h.id) === hunterId);
+                      const hunter = chasseurs.find(
+                        (h) => Number(h.id) === hunterId
+                      );
                       return (
                         hunter && (
                           <div
                             key={hunter.id}
-                            className="relative bg-sidebar-accent rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition-transform border border-sidebar-border hover:border-solo-purple"
+                            className="relative bg-sidebar-accent rounded-lg shadow-md p-3 text-center hover:scale-[1.03] transition-transform border border-sidebar-border hover:border-solo-purple"
                           >
-                            {/* Element icon positioned at top-left of the card */}
+                            {/* Élément icon en haut à gauche */}
                             {hunter.element && (
-                              <div className="absolute top-2 left-2 z-10 w-7 h-7">
+                              <div className="absolute top-2 left-2 z-10 w-6 h-6">
                                 <img
                                   src={hunter.element}
                                   alt="Élément"
-                                  className="w-6 h-6"
+                                  className="w-full h-full"
                                 />
                               </div>
                             )}
-                            
-                            <div className="relative mx-auto w-16 sm:w-20 h-16 sm:h-20 mb-2">
+
+                            {/* Image du chasseur */}
+                            <div className="relative mx-auto w-14 sm:w-16 md:w-20 h-14 sm:h-16 md:h-20 mb-2">
                               <img
                                 src={hunter.image || ""}
                                 alt={hunter.nom}
                                 className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
                               />
                             </div>
-                            <p className="font-medium mt-1 text-xs sm:text-sm truncate">{hunter.nom}</p>
+
+                            {/* Nom et rareté */}
+                            <p className="font-medium mt-1 text-xs sm:text-sm truncate">
+                              {hunter.nom}
+                            </p>
                           </div>
                         )
                       );
@@ -288,8 +310,6 @@ function TeamsTab({
     </div>
   );
 }
-
-
 
 function TeamsPodTab({
   tiers,
@@ -300,7 +320,9 @@ function TeamsPodTab({
 
   useEffect(() => {
     const fetchChasseurs = async () => {
-      const { data: chasseursData } = await supabase.from("chasseurs").select("*");
+      const { data: chasseursData } = await supabase
+        .from("chasseurs")
+        .select("*");
       if (chasseursData) setChasseurs(chasseursData);
     };
 
@@ -310,7 +332,10 @@ function TeamsPodTab({
   return (
     <div className="space-y-8">
       {Object.entries(tiers).map(([tier, teams]) => (
-        <Card key={tier} className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl">
+        <Card
+          key={tier}
+          className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl"
+        >
           <div className="bg-sidebar-accent py-3 px-5 border-b border-sidebar-border">
             <h2 className="text-2xl font-bold text-white">Tier {tier}</h2>
           </div>
@@ -346,7 +371,9 @@ function TeamsPodTab({
                                 className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
                               />
                             </div>
-                            <p className="font-medium mt-1 text-xs sm:text-sm truncate">{hunter.nom}</p>
+                            <p className="font-medium mt-1 text-xs sm:text-sm truncate">
+                              {hunter.nom}
+                            </p>
                           </div>
                         )
                       );
@@ -361,9 +388,6 @@ function TeamsPodTab({
     </div>
   );
 }
-
-
-
 
 function TeamsBdgTab({
   tiers,
@@ -374,7 +398,9 @@ function TeamsBdgTab({
 
   useEffect(() => {
     const fetchChasseurs = async () => {
-      const { data: chasseursData } = await supabase.from("chasseurs").select("*");
+      const { data: chasseursData } = await supabase
+        .from("chasseurs")
+        .select("*");
       if (chasseursData) setChasseurs(chasseursData);
     };
 
@@ -384,7 +410,10 @@ function TeamsBdgTab({
   return (
     <div className="space-y-8">
       {Object.entries(tiers).map(([tier, teams]) => (
-        <Card key={tier} className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl">
+        <Card
+          key={tier}
+          className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl"
+        >
           <div className="bg-sidebar-accent py-3 px-5 border-b border-sidebar-border">
             <h2 className="text-2xl font-bold text-white">Tier {tier}</h2>
           </div>
@@ -420,7 +449,9 @@ function TeamsBdgTab({
                                 className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
                               />
                             </div>
-                            <p className="font-medium mt-1 text-xs sm:text-sm truncate">{hunter.nom}</p>
+                            <p className="font-medium mt-1 text-xs sm:text-sm truncate">
+                              {hunter.nom}
+                            </p>
                           </div>
                         )
                       );
@@ -435,5 +466,3 @@ function TeamsBdgTab({
     </div>
   );
 }
-
-
