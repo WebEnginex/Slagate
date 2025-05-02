@@ -8,7 +8,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 
 import Guides from "@/pages/Guides"; 
-import Portal from "@/pages/Guides/portals/Portals"; 
+import Portal from "@/pages/guides/portals/Portals";
 
 import Boss from "@/pages/guides/boss/Boss";
 import Ennio from "@/pages/guides/boss/Ennio";

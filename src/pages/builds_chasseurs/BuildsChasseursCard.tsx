@@ -137,11 +137,11 @@ export default function BuildChasseurCard({
         onClick={() => setIsExpanded((prev) => !prev)}
       >
         <CardTitle className="text-xl font-bold flex items-center gap-4 text-white">
-  <Avatar className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24">
-    <AvatarImage src={chasseur.image} alt={chasseur.nom} />
-  </Avatar>
-  {chasseur.nom}
-</CardTitle>
+          <Avatar className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24">
+            <AvatarImage src={chasseur.image} alt={chasseur.nom} />
+          </Avatar>
+          {chasseur.nom}
+        </CardTitle>
 
         {isExpanded ? (
           <ChevronUp className="h-5 w-5 text-white" />
@@ -152,7 +152,6 @@ export default function BuildChasseurCard({
 
       {isExpanded && (
         <CardContent className="p-4 pt-6 bg-sidebar-accent space-y-6">
-
           {/* Sélecteur de build */}
           <div className="flex gap-4 overflow-x-auto">
             {builds.map((b, i) => {
@@ -190,6 +189,14 @@ export default function BuildChasseurCard({
             isOpen={isSectionOpen("stats")}
             onToggle={() => toggleSection("stats")}
           >
+            {/* Texte informatif */}
+            <p className="text-sm text-gray-300 leading-relaxed mb-4">
+              Voici les statistiques recommandées pour optimiser les
+              performances de ce chasseur. Adaptez-les en fonction de votre
+              style de jeu et des besoins de votre équipe.
+            </p>
+
+            {/* Grille des statistiques */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {Object.entries(build.stats).map(([label, val]) => (
                 <div
@@ -206,110 +213,126 @@ export default function BuildChasseurCard({
           </SectionCollapsible>
 
           {/* Artefacts */}
-<SectionCollapsible
-  label="Artefacts"
-  icon={<GemIcon className="h-4 w-4 text-solo-purple" />}
-  isOpen={isSectionOpen("artefacts")}
-  onToggle={() => toggleSection("artefacts")}
->
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-    {Object.entries(build.artefacts).map(([slot, conf]) => {
-      const artefact = getById(artefacts, conf.id);
-      return (
-        <div
-          key={slot}
-          className="bg-sidebar p-3 rounded-lg border border-sidebar-border"
-        >
-          <div className="flex flex-col items-center">
-          <p className="mb-2 text-xs font-semibold text-solo-light-purple">
-  {slot.charAt(0).toUpperCase() + slot.slice(1)}
-</p>
-            <img
-              src={artefact?.image || ""}
-              className="w-16 h-16 object-contain"
-              alt={artefact?.nom || "Artefact"}
-            />
-            <p className="mt-1 text-xs font-medium text-center text-white">
-              {artefact?.nom}
+          <SectionCollapsible
+            label="Artefacts"
+            icon={<GemIcon className="h-4 w-4 text-solo-purple" />}
+            isOpen={isSectionOpen("artefacts")}
+            onToggle={() => toggleSection("artefacts")}
+          >
+            {/* Texte informatif */}
+            <p className="text-sm text-gray-300 leading-relaxed mb-4">
+              Les artefacts jouent un rôle clé dans l'optimisation des
+              performances de votre chasseur. Choisissez-les en fonction des
+              statistiques principales et secondaires qui complètent votre
+              build.
             </p>
-            <div className="w-full mt-2">
-              <div className="text-xs bg-solo-purple/20 text-white px-2 py-1 rounded font-medium text-center">
-                {conf.statPrincipale}
-              </div>
+
+            {/* Grille des artefacts */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {Object.entries(build.artefacts).map(([slot, conf]) => {
+                const artefact = getById(artefacts, conf.id);
+                return (
+                  <div
+                    key={slot}
+                    className="bg-sidebar p-3 rounded-lg border border-sidebar-border"
+                  >
+                    <div className="flex flex-col items-center">
+                      <p className="mb-2 text-xs font-semibold text-solo-light-purple">
+                        {slot.charAt(0).toUpperCase() + slot.slice(1)}
+                      </p>
+                      <img
+                        src={artefact?.image || ""}
+                        className="w-16 h-16 object-contain"
+                        alt={artefact?.nom || "Artefact"}
+                      />
+                      <p className="mt-1 text-xs font-medium text-center text-white">
+                        {artefact?.nom}
+                      </p>
+                      <div className="w-full mt-2">
+                        <div className="text-xs bg-solo-purple/20 text-white px-2 py-1 rounded font-medium text-center">
+                          {conf.statPrincipale}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          </div>
-        </div>
-      );
-    })}
-  </div>
-</SectionCollapsible>
+          </SectionCollapsible>
 
           {/* Sets Bonus */}
-<SectionCollapsible
-  label="Bonus de Sets"
-  icon={<Layers className="h-4 w-4 text-solo-purple" />}
-  isOpen={isSectionOpen("sets")}
-  onToggle={() => toggleSection("sets")}
->
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-    {build.sets_bonus.map((sb, i) => {
-      const bonus = getById(setsBonus, sb.id);
-      if (!bonus) return null;
-      return (
-        <div
-          key={i}
-          className="bg-sidebar p-3 rounded-lg border border-sidebar-border"
-        >
-          <p className="font-semibold text-sm text-solo-purple">
-            {bonus.nom}
-          </p>
-          <p className="text-xs text-gray-300 mt-2">
-            {formatTextWithBrackets(bonus.description || "")}
-          </p>
-        </div>
-      );
-    })}
-  </div>
-</SectionCollapsible>
+          <SectionCollapsible
+            label="Bonus de Sets"
+            icon={<Layers className="h-4 w-4 text-solo-purple" />}
+            isOpen={isSectionOpen("sets")}
+            onToggle={() => toggleSection("sets")}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              {build.sets_bonus.map((sb, i) => {
+                const bonus = getById(setsBonus, sb.id);
+                if (!bonus) return null;
+                return (
+                  <div
+                    key={i}
+                    className="bg-sidebar p-3 rounded-lg border border-sidebar-border"
+                  >
+                    <p className="font-semibold text-sm text-solo-purple">
+                      {bonus.nom}
+                    </p>
+                    <p className="text-xs text-gray-300 mt-2">
+                      {formatTextWithBrackets(bonus.description || "")}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </SectionCollapsible>
 
           {/* Noyaux */}
-<SectionCollapsible
-  label="Noyaux"
-  icon={<Dna className="h-4 w-4 text-solo-purple" />}
-  isOpen={isSectionOpen("noyaux")}
-  onToggle={() => toggleSection("noyaux")}
->
-  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-    {build.noyaux.map((n, i) => {
-      const noyau = getById(noyaux, n.id);
-      return (
-        <div
-          key={i}
-          className="bg-sidebar p-4 rounded-lg border border-sidebar-border"
-        >
-          <div className="flex flex-col items-center mb-3">
-            <img
-              src={noyau?.image || ""}
-              className="w-16 h-16 object-contain mb-2"
-              alt={noyau?.nom || "Noyau"}
-            />
-            <p className="text-sm font-semibold text-white text-center">
-              {noyau?.nom}
+          <SectionCollapsible
+            label="Noyaux"
+            icon={<Dna className="h-4 w-4 text-solo-purple" />}
+            isOpen={isSectionOpen("noyaux")}
+            onToggle={() => toggleSection("noyaux")}
+          >
+            {/* Texte informatif */}
+            <p className="text-sm text-gray-300 leading-relaxed mb-4">
+              Les noyaux sont essentiels pour renforcer les capacités de votre
+              chasseur. Sélectionnez-les en fonction des statistiques
+              principales et des bonus secondaires qui complètent votre
+              stratégie.
             </p>
-          </div>
-          <div className="bg-solo-purple/20 text-white text-xs px-3 py-1.5 rounded-md text-center font-medium">
-            {n.statPrincipale}
-          </div>
-          <p className="text-xs text-gray-300 mt-1.5 text-center">
-            {formatTextWithBrackets(noyau?.description || "")}
-          </p>
-        </div>
-      );
-    })}
-  </div>
-</SectionCollapsible>
 
-          
+            {/* Grille des noyaux */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {build.noyaux.map((n, i) => {
+                const noyau = getById(noyaux, n.id);
+                return (
+                  <div
+                    key={i}
+                    className="bg-sidebar p-4 rounded-lg border border-sidebar-border"
+                  >
+                    <div className="flex flex-col items-center mb-3">
+                      <img
+                        src={noyau?.image || ""}
+                        className="w-16 h-16 object-contain mb-2"
+                        alt={noyau?.nom || "Noyau"}
+                      />
+                      <p className="text-sm font-semibold text-white text-center">
+                        {noyau?.nom}
+                      </p>
+                    </div>
+                    <div className="bg-solo-purple/20 text-white text-xs px-3 py-1.5 rounded-md text-center font-medium">
+                      {n.statPrincipale}
+                    </div>
+                    <p className="text-xs text-gray-300 mt-1.5 text-center">
+                      {formatTextWithBrackets(noyau?.description || "")}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </SectionCollapsible>
         </CardContent>
       )}
     </Card>

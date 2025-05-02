@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Layout from "@/components/Layout";
@@ -12,6 +13,7 @@ const Index = () => {
   const chasseur3 = 41; // ID du troisième chasseur
 
   const [hunters, setHunters] = useState([]);
+  const [latestVideoId, setLatestVideoId] = useState(""); // État pour stocker l'ID de la dernière vidéo YouTube
 
   useEffect(() => {
     const fetchHunters = async () => {
@@ -48,6 +50,27 @@ const Index = () => {
     };
 
     fetchHunters();
+  }, []);
+
+  // Récupération de la dernière vidéo YouTube
+  useEffect(() => {
+    const fetchLatestVideo = async () => {
+      const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY; // Clé API depuis .env
+      const CHANNEL_ID = "UCT9h3NfvJJ6eT7_Iri6CwFg"; // ID de la chaîne YouTube
+      const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=1`;
+  
+      try {
+        const response = await axios.get(url);
+        const video = response.data.items[0];
+        if (video && video.id.videoId) {
+          setLatestVideoId(video.id.videoId);
+        }
+      } catch (error) {
+        console.error("Erreur lors de la récupération de la dernière vidéo :", error);
+      }
+    };
+  
+    fetchLatestVideo();
   }, []);
 
   return (
@@ -128,18 +151,20 @@ const Index = () => {
           <h2 className="text-3xl font-bold text-center text-violet-400 mb-8">
             Dernière vidéo YouTube
           </h2>
-          <div className="relative w-full max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto aspect-video">
-            {/* Ratio 16:9 */}
-            <iframe
-              src="https://www.youtube.com/embed/ID_DE_LA_VIDEO"
-              frameBorder="0"
-              allowFullScreen={true}
-              className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
-            ></iframe>
-          </div>
+          {latestVideoId ? (
+            <div className="relative w-full max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto aspect-video">
+              {/* Ratio 16:9 */}
+              <iframe
+                src={`https://www.youtube.com/embed/${latestVideoId}`}
+                frameBorder="0"
+                allowFullScreen={true}
+                className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
+              ></iframe>
+            </div>
+          ) : (
+            <p className="text-center text-gray-300">Chargement de la dernière vidéo...</p>
+          )}
         </div>
-
-        
       </div>
     </Layout>
   );
