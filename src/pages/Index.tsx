@@ -55,10 +55,15 @@ const Index = () => {
   // Récupération de la dernière vidéo YouTube
   useEffect(() => {
     const fetchLatestVideo = async () => {
-      const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY; // Clé API depuis .env
+      const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY; // Utilisation de Vite pour accéder à la clé API
+      if (!API_KEY) {
+        console.error("Clé API YouTube non définie !");
+        return;
+      }
+
       const CHANNEL_ID = "UCT9h3NfvJJ6eT7_Iri6CwFg"; // ID de la chaîne YouTube
       const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=1`;
-  
+
       try {
         const response = await axios.get(url);
         const video = response.data.items[0];
@@ -69,7 +74,7 @@ const Index = () => {
         console.error("Erreur lors de la récupération de la dernière vidéo :", error);
       }
     };
-  
+
     fetchLatestVideo();
   }, []);
 
