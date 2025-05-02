@@ -25,7 +25,7 @@ const guides = [
       title: "Guide des Portails",
       description: "Découvrez comment fonctionne les portails.",
       image: "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Guide_Portails.png",
-      link: "/guides/cores",
+      link: "/guides/portals",
     },
     {
         id: 4,

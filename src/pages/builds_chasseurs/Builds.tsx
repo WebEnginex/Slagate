@@ -146,6 +146,12 @@ export default function BuildsPage() {
               </div>
             </div>
 
+            <div>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum incidunt nisi aliquid sunt, sed cum tenetur amet repellat reprehenderit blanditiis quasi! Sapiente eaque repellendus veritatis?
+              </p>
+            </div>
+
             {/* Cartes des builds */}
             <div className="mt-6">
               {filteredBuilds.map((entry) => {

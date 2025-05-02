@@ -53,13 +53,12 @@ export default function TierListPage() {
         </div>
 
         {/* Tabs navigation */}
-        <div className="mb-8 border-b border-gray-700">
-  <ul className="tabs-scroll space-x-2 sm:space-x-3 md:space-x-4">
-
+        <div className="mb-8">
+          <ul className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 px-2 sm:px-0 justify-center md:justify-start">
             {tabs.map((tab) => (
               <li
                 key={tab}
-                className={`cursor-pointer px-4 py-2 text-sm sm:text-base rounded-t-lg whitespace-nowrap transition-colors duration-200 ${
+                className={`cursor-pointer px-4 py-2 text-sm sm:text-base rounded-lg whitespace-nowrap transition-colors duration-200 ${
                   activeTab === tab
                     ? "bg-solo-purple text-white font-bold"
                     : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white"

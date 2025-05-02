@@ -185,7 +185,7 @@ export default function BuildChasseurCard({
 
           {/* Statistiques */}
           <SectionCollapsible
-            label="Statistiques"
+            label="Statistiques à viser"
             icon={<BarChart2 className="h-4 w-4 text-solo-purple" />}
             isOpen={isSectionOpen("stats")}
             onToggle={() => toggleSection("stats")}

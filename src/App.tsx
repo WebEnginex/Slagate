@@ -8,6 +8,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 
 import Guides from "@/pages/Guides"; 
+import Portal from "@/pages/Guides/portals/Portals"; 
 
 import Boss from "@/pages/guides/boss/Boss";
 import Ennio from "@/pages/guides/boss/Ennio";
@@ -45,6 +46,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/guides" element={<Guides />} />
 
+          <Route path="/guides/portals" element={<Portal />} /> {/* Sous-route pour Portals */}
           <Route path="/guides/boss" element={<Boss />} />
           <Route path="/guides/boss/ennio" element={<Ennio />} />
 
