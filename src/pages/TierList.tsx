@@ -34,7 +34,7 @@ export default function TierListPage() {
 
   return (
     <Layout>
-      <div className="container max-w-6xl mx-auto px-4 py-6 text-white">
+      <div className="container mx-auto px-4 py-6 text-white">
         <div className="mb-6 space-y-2">
           <div className="flex items-center gap-2">
             <Flame className="h-5 w-5 text-solo-purple sm:h-6 sm:w-6 md:h-7 md:w-7" />
@@ -42,10 +42,9 @@ export default function TierListPage() {
           </div>
           <Separator className="bg-sidebar-border" />
           <p className="text-muted-foreground text-sm md:text-base">
-  Découvrez notre classement complet des chasseurs, armes et compositions d'équipe dans Solo Leveling: ARISE.
-  Chaque tier list est régulièrement mise à jour pour refléter les dernières évolutions du jeu, les équilibrages et les nouvelles sorties. 
-  Utilisez cette section pour optimiser vos choix et former les meilleures équipes possibles en fonction des défis du moment.
-</p>
+            Découvrez notre classement complet des chasseurs, armes et
+            compositions d'équipe dans Solo Leveling: ARISE.
+          </p>
 
           <p>
             {/* Ajout de la date de dernière modification */}
@@ -54,39 +53,34 @@ export default function TierListPage() {
         </div>
 
         {/* Tabs navigation */}
-        <div className="relative">
-          {/* Conteneur défilable pour les onglets */}
-          <div
-            className="mb-8 border-b border-gray-700 overflow-x-auto tabs-scroll"
-            style={{ WebkitOverflowScrolling: "touch" }}
-          >
-            <ul className="flex w-max space-x-2 sm:space-x-3 md:space-x-4 px-2 sm:px-0">
-              {tabs.map((tab) => (
-                <li
-                  key={tab}
-                  className={`cursor-pointer px-4 py-2 text-sm sm:text-base rounded-t-lg whitespace-nowrap transition-colors duration-200 ${
-                    activeTab === tab
-                      ? "bg-solo-purple text-white font-bold"
-                      : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white"
-                  }`}
-                  onClick={() => setActiveTab(tab)}
-                >
-                  {tab}
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="mb-8 border-b border-gray-700">
+  <ul className="tabs-scroll space-x-2 sm:space-x-3 md:space-x-4">
 
-          {/* Contenu des onglets */}
-          <div className="text-white text-left bg-transparent p-4 sm:p-6 rounded-lg shadow-md">
-            {activeTab === "Chasseurs" && <HuntersTab />}
-            {activeTab === "Armes" && <WeaponsTab />}
-            {activeTab === "Teams Chasseurs" && (
-              <TeamsTab tiers={teamChasseursTiers} teamSize={3} />
-            )}
-            {activeTab === "Teams POD" && <TeamsPodTab tiers={teamPodTiers} />}
-            {activeTab === "Teams BDG" && <TeamsBdgTab tiers={teamBdgTiers} />}
-          </div>
+            {tabs.map((tab) => (
+              <li
+                key={tab}
+                className={`cursor-pointer px-4 py-2 text-sm sm:text-base rounded-t-lg whitespace-nowrap transition-colors duration-200 ${
+                  activeTab === tab
+                    ? "bg-solo-purple text-white font-bold"
+                    : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white"
+                }`}
+                onClick={() => setActiveTab(tab)}
+              >
+                {tab}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Contenu des onglets */}
+        <div className="text-white text-left bg-transparent p-4 sm:p-6 rounded-lg shadow-md overflow-x-hidden">
+          {activeTab === "Chasseurs" && <HuntersTab />}
+          {activeTab === "Armes" && <WeaponsTab />}
+          {activeTab === "Teams Chasseurs" && (
+            <TeamsTab tiers={teamChasseursTiers} teamSize={3} />
+          )}
+          {activeTab === "Teams POD" && <TeamsPodTab tiers={teamPodTiers} />}
+          {activeTab === "Teams BDG" && <TeamsBdgTab tiers={teamBdgTiers} />}
         </div>
       </div>
     </Layout>

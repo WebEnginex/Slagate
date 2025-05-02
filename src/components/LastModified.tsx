@@ -6,8 +6,8 @@ interface LastModifiedProps {
 
 const LastModified: React.FC<LastModifiedProps> = ({ date }) => {
   return (
-    <div className="text-sm text-gray-400 mb-4">
-      Dernières modifications : <span className="font-medium">{date}</span>
+    <div className="text-sm text-yellow-500 mb-4">
+      Dernières modifications : <span className="font-medium ">{date}</span>
     </div>
   );
 };

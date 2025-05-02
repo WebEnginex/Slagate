@@ -72,19 +72,19 @@ const SideNav = ({ isMobileOpen, setIsMobileOpen }: SideNavProps) => {
         </button>
 
         {/* Logo */}
-        <div className="flex items-center gap-3 px-3 py-4">
-          <img
-            src="/images/logo/Sohoven_Logo.png"
-            alt="Sohoven Logo"
-            className="h-8 w-8 rounded object-cover"
-          />
+<Link to="/" className="flex items-center gap-3 px-3 py-4">
+  <img
+    src="/images/logo/Sohoven_Logo.png"
+    alt="Sohoven Logo"
+    className="h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 rounded object-cover"
+  />
 
-          <div className="flex flex-col">
-            <span className="font-bold text-sidebar-foreground">
-            SLAGATE
-            </span>
-          </div>
-        </div>
+  <div className="flex flex-col">
+    <span className="font-bold text-sidebar-foreground">
+      SLAGATE
+    </span>
+  </div>
+</Link>
 
         {/* Nav links */}
         <div className="mt-8 space-y-1">

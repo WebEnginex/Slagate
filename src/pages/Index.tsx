@@ -92,6 +92,8 @@ const Index = () => {
           </div>
         </div>
 
+        
+
         {/* Section de bienvenue */}
         <div className="my-16 text-center">
           <h2 className="text-3xl font-bold mb-4 text-violet-400">
@@ -109,7 +111,7 @@ const Index = () => {
           <h2 className="text-3xl font-bold text-center text-violet-400 mb-8">
             Stream en direct
           </h2>
-          <div className="relative w-full max-w-4xl mx-auto" style={{ paddingTop: "56.25%" }}>
+          <div className="relative w-full max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto aspect-video">
             {/* Ratio 16:9 */}
             <iframe
               src="https://player.twitch.tv/?channel=sohoven&parent=slagate.netlify.app"
@@ -126,7 +128,8 @@ const Index = () => {
           <h2 className="text-3xl font-bold text-center text-violet-400 mb-8">
             Dernière vidéo YouTube
           </h2>
-          <div className="relative w-full max-w-4xl mx-auto" style={{ paddingTop: "56.25%" }}>
+          <div className="relative w-full max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto aspect-video">
+            {/* Ratio 16:9 */}
             <iframe
               src="https://www.youtube.com/embed/ID_DE_LA_VIDEO"
               frameBorder="0"
