@@ -1,5704 +1,5463 @@
 export type ChasseurBuild = {
-    chasseurId: number;
-    element: "feu" | "eau" | "vent" | "lumiere" | "tenebres"; 
-    builds: {
-      id: number;
-      nom: string;
-      artefacts: {
-          [slot: string]: {
-              id: number;
-              statPrincipale: string;
-              statsSecondaires: string[];
-            };
-        };
-        noyaux: {
-            id: number;
-            statPrincipale: string;
-            statSecondaire?: string;
-        }[];
-        sets_bonus: { id: number }[];
-        stats: Record<string, string>;
-    }[];
-  };
-
+  chasseurId: number;
+  element: "feu" | "eau" | "vent" | "lumiere" | "tenebres";
+  builds: {
+    id: number;
+    nom: string;
+    artefacts: {
+      [slot: string]: {
+        id: number;
+        statPrincipale: string;
+        statsSecondaires: string[];
+      };
+    };
+    noyaux: {
+      [slot: number]: {
+        id: number;
+        statPrincipale: string;
+      }[];
+    };
+    sets_bonus: { id: number }[];
+    stats: Record<string, string>;
+  }[];
+};
 
 // Eléments possibles : "feu", "eau", "vent", "lumiere", "tenebres"
-  
-  export const buildsChasseurs: ChasseurBuild[] = [
-    
-    // Alicia Blanche
-    {
-      chasseurId: 1,
-      element: "eau", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "-",
-            "Défense ": "-",
-            "PM ": "-",
-            "Attaque ": "-",
-            "Précision": "90% - 99%",
-            "Taux de coup critique ": "50% - (4100-8000)",
-            "Dégâts de coup critique ": "200% - 210%",
-            "Hausse des dégâts ": "30% - 35%",
-            "Pénétration de défense ": "10% - 20%",
-            "Réduction des dégâts ": "-",
-            "Hausse des soins donnés ": "-",
-            "Hausse des soins reçus ": "-",
-            "Hausse du taux de récupération des PM ": "-",
-            "Baisse du coût de PM ": "-",
-          },
-          artefacts: {
-            casque: {
-              id: 61,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 8,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 71,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 50,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 15,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 39,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "Attaque", statSecondaire: "" },
-            { id: 12, statPrincipale: "Défense", statSecondaire: "" },
-            { id: 3, statPrincipale: "PV", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 29 },
-            { id: 30 },
-            { id: 23 },
-            { id: 24 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 61,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 8,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 71,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 50,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 15,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 39,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 29 },
-            { id: 30 },
-            { id: 23 },
-            { id: 24 },
-          ],
-        },
-        {
-          id: 3,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 61,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 8,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 71,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 50,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 15,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 39,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 29 },
-            { id: 30 },
-            { id: 23 },
-            { id: 24 },
-          ],
-        },
-       
- 
-      ],
-    },
 
-    // Amamiya Mirei
-    {
-        chasseurId: 2,
-        element: "vent", 
-        builds: [
-          {
-            id: 10,
-            nom: "Général",
-            stats: {
-              "PV ": "",
-              "Défense ": "",
-              "PM ": "",
-              "Attaque ": "",
-              "Précision ": "",
-              "Taux de coup critique ": "",
-              "Dégâts de coup critique ": "",
-              "Hausse des dégâts ": "",
-              "Pénétration de défense ": "",
-              "Réduction des dégâts ": "",
-              "Réduction du temps de rechargement ": "",
-              "Hausse des soins donnés ": "",
-              "Hausse des soins reçus ": "",
-              "Hausse du taux de récupération des PM ": "",
-              "Baisse du coût de PM ": "",
-            },
-            artefacts: {
-              casque: {
-                id: 61,
-                statPrincipale: "Attaque (%)",
-                statsSecondaires: [""],
-              },
-              armure: {
-                id: 8,
-                statPrincipale: "Défense",
-                statsSecondaires: [""],
-              },
-              gants: {
-                id: 86,
-                statPrincipale: "Taux de coup critique",
-                statsSecondaires: [""],
-              },
-              bottes: {
-                id: 30,
-                statPrincipale: "Précision (%)",
-                statsSecondaires: [""],
-              },
-              collier: {
-                id: 71,
-                statPrincipale: "Hausse des dégâts",
-                statsSecondaires: [""],
-              },
-              bracelet: {
-                id: 50,
-                statPrincipale: "Attaque",
-                statsSecondaires: [""],
-              },
-              bague: {
-                id: 15,
-                statPrincipale: "Précision (%)",
-                statsSecondaires: [""],
-              },
-              boucles: {
-                id: 39,
-                statPrincipale: "Précision (%)",
-                statsSecondaires: [""],
-              },
-            },
-            noyaux: [
-              { id: 1, statPrincipale: "", statSecondaire: "" },
-              { id: 2, statPrincipale: "", statSecondaire: "" },
-              { id: 3, statPrincipale: "", statSecondaire: "" },
-            ],
-            sets_bonus: [
-              { id: 29 },
-              { id: 30 },
-              { id: 23 },
-              { id: 24 },
-            ],
+export const buildsChasseurs: ChasseurBuild[] = [
+  // Alicia Blanche
+  {
+    chasseurId: 1,
+    element: "eau",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "-",
+          "Défense ": "-",
+          "PM ": "-",
+          "Attaque ": "-",
+          Précision: "90% - 99%",
+          "Taux de coup critique ": "50% - (4100-8000)",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% - 35%",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
           },
-          {
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 4, statPrincipale: "Attaque" },
+            { id: 9, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 7, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 4, statPrincipale: "Attaque" },
+            { id: 9, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 7, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+      {
+        id: 3,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 4, statPrincipale: "Attaque" },
+            { id: 9, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 7, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+    ],
+  },
+
+  // Amamiya Mirei
+  {
+    chasseurId: 2,
+    element: "vent",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 7, statPrincipale: "PV" },
+            { id: 3, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 7, statPrincipale: "PV" },
+            { id: 3, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+      {
+        id: 3,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 7, statPrincipale: "PV" },
+            { id: 3, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+    ],
+  },
+
+  // Anna Ruiz
+  {
+    chasseurId: 3,
+    element: "eau",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 9, statPrincipale: "Attaque" },
+            { id: 8, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 3, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 9, statPrincipale: "Attaque" },
+            { id: 8, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 3, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+      {
+        id: 3,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 9, statPrincipale: "Attaque" },
+            { id: 8, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 3, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+    ],
+  },
+
+  // Baek Yunho
+  {
+    chasseurId: 4,
+    element: "lumiere",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 68,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 47,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 12,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 36,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 7, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 7, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 39 }, { id: 40 }],
+      },
+      {
+        id: 2,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 7, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 39 }, { id: 40 }],
+      },
+    ],
+  },
+
+  // Baek Yunho à crinière argentée
+  {
+    chasseurId: 5,
+    element: "tenebres",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 4, statPrincipale: "Attaque" },
+            { id: 8, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 4, statPrincipale: "Attaque" },
+            { id: 8, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+      {
+        id: 3,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 4, statPrincipale: "Attaque" },
+            { id: 8, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+    ],
+  },
+
+  // Cha Hae-In
+  {
+    chasseurId: 6,
+    element: "lumiere",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 9, statPrincipale: "Attaque" },
+            { id: 8, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 7, statPrincipale: "PV" },
+            { id: 2, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 9, statPrincipale: "Attaque" },
+            { id: 8, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 7, statPrincipale: "PV" },
+            { id: 2, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+      {
+        id: 3,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 9, statPrincipale: "Attaque" },
+            { id: 8, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 7, statPrincipale: "PV" },
+            { id: 2, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+    ],
+  },
+
+  // Charlotte
+  {
+    chasseurId: 7,
+    element: "tenebres",
+    builds: [
+      {
+        id: 8,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 121,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 122,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 123,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 124,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 48 }, { id: 49 }, { id: 39 }, { id: 40 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 121,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 122,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 123,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 124,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 48 }, { id: 49 }, { id: 39 }, { id: 40 }],
+      },
+      {
+        id: 3,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 121,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 122,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 123,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 124,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 48 }, { id: 49 }, { id: 39 }, { id: 40 }],
+      },
+    ],
+  },
+
+  // Choi Jongin
+  {
+    chasseurId: 8,
+    element: "feu",
+    builds: [
+      {
+        id: 8,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 8, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 39 }, { id: 40 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 8, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 39 }, { id: 40 }],
+      },
+      {
+        id: 2,
+        nom: "POD 2",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 97,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 98,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 99,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 100,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 101,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 102,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 103,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 104,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 8, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 52 }, { id: 53 }, { id: 54 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 7, statPrincipale: "PV" },
+            { id: 3, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 39 }, { id: 40 }],
+      },
+    ],
+  },
+
+  // Emma Laurent
+  {
+    chasseurId: 9,
+    element: "feu",
+    builds: [
+      {
+        id: 8,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 68,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 47,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 12,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 105,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 106,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 107,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 108,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 68,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 47,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 12,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 36,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 55 }, { id: 56 }, { id: 32 }, { id: 33 }],
+      },
+      {
+        id: 2,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 105,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 106,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 107,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 108,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 68,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 47,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 12,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 36,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 55 }, { id: 56 }, { id: 32 }, { id: 33 }],
+      },
+    ],
+  },
+
+  // Esil Radir
+  {
+    chasseurId: 10,
+    element: "feu",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 68,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 47,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 12,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 36,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 9, statPrincipale: "Attaque" },
+            { id: 8, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 105,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 106,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 107,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 108,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 68,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 47,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 12,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 36,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 9, statPrincipale: "Attaque" },
+            { id: 8, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 55 }, { id: 56 }, { id: 32 }, { id: 33 }],
+      },
+      {
+        id: 2,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 68,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 47,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 12,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 36,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 9, statPrincipale: "Attaque" },
+            { id: 8, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
+      },
+    ],
+  },
+
+  // Gina
+  {
+    chasseurId: 11,
+    element: "feu",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 59,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 6,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 83,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 27,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 9, statPrincipale: "Attaque" },
+            { id: 8, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 59,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 6,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 83,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 27,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 9, statPrincipale: "Attaque" },
+            { id: 8, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+      },
+      {
+        id: 2,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 59,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 6,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 83,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 27,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 9, statPrincipale: "Attaque" },
+            { id: 8, statPrincipale: "Attaque" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+      },
+    ],
+  },
+
+  // Go Gunhee
+  {
+    chasseurId: 12,
+    element: "lumiere",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 68,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 47,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 12,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 36,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 7, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 68,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 47,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 12,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 36,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 7, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
+      },
+      {
+        id: 2,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 68,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 47,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 12,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 36,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 7, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
+      },
+    ],
+  },
+
+  // Goto Ryuji
+  {
+    chasseurId: 13,
+    element: "vent",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 7, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 39 }, { id: 40 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 7, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 39 }, { id: 40 }],
+      },
+      {
+        id: 2,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 7, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 39 }, { id: 40 }],
+      },
+    ],
+  },
+
+  // Han Se-Mi
+  {
+    chasseurId: 14,
+    element: "vent",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 59,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 6,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 83,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 27,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 7, statPrincipale: "PV" },
+            { id: 3, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 59,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 6,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 83,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 27,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 7, statPrincipale: "PV" },
+            { id: 3, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+      },
+      {
+        id: 2,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 59,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 6,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 83,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 27,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 7, statPrincipale: "PV" },
+            { id: 3, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+      },
+    ],
+  },
+
+  // Han Songyi
+
+  // Harper
+  {
+    chasseurId: 16,
+    element: "tenebres",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 68,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 47,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 12,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 36,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 68,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 47,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 12,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 36,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
+      },
+      {
+        id: 2,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 68,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 47,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 12,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 36,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 2, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
+      },
+    ],
+  },
+
+  // Hwang Dongsoo
+
+  // Hwang Dongsuk
+
+  // Isla Wright
+  {
+    chasseurId: 19,
+    element: "tenebres",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 59,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 6,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 83,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 27,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 3, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 59,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 6,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 83,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 27,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 3, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+      },
+      {
+        id: 2,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 59,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 6,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 83,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 27,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [{ id: 3, statPrincipale: "PV" }],
+        },
+        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+      },
+    ],
+  },
+
+  // Jo Kyuhwan
+  // Kang Taeshik
+  // Kim Chul
+  // Kim Sangshik
+  // Lee Bora
+  // Lee Juhee
+
+  // Lim Taegyu
+  {
+    chasseurId: 26,
+    element: "tenebres",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 68,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 47,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 12,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 36,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 7, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 7, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 39 }, { id: 40 }],
+      },
+      {
+        id: 2,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 68,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 47,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 12,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 36,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+            { id: 7, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
+      },
+    ],
+  },
+
+  // Meilin Fisher
+  {
+    chasseurId: 27,
+    element: "eau",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 59,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 6,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 83,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 27,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 66,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 96,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 90,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 34,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 7 }, { id: 8 }, { id: 41 }, { id: 42 }],
+      },
+      {
+        id: 2,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 59,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 6,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 83,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 27,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+      },
+    ],
+  },
+
+  // Min Byeonggu
+  {
+    chasseurId: 28,
+    element: "lumiere",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 58,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
             id: 2,
-            nom: "POD",
-            stats: {
-              "PV ": "",
-              "Défense ": "",
-              "PM ": "",
-              "Attaque ": "",
-              "Précision ": "",
-              "Taux de coup critique ": "",
-              "Dégâts de coup critique ": "",
-              "Hausse des dégâts ": "",
-              "Pénétration de défense ": "",
-              "Réduction des dégâts ": "",
-              "Réduction du temps de rechargement ": "",
-              "Hausse des soins donnés ": "",
-              "Hausse des soins reçus ": "",
-              "Hausse du taux de récupération des PM ": "",
-              "Baisse du coût de PM ": "",
-            },
-            artefacts: {
-              casque: {
-                id: 61,
-                statPrincipale: "Attaque (%)",
-                statsSecondaires: [""],
-              },
-              armure: {
-                id: 8,
-                statPrincipale: "Défense",
-                statsSecondaires: [""],
-              },
-              gants: {
-                id: 86,
-                statPrincipale: "Taux de coup critique",
-                statsSecondaires: [""],
-              },
-              bottes: {
-                id: 30,
-                statPrincipale: "Précision (%)",
-                statsSecondaires: [""],
-              },
-              collier: {
-                id: 71,
-                statPrincipale: "Hausse des dégâts",
-                statsSecondaires: [""],
-              },
-              bracelet: {
-                id: 50,
-                statPrincipale: "Attaque",
-                statsSecondaires: [""],
-              },
-              bague: {
-                id: 15,
-                statPrincipale: "Précision (%)",
-                statsSecondaires: [""],
-              },
-              boucles: {
-                id: 39,
-                statPrincipale: "Précision (%)",
-                statsSecondaires: [""],
-              },
-            },
-            noyaux: [
-              { id: 1, statPrincipale: "", statSecondaire: "" },
-              { id: 2, statPrincipale: "", statSecondaire: "" },
-              { id: 3, statPrincipale: "", statSecondaire: "" },
-            ],
-            sets_bonus: [
-              { id: 29 },
-              { id: 30 },
-              { id: 23 },
-              { id: 24 },
-            ],
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
           },
-          {
-            id: 3,
-            nom: "BDG",
-            stats: {
-              "PV ": "",
-              "Défense ": "",
-              "PM ": "",
-              "Attaque ": "",
-              "Précision ": "",
-              "Taux de coup critique ": "",
-              "Dégâts de coup critique ": "",
-              "Hausse des dégâts ": "",
-              "Pénétration de défense ": "",
-              "Réduction des dégâts ": "",
-              "Réduction du temps de rechargement ": "",
-              "Hausse des soins donnés ": "",
-              "Hausse des soins reçus ": "",
-              "Hausse du taux de récupération des PM ": "",
-              "Baisse du coût de PM ": "",
-            },
-            artefacts: {
-              casque: {
-                id: 61,
-                statPrincipale: "Attaque (%)",
-                statsSecondaires: [""],
-              },
-              armure: {
-                id: 8,
-                statPrincipale: "Défense",
-                statsSecondaires: [""],
-              },
-              gants: {
-                id: 86,
-                statPrincipale: "Taux de coup critique",
-                statsSecondaires: [""],
-              },
-              bottes: {
-                id: 30,
-                statPrincipale: "Précision (%)",
-                statsSecondaires: [""],
-              },
-              collier: {
-                id: 71,
-                statPrincipale: "Hausse des dégâts",
-                statsSecondaires: [""],
-              },
-              bracelet: {
-                id: 50,
-                statPrincipale: "Attaque",
-                statsSecondaires: [""],
-              },
-              bague: {
-                id: 15,
-                statPrincipale: "Précision (%)",
-                statsSecondaires: [""],
-              },
-              boucles: {
-                id: 39,
-                statPrincipale: "Précision (%)",
-                statsSecondaires: [""],
-              },
-            },
-            noyaux: [
-              { id: 1, statPrincipale: "", statSecondaire: "" },
-              { id: 2, statPrincipale: "", statSecondaire: "" },
-              { id: 3, statPrincipale: "", statSecondaire: "" },
-            ],
-            sets_bonus: [
-              { id: 29 },
-              { id: 30 },
-              { id: 23 },
-              { id: 24 },
-            ],
+          gants: {
+            id: 79,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
           },
-         
-   
-        ],
-    },
+          bottes: {
+            id: 23,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 70,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 49,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 14,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 43 }, { id: 44 }, { id: 45 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 59,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 6,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 83,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 27,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+      },
+      {
+        id: 2,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 93,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
+          },
+          armure: {
+            id: 5,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
+          },
+          gants: {
+            id: 82,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 26,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
+          ],
+        },
+        sets_bonus: [{ id: 15 }, { id: 16 }, { id: 41 }, { id: 42 }],
+      },
+    ],
+  },
 
-    // Anna Ruiz
-    {
-      chasseurId: 3,
-      element: "eau", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 61,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 8,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 71,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 50,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 15,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 39,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 29 },
-            { id: 30 },
-            { id: 23 },
-            { id: 24 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 61,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 8,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 71,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 50,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 15,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 39,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 29 },
-            { id: 30 },
-            { id: 23 },
-            { id: 24 },
-          ],
-        },
-        {
-          id: 3,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 61,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 8,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 71,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 50,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 15,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 39,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 29 },
-            { id: 30 },
-            { id: 23 },
-            { id: 24 },
-          ],
-        },
-       
- 
-      ],
-    },
-    
-    // Baek Yunho
-    {
-      chasseurId: 4,
-      element: "lumiere", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 68,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 47,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 12,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 36,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 34 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 39 },
-            { id: 40 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 39 },
-            { id: 40 },
-          ],
-        },
-       
- 
-      ],
-    },
+  // Nam Chae-Young
+  // Park Beom-Shik
+  // Park Heejin
 
-    // Baek Yunho à crinière argentée
-    {
-      chasseurId: 5,
-      element: "tenebres", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
+  // Seo Jiwoo
+  {
+    chasseurId: 32,
+    element: "eau",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
           },
-          artefacts: {
-            casque: {
-              id: 61,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 8,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 71,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 50,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 15,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 39,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
           },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 29 },
-            { id: 30 },
-            { id: 23 },
-            { id: 24 },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 7, statPrincipale: "PV" },
+            { id: 2, statPrincipale: "PV" },
           ],
         },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 39 }, { id: 40 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
           },
-          artefacts: {
-            casque: {
-              id: 61,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 8,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 71,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 50,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 15,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 39,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
           },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 29 },
-            { id: 30 },
-            { id: 23 },
-            { id: 24 },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 7, statPrincipale: "PV" },
+            { id: 2, statPrincipale: "PV" },
           ],
         },
-        {
-          id: 3,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 39 }, { id: 40 }],
+      },
+      {
+        id: 2,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
           },
-          artefacts: {
-            casque: {
-              id: 61,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 8,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 71,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 50,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 15,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 39,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
           },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 29 },
-            { id: 30 },
-            { id: 23 },
-            { id: 24 },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 7, statPrincipale: "PV" },
+            { id: 2, statPrincipale: "PV" },
           ],
         },
-       
- 
-      ],
-    },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 39 }, { id: 40 }],
+      },
+    ],
+  },
 
-    // Cha Hae-In
-    {
-      chasseurId: 6,
-      element: "lumiere", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
+  // Shimizu Akari
+  {
+    chasseurId: 33,
+    element: "lumiere",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 93,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
           },
-          artefacts: {
-            casque: {
-              id: 61,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 8,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 71,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 50,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 15,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 39,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
+          armure: {
+            id: 5,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
           },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 29 },
-            { id: 30 },
-            { id: 23 },
-            { id: 24 },
+          gants: {
+            id: 82,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 26,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
           ],
         },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
+        sets_bonus: [{ id: 15 }, { id: 16 }, { id: 41 }, { id: 42 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 59,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
           },
-          artefacts: {
-            casque: {
-              id: 61,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 8,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 71,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 50,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 15,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 39,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
+          armure: {
+            id: 6,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
           },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 29 },
-            { id: 30 },
-            { id: 23 },
-            { id: 24 },
+          gants: {
+            id: 83,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 27,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
           ],
         },
-        {
-          id: 3,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
+        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+      },
+      {
+        id: 2,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 93,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
           },
-          artefacts: {
-            casque: {
-              id: 61,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 8,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 71,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 50,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 15,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 39,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
+          armure: {
+            id: 5,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
           },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 29 },
-            { id: 30 },
-            { id: 23 },
-            { id: 24 },
+          gants: {
+            id: 82,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 26,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
           ],
         },
-       
- 
-      ],
-    },
+        sets_bonus: [{ id: 15 }, { id: 16 }, { id: 41 }, { id: 42 }],
+      },
+    ],
+  },
 
-    // Charlotte
-    {
-      chasseurId: 7,
-      element: "tenebres", 
-      builds: [
-        {
-          id: 8,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
+  // Tawata Kanae
+  {
+    chasseurId: 35,
+    element: "feu",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 64,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
           },
-          artefacts: {
-            casque: {
-              id: 121,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 122,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 123,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 124,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
+          armure: {
+            id: 94,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
           },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 48 },
-            { id: 49 },
-            { id: 39 },
-            { id: 40 },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 7, statPrincipale: "PV" },
+            { id: 3, statPrincipale: "PV" },
           ],
         },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
+        sets_bonus: [{ id: 9 }, { id: 29 }, { id: 23 }, { id: 24 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 64,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
           },
-          artefacts: {
-            casque: {
-              id: 121,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 122,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 123,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 124,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
+          armure: {
+            id: 94,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
           },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 48 },
-            { id: 49 },
-            { id: 39 },
-            { id: 40 },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 7, statPrincipale: "PV" },
+            { id: 3, statPrincipale: "PV" },
           ],
         },
-        {
-          id: 3,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
+        sets_bonus: [{ id: 9 }, { id: 29 }, { id: 23 }, { id: 24 }],
+      },
+      {
+        id: 2,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 64,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
           },
-          artefacts: {
-            casque: {
-              id: 121,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 122,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 123,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 124,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
+          armure: {
+            id: 94,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
           },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 48 },
-            { id: 49 },
-            { id: 39 },
-            { id: 40 },
+          gants: {
+            id: 86,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 7, statPrincipale: "PV" },
+            { id: 3, statPrincipale: "PV" },
           ],
         },
-       
- 
-      ],
-    },
+        sets_bonus: [{ id: 9 }, { id: 29 }, { id: 23 }, { id: 24 }],
+      },
+    ],
+  },
 
-    // Choi Jongin
-    {
-      chasseurId: 8,
-      element: "feu", 
-      builds: [
-        {
-          id: 8,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
+  // Thomas André
+  {
+    chasseurId: 36,
+    element: "lumiere",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 121,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
           },
-          artefacts: {
-            casque: {
-              id: 61,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 8,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
+          armure: {
+            id: 122,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
           },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 29 },
-            { id: 30 },
-            { id: 39 },
-            { id: 40 },
+          gants: {
+            id: 123,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 124,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 3, statPrincipale: "PV" },
+            { id: 2, statPrincipale: "PV" },
           ],
         },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
+        sets_bonus: [{ id: 48 }, { id: 49 }, { id: 39 }, { id: 40 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 121,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
           },
-          artefacts: {
-            casque: {
-              id: 61,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 8,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
+          armure: {
+            id: 122,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
           },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 29 },
-            { id: 30 },
-            { id: 39 },
-            { id: 40 },
+          gants: {
+            id: 123,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 124,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 3, statPrincipale: "PV" },
+            { id: 2, statPrincipale: "PV" },
           ],
         },
-        {
-          id: 2,
-          nom: "POD 2",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
+        sets_bonus: [{ id: 48 }, { id: 49 }, { id: 39 }, { id: 40 }],
+      },
+      {
+        id: 2,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 121,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
           },
-          artefacts: {
-            casque: {
-              id: 97,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 98,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 99,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 100,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 101,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 102,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 103,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 104,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
+          armure: {
+            id: 122,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
           },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 52 },
-            { id: 53 },
-            { id: 54 },
+          gants: {
+            id: 123,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 124,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 3, statPrincipale: "PV" },
+            { id: 2, statPrincipale: "PV" },
           ],
         },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 61,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 8,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 29 },
-            { id: 30 },
-            { id: 39 },
-            { id: 40 },
-          ],
-        },
-       
- 
-      ],
-    },
+        sets_bonus: [{ id: 48 }, { id: 49 }, { id: 39 }, { id: 40 }],
+      },
+    ],
+  },
 
-    // Emma Laurent
-    {
-      chasseurId: 9,
-      element: "feu", 
-      builds: [
-        {
-          id: 8,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
+  // Woo Jincheol
+  {
+    chasseurId: 37,
+    element: "vent",
+    builds: [
+      {
+        id: 10,
+        nom: "Général",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
           },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 68,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 47,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 12,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 39,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
           },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 34 },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
           ],
         },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 39 }, { id: 40 }],
+      },
+      {
+        id: 2,
+        nom: "POD",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
           },
-          artefacts: {
-            casque: {
-              id: 105,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 106,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 107,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 108,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 68,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 47,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 12,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 36,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
           },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 55 },
-            { id: 56 },
-            { id: 32 },
-            { id: 33 },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
           ],
         },
-        {
-          id: 2,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 39 }, { id: 40 }],
+      },
+      {
+        id: 2,
+        nom: "BDG",
+        stats: {
+          "PV ": "",
+          "Défense ": "",
+          "PM ": "",
+          "Attaque ": "",
+          "Précision ": "",
+          "Taux de coup critique ": "",
+          "Dégâts de coup critique ": "",
+          "Hausse des dégâts ": "",
+          "Pénétration de défense ": "",
+          "Réduction des dégâts ": "",
+          "Réduction du temps de rechargement ": "",
+          "Hausse des soins donnés ": "",
+          "Hausse des soins reçus ": "",
+          "Hausse du taux de récupération des PM ": "",
+          "Baisse du coût de PM ": "",
+        },
+        artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque (%)",
+            statsSecondaires: [""],
           },
-          artefacts: {
-            casque: {
-              id: 105,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 106,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 107,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 108,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 68,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 47,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 12,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 36,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense",
+            statsSecondaires: [""],
           },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 55 },
-            { id: 56 },
-            { id: 32 },
-            { id: 33 },
+          gants: {
+            id: 78,
+            statPrincipale: "Taux de coup critique",
+            statsSecondaires: [""],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "Hausse des dégâts",
+            statsSecondaires: [""],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Attaque",
+            statsSecondaires: [""],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "Précision (%)",
+            statsSecondaires: [""],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque" }],
+          2: [{ id: 12, statPrincipale: "Défense" }],
+          3: [
+            { id: 2, statPrincipale: "PV" },
           ],
         },
-       
- 
-      ],
-    },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 39 }, { id: 40 }],
+      },
+    ],
+  },
 
-    // Esil Radir
-    {
-      chasseurId: 10,
-      element: "feu", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 68,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 47,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 12,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 36,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 34 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 105,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 106,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 107,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 108,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 68,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 47,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 12,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 36,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 55 },
-            { id: 56 },
-            { id: 32 },
-            { id: 33 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 68,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 47,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 12,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 36,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 34 },
-          ],
-        },
-       
- 
-      ],
-    },
-
-    // Gina
-    {
-      chasseurId: 11,
-      element: "feu", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 59,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 6,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 83,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 27,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 73,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 55,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 20,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 44,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 5 },
-            { id: 6 },
-            { id: 41 },
-            { id: 42 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 59,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 6,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 83,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 27,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 73,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 55,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 20,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 44,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 5 },
-            { id: 6 },
-            { id: 41 },
-            { id: 42 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 59,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 6,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 83,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 27,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 73,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 55,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 20,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 44,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 5 },
-            { id: 6 },
-            { id: 41 },
-            { id: 42 },
-          ],
-        },
-       
- 
-      ],
-    },
-
-    // Go Gunhee
-    {
-      chasseurId: 12,
-      element: "lumiere", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 68,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 47,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 12,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 36,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 34 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 68,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 47,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 12,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 36,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 34 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 68,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 47,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 12,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 36,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 34 },
-          ],
-        },
-       
- 
-      ],
-    },
-
-    // Goto Ryuji
-    {
-      chasseurId: 13,
-      element: "vent", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 39 },
-            { id: 40 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 39 },
-            { id: 40 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 39 },
-            { id: 40 },
-          ],
-        },
-       
- 
-      ],
-    },
-
-    // Han Se-Mi
-    {
-      chasseurId: 14,
-      element: "vent", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 59,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 6,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 83,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 27,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 73,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 55,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 20,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 44,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 5 },
-            { id: 6 },
-            { id: 41 },
-            { id: 42 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 59,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 6,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 83,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 27,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 73,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 55,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 20,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 44,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 5 },
-            { id: 6 },
-            { id: 41 },
-            { id: 42 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 59,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 6,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 83,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 27,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 73,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 55,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 20,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 44,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 5 },
-            { id: 6 },
-            { id: 41 },
-            { id: 42 },
-          ],
-        },
-       
- 
-      ],
-    },
-
-    // Han Songyi
-
-
-    // Harper
-    {
-      chasseurId: 16,
-      element: "tenebres", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 68,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 47,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 12,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 36,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 34 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 68,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 47,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 12,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 36,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 34 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 68,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 47,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 12,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 36,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 34 },
-          ],
-        },
-       
- 
-      ],
-    },
-
-
-    // Hwang Dongsoo
-
-    // Hwang Dongsuk
-
-
-    // Isla Wright
-    {
-      chasseurId: 19,
-      element: "tenebres", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 59,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 6,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 83,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 27,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 73,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 55,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 20,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 44,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 5 },
-            { id: 6 },
-            { id: 41 },
-            { id: 42 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 59,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 6,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 83,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 27,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 73,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 55,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 20,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 44,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 5 },
-            { id: 6 },
-            { id: 41 },
-            { id: 42 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 59,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 6,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 83,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 27,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 73,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 55,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 20,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 44,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 5 },
-            { id: 6 },
-            { id: 41 },
-            { id: 42 },
-          ],
-        },
-       
- 
-      ],
-    },
-
-
-    // Jo Kyuhwan
-    // Kang Taeshik
-    // Kim Chul
-    // Kim Sangshik
-    // Lee Bora
-    // Lee Juhee
-
-
-
-    // Lim Taegyu
-    {
-      chasseurId: 26,
-      element: "tenebres", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 68,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 47,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 12,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 36,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 34 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 39 },
-            { id: 40 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 68,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 47,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 12,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 36,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 34 },
-          ],
-        },
-       
- 
-      ],
-    },
-
-
-    // Meilin Fisher
-    {
-      chasseurId: 27,
-      element: "eau", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 59,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 6,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 83,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 27,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 73,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 55,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 20,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 44,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 5 },
-            { id: 6 },
-            { id: 41 },
-            { id: 42 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 66,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 96,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 90,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 34,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 73,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 55,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 20,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 44,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 7 },
-            { id: 8 },
-            { id: 41 },
-            { id: 42 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 59,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 6,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 83,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 27,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 73,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 55,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 20,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 44,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 5 },
-            { id: 6 },
-            { id: 41 },
-            { id: 42 },
-          ],
-        },
-       
- 
-      ],
-    },
-
-
-    // Min Byeonggu
-    {
-      chasseurId: 28,
-      element: "lumiere", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 58,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 2,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 79,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 23,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 70,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 49,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 14,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 39,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 43 },
-            { id: 44 },
-            { id: 45 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 59,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 6,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 83,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 27,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 73,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 55,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 20,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 44,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 5 },
-            { id: 6 },
-            { id: 41 },
-            { id: 42 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 93,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 5,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 82,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 26,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 73,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 55,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 20,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 44,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 15 },
-            { id: 16 },
-            { id: 41 },
-            { id: 42 },
-          ],
-        },
-       
- 
-      ],
-    },
-
-
-    // Nam Chae-Young
-    // Park Beom-Shik
-    // Park Heejin
-
-
-    // Seo Jiwoo
-    {
-      chasseurId: 32,
-      element: "eau", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 39 },
-            { id: 40 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 39 },
-            { id: 40 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 61,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 8,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 29 },
-            { id: 30 },
-            { id: 39 },
-            { id: 40 },
-          ],
-        },
-       
- 
-      ],
-    },
-
-
-    // Shimizu Akari
-    {
-      chasseurId: 33,
-      element: "lumiere", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 93,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 5,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 82,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 26,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 73,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 55,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 20,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 44,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 15 },
-            { id: 16 },
-            { id: 41 },
-            { id: 42 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 59,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 6,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 83,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 27,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 73,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 55,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 20,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 44,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 5 },
-            { id: 6 },
-            { id: 41 },
-            { id: 42 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 93,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 5,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 82,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 26,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 73,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 55,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 20,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 44,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 15 },
-            { id: 16 },
-            { id: 41 },
-            { id: 42 },
-          ],
-        },
-       
- 
-      ],
-    },
-
-    // Tawata Kanae
-    {
-      chasseurId: 35,
-      element: "feu", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 64,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 94,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 71,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 50,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 15,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 39,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 9 },
-            { id: 29 },
-            { id: 23 },
-            { id: 24 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 64,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 94,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 71,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 50,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 15,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 39,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 9 },
-            { id: 29 },
-            { id: 23 },
-            { id: 24 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 64,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 94,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 86,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 30,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 71,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 50,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 15,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 39,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 9 },
-            { id: 29 },
-            { id: 23 },
-            { id: 24 },
-          ],
-        },
-       
- 
-      ],
-    },
-
-    
-    // Thomas André
-    {
-      chasseurId: 36,
-      element: "lumiere", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 121,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 122,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 123,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 124,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 48 },
-            { id: 49 },
-            { id: 39 },
-            { id: 40 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 121,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 122,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 123,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 124,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 48 },
-            { id: 49 },
-            { id: 39 },
-            { id: 40 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 121,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 122,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 123,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 124,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 48 },
-            { id: 49 },
-            { id: 39 },
-            { id: 40 },
-          ],
-        },
-       
- 
-      ],
-    },
-
-
-    // Woo Jincheol
-    {
-      chasseurId: 37,
-      element: "vent", 
-      builds: [
-        {
-          id: 10,
-          nom: "Général",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 39 },
-            { id: 40 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "POD",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 39 },
-            { id: 40 },
-          ],
-        },
-        {
-          id: 2,
-          nom: "BDG",
-          stats: {
-            "PV ": "",
-            "Défense ": "",
-            "PM ": "",
-            "Attaque ": "",
-            "Précision ": "",
-            "Taux de coup critique ": "",
-            "Dégâts de coup critique ": "",
-            "Hausse des dégâts ": "",
-            "Pénétration de défense ": "",
-            "Réduction des dégâts ": "",
-            "Réduction du temps de rechargement ": "",
-            "Hausse des soins donnés ": "",
-            "Hausse des soins reçus ": "",
-            "Hausse du taux de récupération des PM ": "",
-            "Baisse du coût de PM ": "",
-          },
-          artefacts: {
-            casque: {
-              id: 57,
-              statPrincipale: "Attaque (%)",
-              statsSecondaires: [""],
-            },
-            armure: {
-              id: 1,
-              statPrincipale: "Défense",
-              statsSecondaires: [""],
-            },
-            gants: {
-              id: 78,
-              statPrincipale: "Taux de coup critique",
-              statsSecondaires: [""],
-            },
-            bottes: {
-              id: 22,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            collier: {
-              id: 76,
-              statPrincipale: "Hausse des dégâts",
-              statsSecondaires: [""],
-            },
-            bracelet: {
-              id: 54,
-              statPrincipale: "Attaque",
-              statsSecondaires: [""],
-            },
-            bague: {
-              id: 19,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-            boucles: {
-              id: 43,
-              statPrincipale: "Précision (%)",
-              statsSecondaires: [""],
-            },
-          },
-          noyaux: [
-            { id: 1, statPrincipale: "", statSecondaire: "" },
-            { id: 2, statPrincipale: "", statSecondaire: "" },
-            { id: 3, statPrincipale: "", statSecondaire: "" },
-          ],
-          sets_bonus: [
-            { id: 32 },
-            { id: 33 },
-            { id: 39 },
-            { id: 40 },
-          ],
-        },
-       
- 
-      ],
-    },
-
-
-    // Yoo Soohyun
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  ];
-  
+  // Yoo Soohyun
+];

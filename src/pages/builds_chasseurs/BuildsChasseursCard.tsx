@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import type { Database } from "@/integrations/supabase/types";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -36,10 +35,12 @@ type Build = {
     };
   };
   noyaux: {
-    id: number;
-    statPrincipale: string;
-    statSecondaire?: string;
-  }[];
+    [slot: number]: {
+      id: number;
+      statPrincipale: string;
+      statSecondaire?: string;
+    }[]; // Assurez-vous que c'est un tableau
+  };
   sets_bonus: { id: number }[];
 };
 
@@ -112,6 +113,7 @@ export default function BuildChasseurCard({
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedBuildIndex, setSelectedBuildIndex] = useState(0);
   const [openSections, setOpenSections] = useState<string[]>([]);
+  const [activeNoyauIndices, setActiveNoyauIndices] = useState<Record<number, number>>({});
 
   const build = builds[selectedBuildIndex];
 
@@ -129,6 +131,15 @@ export default function BuildChasseurCard({
   };
 
   const isSectionOpen = (key: string) => openSections.includes(key);
+
+  const handleToggleAlternative = (slot: number, maxAlternatives: number) => {
+    setActiveNoyauIndices((prev) => ({
+      ...prev,
+      [slot]: (prev[slot] + 1) % maxAlternatives,
+    }));
+  };
+
+  console.log("Props reçues :", { builds, noyaux });
 
   return (
     <Card className="mb-10 bg-sidebar border-sidebar-border overflow-hidden">
@@ -279,9 +290,9 @@ export default function BuildChasseurCard({
                     <p className="font-semibold text-sm text-solo-purple">
                       {bonus.nom}
                     </p>
-                    <p className="text-xs text-gray-300 mt-2">
+                    <div className="text-xs text-gray-300 mt-2">
                       {formatTextWithBrackets(bonus.description || "")}
-                    </p>
+                    </div>
                   </div>
                 );
               })}
@@ -295,42 +306,62 @@ export default function BuildChasseurCard({
             isOpen={isSectionOpen("noyaux")}
             onToggle={() => toggleSection("noyaux")}
           >
-            {/* Texte informatif */}
-            <p className="text-sm text-gray-300 leading-relaxed mb-4">
+            <div className="text-sm text-gray-300 leading-relaxed mb-4">
               Les noyaux sont essentiels pour renforcer les capacités de votre
-              chasseur. Sélectionnez-les en fonction des statistiques
-              principales et des bonus secondaires qui complètent votre
-              stratégie.
-            </p>
+              chasseur. Sélectionnez-les en fonction des statistiques principales
+              et des bonus secondaires qui complètent votre stratégie.
+            </div>
 
-            {/* Grille des noyaux */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {build.noyaux.map((n, i) => {
-                const noyau = getById(noyaux, n.id);
-                return (
-                  <div
-                    key={i}
-                    className="bg-sidebar p-4 rounded-lg border border-sidebar-border"
-                  >
-                    <div className="flex flex-col items-center mb-3">
-                      <img
-                        src={noyau?.image || ""}
-                        className="w-16 h-16 object-contain mb-2"
-                        alt={noyau?.nom || "Noyau"}
-                      />
-                      <p className="text-sm font-semibold text-white text-center">
-                        {noyau?.nom}
-                      </p>
+              {Object.entries(build.noyaux)
+                .slice(0, 3) // Limiter aux 3 premiers slots
+                .map(([slot, noyauxList]) => {
+                  const slotNumber = parseInt(slot, 10);
+                  const activeIndex = activeNoyauIndices[slotNumber] || 0;
+                  const noyau = noyauxList[activeIndex];
+                  const noyauData = noyaux.find((n) => n.id === noyau.id);
+
+                  if (!noyauData) return null;
+
+                  return (
+                    <div
+                      key={slot}
+                      className="bg-sidebar p-4 rounded-lg border border-sidebar-border"
+                    >
+                      <div className="flex flex-col items-center mb-3">
+                        <img
+                          src={noyauData.image || ""}
+                          className="w-16 h-16 object-contain mb-2"
+                          alt={noyauData.nom || "Noyau"}
+                        />
+                        <p className="text-sm font-semibold text-white text-center">
+                          {noyauData.nom}
+                        </p>
+                      </div>
+                      <div className="bg-solo-purple/20 text-white text-xs px-3 py-1.5 rounded-md text-center font-medium">
+                        {noyau.statPrincipale}
+                      </div>
+                      <div className="text-xs text-gray-300 mt-1.5 text-center">
+                        {formatTextWithBrackets(noyauData.description || "")}
+                      </div>
+                      {noyauxList.length > 1 && (
+                        <button
+                          onClick={() =>
+                            setActiveNoyauIndices((prev) => ({
+                              ...prev,
+                              [slotNumber]: (prev[slotNumber] || 0) + 1 >= noyauxList.length
+                                ? 0
+                                : (prev[slotNumber] || 0) + 1,
+                            }))
+                          }
+                          className="mt-4 bg-solo-purple text-white text-xs px-4 py-2 rounded-md"
+                        >
+                          Alternative
+                        </button>
+                      )}
                     </div>
-                    <div className="bg-solo-purple/20 text-white text-xs px-3 py-1.5 rounded-md text-center font-medium">
-                      {n.statPrincipale}
-                    </div>
-                    <p className="text-xs text-gray-300 mt-1.5 text-center">
-                      {formatTextWithBrackets(noyau?.description || "")}
-                    </p>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           </SectionCollapsible>
         </CardContent>
