@@ -55,7 +55,7 @@ type Props = {
 };
 
 function formatTextWithBrackets(text: string) {
-  const regex = /(\[[^\]]+\])|(\d+(\.\d+)? ?%?)|(\bseconde(?:s)?\b)/gi;
+  const regex = /(\[[^\]]+\])|(\d+(?:[.,]\d+)? ?%?)|(\bseconde(?:s)?\b)/gi;
 
   return text.split(regex).map((part, index) => {
     if (!part) return null;
@@ -78,8 +78,8 @@ function formatTextWithBrackets(text: string) {
       }
     }
 
-    // Chiffres ou pourcentages
-    if (/^\d+(\.\d+)? ?%?$/.test(part)) {
+    // Chiffres ou pourcentages (inclut les chiffres à virgules)
+    if (/^\d+(?:[.,]\d+)? ?%?$/.test(part)) {
       return (
         <span key={index} className="text-yellow-500">
           {part}
