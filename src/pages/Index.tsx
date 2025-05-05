@@ -142,7 +142,7 @@ const Index = () => {
           <div className="relative w-full max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto aspect-video">
             {/* Ratio 16:9 */}
             <iframe
-              src="https://player.twitch.tv/?channel=sohoven&parent=slagate.netlify.app"
+              src="https://player.twitch.tv/?channel=sohoven&parent=slagate.fr"
               frameBorder="0"
               allowFullScreen={true}
               scrolling="no"
