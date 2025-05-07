@@ -13,57 +13,81 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import {
-  ExternalLink,
-  Youtube,
-  Twitch,
-  Twitter,
-  Instagram,
-  ChevronDown,
-  ChevronUp,
-  X,
-} from "lucide-react";
+import { X, ChevronDown, ChevronUp } from "lucide-react";
 import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
 
-// Types pour les réseaux sociaux
 type SocialLink = {
-  type: "youtube" | "twitch" | "twitter" | "instagram" | "website";
+  type: "youtube" | "twitch" | "twitter" | "instagram" | "website" | "tiktok";
   url: string;
   label: string;
 };
+
+// Déclaration globale de socialLinks
+const socialLinks: SocialLink[] = [
+  {
+    type: "youtube",
+    url: "https://www.youtube.com/@Sohoven",
+    label: "Sohoven",
+  },
+  { type: "twitch", url: "https://www.twitch.tv/sohoven", label: "sohoven" },
+  {
+    type: "tiktok",
+    url: "https://www.tiktok.com/@sohovenn",
+    label: "@sohoven",
+  },
+  { type: "twitter", url: "https://x.com/Soho_ven", label: "@Soho_ven" },
+  {
+    type: "instagram",
+    url: "https://www.instagram.com/sohoven",
+    label: "sohoven",
+  },
+  {
+    type: "website",
+    url: "https://creator.netmarble.com/en/sololv/ranking/sohoven",
+    label: "Page créateur",
+  },
+];
 
 const copyToClipboard = (code: string) => {
   navigator.clipboard.writeText(code);
   alert(`Code promo "${code}" copié dans le presse-papiers !`);
 };
 
+// Mise à jour de la fonction getSocialIcon pour utiliser les SVG locaux
 const getSocialIcon = (type: SocialLink["type"]) => {
-  switch (type) {
-    case "youtube":
-      return <Youtube className="h-5 w-5" />;
-    case "twitch":
-      return <Twitch className="h-5 w-5" />;
-    case "twitter":
-      return <Twitter className="h-5 w-5" />;
-    case "instagram":
-      return <Instagram className="h-5 w-5" />;
-    case "website":
-      return <ExternalLink className="h-5 w-5" />;
-  }
+  const iconMap: Record<SocialLink["type"], string> = {
+    youtube: "/icons/youtube.svg",
+    twitch: "/icons/twitch.svg",
+    tiktok: "/icons/tiktok.svg",
+    twitter: "/icons/twitter.svg",
+    instagram: "/icons/instagram.svg",
+    website: "/icons/external-link.svg", 
+  };
+
+  return (
+    <img
+      src={iconMap[type]}
+      alt={type}
+      className="h-5 w-5"
+      style={{ display: "inline-block" }}
+    />
+  );
 };
 
 // Mettre les récompenses en listes 
 const promoCodes = [
   {
     code: "WHITEVALKYRIE",
-    rewards: "Special Designx2, Hunter Exclusive Weapon Designx2, Special Player's Weapon Designx2",
-    validity: "Valide jusqu'au 30 Avril 2025",
+    rewards: [
+      "Concept spécial x2",
+      "Concept d'arme exclusive de chasseur x2",
+      "Concept d'arme de joueur spécial x2",
+    ],
   },
   {
     code: "OREARA1STANNIV",
-    rewards: "1,000 Essence Stones",
-    validity: "Valide jusqu'au 30 Avril 2025",
+    rewards: ["Pierres de l'esprit x1,000"],
   },
 ];
 
@@ -90,26 +114,22 @@ const formatDescription = (text: React.ReactNode) => {
   });
 };
 
+// Fonction pour mettre en évidence les chiffres dans les récompenses
+const highlightNumbers = (text: string) => {
+  return text.split(/(\d+)/g).map((segment, i) => {
+    if (!isNaN(Number(segment)) && segment.trim() !== "") {
+      return (
+        <span key={i} style={{ color: "rgb(167,139,250)" }}>
+          {segment}
+        </span>
+      );
+    }
+    return segment;
+  });
+};
+
 const PromoCodes = () => {
-  const socialLinks: SocialLink[] = [
-    {
-      type: "youtube",
-      url: "https://www.youtube.com/@Sohoven",
-      label: "Sohoven",
-    },
-    { type: "twitch", url: "https://www.twitch.tv/sohoven", label: "sohoven" },
-    { type: "twitter", url: "https://x.com/Soho_ven", label: "@Soho_ven" },
-    {
-      type: "instagram",
-      url: "https://www.instagram.com/sohoven",
-      label: "sohoven",
-    },
-    {
-      type: "website",
-      url: "https://creator.netmarble.com/en/sololv/ranking/sohoven",
-      label: "Page créateur",
-    },
-  ];
+  // Suppression de la déclaration locale de socialLinks
 
   const steps = [
     {
@@ -158,6 +178,7 @@ const PromoCodes = () => {
 
   const [openStep, setOpenStep] = useState<number | null>(0);
   const [modalImage, setModalImage] = useState<string | null>(null);
+  const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
   const toggleStep = (index: number) => {
     setOpenStep(openStep === index ? null : index);
@@ -169,6 +190,12 @@ const PromoCodes = () => {
 
   const closeModal = () => {
     setModalImage(null);
+  };
+
+  const handleCopy = (code: string) => {
+    navigator.clipboard.writeText(code);
+    setCopiedCode(code);
+    setTimeout(() => setCopiedCode(null), 2000); // Réinitialiser après 2 secondes
   };
 
   return (
@@ -305,28 +332,23 @@ const PromoCodes = () => {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
           {promoCodes.map((promo, index) => (
-            <Card key={index} className="p-4 border border-card-border">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-lg font-semibold text-white">
-                    {promo.code}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Récompenses : {promo.rewards}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {promo.validity}
-                  </p>
-                </div>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  className="bg-solo-purple text-white hover:bg-solo-dark-purple"
-                  onClick={() => copyToClipboard(promo.code)}
-                >
-                  Copier le code
-                </Button>
+            <Card key={index} className="p-4 border border-card-border relative">
+              <div className="flex flex-col gap-2">
+                <p className="text-lg font-semibold text-white">{promo.code}</p>
+                <ul className="list-disc list-inside text-sm text-muted-foreground">
+                  {promo.rewards.map((reward, i) => (
+                    <li key={i}>{highlightNumbers(reward)}</li>
+                  ))}
+                </ul>
               </div>
+              <Button
+  variant="secondary"
+  size="sm"
+  className="absolute top-4 right-4 bg-solo-purple text-white hover:bg-solo-purple hover:scale-105 hover:shadow-lg transition-transform duration-300"
+  onClick={() => handleCopy(promo.code)}
+>
+  {copiedCode === promo.code ? "Copié" : "Copier"}
+</Button>
             </Card>
           ))}
         </div>

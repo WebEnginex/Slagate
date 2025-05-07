@@ -1,33 +1,46 @@
-
 import React, { useState } from "react";
 import Layout from "@/components/Layout";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ExternalLink, Youtube, Twitch, Twitter, Instagram, ChevronDown, ChevronUp, X } from "lucide-react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { ExternalLink, ChevronDown, ChevronUp, X } from "lucide-react";
+
+// Fonction pour afficher les icônes des réseaux sociaux
+const getSocialIcon = (type: SocialLink["type"]) => {
+  const iconMap: Record<SocialLink["type"], string> = {
+    youtube: "/icons/youtube.svg",
+    twitch: "/icons/twitch.svg",
+    tiktok: "/icons/tiktok.svg",
+    twitter: "/icons/twitter.svg",
+    instagram: "/icons/instagram.svg",
+    website: "/icons/external-link.svg", // Icône générique pour les liens externes
+  };
+
+  return (
+    <img
+      src={iconMap[type]}
+      alt={type}
+      className="h-5 w-5"
+      style={{ display: "inline-block" }}
+    />
+  );
+};
 
 // Types pour les réseaux sociaux
 type SocialLink = {
-  type: "youtube" | "twitch" | "twitter" | "instagram" | "website";
+  type: "youtube" | "twitch" | "twitter" | "instagram" | "website" | "tiktok";
   url: string;
   label: string;
-};
-
-// Fonction pour afficher l'icône correspondant au type de lien social
-// Rajouter https://www.tiktok.com/@sohovenn (rajouter aussi au footer)
-const getSocialIcon = (type: SocialLink["type"]) => {
-  switch (type) {
-    case "youtube":
-      return <Youtube className="h-5 w-5" />;
-    case "twitch":
-      return <Twitch className="h-5 w-5" />;
-    case "twitter":
-      return <Twitter className="h-5 w-5" />;
-    case "instagram":
-      return <Instagram className="h-5 w-5" />;
-    case "website":
-      return <ExternalLink className="h-5 w-5" />;
-  }
 };
 
 // Fonction pour formatter le texte avec mise en évidence des mots entre guillemets
@@ -54,6 +67,7 @@ const Creators = () => {
   const socialLinks: SocialLink[] = [
     { type: "youtube", url: "https://www.youtube.com/@Sohoven", label: "Sohoven" },
     { type: "twitch", url: "https://www.twitch.tv/sohoven", label: "sohoven" },
+    { type: "tiktok", url: "https://www.tiktok.com/@sohovenn", label: "@sohoven" },
     { type: "twitter", url: "https://x.com/Soho_ven", label: "@Soho_ven" },
     { type: "instagram", url: "https://www.instagram.com/sohoven", label: "sohoven" },
     { type: "website", url: "https://creator.netmarble.com/en/sololv/ranking/sohoven", label: "Page créateur" },
@@ -120,11 +134,15 @@ const Creators = () => {
         <div className="p-6">
           <div className="flex flex-col sm:flex-row items-center gap-6">
             <div className="aspect-square w-32 h-32 overflow-hidden rounded-full bg-muted border-4 border-white/10">
-            <img src="/images/logo/Sohoven_Logo.png" alt="Sohoven" className="h-full w-full object-cover" />
+              <img
+                src="/images/logo/Sohoven_Logo.png"
+                alt="Sohoven"
+                className="h-full w-full object-cover"
+              />
             </div>
             <div className="flex-1 text-center sm:text-left">
               <h2 className="text-2xl font-bold mb-2">Sohoven</h2>
-              <p className="mb-4">
+              <p className="text-muted-foreground mb-4">
                 Créateur de contenu français pour Solo Leveling: Arise
               </p>
               <div className="flex flex-wrap justify-center sm:justify-start gap-3">

@@ -6,6 +6,7 @@ import { buildsChasseurs } from "@/config/builds/buildsChasseurs";
 import BuildChasseurCard from "./BuildsChasseursCard";
 import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
+import { Separator } from "@/components/ui/separator";
 import { FiRefreshCw } from "react-icons/fi"; //
 
 export default function BuildsPage() {
@@ -90,13 +91,34 @@ export default function BuildsPage() {
       <div className="w-full px-4 py-6">
         <div className="max-w-7xl mx-auto space-y-10">
           <div className="space-y-4">
-            {/* Dernières modifications */}
-            <div className="text-center md:text-left">
-              <p className="text-sm text-gray-400 italic">
-                <span className="text-white font-medium">
-                  <LastModified date={lastModifiedDates.builds} />
-                </span>
+            {/* Introduction */}
+            <div className="bg-sidebar-accent p-6 rounded-lg shadow-md space-y-4">
+              <h1 className="text-3xl md:text-4xl font-extrabold text-violet-400 text-center md:text-left">
+                Bienvenue sur la page des builds de chasseurs !
+              </h1>
+              <p className="text-base md:text-lg text-gray-300 text-center md:text-left">
+                Vous y trouverez des configurations optimisées pour chaque
+                chasseur, comprenant leurs statistiques, les artefacts
+                recommandés, les noyaux et les différents bonus de sets.
               </p>
+              <p className="text-base md:text-lg text-gray-300 text-center md:text-left">
+                Utilisez les outils de recherche et de filtres pour trouver
+                rapidement un chasseur spécifique ou explorer les meilleures
+                configurations adaptées à chaque héros.
+              </p>
+              <p className="text-base md:text-lg text-gray-300 text-center md:text-left">
+                Que vous soyez débutant à la recherche d'une configuration de
+                départ ou expert cherchant à affiner vos équipes, cette section
+                est conçue pour vous aider à maximiser vos performances.
+              </p>
+              {/* Dernières modifications */}
+              <div className="text-center md:text-left">
+                <p className="text-sm text-gray-400 italic">
+                  <span className="text-white font-medium">
+                    <LastModified date={lastModifiedDates.builds} />
+                  </span>
+                </p>
+              </div>
             </div>
 
             {/* Barre de recherche et filtres */}
@@ -144,12 +166,6 @@ export default function BuildsPage() {
                   </div>
                 ))}
               </div>
-            </div>
-
-            <div>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum incidunt nisi aliquid sunt, sed cum tenetur amet repellat reprehenderit blanditiis quasi! Sapiente eaque repellendus veritatis?
-              </p>
             </div>
 
             {/* Cartes des builds */}

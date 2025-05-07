@@ -1824,7 +1824,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
       },
       {
         id: 2,
-        nom: "POD",
+        nom: "BDG",
         stats: {
           "PV ": "",
           "Défense ": "",
@@ -6166,7 +6166,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             statsSecondaires: [""],
           },
           boucles: {
-            id: 39,
+            id: 38,
             statPrincipale: "Précision (%)",
             statsSecondaires: [""],
           },

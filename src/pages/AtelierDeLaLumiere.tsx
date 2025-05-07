@@ -30,7 +30,6 @@ export default function AtelierDeLaLumiere() {
       <div className="w-full px-4 py-6 sm:py-8">
         <div className="mb-6 sm:mb-8 space-y-2 max-w-7xl mx-auto">
           <div className="flex items-center gap-2">
-            <Flame className="h-5 w-5 text-solo-purple sm:h-6 sm:w-6 md:h-7 md:w-7" />
             <h1 className="text-2xl font-bold text-white sm:text-3xl md:text-4xl">
               Atelier de la Lumière
             </h1>

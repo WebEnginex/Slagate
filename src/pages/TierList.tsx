@@ -36,20 +36,35 @@ export default function TierListPage() {
     <Layout>
       <div className="container mx-auto px-4 py-6 text-white">
         <div className="mb-6 space-y-2">
-          <div className="flex items-center gap-2">
-            <Flame className="h-5 w-5 text-solo-purple sm:h-6 sm:w-6 md:h-7 md:w-7" />
-            <h1 className="text-3xl font-bold mb-1">Tier List</h1>
+          <div className="bg-sidebar-accent p-6 rounded-lg shadow-md space-y-4">
+            <h1 className="text-3xl md:text-4xl font-extrabold text-violet-400 text-center md:text-left">
+              Bienvenue sur la page Tier List !
+            </h1>
+            <p className="text-base md:text-lg text-gray-300 text-center md:text-left">
+              Ici, vous trouverez les meilleurs chasseurs, les meilleures armes
+              pour Sung Jinwoo, et les meilleures compositions d'équipes pour
+              dominer tous les contenus du jeu.
+            </p>
+            <p className="text-base md:text-lg text-gray-300 text-center md:text-left">
+              Explorez les différentes catégories pour découvrir les équipes les
+              plus performantes, qu'il s'agisse de compositions optimisées pour
+              la "Puissance de Destruction" ou pour affronter le redoutable Boss
+              de Guilde.
+            </p>
+            <p className="text-base md:text-lg text-gray-300 text-center md:text-left">
+              Que vous cherchiez à optimiser vos équipes ou à découvrir les
+              chasseurs les plus puissants, cette section est faite pour vous
+              guider.
+            </p>
+            {/* Dernières modifications */}
+            <div className="text-center md:text-left">
+              <p className="text-sm text-gray-400 italic">
+                <span className="text-white font-medium">
+                  <LastModified date={lastModifiedDates.tierList} />
+                </span>
+              </p>
+            </div>
           </div>
-          <Separator className="bg-sidebar-border" />
-          <p className="text-muted-foreground text-sm md:text-base">
-            Découvrez notre classement complet des chasseurs, armes et
-            compositions d'équipe dans Solo Leveling: ARISE.
-          </p>
-
-          <p>
-            {/* Ajout de la date de dernière modification */}
-            <LastModified date={lastModifiedDates.tierList} />
-          </p>
         </div>
 
         {/* Tabs navigation */}

@@ -48,6 +48,11 @@ export type TeamVulcanJinwoo = {
         {
           id: 40,
           stats: {
+            "Force": "25000",
+            "Vitalité": "30000",
+            "Agilité": "1000",
+            "Intélligence": "15",
+            "Perception": "8000",
             "PV": "25000",
             "Attaque": "30000",
             "PM": "1000",
@@ -58,48 +63,48 @@ export type TeamVulcanJinwoo = {
             casque: {
               id: 1,
               statPrincipale: "PV",
-              statsSecondaires: ["Attaque", "PM"],
+              statsSecondaires: [""],
             },
             armure: {
               id: 2,
               statPrincipale: "Défense",
-              statsSecondaires: ["PV", "Attaque", "PM"],
+              statsSecondaires: [""],
             },
             gants: {
               id: 3,
               statPrincipale: "Taux de coup critique",
-              statsSecondaires: ["Précision", "Dégâts de coup critique"]
+              statsSecondaires: [""]
             },
             bottes: {
               id: 4,
               statPrincipale: "PM",
-              statsSecondaires: ["Attaque", "PV"]
+              statsSecondaires: [""]
             },
             collier: {
               id: 5,
               statPrincipale: "Attaque",
-              statsSecondaires: ["PM", "Taux de coup critique"]
+              statsSecondaires: [""]
             },
             bracelet: {
               id: 6,
               statPrincipale: "Attaque",
-              statsSecondaires: ["Précision", "Défense"]
+              statsSecondaires: [""]
             },
             bague: {
               id: 7,
               statPrincipale: "Dégâts de coup critique",
-              statsSecondaires: ["Attaque", "PM"]
+              statsSecondaires: [""]
             },
             boucles: {
               id: 8,
               statPrincipale: "Précision",
-              statsSecondaires: ["Attaque", "PM"]
+              statsSecondaires: [""]
             }
           },
           noyaux: [
-            { id: 1, statPrincipale: "Attaque (%)", statSecondaire: "PM" },
-            { id: 2, statPrincipale: "Taux de coup critique", statSecondaire: "Attaque (%)" },
-            { id: 3, statPrincipale: "Dégâts de coup critique", statSecondaire: "Défense" },
+            { id: 1, statPrincipale: "Attaque (%)", statSecondaire: "" },
+            { id: 2, statPrincipale: "Taux de coup critique", statSecondaire: "" },
+            { id: 3, statPrincipale: "Dégâts de coup critique", statSecondaire: "" },
           ],
           sets_bonus: [
             { id: 29 },
@@ -119,48 +124,48 @@ export type TeamVulcanJinwoo = {
             casque: {
               id: 1,
               statPrincipale: "PV",
-              statsSecondaires: ["Attaque", "PM"],
+              statsSecondaires: [""],
             },
             armure: {
               id: 2,
               statPrincipale: "Défense",
-              statsSecondaires: ["PV", "Attaque", "PM"],
+              statsSecondaires: [""],
             },
             gants: {
               id: 3,
               statPrincipale: "Taux de coup critique",
-              statsSecondaires: ["Précision", "Dégâts de coup critique"]
+              statsSecondaires: [""]
             },
             bottes: {
               id: 4,
               statPrincipale: "PM",
-              statsSecondaires: ["Attaque", "PV"]
+              statsSecondaires: [""]
             },
             collier: {
               id: 5,
               statPrincipale: "Attaque",
-              statsSecondaires: ["PM", "Taux de coup critique"]
+              statsSecondaires: [""]
             },
             bracelet: {
               id: 6,
               statPrincipale: "Attaque",
-              statsSecondaires: ["Précision", "Défense"]
+              statsSecondaires: [""]
             },
             bague: {
               id: 7,
               statPrincipale: "Dégâts de coup critique",
-              statsSecondaires: ["Attaque", "PM"]
+              statsSecondaires: [""]
             },
             boucles: {
               id: 8,
               statPrincipale: "Précision",
-              statsSecondaires: ["Attaque", "PM"]
+              statsSecondaires: [""]
             }
           },
           noyaux: [
-            { id: 1, statPrincipale: "Attaque (%)", statSecondaire: "PM" },
-            { id: 2, statPrincipale: "Taux de coup critique", statSecondaire: "Attaque (%)" },
-            { id: 3, statPrincipale: "Dégâts de coup critique", statSecondaire: "Défense" },
+            { id: 1, statPrincipale: "Attaque (%)", statSecondaire: "" },
+            { id: 2, statPrincipale: "Taux de coup critique", statSecondaire: "" },
+            { id: 3, statPrincipale: "Dégâts de coup critique", statSecondaire: "" },
           ],
           sets_bonus: [
             { id: 29 },
@@ -179,48 +184,48 @@ export type TeamVulcanJinwoo = {
             casque: {
               id: 1,
               statPrincipale: "PV",
-              statsSecondaires: ["Attaque", "PM"],
+              statsSecondaires: [""],
             },
             armure: {
               id: 2,
               statPrincipale: "Défense",
-              statsSecondaires: ["PV", "Attaque", "PM"],
+              statsSecondaires: [""],
             },
             gants: {
               id: 3,
               statPrincipale: "Taux de coup critique",
-              statsSecondaires: ["Précision", "Dégâts de coup critique"]
+              statsSecondaires: [""]
             },
             bottes: {
               id: 4,
               statPrincipale: "PM",
-              statsSecondaires: ["Attaque", "PV"]
+              statsSecondaires: [""]
             },
             collier: {
               id: 5,
               statPrincipale: "Attaque",
-              statsSecondaires: ["PM", "Taux de coup critique"]
+              statsSecondaires: [""]
             },
             bracelet: {
               id: 6,
               statPrincipale: "Attaque",
-              statsSecondaires: ["Précision", "Défense"]
+              statsSecondaires: [""]
             },
             bague: {
               id: 7,
               statPrincipale: "Dégâts de coup critique",
-              statsSecondaires: ["Attaque", "PM"]
+              statsSecondaires: [""]
             },
             boucles: {
               id: 8,
               statPrincipale: "Précision",
-              statsSecondaires: ["Attaque", "PM"]
+              statsSecondaires: [""]
             }
           },
           noyaux: [
-            { id: 1, statPrincipale: "Attaque (%)", statSecondaire: "PM" },
-            { id: 2, statPrincipale: "Taux de coup critique", statSecondaire: "Attaque (%)" },
-            { id: 3, statPrincipale: "Dégâts de coup critique", statSecondaire: "Défense" },
+            { id: 1, statPrincipale: "Attaque (%)", statSecondaire: "" },
+            { id: 2, statPrincipale: "Taux de coup critique", statSecondaire: "" },
+            { id: 3, statPrincipale: "Dégâts de coup critique", statSecondaire: "" },
           ],
           sets_bonus: [
             { id: 29 },
@@ -236,16 +241,51 @@ export type TeamVulcanJinwoo = {
             "PM": "950"
           },
           artefacts: {
+            casque: {
+              id: 1,
+              statPrincipale: "PV",
+              statsSecondaires: [""],
+            },
+            armure: {
+              id: 2,
+              statPrincipale: "Défense",
+              statsSecondaires: [""],
+            },
+            gants: {
+              id: 3,
+              statPrincipale: "Taux de coup critique",
+              statsSecondaires: [""]
+            },
             bottes: {
-              id: 11,
+              id: 4,
               statPrincipale: "PM",
-              statsSecondaires: ["PV", "Attaque"]
+              statsSecondaires: [""]
+            },
+            collier: {
+              id: 5,
+              statPrincipale: "Attaque",
+              statsSecondaires: [""]
+            },
+            bracelet: {
+              id: 6,
+              statPrincipale: "Attaque",
+              statsSecondaires: [""]
+            },
+            bague: {
+              id: 7,
+              statPrincipale: "Dégâts de coup critique",
+              statsSecondaires: [""]
+            },
+            boucles: {
+              id: 8,
+              statPrincipale: "Précision",
+              statsSecondaires: [""]
             }
           },
           noyaux: [
-            { id: 1, statPrincipale: "Attaque (%)", statSecondaire: "PM" },
-            { id: 2, statPrincipale: "Taux de coup critique", statSecondaire: "Attaque (%)" },
-            { id: 3, statPrincipale: "Dégâts de coup critique", statSecondaire: "Défense" },
+            { id: 1, statPrincipale: "Attaque (%)", statSecondaire: "" },
+            { id: 2, statPrincipale: "Taux de coup critique", statSecondaire: "" },
+            { id: 3, statPrincipale: "Dégâts de coup critique", statSecondaire: "" },
           ],
           sets_bonus: [
             { id: 29 },
@@ -255,7 +295,7 @@ export type TeamVulcanJinwoo = {
         }
       ],
       ombres: [
-        { id: 1, description: "Augmente l'attaque de 10% pendant 20 secondes après une compétence" },
+        { id: 1, description: "" },
         { id: 2 },
         { id: 3 },
       ],
@@ -263,7 +303,7 @@ export type TeamVulcanJinwoo = {
       arme2: 2,
       competence1: 1,
       competence2: 1,
-      qte1: 1,
+      qte1: 3,
       qte2: 1,
       pierre_benediction_booster1: 1,
       pierre_benediction_booster2: 2,

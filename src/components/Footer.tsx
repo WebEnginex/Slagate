@@ -1,5 +1,4 @@
 import React from "react";
-import { Youtube, Twitch, Twitter, Instagram, ArrowUp } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -11,7 +10,7 @@ const Footer = () => {
     <footer className="bg-sidebar-accent border-t border-sidebar-border py-8 mt-10 relative">
       <div className="container mx-auto px-4 text-center space-y-6">
         <div>
-          <p className="text-base font-medium text-white mb-2">
+          <p className="text-base font-medium text-white mb-4">
             Suivez-moi sur :
           </p>
           <div className="flex justify-center gap-6">
@@ -21,7 +20,11 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-white transition-colors"
             >
-              <Youtube className="h-6 w-6" />
+              <img
+                src="/icons/youtube.svg"
+                alt="YouTube"
+                className="h-6 w-6"
+              />
             </a>
             <a
               href="https://www.twitch.tv/sohoven"
@@ -29,7 +32,23 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-white transition-colors"
             >
-              <Twitch className="h-6 w-6" />
+              <img
+                src="/icons/twitch.svg"
+                alt="Twitch"
+                className="h-6 w-6"
+              />
+            </a>
+            <a
+              href="https://www.tiktok.com/@sohovenn"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-white transition-colors"
+            >
+              <img
+                src="/icons/tiktok.svg"
+                alt="TikTok"
+                className="h-6 w-6"
+              />
             </a>
             <a
               href="https://x.com/Soho_ven"
@@ -37,7 +56,11 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-white transition-colors"
             >
-              <Twitter className="h-6 w-6" />
+              <img
+                src="/icons/twitter.svg"
+                alt="Twitter"
+                className="h-6 w-6"
+              />
             </a>
             <a
               href="https://www.instagram.com/sohoven"
@@ -45,7 +68,11 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-white transition-colors"
             >
-              <Instagram className="h-6 w-6" />
+              <img
+                src="/icons/instagram.svg"
+                alt="Instagram"
+                className="h-6 w-6"
+              />
             </a>
           </div>
         </div>
@@ -91,7 +118,11 @@ const Footer = () => {
         className="absolute right-4 bottom-4 bg-violet-500 hover:bg-violet-600 text-white p-3 rounded-full shadow-lg transition-all duration-300"
         aria-label="Remonter en haut"
       >
-        <ArrowUp className="h-5 w-5" />
+        <img
+          src="/icons/arrow-up.svg"
+          alt="Remonter en haut"
+          className="h-5 w-5"
+        />
       </button>
     </footer>
   );

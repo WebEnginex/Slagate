@@ -1,8 +1,6 @@
-Faire la page Ennio comme Atelier avec chaque ennio + 2 faiblesses. (team jinwoo)
+- Faire la page Ennio comme Atelier avec chaque ennio + 2 faiblesses. (team jinwoo)
 
+- Faire la page BDG (redirection vers la page directement) (team de 7)
 
-Faire la page BDG (redirection vers la page directement) (team de 7)
-
-code promo = recompense en liste
 
 Rajouter https://www.tiktok.com/@sohovenn (rajouter aussi au footer)
