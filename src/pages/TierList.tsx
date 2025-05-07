@@ -100,7 +100,10 @@ function HuntersTab() {
 
   const huntersByTier = Object.entries(hunterTiers).reduce(
     (acc, [tier, ids]) => {
-      acc[tier] = chasseurs.filter((h) => ids.includes(Number(h.id)));
+      // Filtrer les chasseurs par ID et les trier selon l'ordre des IDs dans hunterTiers
+      acc[tier] = ids
+        .map((id) => chasseurs.find((h) => Number(h.id) === id))
+        .filter((hunter) => hunter !== undefined) as Chasseur[];
       return acc;
     },
     {} as Record<string, Chasseur[]>
@@ -171,7 +174,10 @@ function WeaponsTab() {
   }, []);
 
   const armesByTier = Object.entries(weaponTiers).reduce((acc, [tier, ids]) => {
-    acc[tier] = armes.filter((a) => ids.includes(Number(a.id)));
+    // Trier les armes selon l'ordre des IDs dans weaponTiers
+    acc[tier] = ids
+      .map((id) => armes.find((arme) => Number(arme.id) === id))
+      .filter((arme) => arme !== undefined) as Arme[];
     return acc;
   }, {} as Record<string, Arme[]>);
 
@@ -192,7 +198,7 @@ function WeaponsTab() {
                   key={arme.id}
                   className="relative bg-sidebar-accent rounded-2xl shadow-md p-3 text-center hover:scale-[1.03] transition-transform border border-sidebar-border hover:border-solo-purple"
                 >
-                  {/* Element icon positioned at top-left of the card */}
+                  {/* Élément icon en haut à gauche */}
                   {arme.arme_element && (
                     <div className="absolute top-2 left-2 z-10 w-7 h-7">
                       <img

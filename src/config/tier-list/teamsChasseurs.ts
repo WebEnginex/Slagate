@@ -1,24 +1,23 @@
 
 export const teamChasseursTiers = {
-  S: [
+  'S+': [
     {
       id: 1,
-      name: "Team S-Rank",
-      hunters: [1, 2, 3],
+      name: "Team Feu",
+      hunters: [10, 11, 35],
     },
-    {
-      id: 1,
-      name: "Team S-Rank",
-      hunters: [1, 2, 3],
-    },
-  ],
-  A: [
     {
       id: 2,
-      name: "Team A-Rank",
-      hunters: [4, 5, 6],
+      name: "Team Vent",
+      hunters: [13, 14, 2],
+    },
+    {
+      id: 3,
+      name: "Team Lumière",
+      hunters: [12, 33, 36],
     },
   ],
+  A: [],
   B: [],
   C: [],
   D: [],

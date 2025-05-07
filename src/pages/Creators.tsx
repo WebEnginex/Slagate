@@ -14,6 +14,7 @@ type SocialLink = {
 };
 
 // Fonction pour afficher l'icône correspondant au type de lien social
+// Rajouter https://www.tiktok.com/@sohovenn (rajouter aussi au footer)
 const getSocialIcon = (type: SocialLink["type"]) => {
   switch (type) {
     case "youtube":

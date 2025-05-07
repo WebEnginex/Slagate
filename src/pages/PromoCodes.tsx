@@ -53,36 +53,17 @@ const getSocialIcon = (type: SocialLink["type"]) => {
   }
 };
 
+// Mettre les récompenses en listes 
 const promoCodes = [
   {
-    code: "WELCOME2025",
-    rewards: "100 Gemmes, 50 Or",
+    code: "WHITEVALKYRIE",
+    rewards: "Special Designx2, Hunter Exclusive Weapon Designx2, Special Player's Weapon Designx2",
     validity: "Valide jusqu'au 30 Avril 2025",
   },
   {
-    code: "WELCOME2025",
-    rewards: "100 Gemmes, 50 Or",
+    code: "OREARA1STANNIV",
+    rewards: "1,000 Essence Stones",
     validity: "Valide jusqu'au 30 Avril 2025",
-  },
-  {
-    code: "WELCOME2025",
-    rewards: "100 Gemmes, 50 Or",
-    validity: "Valide jusqu'au 30 Avril 2025",
-  },
-  {
-    code: "WELCOME2025",
-    rewards: "100 Gemmes, 50 Or",
-    validity: "Valide jusqu'au 30 Avril 2025",
-  },
-  {
-    code: "SOLOLEVELUP",
-    rewards: "200 Gemmes, 1 Ticket d'invocation",
-    validity: "Valide jusqu'au 15 Mai 2025",
-  },
-  {
-    code: "ARISE2025",
-    rewards: "300 Gemmes, 2 Tickets d'invocation",
-    validity: "Valide jusqu'au 31 Mai 2025",
   },
 ];
 
