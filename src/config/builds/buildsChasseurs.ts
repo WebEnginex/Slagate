@@ -1284,7 +1284,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 17,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -4052,7 +4052,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 30,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4062,12 +4062,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 54,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Dégâts d'eau",
             statsSecondaires: ["-"],
           },
           bague: {
             id: 19,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -4123,7 +4123,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 30,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4133,12 +4133,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 54,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Dégâts d'eau",
             statsSecondaires: ["-"],
           },
           bague: {
             id: 19,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -4202,7 +4202,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4212,12 +4212,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 47,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Dégâts de ténèbres",
             statsSecondaires: ["-"],
           },
           bague: {
             id: 12,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -4274,7 +4274,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4284,12 +4284,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 47,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Dégâts de ténèbres",
             statsSecondaires: ["-"],
           },
           bague: {
             id: 12,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -4346,7 +4346,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4356,12 +4356,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 47,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Dégâts de ténèbres",
             statsSecondaires: ["-"],
           },
           bague: {
             id: 12,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -7241,12 +7241,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 6,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 83,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -7276,8 +7276,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" }
@@ -7312,12 +7312,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 2,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 79,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -7347,8 +7347,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" }
@@ -7383,12 +7383,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 6,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 83,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -7418,8 +7418,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" }
@@ -7454,12 +7454,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 6,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 83,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -7489,8 +7489,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" }
@@ -7569,7 +7569,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 2, statPrincipale: "PV supplémentaire" },
@@ -7640,7 +7640,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 2, statPrincipale: "PV supplémentaire" },
@@ -7711,7 +7711,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 2, statPrincipale: "PV supplémentaire" },
@@ -7790,7 +7790,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 2, statPrincipale: "PV supplémentaire" },
@@ -7861,7 +7861,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 2, statPrincipale: "PV supplémentaire" },
@@ -7932,7 +7932,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 2, statPrincipale: "PV supplémentaire" },
@@ -8012,7 +8012,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
@@ -8057,12 +8057,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 1,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 78,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -8092,8 +8092,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -8128,12 +8128,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 1,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 78,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -8163,8 +8163,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -8199,12 +8199,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 114,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 86,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -8234,8 +8234,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -8278,12 +8278,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 94,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 84,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -8313,8 +8313,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" }
@@ -8349,12 +8349,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 6,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 83,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -8384,8 +8384,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" }
@@ -8420,12 +8420,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 2,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 79,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -8455,8 +8455,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" }
@@ -8491,12 +8491,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 94,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 84,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -8526,8 +8526,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" }
@@ -8562,12 +8562,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 6,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 83,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -8597,8 +8597,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" }
@@ -8633,12 +8633,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 94,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 84,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -8668,8 +8668,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" }
@@ -8704,12 +8704,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 6,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 83,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -8739,8 +8739,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" }
@@ -8999,17 +8999,17 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 64,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
             id: 94,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 86,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -9029,7 +9029,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 15,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -9039,8 +9039,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 3, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -9070,7 +9070,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 64,
-            statPrincipale: "Attaque supplémentaire (%)",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
@@ -9085,7 +9085,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 30,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -9095,12 +9095,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 50,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Dégâts de feu",
             statsSecondaires: ["-"],
           },
           bague: {
             id: 15,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -9110,8 +9110,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 3, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -9141,7 +9141,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 64,
-            statPrincipale: "Attaque supplémentaire (%)",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
@@ -9156,7 +9156,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 30,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -9166,12 +9166,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 50,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Dégâts de feu",
             statsSecondaires: ["-"],
           },
           bague: {
             id: 15,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -9181,8 +9181,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 3, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -9230,7 +9230,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           gants: {
             id: 123,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -9250,7 +9250,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 19,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -9260,8 +9260,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 3, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -9301,7 +9301,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           gants: {
             id: 123,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -9321,7 +9321,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 19,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -9331,8 +9331,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 3, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -9372,7 +9372,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           gants: {
             id: 123,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -9392,7 +9392,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 19,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -9402,8 +9402,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 3, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -9441,17 +9441,17 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 60,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
             id: 7,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 85,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -9471,7 +9471,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 19,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -9481,8 +9481,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -9512,17 +9512,17 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 60,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
             id: 7,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 85,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -9542,7 +9542,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 19,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -9552,8 +9552,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -9583,17 +9583,17 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 60,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
             id: 7,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 85,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -9613,7 +9613,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 19,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -9623,8 +9623,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire Supplémentaire" }],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -9883,17 +9883,17 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 60,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
             id: 7,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 85,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -9913,7 +9913,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 19,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -9924,10 +9924,10 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         noyaux: {
           1: [
-            { id: 8, statPrincipale: "Attaque supplémentaire Supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire Supplémentaire" },
+            { id: 8, statPrincipale: "Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
           ],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -9957,17 +9957,17 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 61,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
             id: 8,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 86,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -9987,7 +9987,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 19,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -9998,10 +9998,10 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         noyaux: {
           1: [
-            { id: 8, statPrincipale: "Attaque supplémentaire Supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire Supplémentaire" },
+            { id: 8, statPrincipale: "Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
           ],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -10031,17 +10031,17 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 61,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
             id: 8,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 86,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -10061,7 +10061,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 19,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -10072,10 +10072,10 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         noyaux: {
           1: [
-            { id: 8, statPrincipale: "Attaque supplémentaire Supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire Supplémentaire" },
+            { id: 8, statPrincipale: "Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
           ],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -10105,17 +10105,17 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 61,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
             id: 8,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 86,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -10135,7 +10135,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 19,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -10146,10 +10146,10 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         noyaux: {
           1: [
-            { id: 8, statPrincipale: "Attaque supplémentaire Supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire Supplémentaire" },
+            { id: 8, statPrincipale: "Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
           ],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -10192,12 +10192,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 106,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 107,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -10228,10 +10228,10 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         noyaux: {
           1: [
-            { id: 4, statPrincipale: "Attaque supplémentaire Supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire Supplémentaire" },
+            { id: 4, statPrincipale: "Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
           ],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 3, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -10266,12 +10266,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 1,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 78,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -10302,10 +10302,10 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         noyaux: {
           1: [
-            { id: 4, statPrincipale: "Attaque supplémentaire Supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire Supplémentaire" },
+            { id: 4, statPrincipale: "Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
           ],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 3, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -10340,12 +10340,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 106,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 107,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -10376,10 +10376,10 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         noyaux: {
           1: [
-            { id: 4, statPrincipale: "Attaque supplémentaire Supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire Supplémentaire" },
+            { id: 4, statPrincipale: "Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
           ],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 3, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -10414,12 +10414,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 1,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 78,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -10450,10 +10450,10 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         noyaux: {
           1: [
-            { id: 4, statPrincipale: "Attaque supplémentaire Supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire Supplémentaire" },
+            { id: 4, statPrincipale: "Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
           ],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 3, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -10488,12 +10488,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 106,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 107,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -10524,10 +10524,10 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         noyaux: {
           1: [
-            { id: 4, statPrincipale: "Attaque supplémentaire Supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire Supplémentaire" },
+            { id: 4, statPrincipale: "Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
           ],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 3, statPrincipale: "PV supplémentaire Supplémentaire" },
@@ -10562,12 +10562,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           armure: {
             id: 1,
-            statPrincipale: "Défense supplémentaire Supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
             id: 78,
-            statPrincipale: "Attaque supplémentaire Supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -10598,10 +10598,10 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         noyaux: {
           1: [
-            { id: 4, statPrincipale: "Attaque supplémentaire Supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire Supplémentaire" },
+            { id: 4, statPrincipale: "Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
           ],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire Supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire Supplémentaire" },
             { id: 3, statPrincipale: "PV supplémentaire Supplémentaire" },
