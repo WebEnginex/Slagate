@@ -70,19 +70,24 @@ export default function TierListPage() {
         {/* Tabs navigation */}
         <div className="mb-8">
           <ul className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 px-2 sm:px-0 justify-center md:justify-start">
-            {tabs.map((tab) => (
-              <li
-                key={tab}
-                className={`cursor-pointer px-4 py-2 text-sm sm:text-base rounded-lg whitespace-nowrap transition-colors duration-200 ${
-                  activeTab === tab
-                    ? "bg-solo-purple text-white font-bold"
-                    : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white"
-                }`}
-                onClick={() => setActiveTab(tab)}
-              >
-                {tab}
-              </li>
-            ))}
+            {tabs.map((tab) => {
+              const isDisabled = tab === "Teams POD" || tab === "Teams BDG";
+              return (
+                <li
+                  key={tab}
+                  className={`cursor-pointer px-4 py-2 text-sm sm:text-base rounded-lg whitespace-nowrap transition-colors duration-200 ${
+                    isDisabled
+                      ? "bg-gray-600 text-gray-400 cursor-not-allowed"
+                      : activeTab === tab
+                      ? "bg-solo-purple text-white font-bold"
+                      : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white"
+                  }`}
+                  onClick={() => !isDisabled && setActiveTab(tab)}
+                >
+                  {isDisabled ? `${tab} (Prochainement)` : tab}
+                </li>
+              );
+            })}
           </ul>
         </div>
 
