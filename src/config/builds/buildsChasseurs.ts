@@ -10679,7 +10679,10 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          1: [
+            { id: 7, statPrincipale: "Attaque supplémentaire" },
+            { id: 3, statPrincipale: "Attaque supplémentaire" }
+          ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
