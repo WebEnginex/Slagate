@@ -653,7 +653,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 57,
-            statPrincipale: "Attaque Attaque supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
@@ -663,7 +663,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           gants: {
             id: 78,
-            statPrincipale: "Attaque Attaque supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -683,7 +683,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 12,
-            statPrincipale: "Attaque Attaque supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -728,7 +728,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 57,
-            statPrincipale: "Attaque Attaque supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
@@ -738,7 +738,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           gants: {
             id: 78,
-            statPrincipale: "Attaque Attaque supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -758,7 +758,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 12,
-            statPrincipale: "Attaque Attaque supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -803,7 +803,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 57,
-            statPrincipale: "Attaque Attaque supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
@@ -813,7 +813,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           gants: {
             id: 78,
-            statPrincipale: "Attaque Attaque supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -833,7 +833,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 12,
-            statPrincipale: "Attaque Attaque supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -896,7 +896,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           gants: {
             id: 78,
-            statPrincipale: "Attaque Attaque supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -916,7 +916,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 19,
-            statPrincipale: "Attaque Attaque supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -968,7 +968,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           gants: {
             id: 78,
-            statPrincipale: "Attaque Attaque supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -988,7 +988,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 12,
-            statPrincipale: "Attaque Attaque supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -1040,7 +1040,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           gants: {
             id: 78,
-            statPrincipale: "Attaque Attaque supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -1060,7 +1060,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 19,
-            statPrincipale: "Attaque Attaque supplémentaire",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
