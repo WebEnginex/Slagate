@@ -9234,7 +9234,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             statsSecondaires: ["-"],
           },
           bottes: {
-            id: 29,
+            id: 124,
             statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
             statsSecondaires: ["-"],
           },
@@ -9305,7 +9305,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             statsSecondaires: ["-"],
           },
           bottes: {
-            id: 29,
+            id: 124,
             statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
             statsSecondaires: ["-"],
           },
@@ -9376,7 +9376,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             statsSecondaires: ["-"],
           },
           bottes: {
-            id: 29,
+            id: 124,
             statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
             statsSecondaires: ["-"],
           },
