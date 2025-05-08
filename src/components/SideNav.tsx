@@ -59,9 +59,9 @@ const SideNav = ({ isMobileOpen, setIsMobileOpen }: SideNavProps) => {
       {/* Side navigation */}
       <nav
         className={cn(
-          "fixed top-0 left-0 bottom-0 z-50 w-64 flex-col bg-sidebar p-4 transition-transform duration-200 lg:relative lg:flex lg:transform-none",
+          "fixed top-0 left-0 bottom-0 z-50 w-64 flex-col bg-sidebar p-4 transition-transform duration-200 flex transform-gpu",
           isMobileOpen
-            ? "flex translate-x-0"
+            ? "translate-x-0"
             : "-translate-x-full lg:translate-x-0"
         )}
       >
