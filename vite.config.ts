@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => ({
     mode === 'development' &&
     componentTagger(),
     ViteSitemap({
-      hostname: 'https://slagate.fr', // Remplace par ton domaine
+      hostname: 'https://slagate.fr',
     }),
   ].filter(Boolean),
   resolve: {
