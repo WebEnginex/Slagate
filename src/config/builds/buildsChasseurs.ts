@@ -1582,7 +1582,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 124,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -1654,7 +1654,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 124,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -1726,7 +1726,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 124,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -2264,7 +2264,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | PV supplémentaire",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -2336,7 +2336,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 108,
-            statPrincipale: "Dégâts de coup critique | PV supplémentaire",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -2408,7 +2408,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | PV supplémentaire",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -2480,7 +2480,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 108,
-            statPrincipale: "Dégâts de coup critique | PV supplémentaire",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -2552,7 +2552,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | PV supplémentaire",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -3167,7 +3167,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -3239,7 +3239,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -3311,7 +3311,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -3383,7 +3383,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -3455,7 +3455,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -3535,7 +3535,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | PV supplémentaire",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -3607,7 +3607,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | PV supplémentaire",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -3679,7 +3679,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | PV supplémentaire",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4426,7 +4426,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4498,7 +4498,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4570,7 +4570,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4642,7 +4642,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4714,7 +4714,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4795,7 +4795,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4866,7 +4866,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4937,7 +4937,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -5017,7 +5017,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 27,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -5089,7 +5089,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 23,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -5161,7 +5161,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 27,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -5233,7 +5233,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 23,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -5305,7 +5305,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 27,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -5827,7 +5827,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -5898,7 +5898,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -5969,7 +5969,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -6048,7 +6048,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -6119,7 +6119,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -6190,7 +6190,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -6501,7 +6501,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 23,
-            statPrincipale: "Dégâts de coup critique | PV supplémentaire",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -6572,7 +6572,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 23,
-            statPrincipale: "Dégâts de coup critique | PV supplémentaire",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -6643,7 +6643,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 23,
-            statPrincipale: "Dégâts de coup critique | PV supplémentaire",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -7765,7 +7765,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 30,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -7836,7 +7836,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 30,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -7907,7 +7907,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 30,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -8067,7 +8067,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | PV supplémentaire",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -8138,7 +8138,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | PV supplémentaire",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -8209,7 +8209,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 30,
-            statPrincipale: "Dégâts de coup critique | PV supplémentaire",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -9235,7 +9235,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 124,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -9306,7 +9306,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 124,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -9377,7 +9377,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 124,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -9456,7 +9456,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 29,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -9527,7 +9527,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 29,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -9598,7 +9598,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 29,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -9678,7 +9678,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -9749,7 +9749,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -9820,7 +9820,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégâts de coup critique | Défense supplémentaire",
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
