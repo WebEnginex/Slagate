@@ -106,7 +106,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
       },
       {
         id: 2,
-        nom: "Général V.2",
+        nom: "Général 2",
         stats: {
           "PV ": "-",
           "Défense ": "-",
@@ -408,7 +408,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
       },
       {
         id: 501,
-        nom: "Général V.2",
+        nom: "Général 2",
         stats: {
           "PV ": "-",
           "Défense ": "-",
@@ -1806,7 +1806,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 30,
-            statPrincipale: "Défense | Pénétration de défense",
+            statPrincipale: "Pénétration de défense",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -1821,7 +1821,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 19,
-            statPrincipale: "PV",
+            statPrincipale: "Attaque",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -1881,7 +1881,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 27,
-            statPrincipale: "Défense | Pénétration de défense",
+            statPrincipale: "Pénétration de défense",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -1956,7 +1956,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 23,
-            statPrincipale: "Défense | Pénétration de défense",
+            statPrincipale: "Pénétration de défense",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -2031,7 +2031,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 27,
-            statPrincipale: "Défense | Pénétration de défense",
+            statPrincipale: "Pénétration de défense",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -2104,17 +2104,17 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           gants: {
             id: 99,
-            statPrincipale: "Taux de coup critique",
+            statPrincipale: "Attaque",
             statsSecondaires: ["-"],
           },
           bottes: {
             id: 100,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "Pénétration de défense",
             statsSecondaires: ["-"],
           },
           collier: {
             id: 101,
-            statPrincipale: "Hausse des dégâts",
+            statPrincipale: "PV",
             statsSecondaires: ["-"],
           },
           bracelet: {
@@ -2124,12 +2124,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 103,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "Attaque",
             statsSecondaires: ["-"],
           },
           boucles: {
             id: 104,
-            statPrincipale: "Précision (%)",
+            statPrincipale: "PM",
             statsSecondaires: ["-"],
           },
         },
@@ -2168,23 +2168,23 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         artefacts: {
           casque: {
-            id: 57,
+            id: 61,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
-            id: 1,
+            id: 8,
             statPrincipale: "Défense",
             statsSecondaires: ["-"],
           },
           gants: {
-            id: 78,
+            id: 86,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
-            id: 22,
-            statPrincipale: "Défense | Pénétration de défense",
+            id: 30,
+            statPrincipale: "Pénétration de défense",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -2216,7 +2216,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             { id: 3, statPrincipale: "PV" },
           ],
         },
-        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 39 }, { id: 40 }],
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 39 }, { id: 40 }],
       },
     ],
   },
@@ -7287,7 +7287,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
       },
       {
         id: 271,
-        nom: "Général V.3",
+        nom: "Général 3",
         stats: {
           "PV ": "Le plus possible",
           "Défense ": "-",
@@ -8324,7 +8324,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
       },
       {
         id: 321,
-        nom: "Général V.2",
+        nom: "Général 2",
         stats: {
           "PV ": "Le plus possible",
           "Défense ": "-",
@@ -8395,7 +8395,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
       },
       {
         id: 322,
-        nom: "Général V.3",
+        nom: "Général 3",
         stats: {
           "PV ": "Le plus possible",
           "Défense ": "-",
@@ -8537,7 +8537,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
       },
       {
         id: 324,
-        nom: "POD V.2",
+        nom: "POD 2",
         stats: {
           "PV ": "Le plus possible",
           "Défense ": "-",
@@ -8679,7 +8679,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
       },
       {
         id: 326,
-        nom: "BDG V.2",
+        nom: "BDG 2",
         stats: {
           "PV ": "Le plus possible",
           "Défense ": "-",
@@ -9937,7 +9937,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
       },
       {
         id: 381,
-        nom: "Général V.2",
+        nom: "Général 2",
         stats: {
           "PV ": "-",
           "Défense ": "-",
@@ -10241,7 +10241,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
       },
       {
         id: 391,
-        nom: "Général V.2",
+        nom: "Général 2",
         stats: {
           "PV ": "Le plus possible",
           "Défense ": "-",
@@ -10389,7 +10389,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
       },
       {
         id: 393,
-        nom: "POD V.2",
+        nom: "POD 2",
         stats: {
           "PV ": "Le plus possible",
           "Défense ": "-",
@@ -10537,7 +10537,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
       },
       {
         id: 395,
-        nom: "BDG V.2",
+        nom: "BDG 2",
         stats: {
           "PV ": "Le plus possible",
           "Défense ": "-",
