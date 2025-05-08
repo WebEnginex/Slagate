@@ -16,6 +16,11 @@ export const teamChasseursTiers = {
       name: "Team Lumière",
       hunters: [12, 33, 36],
     },
+    {
+      id: 4,
+      name: "Team Eau",
+      hunters: [41, 27, 43],
+    },
   ],
   A: [],
   B: [],
