@@ -1,7 +1,7 @@
 export const lastModifiedDates: Record<string, string> = {
-    index: "8 Mai 2025 | 22h50",
+    index: "8 Mai 2025 | 23h50",
     tierList: "8 Mai 2025 | 22h50",
-    builds: "8 Mai 2025 | 22h50",
+    builds: "8 Mai 2025 | 23h50",
     atelier: "8 Mai 2025 | 22h50",
     promoCodes: "8 Mai 2025 | 22h50",
     creators: "8 Mai 2025 | 22h50",
