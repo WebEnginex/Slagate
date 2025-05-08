@@ -9925,7 +9925,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 8, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
@@ -9999,7 +9999,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 8, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
@@ -10073,7 +10073,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 8, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
@@ -10147,7 +10147,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 8, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
@@ -10229,7 +10229,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 4, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
@@ -10303,7 +10303,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 4, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
@@ -10377,7 +10377,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 4, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
@@ -10451,7 +10451,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 4, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
@@ -10525,7 +10525,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 4, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
@@ -10599,7 +10599,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 4, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
