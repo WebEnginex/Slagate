@@ -20,6 +20,72 @@ type Props = {
   pierres: Database["public"]["Tables"]["pierres_benediction"]["Row"][];
 };
 
+function formatTextWithBrackets(text: string) {
+  const regex =
+    /(\[[^\]]+\])|(\d+(?:[.,]\d+)? ?%?)|(\bseconde(?:s)?\b)|(\bPV\b|\bpv\b)|(\bPM\b|\bpm\b)/gi;
+
+  return text.split(regex).map((part, index) => {
+    if (!part) return null;
+
+    // Texte entre crochets
+    if (part.startsWith("[") && part.endsWith("]")) {
+      const content = part.slice(1, -1); // Retirer les crochets
+      if (content === "Bris") {
+        return (
+          <span key={index} className="text-orange-500">
+            {part}
+          </span>
+        );
+      } else {
+        return (
+          <span key={index} className="text-teal-500">
+            {part}
+          </span>
+        );
+      }
+    }
+
+    // Chiffres ou pourcentages (inclut les chiffres à virgules)
+    if (/^\d+(?:[.,]\d+)? ?%?$/.test(part)) {
+      return (
+        <span key={index} className="text-yellow-500">
+          {part}
+        </span>
+      );
+    }
+
+    // Mots "seconde" ou "secondes"
+    if (/^seconde(?:s)?$/.test(part)) {
+      return (
+        <span key={index} className="text-yellow-500">
+          {part}
+        </span>
+      );
+    }
+
+    // "PV" ou "pv" en rouge
+    if (/^PV$|^pv$/.test(part)) {
+      return (
+        <span key={index} className="text-red-500">
+          {part}
+        </span>
+      );
+    }
+
+    // "PM" ou "pm" en bleu
+    if (/^PM$|^pm$/.test(part)) {
+      return (
+        <span key={index} className="text-blue-500">
+          {part}
+        </span>
+      );
+    }
+
+    // Texte normal
+    return part;
+  });
+}
+
 export default function TeamJinwooCard({
   team,
   chasseurs,
@@ -158,27 +224,37 @@ export default function TeamJinwooCard({
                     </h4>
                   </div>
 
-                  {/* Stats Section */}
-                  <div className="bg-sidebar/50 rounded-lg overflow-hidden">
-                    <Collapsible open={isSectionOpen('stats')} onOpenChange={() => toggleSection('stats')}>
-                      <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                        <BarChart2 className="h-4 w-4 text-solo-purple" />
-                        <span className="flex-1 text-left">Statistiques</span>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <div className="p-4">
-                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            {Object.entries(ch.stats).map(([label, val]) => (
-                              <div key={label} className="bg-sidebar p-3 rounded border border-sidebar-border">
-                                <div className="text-xs text-solo-light-purple mb-1">{label}</div>
-                                <div className="font-medium text-white">{val}</div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </CollapsibleContent>
-                    </Collapsible>
-                  </div>
+                  {/* Statistiques Section */}
+<div className="bg-sidebar/50 rounded-lg overflow-hidden">
+  <Collapsible
+    open={isSectionOpen("stats")}
+    onOpenChange={() => toggleSection("stats")}
+  >
+    <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
+      <BarChart2 className="h-4 w-4 text-solo-purple" />
+      <span className="flex-1 text-left">Statistiques</span>
+    </CollapsibleTrigger>
+    <CollapsibleContent>
+      <div className="p-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {Object.entries(ch.stats).map(([label, val]) => (
+            <div
+              key={label}
+              className="bg-sidebar p-3 rounded border border-sidebar-border"
+            >
+              <div className="text-xs text-solo-light-purple mb-1">
+                {label}
+              </div>
+              <div className="font-medium text-white">
+                {formatTextWithBrackets(val)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </CollapsibleContent>
+  </Collapsible>
+</div>
 
                   {/* Armes - uniquement pour le 1er chasseur */}
                   {selectedChasseurId === team.chasseurs[0]?.id && (
@@ -256,43 +332,56 @@ export default function TeamJinwooCard({
   </Collapsible>
 </div>
 
-                  {/* Sets Bonus Section */}
-                  <div className="bg-sidebar/50 rounded-lg overflow-hidden">
-                    <Collapsible open={isSectionOpen('sets')} onOpenChange={() => toggleSection('sets')}>
-                      <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                        <Layers className="h-4 w-4 text-solo-purple" />
-                        <span className="flex-1 text-left">Bonus de Sets</span>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <div className="p-4">
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                            {ch.sets_bonus.map((sb, i) => {
-                              const bonus = getFromList(setsBonus, sb.id);
-                              if (!bonus) return null;
-                              return (
-                                <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border">
-                                  <p className="font-semibold text-sm text-solo-purple">{bonus.nom}</p>
-                                  <p className="text-xs text-gray-300 mt-2">
-                                    {bonus.description}
-                                  </p>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      </CollapsibleContent>
-                    </Collapsible>
-                  </div>
+                  {/* Bonus de Set Section */}
+<div className="bg-sidebar/50 rounded-lg overflow-hidden">
+  <Collapsible
+    open={isSectionOpen("sets")}
+    onOpenChange={() => toggleSection("sets")}
+  >
+    <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
+      <Layers className="h-4 w-4 text-solo-purple" />
+      <span className="flex-1 text-left">Bonus de Sets</span>
+    </CollapsibleTrigger>
+    <CollapsibleContent>
+      <div className="p-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          {ch.sets_bonus.map((sb, i) => {
+            const bonus = getFromList(setsBonus, sb.id);
+            if (!bonus) return null;
+            return (
+              <div
+                key={i}
+                className="bg-sidebar p-3 rounded-lg border border-sidebar-border"
+              >
+                <p className="font-semibold text-sm text-solo-purple">
+                  {bonus.nom}
+                </p>
+                <p className="text-xs text-gray-300 mt-2">
+                  {formatTextWithBrackets(bonus.description)}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </CollapsibleContent>
+  </Collapsible>
+</div>
 
                   {/* Noyaux Section */}
 <div className="bg-sidebar/50 rounded-lg overflow-hidden">
-  <Collapsible open={isSectionOpen('noyaux')} onOpenChange={() => toggleSection('noyaux')}>
+  <Collapsible open={isSectionOpen("noyaux")} onOpenChange={() => toggleSection("noyaux")}>
     <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
       <Dna className="h-4 w-4 text-solo-purple" />
       <span className="flex-1 text-left">Noyaux</span>
     </CollapsibleTrigger>
     <CollapsibleContent>
       <div className="p-4">
+        <div className="text-sm text-gray-300 leading-relaxed mb-4">
+          {formatTextWithBrackets(
+            "Les noyaux sont essentiels pour renforcer les capacités de votre chasseur. Sélectionnez-les en fonction des statistiques principales et des bonus secondaires."
+          )}
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {Object.entries(ch.noyaux).map(([slot, noyauxList]) => {
             const slotNumber = parseInt(slot, 10);
@@ -310,13 +399,15 @@ export default function TeamJinwooCard({
                     className="w-16 h-16 object-contain mb-2"
                     alt={noyauData.nom || "Noyau"}
                   />
-                  <p className="text-sm font-semibold text-white text-center">{noyauData.nom}</p>
+                  <p className="text-sm font-semibold text-white text-center">
+                    {noyauData.nom}
+                  </p>
                 </div>
                 <div className="bg-solo-purple/20 text-white text-xs px-3 py-1.5 rounded-md text-center font-medium">
                   {noyau.statPrincipale}
                 </div>
                 <div className="text-xs text-gray-300 mt-1.5 text-center">
-                  {noyauData.description}
+                  {formatTextWithBrackets(noyauData.description || "")}
                 </div>
                 {Array.isArray(noyauxList) && noyauxList.length > 1 && (
                   <button
