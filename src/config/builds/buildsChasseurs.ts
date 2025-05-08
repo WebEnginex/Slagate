@@ -1120,7 +1120,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           gants: {
             id: 86,
-            statPrincipale: "Taux de coup critique",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
@@ -1192,7 +1192,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           gants: {
             id: 86,
-            statPrincipale: "Taux de coup critique",
+            statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
