@@ -62,7 +62,7 @@ const getSocialIcon = (type: SocialLink["type"]) => {
     tiktok: "/icons/tiktok.svg",
     twitter: "/icons/twitter.svg",
     instagram: "/icons/instagram.svg",
-    website: "/icons/external-link.svg", 
+    website: "/icons/external-link.svg",
   };
 
   return (
@@ -75,7 +75,7 @@ const getSocialIcon = (type: SocialLink["type"]) => {
   );
 };
 
-// Mettre les récompenses en listes 
+// Mettre les récompenses en listes
 const promoCodes = [
   {
     code: "WHITEVALKYRIE",
@@ -84,10 +84,35 @@ const promoCodes = [
       "Concept d'arme exclusive de chasseur x2",
       "Concept d'arme de joueur spécial x2",
     ],
+    date: "?",
   },
   {
     code: "OREARA1STANNIV",
     rewards: ["Pierres de l'esprit x1,000"],
+    date: "?",
+  },
+  {
+    code: "365THXHUNTER365",
+    rewards: ["Marques du temps I x200", "Marques du temps II x100"],
+    date: "31 Mai 2025 à 2h du matin",
+  },
+  {
+    code: "LDH1YEARGIFT",
+    rewards: [
+      "Énergie de l'ombre x3,000",
+      "Traces d'ombres x200",
+      "Cristal abyssal x15",
+    ],
+    date: "31 Mai 2025 à 2h du matin",
+  },
+  {
+    code: "JSKSPECIAL365",
+    rewards: [
+      "Ticket de tirage personnalisé d'arme x10",
+      "Ticket de tirage personnalisé x10",
+      "Ticket d'augmentation du taux de tirage x10",
+    ],
+    date: "31 Mai 2025 à 2h du matin",
   },
 ];
 
@@ -306,22 +331,22 @@ const PromoCodes = () => {
 
       {/* Modal pour afficher l'image en grand */}
       {modalImage && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
-    <div className="relative w-full h-full p-2 flex items-center justify-center">
-      <button
-        className="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 z-10"
-        onClick={closeModal}
-      >
-        <X className="h-6 w-6" />
-      </button>
-      <img
-        src={modalImage}
-        alt="Agrandissement"
-        className="max-w-full max-h-full object-contain rounded-lg"
-      />
-    </div>
-  </div>
-)}
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+          <div className="relative w-full h-full p-2 flex items-center justify-center">
+            <button
+              className="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 z-10"
+              onClick={closeModal}
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <img
+              src={modalImage}
+              alt="Agrandissement"
+              className="max-w-full max-h-full object-contain rounded-lg"
+            />
+          </div>
+        </div>
+      )}
 
       {/* Section des codes promo */}
       <div className="space-y-4 mb-8">
@@ -332,7 +357,10 @@ const PromoCodes = () => {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
           {promoCodes.map((promo, index) => (
-            <Card key={index} className="p-4 border border-card-border relative">
+            <Card
+              key={index}
+              className="p-4 border border-card-border relative"
+            >
               <div className="flex flex-col gap-2">
                 <p className="text-lg font-semibold text-white">{promo.code}</p>
                 <ul className="list-disc list-inside text-sm text-muted-foreground">
@@ -340,15 +368,16 @@ const PromoCodes = () => {
                     <li key={i}>{highlightNumbers(reward)}</li>
                   ))}
                 </ul>
+                <p className="text-md font-semibold text-white">Le code expire le : <span className="text-yellow-400">{promo.date}</span> </p>
               </div>
               <Button
-  variant="secondary"
-  size="sm"
-  className="absolute top-4 right-4 bg-solo-purple text-white hover:bg-solo-purple hover:scale-105 hover:shadow-lg transition-transform duration-300"
-  onClick={() => handleCopy(promo.code)}
->
-  {copiedCode === promo.code ? "Copié" : "Copier"}
-</Button>
+                variant="secondary"
+                size="sm"
+                className="absolute top-4 right-4 bg-solo-purple text-white hover:bg-solo-purple hover:scale-105 hover:shadow-lg transition-transform duration-300"
+                onClick={() => handleCopy(promo.code)}
+              >
+                {copiedCode === promo.code ? "Copié" : "Copier"}
+              </Button>
             </Card>
           ))}
         </div>

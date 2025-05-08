@@ -406,55 +406,38 @@ export default function TeamJinwooCard({
                       </div>
 
                       {/* QTE */}
-<div className="bg-sidebar/50 rounded-lg overflow-hidden">
-  <Collapsible open={isSectionOpen('qte')} onOpenChange={() => toggleSection('qte')}>
-    <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-      <CirclePlay className="h-4 w-4 text-solo-purple" />
-      <span className="flex-1 text-left">QTE</span>
-    </CollapsibleTrigger>
-    <CollapsibleContent>
-      <div className="p-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {[team.qte1, team.qte2].map((id, i) => {
-            const qte = getFromList(qtes, id);
-            if (!qte || !qte.element) return null; // Afficher uniquement si "element" existe
-            return (
-              <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border relative">
-                {/* Element */}
-                <div className="absolute top-2 left-2">
-                  <img
-                    src={qte.element}
-                    alt="Element"
-                    className="w-12 h-12 object-contain"
-                  />
-                </div>
-                {/* Image and Tooltip */}
-                <div className="group relative flex flex-col items-center">
-                  <img
-                    src={qte.image || ""}
-                    alt={qte.nom}
-                    className="w-24 h-24 object-contain"
-                  />
-                  <p className="text-sm font-medium text-white mt-2">{qte.nom}</p>
-                  {/* Tooltip */}
-                  <div className="absolute bottom-full mb-2 hidden group-hover:block bg-black text-white text-xs rounded px-2 py-1">
-                    {qte.description.split("<br>").map((line, index) => (
-                      <p key={index}>{line}</p>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </CollapsibleContent>
-  </Collapsible>
-</div>
-
-
-
-
+                      <div className="bg-sidebar/50 rounded-lg overflow-hidden">
+                        <Collapsible open={isSectionOpen('qte')} onOpenChange={() => toggleSection('qte')}>
+                          <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
+                            <CirclePlay className="h-4 w-4 text-solo-purple" />
+                            <span className="flex-1 text-left">QTE</span>
+                          </CollapsibleTrigger>
+                          <CollapsibleContent>
+                            <div className="p-4">
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {[team.qte1, team.qte2].map((id, i) => {
+                                  const qte = getFromList(qtes, id);
+                                  if (!qte) return null;
+                                  return (
+                                    <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border flex items-start gap-3">
+                                      <img
+                                        src={qte.image || ""}
+                                        className="w-14 h-14 object-contain"
+                                      />
+                                      <div>
+                                        <p className="text-sm font-medium text-white">{qte.nom}</p>
+                                        <p className="text-xs text-gray-300 mt-1">
+                                          {qte.description}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          </CollapsibleContent>
+                        </Collapsible>
+                      </div>
 
                       {/* Pierres de bénédiction */}
                       <div className="bg-sidebar/50 rounded-lg overflow-hidden">

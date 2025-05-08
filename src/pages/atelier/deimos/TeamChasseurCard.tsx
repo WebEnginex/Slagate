@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/collapsible";
 import { useExpandedTeam } from "@/contexts/ExpandedTeamContext";
 
-type TeamVulcanChasseur = {
+type TeamDeimosChasseur = {
   id: number;
   nom: string;
   chasseurs: {
@@ -64,7 +64,7 @@ type NoyauConfig = {
 };
 
 type Props = {
-  team: TeamVulcanChasseur;
+  team: TeamDeimosChasseur;
   chasseurs: Chasseur[];
   artefacts: Artefact[];
   noyaux: Noyau[];

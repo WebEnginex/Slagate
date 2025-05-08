@@ -5,4 +5,9 @@ export const lastModifiedDates: Record<string, string> = {
     atelier: "30 Avril 2025",
     promoCodes: "30 Avril 2025",
     creators: "30 Avril 2025",
+    ennio: "7 Mai 2025",
+    bdg: "7 Mai 2025",
+    vulcan: "30 Avril 2025",
+    baran: "30 Avril 2025",
+    deimos: "30 Avril 2025",
   };

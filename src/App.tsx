@@ -14,7 +14,6 @@ import Simulations from "@/pages/guides/simulation/Simulation";
 
 
 import Boss from "@/pages/guides/boss/Boss";
-import Ennio from "@/pages/guides/boss/Ennio";
 
 import TierList from "@/pages/TierList";
 
@@ -24,6 +23,11 @@ import AtelierDeLaLumiere from "@/pages/AtelierDeLaLumiere";
 import Vulcan from "@/pages/atelier/vulcan/Vulcan";
 import Baran from "@/pages/atelier/baran/Baran";
 import Deimos from "@/pages/atelier/deimos/Deimos";
+
+import BossDeGuilde from "@/pages/bdg/BossDeGuilde";
+import Ennio from "@/pages/ennio/Ennio";
+
+
 
 import Creators from "@/pages/Creators";
 import PromoCodes from "@/pages/PromoCodes";
@@ -63,6 +67,10 @@ const App = () => (
           <Route path="/atelier/Vulcan" element={<Vulcan />} />
           <Route path="/atelier/Baran" element={<Baran />} />
           <Route path="/atelier/Deimos" element={<Deimos />} />
+
+          <Route path="/ennio" element={<Ennio />} />
+          <Route path="/bdg" element={<BossDeGuilde />} />
+
 
           <Route path="/promo-codes" element={<PromoCodes />} />
           <Route path="/creators" element={<Creators />} />

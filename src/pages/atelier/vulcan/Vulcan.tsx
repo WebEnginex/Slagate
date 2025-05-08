@@ -182,10 +182,10 @@ export default function VulcanPage() {
                         </div>
                       </div>
                     </div>
-                    <p>
+                    <div>
                       {/* Ajout de la date de dernière modification */}
-                      <LastModified date={lastModifiedDates.tierList} />
-                    </p>
+                      <LastModified date={lastModifiedDates.vulcan} />
+                    </div>
                   </CardContent>
                 </TabsContent>
               ))}

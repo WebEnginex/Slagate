@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { Home, BookOpen, Award, Gift, Users, Menu, X, Flame, Shield } from "lucide-react";
+import { Home, BookOpen, Award, Gift, Users, Menu, X, Flame, Shield, Swords, Skull } from "lucide-react";
 
 type NavItemProps = {
   to: string;
@@ -40,6 +40,8 @@ const SideNav = ({ isMobileOpen, setIsMobileOpen }: SideNavProps) => {
     { to: "/tier-list", icon: <Award size={20} />, label: "Tier List" },
     { to: "/builds", icon: <Shield size={20} />, label: "Builds" }, 
     { to: "/atelier", icon: <Flame size={20} />, label: "Atelier" },
+    { to: "/ennio", icon: <Swords size={20} />, label: "Ennio" },
+    { to: "/bdg", icon: <Skull size={20} />, label: "Boss de Guilde" },
     { to: "/promo-codes", icon: <Gift size={20} />, label: "Code Promo" },
     { to: "/creators", icon: <Users size={20} />, label: "Creators" },
   ];

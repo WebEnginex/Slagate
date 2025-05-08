@@ -104,7 +104,7 @@ export default function BuildsPage() {
               <p className="text-base md:text-lg text-gray-300 text-center md:text-left">
                 Utilisez les outils de recherche et de filtres pour trouver
                 rapidement un chasseur spécifique ou explorer les meilleures
-                configurations adaptées à chaque héros.
+                configurations adaptées à chaque chasseur.
               </p>
               <p className="text-base md:text-lg text-gray-300 text-center md:text-left">
                 Que vous soyez débutant à la recherche d'une configuration de

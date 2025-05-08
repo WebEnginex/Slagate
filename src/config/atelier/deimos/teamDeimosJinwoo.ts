@@ -1,4 +1,4 @@
-export type TeamVulcanJinwoo = {
+export type TeamDeimosJinwoo = {
     id: number;
     nom: string;
     chasseurs: {
@@ -40,10 +40,10 @@ export type TeamVulcanJinwoo = {
   
   
   
-  export const teamVulcanJinwoo: TeamVulcanJinwoo[] = [
+  export const teamDeimosJinwoo: TeamDeimosJinwoo[] = [
     {
       id: 1,
-      nom: "Team Jinwoo #1",
+      nom: "Team Jinwtergr",
       chasseurs: [
         {
           id: 40,

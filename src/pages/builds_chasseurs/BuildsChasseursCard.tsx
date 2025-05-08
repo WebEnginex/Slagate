@@ -55,7 +55,7 @@ type Props = {
 };
 
 function formatTextWithBrackets(text: string) {
-  const regex = /(\[[^\]]+\])|(\d+(?:[.,]\d+)? ?%?)|(\bseconde(?:s)?\b)/gi;
+  const regex = /(\[[^\]]+\])|(\d+(?:[.,]\d+)? ?%?)|(\bseconde(?:s)?\b)|(\bPV\b|\bpv\b)|(\bPM\b|\bpm\b)/gi;
 
   return text.split(regex).map((part, index) => {
     if (!part) return null;
@@ -91,6 +91,24 @@ function formatTextWithBrackets(text: string) {
     if (/^seconde(?:s)?$/.test(part)) {
       return (
         <span key={index} className="text-yellow-500">
+          {part}
+        </span>
+      );
+    }
+
+    // "PV" ou "pv" en rouge
+    if (/^PV$|^pv$/.test(part)) {
+      return (
+        <span key={index} className="text-red-500">
+          {part}
+        </span>
+      );
+    }
+
+    // "PM" ou "pm" en bleu
+    if (/^PM$|^pm$/.test(part)) {
+      return (
+        <span key={index} className="text-blue-500">
           {part}
         </span>
       );
@@ -364,6 +382,9 @@ export default function BuildChasseurCard({
                 })}
             </div>
           </SectionCollapsible>
+
+
+          
         </CardContent>
       )}
     </Card>

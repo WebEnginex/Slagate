@@ -90,6 +90,7 @@ export type Database = {
         }
         Relationships: []
       }
+      
       jinwoo: {
         Row: {
           id: number
@@ -138,39 +139,51 @@ export type Database = {
           id: number
           image: string | null
           nom: string
+          description: string | null
         }
         Insert: {
           element?: string | null
           id?: number
           image?: string | null
           nom: string
+          description?: string | null
         }
         Update: {
           element?: string | null
           id?: number
           image?: string | null
           nom?: string
+          description?: string | null
         }
         Relationships: []
       }
       jinwoo_qte: {
         Row: {
           element: string | null
+          element2?: string | null
+          element3?: string | null
           id: number
           image: string | null
           nom: string
+          description: string | null
         }
         Insert: {
           element?: string | null
+          element2?: string | null
+          element3?: string | null
           id?: number
           image?: string | null
           nom: string
+          description?: string | null
         }
         Update: {
           element?: string | null
+          element2?: string | null
+          element3?: string | null
           id?: number
           image?: string | null
           nom?: string
+          description?: string | null
         }
         Relationships: []
       }
@@ -278,6 +291,48 @@ export type Database = {
           nom?: string
         }
         Relationships: []
+      }
+      ennio: {
+        Row: {
+          id: number; // Non nullable
+          created_at: string; // Non nullable, ISO date format
+          nom?: string | null; // Nullable
+          image?: string | null; // Nullable
+        };
+        Insert: {
+          id?: number; // Optionnel pour les insertions
+          created_at?: string; // Optionnel pour les insertions
+          nom?: string | null; // Nullable
+          image?: string | null; // Nullable
+        };
+        Update: {
+          id?: number; // Optionnel pour les mises à jour
+          created_at?: string; // Optionnel pour les mises à jour
+          nom?: string | null; // Nullable
+          image?: string | null; // Nullable
+        };
+        Relationships: [];
+      }
+      boss_de_guilde: {
+        Row: {
+          id: number; // Non nullable
+          created_at: string; // Non nullable, ISO date format
+          nom?: string | null; // Nullable
+          image?: string | null; // Nullable
+        };
+        Insert: {
+          id?: number; // Optionnel pour les insertions
+          created_at?: string; // Optionnel pour les insertions
+          nom?: string | null; // Nullable
+          image?: string | null; // Nullable
+        };
+        Update: {
+          id?: number; // Optionnel pour les mises à jour
+          created_at?: string; // Optionnel pour les mises à jour
+          nom?: string | null; // Nullable
+          image?: string | null; // Nullable
+        };
+        Relationships: [];
       }
     }
     Views: {
