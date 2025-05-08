@@ -7,7 +7,8 @@ import BuildChasseurCard from "./BuildsChasseursCard";
 import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
 import { Separator } from "@/components/ui/separator";
-import { FiRefreshCw } from "react-icons/fi"; //
+import { FiRefreshCw } from "react-icons/fi";
+import { useLocation } from "react-router-dom"; // Ajoute cet import
 
 export default function BuildsPage() {
   type Chasseur = Database["public"]["Tables"]["chasseurs"]["Row"];
@@ -53,6 +54,8 @@ export default function BuildsPage() {
     },
   ];
 
+  const location = useLocation(); // Ajoute ceci
+
   useEffect(() => {
     const fetchData = async () => {
       const [chasseurData, artefactData, noyauData, ombreData, setBonusData] =
@@ -73,6 +76,25 @@ export default function BuildsPage() {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    // Quand les builds sont chargés, tente de scroller sur l'ancre
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          const yOffset = -40; // Décalage en pixels (ajuste selon ton header)
+          const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
+          // Ajoute la classe d'animation
+          el.classList.add("animate-pulse-once");
+          setTimeout(() => el.classList.remove("animate-pulse-once"), 900);
+        }
+      }, 200); // Attends un peu pour que le DOM soit prêt
+    }
+  }, [location, chasseurs, artefacts, noyaux, ombres, setsBonus]);
+  // Ajoute toutes les dépendances qui déclenchent le rendu des cartes
 
   const filteredBuilds = buildsChasseurs.filter((entry) => {
     const chasseur = chasseurs.find((c) => c.id === entry.chasseurId);

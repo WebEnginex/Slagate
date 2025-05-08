@@ -2119,7 +2119,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 102,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Dégâts de feu",
             statsSecondaires: ["-"],
           },
           bague: {

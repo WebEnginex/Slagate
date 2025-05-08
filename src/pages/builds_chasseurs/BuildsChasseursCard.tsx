@@ -130,14 +130,27 @@ export default function BuildChasseurCard({
 }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedBuildIndex, setSelectedBuildIndex] = useState(0);
-  const [openSections, setOpenSections] = useState<string[]>([]);
+  const [openSections, setOpenSections] = useState<string[]>(["artefacts"]); // artefacts ouvert par défaut
   const [activeNoyauIndices, setActiveNoyauIndices] = useState<Record<number, number>>({});
 
   const build = builds[selectedBuildIndex];
 
+  // Ouvre "artefacts" à l'ouverture d'un chasseur (quand isExpanded passe à true)
   useEffect(() => {
-    setOpenSections([]); // reset sections à chaque changement
-  }, [selectedBuildIndex]);
+    if (isExpanded) {
+      setOpenSections((prev) =>
+        prev.length === 0 ? ["artefacts"] : prev
+      );
+    } else {
+      setOpenSections([]); // ferme tout quand on referme le chasseur
+    }
+  }, [isExpanded]);
+
+  // Ne réinitialise PAS openSections quand on change de build
+  // ...supprimer ou commenter ce useEffect...
+  // useEffect(() => {
+  //   setOpenSections([]); // reset sections à chaque changement
+  // }, [selectedBuildIndex]);
 
   const getById = <T extends { id: number }>(list: T[], id: number) =>
     list.find((item) => item.id === id);
@@ -160,7 +173,10 @@ export default function BuildChasseurCard({
   console.log("Props reçues :", { builds, noyaux });
 
   return (
-    <Card className="mb-10 bg-sidebar border-sidebar-border overflow-hidden">
+    <Card
+      id={`chasseur-${chasseur.id}`} // Ajoute cet id pour l'ancre
+      className="mb-10 bg-sidebar border-sidebar-border overflow-hidden"
+    >
       <CardHeader
         className="p-4 flex flex-row items-center justify-between bg-sidebar cursor-pointer"
         onClick={() => setIsExpanded((prev) => !prev)}

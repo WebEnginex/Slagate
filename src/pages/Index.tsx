@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -88,34 +89,39 @@ const Index = () => {
           </h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {hunters.map((hunter, index) => (
-              <Card
+              <Link
+                to={`/builds#chasseur-${hunter.id}`} // Ajoute une ancre unique par chasseur
                 key={hunter.id}
-                className="bg-gray-800 border border-gray-700 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg overflow-hidden"
+                className="block"
               >
-                <CardContent
-                  className="relative flex justify-center items-end h-64 bg-gray-700 p-0"
-                  style={{
-                    backgroundImage: "url('https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Bg_AchievePage_1.png')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
+                <Card
+                  className="bg-gray-800 border border-gray-700 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg overflow-hidden"
                 >
-                  {hunter.nom === "Prochainement" ? (
-                    <div className="text-gray-300 text-center">
-                      Image bientôt disponible
+                  <CardContent
+                    className="relative flex justify-center items-end h-64 bg-gray-700 p-0"
+                    style={{
+                      backgroundImage: "url('https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Bg_AchievePage_1.png')",
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  >
+                    {hunter.nom === "Prochainement" ? (
+                      <div className="text-gray-300 text-center">
+                        Image bientôt disponible
+                      </div>
+                    ) : (
+                      <img
+                        src={hunter.image_body}
+                        alt={hunter.nom}
+                        className="w-full h-full object-contain"
+                      />
+                    )}
+                    <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/70 to-transparent text-center p-2">
+                      <h3 className="text-lg font-bold text-white">{hunter.nom}</h3>
                     </div>
-                  ) : (
-                    <img
-                      src={hunter.image_body}
-                      alt={hunter.nom}
-                      className="w-full h-full object-contain"
-                    />
-                  )}
-                  <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/70 to-transparent text-center p-2">
-                    <h3 className="text-lg font-bold text-white">{hunter.nom}</h3>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
