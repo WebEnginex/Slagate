@@ -119,6 +119,7 @@ export default function TeamJinwooCard({
     null
   );
   const [openSections, setOpenSections] = useState<string[]>([]);
+  const [activeNoyauIndices, setActiveNoyauIndices] = useState<Record<number, number>>({});
 
   // Reset openSections when team or chasseur changes
   useEffect(() => {
@@ -412,42 +413,58 @@ export default function TeamJinwooCard({
 
                   {/* Noyaux Section */}
 <div className="bg-sidebar/50 rounded-lg overflow-hidden">
-  <Collapsible
-    open={isSectionOpen("noyaux")}
-    onOpenChange={() => toggleSection("noyaux")}
-  >
+  <Collapsible open={isSectionOpen("noyaux")} onOpenChange={() => toggleSection("noyaux")}>
     <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
       <Dna className="h-4 w-4 text-solo-purple" />
       <span className="flex-1 text-left">Noyaux</span>
     </CollapsibleTrigger>
     <CollapsibleContent>
       <div className="p-4">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {ch.noyaux.map((n, i) => {
-            const noyau = getFromList(noyaux, n.id);
+        <div className="text-sm text-gray-300 leading-relaxed mb-4">
+          Les noyaux sont essentiels pour renforcer les capacités de votre chasseur.
+          Sélectionnez-les en fonction des statistiques principales et des bonus secondaires.
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {Object.entries(ch.noyaux).map(([slot, noyauxList]) => {
+            const slotNumber = parseInt(slot, 10);
+            const activeIndex = activeNoyauIndices[slotNumber] || 0;
+            const noyau = Array.isArray(noyauxList) ? noyauxList[activeIndex] : null;
+            const noyauData = noyau ? getFromList(noyaux, noyau.id) : null;
+
+            if (!noyauData) return null;
+
             return (
-              <div
-                key={i}
-                className="bg-sidebar p-4 rounded-lg border border-sidebar-border"
-              >
-                <div className="flex flex-col">
-                  <div className="flex flex-col items-center mb-3">
-                    <img
-                      src={noyau?.image || ""}
-                      className="w-16 h-16 object-contain mb-2"
-                      alt={noyau?.nom || "Noyau"}
-                    />
-                    <p className="text-sm font-semibold text-white text-center">
-                      {noyau?.nom}
-                    </p>
-                  </div>
-                  <div className="bg-solo-purple/20 text-white text-xs px-3 py-1.5 rounded-md text-center font-medium">
-                    {n.statPrincipale}
-                  </div>
-                  <p className="text-xs text-gray-300 mt-1.5 text-center">
-                    {formatTextWithBrackets(noyau?.description || "")}
-                  </p>
+              <div key={slot} className="bg-sidebar p-4 rounded-lg border border-sidebar-border">
+                <div className="flex flex-col items-center mb-3">
+                  <img
+                    src={noyauData.image || ""}
+                    className="w-16 h-16 object-contain mb-2"
+                    alt={noyauData.nom || "Noyau"}
+                  />
+                  <p className="text-sm font-semibold text-white text-center">{noyauData.nom}</p>
                 </div>
+                <div className="bg-solo-purple/20 text-white text-xs px-3 py-1.5 rounded-md text-center font-medium">
+                  {noyau.statPrincipale}
+                </div>
+                <div className="text-xs text-gray-300 mt-1.5 text-center">
+                  {noyauData.description}
+                </div>
+                {Array.isArray(noyauxList) && noyauxList.length > 1 && (
+                  <button
+                    onClick={() =>
+                      setActiveNoyauIndices((prev) => ({
+                        ...prev,
+                        [slotNumber]:
+                          (prev[slotNumber] || 0) + 1 >= noyauxList.length
+                            ? 0
+                            : (prev[slotNumber] || 0) + 1,
+                      }))
+                    }
+                    className="mt-4 bg-solo-purple text-white text-xs px-4 py-2 rounded-md"
+                  >
+                    Alternative
+                  </button>
+                )}
               </div>
             );
           })}

@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
+import Prochainement from "@/pages/Prochainement";
+
 
 import Guides from "@/pages/Guides"; 
 import Portal from "@/pages/guides/portals/Portals";
@@ -68,8 +69,8 @@ const App = () => (
           <Route path="/atelier/Baran" element={<Baran />} />
           <Route path="/atelier/Deimos" element={<Deimos />} />
 
-          <Route path="/ennio" element={<Ennio />} />
-          <Route path="/bdg" element={<BossDeGuilde />} />
+          <Route path="/ennio" element={<Prochainement />} />
+          <Route path="/bdg" element={<Prochainement />} />
 
 
           <Route path="/promo-codes" element={<PromoCodes />} />
