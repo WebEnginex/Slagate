@@ -1,6 +1,5 @@
-- Faire la page Ennio comme Atelier avec chaque ennio + 2 faiblesses. (team jinwoo)
+Les artefacts s'ouvrent automatiquement lorsque vous accédez à un onglet.
 
-- Faire la page BDG (redirection vers la page directement) (team de 7)
+🔹 Si vous changez de build pour un même chasseur, les onglets restent ouverts et ne se ferment plus.
 
-
-Rajouter https://www.tiktok.com/@sohovenn (rajouter aussi au footer)
+🔹 En sélectionnant un autre chasseur, les onglets se ferment automatiquement, et seul celui du chasseur sélectionné s'ouvre avec les artefacts visibles. 
