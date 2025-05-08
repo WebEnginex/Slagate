@@ -8,9 +8,9 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   // IDs des chasseurs à afficher
-  const chasseur1 = 35; // ID du premier chasseur
-  const chasseur2 = 13; // ID du deuxième chasseur
-  const chasseur3 = 41; // ID du troisième chasseur
+  const chasseur1 = 13; // ID du premier chasseur
+  const chasseur2 = 41; // ID du deuxième chasseur
+  const chasseur3 = 43; // ID du troisième chasseur
 
   const [hunters, setHunters] = useState([]);
   const [latestVideoId, setLatestVideoId] = useState(""); // État pour stocker l'ID de la dernière vidéo YouTube
