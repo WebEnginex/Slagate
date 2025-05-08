@@ -26,33 +26,40 @@ export default function BuildsPage() {
   const [search, setSearch] = useState("");
   const [selectedElement, setSelectedElement] = useState<string | null>(null);
 
-  const elementIcons = [
-    {
-      id: "feu",
-      image:
-        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Feu_element.webp",
-    },
-    {
-      id: "eau",
-      image:
-        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Eau_element.webp",
-    },
-    {
-      id: "vent",
-      image:
-        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Vent_element.webp",
-    },
-    {
-      id: "lumiere",
-      image:
-        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Lumiere_element.webp",
-    },
-    {
-      id: "tenebres",
-      image:
-        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Tenebre_element.webp",
-    },
-  ];
+  // ...existing code...
+const elementIcons = [
+  {
+    id: "jinwoo",
+    image:
+      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/hunter-portrait//SungJinWoo_Jeju_Portrait.png",
+  },
+  {
+    id: "feu",
+    image:
+      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Feu_element.webp",
+  },
+  {
+    id: "eau",
+    image:
+      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Eau_element.webp",
+  },
+  {
+    id: "vent",
+    image:
+      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Vent_element.webp",
+  },
+  {
+    id: "lumiere",
+    image:
+      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Lumiere_element.webp",
+  },
+  {
+    id: "tenebres",
+    image:
+      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Tenebre_element.webp",
+  },
+];
+// ...existing code...
 
   const location = useLocation(); // Ajoute ceci
 
