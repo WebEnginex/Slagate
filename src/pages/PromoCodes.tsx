@@ -114,7 +114,38 @@ const promoCodes = [
     ],
     date: "31 Mai 2025 à 2h du matin",
   },
+  {
+    code: "CMIRONGIFT",
+    rewards: [
+      "Énergie de l'ombre x1,111",
+    ],
+    date: "?",
+  },
+  {
+    code: "HAPPYCHANNIVERSARY",
+    rewards: [
+      "Concept spécial x2",
+      "Concept d'arme exclusive de chasseur x2",
+      "Concept d'arme de joueur spécial x2",
+    ],
+    date: "?",
+  },
+  {
+    code: "YEAROFTHEHUNTER",
+    rewards: [
+      "Pierres de l'esprit x1,000",
+    ],
+    date: "?",
+  },
+  {
+    code: "1YRANIVTHANKU",
+    rewards: [
+      "Ticket de tirage personnalisé x10",
+    ],
+    date: "?",
+  },
 ];
+
 
 // Fonction pour formatter le texte avec mise en évidence des mots entre guillemets
 const formatDescription = (text: React.ReactNode) => {
