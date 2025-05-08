@@ -16,7 +16,7 @@ const Layout = ({ children }: LayoutProps) => {
 
       {/* Structure verticale pour main + footer */}
       <div className="flex flex-col flex-1 min-h-screen">
-        <main className="flex-1 overflow-auto relative">
+        <main className="flex-1 overflow-auto relative lg:ml-64">
           <button
             className="fixed top-4 left-4 z-30 rounded-md bg-sidebar p-2 text-white lg:hidden"
             onClick={() => setIsMobileOpen(true)}
