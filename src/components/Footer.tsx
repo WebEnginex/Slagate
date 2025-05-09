@@ -7,8 +7,8 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-sidebar-accent border-t border-sidebar-border py-8 mt-10 relative">
-      <div className="container mx-auto px-4 text-center space-y-6">
+    <footer className="bg-sidebar-accent border-t border-sidebar-border py-8 mt-auto lg:ml-64">
+      <div className="container mx-auto px-4 flex flex-col items-center text-center space-y-6">
         <div>
           <p className="text-base font-medium text-white mb-4">
             Suivez-moi sur :
@@ -115,7 +115,7 @@ const Footer = () => {
       {/* Flèche pour remonter en haut */}
       <button
         onClick={scrollToTop}
-        className="absolute right-4 bottom-4 bg-violet-500 hover:bg-violet-600 text-white p-3 rounded-full shadow-lg transition-all duration-300"
+        className="fixed right-4 bottom-4 bg-violet-500 hover:bg-violet-600 text-white p-3 rounded-full shadow-lg transition-all duration-300"
         aria-label="Remonter en haut"
       >
         <img
