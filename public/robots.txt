@@ -12,3 +12,6 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Autoriser explicitement l'accès au favicon
+Allow: /favicon.ico
