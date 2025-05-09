@@ -106,99 +106,29 @@ YoutubeEmbed.displayName = "YoutubeEmbed";
 // Composant principal
 // =========================
 const Index = () => {
-  // IDs des chasseurs à afficher
-  const chasseur1 = 43;
-  const chasseur2 = 41;
-  const chasseur3 = 13;
-
-  // Tableau des URLs d'images locales pour les 3 chasseurs
-  const hunterImages = [
-    `ChaHaeIn_MM_Portrait_Body.png`,
-    `/images/hunter_body/${chasseur2}.png`,
-    `/images/hunter_body/${chasseur3}.png`,
+  // Tableau statique des chasseurs à afficher (id, nom, image locale)
+  const hunters = [
+    {
+      id: 43,
+      nom: "Cha Hae-In",
+      image: "/images/hunter_body/ChaHaeIn_MM_Portrait_Body.png",
+    },
+    {
+      id: 41,
+      nom: "Seo Lin",
+      image: "/images/hunter_body/SeoLin_Portrait_Body.png",
+    },
+    {
+      id: 13,
+      nom: "Goto Ryuji",
+      image: "/images/hunter_body/GotoRyuji_Portrait_Body.png",
+    },
   ];
-
-  // Centralisation de l'état : images en cache, chasseurs, id vidéo YouTube
-  const [state, setState] = useState<{
-    cachedImages: Record<string, string>;
-    hunters: Hunter[];
-    latestVideoId: string;
-  }>({
-    cachedImages: {},
-    hunters: [],
-    latestVideoId: "",
-  });
-
-  // =========================
-  // Chargement et cache des images des chasseurs
-  // =========================
-  useEffect(() => {
-    const fetchHunters = async () => {
-      const { data, error } = await supabase
-        .from("chasseurs")
-        .select("id, nom, image")
-        .in("id", [chasseur1, chasseur2, chasseur3]);
-
-      if (data) {
-        // Organiser les chasseurs dans l'ordre des IDs et forcer le typage
-        const sortedHunters: Hunter[] = [
-          data.find((hunter: any) => hunter.id === chasseur1) || {
-            id: chasseur1,
-            nom: "",
-            image: null,
-          },
-          data.find((hunter: any) => hunter.id === chasseur2) || {
-            id: chasseur2,
-            nom: "",
-            image: null,
-          },
-          data.find((hunter: any) => hunter.id === chasseur3) || {
-            id: chasseur3,
-            nom: "",
-            image: null,
-          },
-        ];
-
-        // Gestion du cache des images
-        const newCache: Record<string, string> = { ...state.cachedImages };
-        for (const hunter of sortedHunters) {
-          if (hunter.image) {
-            const cacheKey = `hunterImg_${hunter.id}`;
-            let base64 = localStorage.getItem(cacheKey);
-            if (!base64) {
-              base64 = await fetchImageAsBase64(hunter.image);
-              if (base64) {
-                localStorage.setItem(cacheKey, base64);
-                newCache[hunter.id] = base64;
-              }
-            } else {
-              newCache[hunter.id] = base64;
-            }
-          }
-        }
-        // Remplacement des URLs par le cache si dispo
-        const huntersWithCache: Hunter[] = sortedHunters.map((hunter) =>
-          newCache[hunter.id]
-            ? { ...hunter, image: newCache[hunter.id] }
-            : hunter
-        );
-        setState((prev) => ({
-          ...prev,
-          hunters: huntersWithCache,
-          cachedImages: newCache,
-        }));
-      }
-      if (error) {
-        console.error("Erreur lors de la récupération des chasseurs :", error);
-      }
-    };
-    fetchHunters();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   // =========================
   // Récupération de la dernière vidéo YouTube avec cache local (24h)
   // =========================
+  const [latestVideoId, setLatestVideoId] = useState("");
   useEffect(() => {
     const fetchLatestVideo = async () => {
       const cacheKey = "latestYoutubeVideoId";
@@ -206,9 +136,8 @@ const Index = () => {
       const now = Date.now();
       const cacheTime = localStorage.getItem(cacheTimeKey);
       const cacheId = localStorage.getItem(cacheKey);
-      // 24h = 86400000 ms
       if (cacheId && cacheTime && now - parseInt(cacheTime, 10) < 86400000) {
-        setState((prev) => ({ ...prev, latestVideoId: cacheId }));
+        setLatestVideoId(cacheId);
         return;
       }
       const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
@@ -222,7 +151,7 @@ const Index = () => {
         const response = await axios.get(url);
         const video = response.data.items[0];
         if (video && video.id.videoId) {
-          setState((prev) => ({ ...prev, latestVideoId: video.id.videoId }));
+          setLatestVideoId(video.id.videoId);
           localStorage.setItem(cacheKey, video.id.videoId);
           localStorage.setItem(cacheTimeKey, now.toString());
         }
@@ -251,8 +180,8 @@ const Index = () => {
             Derniers chasseurs sortis
           </h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {state.hunters.map((hunter, index) => (
-              <HunterCard key={hunter.id} hunter={hunter} imageUrl={hunterImages[index]} />
+            {hunters.map((hunter) => (
+              <HunterCard key={hunter.id} hunter={hunter} imageUrl={hunter.image} />
             ))}
           </div>
         </div>
@@ -293,8 +222,8 @@ const Index = () => {
           <h2 className="text-3xl font-bold text-center text-violet-400 mb-8">
             Dernière vidéo YouTube
           </h2>
-          {state.latestVideoId ? (
-            <YoutubeEmbed videoId={state.latestVideoId} />
+          {latestVideoId ? (
+            <YoutubeEmbed videoId={latestVideoId} />
           ) : (
             <p className="text-center text-gray-300">Chargement de la dernière vidéo...</p>
           )}
