@@ -14,6 +14,8 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { ExternalLink, ChevronDown, ChevronUp, X } from "lucide-react";
+import SEO from "@/components/SEO";
+
 
 // Fonction pour afficher les icônes des réseaux sociaux
 const getSocialIcon = (type: SocialLink["type"]) => {
@@ -122,6 +124,11 @@ const Creators = () => {
 
   return (
     <Layout>
+      <SEO
+  title="Soutenir un Créateur - Solo Leveling: ARISE"
+  description="Apprenez comment soutenir vos créateurs de contenu préférés pour Solo Leveling: ARISE via le site Netmarble Creator. Suivez notre guide étape par étape."
+  keywords="Solo Leveling, ARISE, créateurs, soutien, Netmarble Creator, guide, SLAGATE"
+/>
       <div className="mb-8">
         <h1 className="mb-2 text-3xl font-bold">Soutenir un créateur</h1>
         <p className="text-muted-foreground">

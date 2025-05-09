@@ -9,6 +9,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Flame, Sword } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
+import SEO from "@/components/SEO";
 
 type Boss = Database["public"]["Tables"]["bosses"]["Row"];
 
@@ -27,6 +28,12 @@ export default function AtelierDeLaLumiere() {
 
   return (
     <Layout>
+      {/* Ajout du composant SEO */}
+      <SEO
+        title="Atelier de la Lumière - Solo Leveling: ARISE"
+        description="Découvrez les boss de l'Atelier de la Lumière dans Solo Leveling: ARISE. Apprenez leurs faiblesses et préparez-vous à les affronter."
+        keywords="Solo Leveling, ARISE, Atelier de la Lumière, boss, faiblesses, stratégie, SLAGATE"
+      />
       <div className="w-full px-4 py-6 sm:py-8">
         <div className="mb-6 sm:mb-8 space-y-2 max-w-7xl mx-auto">
           <div className="flex items-center gap-2">

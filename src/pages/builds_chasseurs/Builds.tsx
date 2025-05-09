@@ -8,7 +8,9 @@ import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
 import { Separator } from "@/components/ui/separator";
 import { FiRefreshCw } from "react-icons/fi";
-import { useLocation } from "react-router-dom"; // Ajoute cet import
+import { useLocation } from "react-router-dom";
+import SEO from "@/components/SEO"; 
+
 
 export default function BuildsPage() {
   type Chasseur = Database["public"]["Tables"]["chasseurs"]["Row"];
@@ -117,28 +119,29 @@ const elementIcons = [
 
   return (
     <Layout>
+      {/* Ajout des balises <title> et <meta> */}
+      <SEO
+        title="Builds des Chasseurs - Solo Leveling: ARISE"
+        description="Découvrez les meilleurs builds pour vos chasseurs dans Solo Leveling: ARISE. Optimisez vos équipes avec des artefacts, noyaux et bonus de sets adaptés."
+        keywords="Solo Leveling, builds chasseurs, artefacts, noyaux, sets bonus, ARISE"
+      />
+
       <div className="w-full px-4 py-6">
         <div className="max-w-7xl mx-auto space-y-10">
           <div className="space-y-4">
             {/* Introduction */}
             <div className="bg-sidebar-accent p-6 rounded-lg shadow-md space-y-4">
               <h1 className="text-3xl md:text-4xl font-extrabold text-violet-400 text-center md:text-left">
-                Bienvenue sur la page des builds de chasseurs !
+                Builds de Chasseurs pour Solo Leveling: ARISE
               </h1>
               <p className="text-base md:text-lg text-gray-300 text-center md:text-left">
-                Vous y trouverez des configurations optimisées pour chaque
-                chasseur, comprenant leurs statistiques, les artefacts
-                recommandés, les noyaux et les différents bonus de sets.
+                Découvrez les meilleures configurations pour vos chasseurs dans Solo Leveling: ARISE. Ce guide inclut des statistiques, artefacts, noyaux et bonus de sets pour optimiser vos équipes.
               </p>
               <p className="text-base md:text-lg text-gray-300 text-center md:text-left">
-                Utilisez les outils de recherche et de filtres pour trouver
-                rapidement un chasseur spécifique ou explorer les meilleures
-                configurations adaptées à chaque chasseur.
+                Utilisez les outils de recherche et de filtres pour trouver rapidement un chasseur spécifique ou explorer les meilleures configurations adaptées à chaque chasseur.
               </p>
               <p className="text-base md:text-lg text-gray-300 text-center md:text-left">
-                Que vous soyez débutant à la recherche d'une configuration de
-                départ ou expert cherchant à affiner vos équipes, cette section
-                est conçue pour vous aider à maximiser vos performances.
+                Que vous soyez débutant à la recherche d'une configuration de départ ou expert cherchant à affiner vos équipes, cette section est conçue pour vous aider à maximiser vos performances.
               </p>
               {/* Dernières modifications */}
               <div className="text-center md:text-left">

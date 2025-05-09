@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Layout from "@/components/Layout";
 import { Youtube, Twitch, Twitter } from "lucide-react";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 const Index = () => {
   // IDs des chasseurs à afficher
@@ -81,6 +82,12 @@ const Index = () => {
 
   return (
     <Layout>
+      {/* Ajout du composant SEO */}
+      <SEO
+        title="Accueil - SLAGATE | Solo Leveling: ARISE"
+        description="Bienvenue sur SLAGATE, votre portail dédié à Solo Leveling: ARISE. Découvrez des guides stratégiques, des builds optimisés, des compositions d'équipes et bien plus encore."
+        keywords="Solo Leveling, ARISE, chasseurs, builds, guides, compositions d'équipes, SLAGATE"
+      />
       <div className="w-full px-6 py-12 text-gray-100">
         {/* Section des chasseurs */}
         <div className="mb-16">

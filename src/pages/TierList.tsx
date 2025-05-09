@@ -14,6 +14,7 @@ import { Flame, Sword } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
+import SEO from "@/components/SEO";
 
 // Types Supabase
 type Chasseur = Database["public"]["Tables"]["chasseurs"]["Row"];
@@ -34,6 +35,12 @@ export default function TierListPage() {
 
   return (
     <Layout>
+      {/* Ajout du composant SEO */}
+      <SEO
+        title="Tier List - Solo Leveling: ARISE"
+        description="Découvrez les meilleures tier lists pour Solo Leveling: ARISE. Trouvez les meilleurs chasseurs, armes et compositions d'équipes pour dominer le jeu."
+        keywords="Solo Leveling, ARISE, tier list, chasseurs, armes, équipes, compositions, SLAGATE"
+      />
       <div className="container mx-auto px-4 py-6 text-white">
         <div className="mb-6 space-y-2">
           <div className="bg-sidebar-accent p-6 rounded-lg shadow-md space-y-4">

@@ -16,6 +16,8 @@ import {
 import { X, ChevronDown, ChevronUp } from "lucide-react";
 import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
+import SEO from "@/components/SEO";
+
 
 type SocialLink = {
   type: "youtube" | "twitch" | "twitter" | "instagram" | "website" | "tiktok";
@@ -256,6 +258,11 @@ const PromoCodes = () => {
 
   return (
     <Layout>
+      <SEO
+  title="Codes Promotionnels - Solo Leveling: ARISE"
+  description="Découvrez les derniers codes promotionnels pour Solo Leveling: ARISE. Obtenez des récompenses gratuites en utilisant ces codes avant leur expiration."
+  keywords="Solo Leveling, ARISE, codes promo, récompenses, SLAGATE, codes promotionnels, cadeaux gratuits"
+/>
       <div className="mb-8">
         <h1 className="mb-2 text-3xl font-bold">Codes Promotionnels</h1>
         <p className="text-muted-foreground">
