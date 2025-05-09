@@ -64,7 +64,7 @@ export default function BuildsPage() {
 
   useEffect(() => {
   const fetchData = async () => {
-    const cacheKey = "buildsData_v1.0";
+    const cacheKey = "buildsData_v1.1";
     const cacheDuration = 1000 * 60 * 60 * 24 * 30; // 30 jours
     const cachedData = localStorage.getItem(cacheKey);
 
