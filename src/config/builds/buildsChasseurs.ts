@@ -2372,7 +2372,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             statsSecondaires: ["-"],
           },
           boucles: {
-            id: 39,
+            id: 36,
             statPrincipale: "PM",
             statsSecondaires: ["-"],
           },
@@ -2444,7 +2444,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             statsSecondaires: ["-"],
           },
           boucles: {
-            id: 39,
+            id: 36,
             statPrincipale: "PM",
             statsSecondaires: ["-"],
           },
@@ -2516,7 +2516,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             statsSecondaires: ["-"],
           },
           boucles: {
-            id: 39,
+            id: 36,
             statPrincipale: "PM",
             statsSecondaires: ["-"],
           },
@@ -2588,7 +2588,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             statsSecondaires: ["-"],
           },
           boucles: {
-            id: 39,
+            id: 36,
             statPrincipale: "PM",
             statsSecondaires: ["-"],
           },
@@ -2660,7 +2660,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             statsSecondaires: ["-"],
           },
           boucles: {
-            id: 39,
+            id: 36,
             statPrincipale: "PM",
             statsSecondaires: ["-"],
           },
