@@ -10,7 +10,7 @@ import SEO from "@/components/SEO";
 
 const Index = () => {
   // IDs des chasseurs à afficher
-  const chasseur1 = 43; // ID du premier chasseur
+  const chasseur1 = 43; // ID du premier chasseur.
   const chasseur2 = 41; // ID du deuxième chasseur
   const chasseur3 = 13; // ID du troisième chasseur
 
