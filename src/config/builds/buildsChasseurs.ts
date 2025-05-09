@@ -471,7 +471,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 50,
-            statPrincipale: "Vent",
+            statPrincipale: "Dégâts de vent",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -543,7 +543,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 54,
-            statPrincipale: "Vent",
+            statPrincipale: "Dégâts de vent",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -615,7 +615,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 50,
-            statPrincipale: "Vent",
+            statPrincipale: "Dégâts de vent",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -687,7 +687,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 50,
-            statPrincipale: "Vent",
+            statPrincipale: "Dégâts de vent",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -767,7 +767,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 47,
-            statPrincipale: "Dégats de vent",
+            statPrincipale: "Dégâts de vent",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -842,7 +842,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 47,
-            statPrincipale: "Dégats de vent",
+            statPrincipale: "Dégâts de vent",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -917,7 +917,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 47,
-            statPrincipale: "Dégats de vent",
+            statPrincipale: "Dégâts de vent",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -1000,7 +1000,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 54,
-            statPrincipale: "Dégats de lumière",
+            statPrincipale: "Dégâts de lumière",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -1072,7 +1072,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 47,
-            statPrincipale: "Dégats de lumière",
+            statPrincipale: "Dégâts de lumière",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -1144,7 +1144,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 54,
-            statPrincipale: "Dégats de lumière",
+            statPrincipale: "Dégâts de lumière",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -1296,7 +1296,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 52,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Dégâts de tenebre",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -1363,12 +1363,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           collier: {
             id: 74,
-            statPrincipale: "Hausse des dégâts",
+            statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           bracelet: {
             id: 52,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Dégâts de tenebre",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -4146,7 +4146,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           collier: {
             id: 76,
-            statPrincipale: "Hausse des dégâts",
+            statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           bracelet: {
@@ -4217,7 +4217,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           collier: {
             id: 76,
-            statPrincipale: "Hausse des dégâts",
+            statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           bracelet: {
@@ -4296,7 +4296,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           collier: {
             id: 68,
-            statPrincipale: "Hausse des dégâts",
+            statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           bracelet: {
@@ -4368,7 +4368,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           collier: {
             id: 68,
-            statPrincipale: "Hausse des dégâts",
+            statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           bracelet: {
@@ -4440,7 +4440,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           collier: {
             id: 68,
-            statPrincipale: "Hausse des dégâts",
+            statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           bracelet: {
@@ -5116,7 +5116,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 55,
-            statPrincipale: "Dégats de ténèbres",
+            statPrincipale: "Dégâts de ténèbres",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -5188,7 +5188,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 49,
-            statPrincipale: "Dégats de ténèbres",
+            statPrincipale: "Dégâts de ténèbres",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -5260,7 +5260,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 55,
-            statPrincipale: "Dégats de ténèbres",
+            statPrincipale: "Dégâts de ténèbres",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -5332,7 +5332,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 49,
-            statPrincipale: "Dégats de ténèbres",
+            statPrincipale: "Dégâts de ténèbres",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -5404,7 +5404,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 55,
-            statPrincipale: "Dégats de ténèbres",
+            statPrincipale: "Dégâts de ténèbres",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -5484,7 +5484,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 54,
-            statPrincipale: "Dégats de lumière",
+            statPrincipale: "Dégâts de lumière",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -5555,7 +5555,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 54,
-            statPrincipale: "Dégats de lumière",
+            statPrincipale: "Dégâts de lumière",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -5626,7 +5626,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 54,
-            statPrincipale: "Dégats de lumière",
+            statPrincipale: "Dégâts de lumière",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -5926,7 +5926,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 47,
-            statPrincipale: "Dégats de lumière",
+            statPrincipale: "Dégâts de lumière",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -5997,7 +5997,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 47,
-            statPrincipale: "Dégats de lumière",
+            statPrincipale: "Dégâts de lumière",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -6068,7 +6068,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 47,
-            statPrincipale: "Dégats de lumière",
+            statPrincipale: "Dégâts de lumière",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -6147,7 +6147,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 47,
-            statPrincipale: "Dégats de vent",
+            statPrincipale: "Dégâts de vent",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -6218,7 +6218,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 47,
-            statPrincipale: "Dégats de vent",
+            statPrincipale: "Dégâts de vent",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -6289,7 +6289,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 47,
-            statPrincipale: "Dégats de vent",
+            statPrincipale: "Dégâts de vent",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -7340,7 +7340,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 27,
-            statPrincipale: "PV supplémentaire| Dégâts de coup critique",
+            statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -7411,7 +7411,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 23,
-            statPrincipale: "PV supplémentaire| Dégâts de coup critique",
+            statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -7482,7 +7482,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 27,
-            statPrincipale: "PV supplémentaire| Dégâts de coup critique",
+            statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -7553,7 +7553,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 27,
-            statPrincipale: "PV supplémentaire| Dégâts de coup critique",
+            statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -7633,7 +7633,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégats de coup critique | PV supplémentaire",
+            statPrincipale: "Dégâts de coup critique | PV supplémentaire",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -7704,7 +7704,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégats de coup critique | PV supplémentaire",
+            statPrincipale: "Dégâts de coup critique | PV supplémentaire",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -7775,7 +7775,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 22,
-            statPrincipale: "Dégats de coup critique | PV supplémentaire",
+            statPrincipale: "Dégâts de coup critique | PV supplémentaire",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -8377,7 +8377,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 28,
-            statPrincipale: "PV supplémentaire| Dégâts de coup critique",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -8448,7 +8448,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 27,
-            statPrincipale: "PV supplémentaire| Dégâts de coup critique",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -8519,7 +8519,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 23,
-            statPrincipale: "PV supplémentaire| Dégâts de coup critique",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -8590,7 +8590,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 28,
-            statPrincipale: "PV supplémentaire| Dégâts de coup critique",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -8661,7 +8661,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 27,
-            statPrincipale: "PV supplémentaire| Dégâts de coup critique",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -8732,7 +8732,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 28,
-            statPrincipale: "PV supplémentaire| Dégâts de coup critique",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -8803,7 +8803,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 27,
-            statPrincipale: "PV supplémentaire| Dégâts de coup critique",
+            statPrincipale: "Dégâts de coup critique | PV (%)",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -9179,7 +9179,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           collier: {
             id: 71,
-            statPrincipale: "Hausse des dégâts",
+            statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           bracelet: {
@@ -9250,7 +9250,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           collier: {
             id: 71,
-            statPrincipale: "Hausse des dégâts",
+            statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           bracelet: {
