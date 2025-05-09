@@ -8361,22 +8361,22 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         artefacts: {
           casque: {
-            id: 59,
+            id: 64,
             statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
-            id: 6,
+            id: 94,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
-            id: 83,
+            id: 84,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
-            id: 27,
+            id: 28,
             statPrincipale: "PV supplémentaire| Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
@@ -8409,7 +8409,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             { id: 2, statPrincipale: "PV supplémentaire" }
           ],
         },
-        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+        sets_bonus: [{ id: 9 }, { id: 10 }, { id: 41 }, { id: 42 }],
       },
       {
         id: 321,
@@ -8574,22 +8574,22 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         artefacts: {
           casque: {
-            id: 59,
+            id: 64,
             statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
-            id: 6,
+            id: 94,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
-            id: 83,
+            id: 84,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
-            id: 27,
+            id: 28,
             statPrincipale: "PV supplémentaire| Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
@@ -8622,7 +8622,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             { id: 2, statPrincipale: "PV supplémentaire" }
           ],
         },
-        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+        sets_bonus: [{ id: 9 }, { id: 10 }, { id: 41 }, { id: 42 }],
       },
       {
         id: 324,
@@ -8716,22 +8716,22 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         artefacts: {
           casque: {
-            id: 59,
+            id: 64,
             statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
-            id: 6,
+            id: 94,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
-            id: 83,
+            id: 84,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
-            id: 27,
+            id: 28,
             statPrincipale: "PV supplémentaire| Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
@@ -8764,7 +8764,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             { id: 2, statPrincipale: "PV supplémentaire" }
           ],
         },
-        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+        sets_bonus: [{ id: 9 }, { id: 10 }, { id: 41 }, { id: 42 }],
       },
       {
         id: 326,
