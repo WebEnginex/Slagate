@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect, memo } from "react";
 import Layout from "@/components/Layout";
 import {
   Card,
@@ -17,7 +17,6 @@ import { X, ChevronDown, ChevronUp } from "lucide-react";
 import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
 import SEO from "@/components/SEO";
-
 
 type SocialLink = {
   type: "youtube" | "twitch" | "twitter" | "instagram" | "website" | "tiktok";
@@ -148,7 +147,6 @@ const promoCodes = [
   },
 ];
 
-
 // Fonction pour formatter le texte avec mise en évidence des mots entre guillemets
 const formatDescription = (text: React.ReactNode) => {
   if (typeof text !== "string") return text;
@@ -186,8 +184,77 @@ const highlightNumbers = (text: string) => {
   });
 };
 
+// =========================
+// Gestion du cache local des images du guide étape par étape
+// =========================
+const GUIDE_IMAGE_PATH = "/images/code_promo/";
+
+// Fonction utilitaire pour charger une image et la convertir en base64
+const fetchImageAsBase64 = async (url: string): Promise<string | null> => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Image fetch failed");
+    const blob = await response.blob();
+    return await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  } catch (error) {
+    console.error(`Erreur lors du chargement de l'image ${url}:`, error);
+    return null;
+  }
+};
+
+// =========================
+// Composant Memo pour les cartes de codes promo
+// =========================
+const PromoCard = memo(({ promo, onCopy, copiedCode }: {
+  promo: typeof promoCodes[0];
+  onCopy: (code: string) => void;
+  copiedCode: string | null;
+}) => (
+  <Card className="p-4 border border-card-border relative">
+    <div className="flex flex-col gap-2">
+      <p className="text-lg font-semibold text-white">{promo.code}</p>
+      <ul className="list-disc list-inside text-sm text-muted-foreground">
+        {promo.rewards.map((reward, i) => (
+          <li key={i}>{highlightNumbers(reward)}</li>
+        ))}
+      </ul>
+      <p className="text-md font-semibold text-white">
+        Le code expire le : <span className="text-yellow-400">{promo.date}</span>
+      </p>
+    </div>
+    <Button
+      variant="secondary"
+      size="sm"
+      className="absolute top-4 right-4 bg-solo-purple text-white hover:bg-solo-purple hover:scale-105 hover:shadow-lg transition-transform duration-300"
+      onClick={() => onCopy(promo.code)}
+    >
+      {copiedCode === promo.code ? "Copié" : "Copier"}
+    </Button>
+  </Card>
+));
+PromoCard.displayName = "PromoCard";
+
+// =========================
+// Composant principal
+// =========================
 const PromoCodes = () => {
-  // Suppression de la déclaration locale de socialLinks
+  // Centralisation de l'état : images en cache + code copié + modal
+  const [state, setState] = useState<{
+    cachedImages: Record<string, string>; // chemin => base64
+    copiedCode: string | null;
+    modalImage: string | null;
+    openStep: number | null;
+  }>({
+    cachedImages: {},
+    copiedCode: null,
+    modalImage: null,
+    openStep: 0,
+  });
 
   const steps = [
     {
@@ -234,28 +301,67 @@ const PromoCodes = () => {
     },
   ];
 
-  const [openStep, setOpenStep] = useState<number | null>(0);
-  const [modalImage, setModalImage] = useState<string | null>(null);
-  const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  // =========================
+  // Chargement et cache des images du guide étape par étape
+  // =========================
+  useEffect(() => {
+    const loadImages = async () => {
+      const newCache: Record<string, string> = { ...state.cachedImages };
+      let updated = false;
+      for (const step of steps) {
+        const imageName = step.image.replace(GUIDE_IMAGE_PATH, "");
+        const cacheKey = `promoGuideImg_${imageName}`;
+        let base64 = localStorage.getItem(cacheKey);
+        if (!base64) {
+          base64 = await fetchImageAsBase64(step.image);
+          if (base64) {
+            localStorage.setItem(cacheKey, base64);
+            newCache[step.image] = base64;
+            updated = true;
+          }
+        } else {
+          newCache[step.image] = base64;
+        }
+      }
+      if (updated) {
+        setState((prev) => ({ ...prev, cachedImages: newCache }));
+      } else if (Object.keys(newCache).length && Object.keys(newCache).length !== Object.keys(state.cachedImages).length) {
+        setState((prev) => ({ ...prev, cachedImages: newCache }));
+      }
+    };
+    loadImages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const toggleStep = (index: number) => {
-    setOpenStep(openStep === index ? null : index);
-  };
-
-  const openModal = (image: string) => {
-    setModalImage(image);
-  };
-
-  const closeModal = () => {
-    setModalImage(null);
-  };
-
-  const handleCopy = (code: string) => {
+  // =========================
+  // Gestion du copier/coller des codes promo
+  // =========================
+  const handleCopy = useCallback((code: string) => {
     navigator.clipboard.writeText(code);
-    setCopiedCode(code);
-    setTimeout(() => setCopiedCode(null), 2000); // Réinitialiser après 2 secondes
-  };
+    setState((prev) => ({ ...prev, copiedCode: code }));
+    setTimeout(() => setState((prev) => ({ ...prev, copiedCode: null })), 2000);
+  }, []);
 
+  // =========================
+  // Gestion du modal d'image
+  // =========================
+  const openModal = useCallback((image: string) => {
+    setState((prev) => ({ ...prev, modalImage: image }));
+  }, []);
+  const closeModal = useCallback(() => {
+    setState((prev) => ({ ...prev, modalImage: null }));
+  }, []);
+
+  // =========================
+  // Gestion de l'ouverture des étapes du guide
+  // =========================
+  const toggleStep = useCallback((index: number) => {
+    setState((prev) => ({ ...prev, openStep: prev.openStep === index ? null : index }));
+  }, []);
+
+  // =========================
+  // Render principal
+  // =========================
   return (
     <Layout>
       <SEO
@@ -319,7 +425,7 @@ const PromoCodes = () => {
         {steps.map((step, index) => (
           <Card key={index} className="overflow-hidden">
             <Collapsible
-              open={openStep === index}
+              open={state.openStep === index}
               onOpenChange={() => toggleStep(index)}
             >
               <CollapsibleTrigger className="w-full">
@@ -333,7 +439,7 @@ const PromoCodes = () => {
                     </CardTitle>
                   </div>
                   <div className="ml-4">
-                    {openStep === index ? (
+                    {state.openStep === index ? (
                       <ChevronUp className="h-5 w-5 text-muted-foreground" />
                     ) : (
                       <ChevronDown className="h-5 w-5 text-muted-foreground" />
@@ -349,7 +455,7 @@ const PromoCodes = () => {
                       onClick={() => openModal(step.image)}
                     >
                       <img
-                        src={step.image}
+                        src={state.cachedImages[step.image] || step.image}
                         alt={`Étape ${index + 1}`}
                         className="h-full w-full object-cover"
                       />
@@ -368,7 +474,7 @@ const PromoCodes = () => {
       </div>
 
       {/* Modal pour afficher l'image en grand */}
-      {modalImage && (
+      {state.modalImage && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
           <div className="relative w-full h-full p-2 flex items-center justify-center">
             <button
@@ -378,7 +484,7 @@ const PromoCodes = () => {
               <X className="h-6 w-6" />
             </button>
             <img
-              src={modalImage}
+              src={state.cachedImages[state.modalImage] || state.modalImage}
               alt="Agrandissement"
               className="max-w-full max-h-full object-contain rounded-lg"
             />
@@ -391,32 +497,16 @@ const PromoCodes = () => {
         <h2 className="text-2xl font-bold">Codes Promo Disponibles</h2>
         <p>
           {/* Ajout de la date de dernière modification */}
-          <LastModified date={lastModifiedDates.tierList} />
+          <LastModified date={lastModifiedDates.promoCodes} />
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
           {promoCodes.map((promo, index) => (
-            <Card
+            <PromoCard
               key={index}
-              className="p-4 border border-card-border relative"
-            >
-              <div className="flex flex-col gap-2">
-                <p className="text-lg font-semibold text-white">{promo.code}</p>
-                <ul className="list-disc list-inside text-sm text-muted-foreground">
-                  {promo.rewards.map((reward, i) => (
-                    <li key={i}>{highlightNumbers(reward)}</li>
-                  ))}
-                </ul>
-                <p className="text-md font-semibold text-white">Le code expire le : <span className="text-yellow-400">{promo.date}</span> </p>
-              </div>
-              <Button
-                variant="secondary"
-                size="sm"
-                className="absolute top-4 right-4 bg-solo-purple text-white hover:bg-solo-purple hover:scale-105 hover:shadow-lg transition-transform duration-300"
-                onClick={() => handleCopy(promo.code)}
-              >
-                {copiedCode === promo.code ? "Copié" : "Copier"}
-              </Button>
-            </Card>
+              promo={promo}
+              onCopy={handleCopy}
+              copiedCode={state.copiedCode}
+            />
           ))}
         </div>
       </div>

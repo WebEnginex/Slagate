@@ -1,51 +1,138 @@
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Flame, Shield, Sword } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import type { Database } from "@/integrations/supabase/types";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { teamVulcanChasseurs } from "@/config/atelier/vulcan/teamVulcanChasseurs";
-import type { TeamVulcanChasseur } from "@/config/atelier/vulcan/teamVulcanChasseurs";
+import { teamVulcanJinwoo } from "@/config/atelier/vulcan/teamVulcanJinwoo";
 import TeamChasseurCard from "@/pages/atelier/vulcan/TeamChasseurCard";
 import TeamJinwooCard from "./TeamJinwooCard";
-import { teamVulcanJinwoo } from "@/config/atelier/vulcan/teamVulcanJinwoo";
-import { Separator } from "@/components/ui/separator";
 import { ExpandedTeamProvider } from "@/contexts/ExpandedTeamContext";
-import LastModified from "@/components/LastModified";
-import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Swords, Shield } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+
+const CACHE_VERSION = "_v1";
+const CACHE_EXPIRATION = 1000 * 60 * 60 * 24; // 24 heures
+
+function getCachedData(key: string) {
+  const cached = localStorage.getItem(key);
+  if (!cached) return null;
+
+  const { data, timestamp } = JSON.parse(cached);
+  if (Date.now() - timestamp > CACHE_EXPIRATION) {
+    localStorage.removeItem(key);
+    return null;
+  }
+  return data;
+}
+
+function setCachedData(key: string, data: any) {
+  localStorage.setItem(
+    key,
+    JSON.stringify({ data, timestamp: Date.now() })
+  );
+}
+
+async function fetchData(key: string, fetchFn: () => Promise<any>) {
+  const cachedData = getCachedData(key);
+  if (cachedData) return cachedData;
+
+  const data = await fetchFn();
+  setCachedData(key, data);
+  return data;
+}
+
+// Correction des transformations pour `teamVulcanChasseurs` et `teamVulcanJinwoo`
+const transformedTeamVulcanChasseurs = teamVulcanChasseurs.map((team) => ({
+  ...team,
+  chasseurs: team.chasseurs.map((chasseur) => ({
+    ...chasseur,
+    noyaux: Object.values(chasseur.noyaux).flat(), // Aplatir les noyaux en un tableau
+  })),
+}));
+
+const transformedTeamVulcanJinwoo = teamVulcanJinwoo.map((team) => ({
+  ...team,
+  armes: [team.arme1, team.arme2]
+    .filter(Boolean)
+    .map((id) => ({
+      id,
+      image: `path/to/image/${id}.png`,
+      nom: `Arme ${id}`,
+      arme_element: "unknown", // Placeholder for missing property
+      created_at: new Date().toISOString(), // Placeholder for missing property
+    })),
+  competences: [team.competence1, team.competence2]
+    .filter(Boolean)
+    .map((id) => ({
+      id,
+      description: `Competence ${id}`,
+      element: "unknown", // Placeholder for missing property
+      image: `path/to/image/${id}.png`, // Placeholder for missing property
+      nom: `Competence ${id}`,
+    })),
+  qtes: [team.qte1, team.qte2]
+    .filter(Boolean)
+    .map((id) => ({
+      id,
+      description: `QTE ${id}`,
+      element: "unknown", // Placeholder for missing property
+      image: `path/to/image/${id}.png`, // Placeholder for missing property
+      nom: `QTE ${id}`,
+    })),
+  pierres: [
+    { id: team.pierre_benediction_booster1, type: "booster", description: `Pierre Booster 1` },
+    { id: team.pierre_benediction_booster2, type: "booster", description: `Pierre Booster 2` },
+    { id: team.pierre_benediction_booster3, type: "booster", description: `Pierre Booster 3` },
+    { id: team.pierre_benediction_booster4, type: "booster", description: `Pierre Booster 4` },
+    { id: team.pierre_benediction_survie1, type: "survie", description: `Pierre Survie 1` },
+    { id: team.pierre_benediction_survie2, type: "survie", description: `Pierre Survie 2` },
+    { id: team.pierre_benediction_survie3, type: "survie", description: `Pierre Survie 3` },
+    { id: team.pierre_benediction_survie4, type: "survie", description: `Pierre Survie 4` },
+  ]
+    .filter((pierre) => pierre.id)
+    .map((pierre) => ({
+      ...pierre,
+      created_at: new Date().toISOString(), // Placeholder for missing property
+      image: `path/to/image/${pierre.id}.png`, // Placeholder for missing property
+      nom: `Pierre ${pierre.id}`,
+    })),
+  chasseurs: team.chasseurs.map((chasseur) => ({
+    ...chasseur,
+    noyaux: Object.values(chasseur.noyaux).flat(), // Flatten noyaux into an array
+  })),
+}));
+
+const bossData = {
+  nom: "Vulcan",
+  image: "/images/vulcan.png",
+  faiblesse1: "fire",
+  faiblesse2: "ice",
+  puissance_facile: "350.000",
+  puissance_normal: "400.000",
+  puissance_difficile: "450.000",
+};
+
+// Replace dynamic boss fetching with static data
+const boss = bossData;
 
 export default function VulcanPage() {
-  type Boss = Database["public"]["Tables"]["bosses"]["Row"];
-  type Chasseur = Database["public"]["Tables"]["chasseurs"]["Row"];
-  type Artefact = Database["public"]["Tables"]["artefacts"]["Row"];
-  type Noyau = Database["public"]["Tables"]["noyaux"]["Row"];
-  type Ombre = Database["public"]["Tables"]["ombres"]["Row"];
-  type SetBonus = Database["public"]["Tables"]["sets_bonus"]["Row"];
-  type JinwooArme = Database["public"]["Tables"]["jinwoo_armes"]["Row"];
-  type JinwooCompetence =
-    Database["public"]["Tables"]["jinwoo_competences"]["Row"];
-  type JinwooQte = Database["public"]["Tables"]["jinwoo_qte"]["Row"];
-  type PierreBenediction =
-    Database["public"]["Tables"]["pierres_benediction"]["Row"];
-
-  const bossName = "Vulcan";
-  const [boss, setBoss] = useState<Boss | null>(null);
-  const [chasseurs, setChasseurs] = useState<Chasseur[]>([]);
-  const [artefacts, setArtefacts] = useState<Artefact[]>([]);
-  const [noyaux, setNoyaux] = useState<Noyau[]>([]);
-  const [ombres, setOmbres] = useState<Ombre[]>([]);
-  const [setsBonus, setSetsBonus] = useState<SetBonus[]>([]);
-  const [armes, setArmes] = useState<JinwooArme[]>([]);
-  const [competences, setCompetences] = useState<JinwooCompetence[]>([]);
-  const [qtes, setQtes] = useState<JinwooQte[]>([]);
-  const [pierres, setPierres] = useState<PierreBenediction[]>([]);
+  const [chasseurs, setChasseurs] = useState([]);
+  const [artefacts, setArtefacts] = useState([]);
+  const [noyaux, setNoyaux] = useState([]);
+  const [ombres, setOmbres] = useState([]);
+  const [setsBonus, setSetsBonus] = useState([]);
+  const [armes, setArmes] = useState([]);
+  const [competences, setCompetences] = useState([]);
+  const [qtes, setQtes] = useState([]);
+  const [pierres, setPierres] = useState([]);
+  const [activeTab, setActiveTab] = useState("chasseurs");
 
   useEffect(() => {
     const fetchAll = async () => {
       const [
-        bossData,
         chasseursData,
         artefactsData,
         noyauxData,
@@ -56,28 +143,53 @@ export default function VulcanPage() {
         qtesData,
         pierresData,
       ] = await Promise.all([
-        supabase.from("bosses").select("*").eq("nom", bossName).single(),
-        supabase.from("chasseurs").select("*"),
-        supabase.from("artefacts").select("*"),
-        supabase.from("noyaux").select("*"),
-        supabase.from("ombres").select("*"),
-        supabase.from("sets_bonus").select("*"),
-        supabase.from("jinwoo_armes").select("*"),
-        supabase.from("jinwoo_competences").select("*"),
-        supabase.from("jinwoo_qte").select("*"),
-        supabase.from("pierres_benediction").select("*"),
+        fetchData(`buildsVulcanChasseur${CACHE_VERSION}`, async () => {
+          const { data } = await supabase.from("chasseurs").select("*");
+          return data || [];
+        }),
+        fetchData(`artefacts${CACHE_VERSION}`, async () => {
+          const { data } = await supabase.from("artefacts").select("*");
+          return data || [];
+        }),
+        fetchData(`noyaux${CACHE_VERSION}`, async () => {
+          const { data } = await supabase.from("noyaux").select("*");
+          return data || [];
+        }),
+        fetchData(`ombres${CACHE_VERSION}`, async () => {
+          const { data } = await supabase.from("ombres").select("*");
+          return data || [];
+        }),
+        fetchData(`setsBonus${CACHE_VERSION}`, async () => {
+          const { data } = await supabase.from("sets_bonus").select("*");
+          return data || [];
+        }),
+        fetchData(`armes${CACHE_VERSION}`, async () => {
+          const { data } = await supabase.from("jinwoo_armes").select("*");
+          return data || [];
+        }),
+        fetchData(`competences${CACHE_VERSION}`, async () => {
+          const { data } = await supabase.from("jinwoo_competences").select("*");
+          return data || [];
+        }),
+        fetchData(`qtes${CACHE_VERSION}`, async () => {
+          const { data } = await supabase.from("jinwoo_qte").select("*");
+          return data || [];
+        }),
+        fetchData(`pierres${CACHE_VERSION}`, async () => {
+          const { data } = await supabase.from("pierres_benediction").select("*");
+          return data || [];
+        }),
       ]);
 
-      if (bossData.data) setBoss(bossData.data);
-      if (chasseursData.data) setChasseurs(chasseursData.data);
-      if (artefactsData.data) setArtefacts(artefactsData.data);
-      if (noyauxData.data) setNoyaux(noyauxData.data);
-      if (ombresData.data) setOmbres(ombresData.data);
-      if (setsBonusData.data) setSetsBonus(setsBonusData.data);
-      if (armesData.data) setArmes(armesData.data);
-      if (competencesData.data) setCompetences(competencesData.data);
-      if (qtesData.data) setQtes(qtesData.data);
-      if (pierresData.data) setPierres(pierresData.data);
+      setChasseurs(chasseursData);
+      setArtefacts(artefactsData);
+      setNoyaux(noyauxData);
+      setOmbres(ombresData);
+      setSetsBonus(setsBonusData);
+      setArmes(armesData);
+      setCompetences(competencesData);
+      setQtes(qtesData);
+      setPierres(pierresData);
     };
 
     fetchAll();
@@ -85,113 +197,63 @@ export default function VulcanPage() {
 
   return (
     <Layout>
-      <div className="w-full max-w-[90rem] 2xl:max-w-[100%] mx-auto px-6 py-6">
-        {" "}
-        <div className="max-w-[100%] mx-auto">
-          <Link
-            to="/atelier"
-            className="mb-6 inline-flex items-center text-sm font-medium text-solo-purple hover:underline"
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Retour à l'Atelier de la Lumière
-          </Link>
+      <div className="w-full max-w-[90rem] mx-auto px-6 py-6">
+        <Link
+          to="/atelier"
+          className="mb-6 inline-flex items-center text-sm font-medium text-solo-purple hover:underline"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Retour à l'Atelier de la Lumière
+        </Link>
 
-          <Card className="bg-sidebar border-sidebar-border overflow-hidden mb-8">
-            <Tabs defaultValue="facile">
-              <CardHeader className="pb-0 pt-6 flex flex-col md:flex-row md:items-center md:justify-between">
-                <CardTitle className="text-xl sm:text-2xl md:text-3xl text-white mb-4 md:mb-0">
-                  {boss?.nom}
-                </CardTitle>
+        <Card className="bg-sidebar border-sidebar-border overflow-hidden mb-8">
+          <CardHeader className="pb-0 pt-6 flex flex-col md:flex-row md:items-center md:justify-between">
+            <CardTitle className="text-xl sm:text-2xl md:text-3xl text-white mb-4 md:mb-0">
+              {boss.nom}
+            </CardTitle>
+          </CardHeader>
 
-                <TabsList className="bg-sidebar-accent border border-sidebar-border self-start md:self-center">
-                  <TabsTrigger
-                    value="facile"
-                    className="data-[state=active]:bg-solo-purple data-[state=active]:text-white"
-                  >
-                    Facile
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="normal"
-                    className="data-[state=active]:bg-solo-purple data-[state=active]:text-white"
-                  >
-                    Normal
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="difficile"
-                    className="data-[state=active]:bg-solo-purple data-[state=active]:text-white"
-                  >
-                    Difficile
-                  </TabsTrigger>
-                </TabsList>
-              </CardHeader>
+          <CardContent className="grid md:grid-cols-2 gap-6 pt-6">
+            <div className="flex items-center justify-center bg-sidebar-accent rounded-md p-4">
+              <img
+                src={boss.image}
+                alt={boss.nom}
+                className="w-full max-h-[300px] object-contain"
+              />
+            </div>
+            <div className="flex flex-col justify-center space-y-6">
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <Swords className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-solo-purple flex-shrink-0" />
+                  <div className="flex flex-col">
+                    <p className="text-xs sm:text-sm md:text-base text-muted-foreground font-medium">
+                      Puissance requise
+                    </p>
+                    <p className="text-base sm:text-xl md:text-2xl font-semibold text-white">
+                      {boss.puissance_facile} ~ {boss.puissance_difficile}
+                    </p>
+                  </div>
+                </div>
 
-              {["facile", "normal", "difficile"].map((diff) => (
-                <TabsContent key={diff} value={diff}>
-                  <CardContent className="grid md:grid-cols-2 gap-6 pt-6">
-                    <div className="flex items-center justify-center bg-sidebar-accent rounded-md p-4">
-                      <img
-                        src={boss?.image || ""}
-                        alt={boss?.nom || "Boss"}
-                        className="w-full max-h-[300px] object-contain"
-                      />
-                    </div>
-                    <div className="flex flex-col justify-center space-y-6">
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-2 sm:gap-3">
-                          <Sword className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-solo-purple flex-shrink-0" />
-                          <div className="flex flex-col">
-                            <p className="text-xs sm:text-sm md:text-base text-muted-foreground font-medium">
-                              Puissance requise
-                            </p>
-                            <p className="text-base sm:text-xl md:text-2xl font-semibold text-white">
-                              {boss?.[`puissance_${diff}` as keyof Boss]}
-                            </p>
-                          </div>
-                        </div>
+                <Separator className="bg-sidebar-border my-2" />
 
-                        <Separator className="bg-sidebar-border my-2" />
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Shield className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-solo-purple flex-shrink-0" />
+                    <p className="text-sm font-medium text-white">Faiblesses</p>
+                  </div>
 
-                        <div className="space-y-3">
-                          <div className="flex items-center gap-2">
-                            <Shield className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-solo-purple flex-shrink-0" />
-                            <p className="text-xs sm:text-sm md:text-base font-medium">
-                              Faiblesses
-                            </p>
-                          </div>
+                  <div className="flex items-center gap-4 pl-10">
+                    <img src={`/images/icons/${boss.faiblesse1}.svg`} alt={boss.faiblesse1} className="h-6 w-6" />
+                    <img src={`/images/icons/${boss.faiblesse2}.svg`} alt={boss.faiblesse2} className="h-6 w-6" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
-                          <div className="flex items-center gap-4 pl-10">
-                            {boss?.faiblesse1 && (
-                              <div className="flex flex-col items-center">
-                                <img
-                                  src={boss.faiblesse1}
-                                  className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain"
-                                  alt="Faiblesse 1"
-                                />
-                              </div>
-                            )}
-                            {boss?.faiblesse2 && (
-                              <div className="flex flex-col items-center">
-                                <img
-                                  src={boss.faiblesse2}
-                                  className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain"
-                                  alt="Faiblesse 2"
-                                />
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      {/* Ajout de la date de dernière modification */}
-                      <LastModified date={lastModifiedDates.vulcan} />
-                    </div>
-                  </CardContent>
-                </TabsContent>
-              ))}
-            </Tabs>
-          </Card>
-
+        <ExpandedTeamProvider>
           <Tabs defaultValue="chasseurs" className="mt-8">
             <TabsList className="bg-sidebar-accent border border-sidebar-border">
               <TabsTrigger
@@ -209,8 +271,9 @@ export default function VulcanPage() {
             </TabsList>
 
             <TabsContent value="chasseurs">
-              <ExpandedTeamProvider>
-                {teamVulcanChasseurs.map((team: TeamVulcanChasseur) => (
+              <div>
+                <h2 className="text-xl font-bold mb-4">Teams Chasseurs</h2>
+                {transformedTeamVulcanChasseurs.map((team) => (
                   <TeamChasseurCard
                     key={team.id}
                     team={team}
@@ -221,12 +284,13 @@ export default function VulcanPage() {
                     setsBonus={setsBonus}
                   />
                 ))}
-              </ExpandedTeamProvider>
+              </div>
             </TabsContent>
 
             <TabsContent value="jinwoo">
-              <ExpandedTeamProvider>
-                {teamVulcanJinwoo.map((team, i) => (
+              <div>
+                <h2 className="text-xl font-bold mt-8 mb-4">Teams Jinwoo</h2>
+                {transformedTeamVulcanJinwoo.map((team) => (
                   <TeamJinwooCard
                     key={team.id}
                     team={team}
@@ -235,16 +299,16 @@ export default function VulcanPage() {
                     noyaux={noyaux}
                     ombres={ombres}
                     setsBonus={setsBonus}
-                    armes={armes}
-                    competences={competences}
-                    qtes={qtes}
-                    pierres={pierres}
+                    armes={team.armes || []}
+                    competences={team.competences || []}
+                    qtes={team.qtes || []}
+                    pierres={team.pierres || []}
                   />
                 ))}
-              </ExpandedTeamProvider>
+              </div>
             </TabsContent>
           </Tabs>
-        </div>
+        </ExpandedTeamProvider>
       </div>
     </Layout>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback, memo } from "react";
 import Layout from "@/components/Layout";
 import {
   Card,
@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/collapsible";
 import { ExternalLink, ChevronDown, ChevronUp, X } from "lucide-react";
 import SEO from "@/components/SEO";
-
 
 // Fonction pour afficher les icônes des réseaux sociaux
 const getSocialIcon = (type: SocialLink["type"]) => {
@@ -64,6 +63,103 @@ const formatDescription = (text: React.ReactNode) => {
   });
 };
 
+// =========================
+// Type pour une étape du guide
+// =========================
+type Step = {
+  title: string;
+  description: string;
+  action?: string;
+  actionText?: string;
+  image: string;
+};
+
+// =========================
+// Gestion du cache local des images du guide étape par étape
+// =========================
+const GUIDE_IMAGE_PATH = "/images/creator_images/";
+
+// Fonction utilitaire pour charger une image et la convertir en base64
+const fetchImageAsBase64 = async (url: string): Promise<string | null> => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Image fetch failed");
+    const blob = await response.blob();
+    return await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  } catch (error) {
+    console.error(`Erreur lors du chargement de l'image ${url}:`, error);
+    return null;
+  }
+};
+
+// =========================
+// Composant Memo pour chaque étape du guide (corrigé)
+// =========================
+const StepCard = memo(({ step, index, open, onToggle, onOpenModal, cachedImages }: {
+  step: Step;
+  index: number;
+  open: boolean;
+  onToggle: (idx: number) => void;
+  onOpenModal: (img: string) => void;
+  cachedImages: Record<string, string>;
+}) => (
+  <Card className="overflow-hidden">
+    <Collapsible open={open} onOpenChange={() => onToggle(index)}>
+      <CollapsibleTrigger className="w-full">
+        <div className="p-6 cursor-pointer flex flex-row items-center justify-between hover:bg-transparent transition-colors">
+          <div className="flex-1">
+            <CardTitle className="flex items-center">
+              <span className="bg-solo-purple text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">
+                {index + 1}
+              </span>
+              <span className="flex-1">{step.title}</span>
+            </CardTitle>
+          </div>
+          <div className="ml-4">
+            {open ? <ChevronUp className="h-5 w-5 text-muted-foreground" /> : <ChevronDown className="h-5 w-5 text-muted-foreground" />}
+          </div>
+        </div>
+      </CollapsibleTrigger>
+      <CollapsibleContent>
+        <CardContent className="pb-6">
+          <div className="flex flex-col md:flex-row gap-6">
+            <div
+              className="w-full md:w-1/3 aspect-video bg-muted rounded-lg overflow-hidden cursor-pointer"
+              onClick={() => onOpenModal(step.image)}
+            >
+              <img
+                src={cachedImages[step.image] || step.image}
+                alt={`Étape ${index + 1}`}
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="flex-1">
+              <p className="text-muted-foreground mb-4">{formatDescription(step.description)}</p>
+              {step.action && (
+                <Button asChild>
+                  <a href={step.action} target="_blank" rel="noopener noreferrer">
+                    {step.actionText}
+                    <ExternalLink className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+              )}
+            </div>
+          </div>
+        </CardContent>
+      </CollapsibleContent>
+    </Collapsible>
+  </Card>
+));
+StepCard.displayName = "StepCard";
+
+// =========================
+// Composant principal
+// =========================
 const Creators = () => {
   // Données pour les réseaux sociaux de Sohoven
   const socialLinks: SocialLink[] = [
@@ -76,7 +172,7 @@ const Creators = () => {
   ];
 
   // Étapes du guide
-  const steps = [
+  const steps: Step[] = [
     {
       title: "Se connecter au site Netmarble Creator",
       description: "Accédez à la page Netmarble Creator puis connectez vous à votre compte.",
@@ -107,20 +203,65 @@ const Creators = () => {
     },
   ];
 
-  const [openStep, setOpenStep] = React.useState<number | null>(0);
-  const [modalImage, setModalImage] = useState<string | null>(null);
+  // Centralisation de l'état : images en cache + étape ouverte + image modale
+  const [state, setState] = useState<{
+    cachedImages: Record<string, string>;
+    openStep: number | null;
+    modalImage: string | null;
+  }>({
+    cachedImages: {},
+    openStep: 0,
+    modalImage: null,
+  });
 
-  const toggleStep = (index: number) => {
-    setOpenStep(openStep === index ? null : index);
-  };
+  // =========================
+  // Chargement et cache des images du guide étape par étape
+  // =========================
+  useEffect(() => {
+    const loadImages = async () => {
+      const newCache: Record<string, string> = { ...state.cachedImages };
+      let updated = false;
+      for (const step of steps) {
+        const imageName = step.image.replace(GUIDE_IMAGE_PATH, "");
+        const cacheKey = `creatorGuideImg_${imageName}`;
+        let base64 = localStorage.getItem(cacheKey);
+        if (!base64) {
+          base64 = await fetchImageAsBase64(step.image);
+          if (base64) {
+            localStorage.setItem(cacheKey, base64);
+            newCache[step.image] = base64;
+            updated = true;
+          }
+        } else {
+          newCache[step.image] = base64;
+        }
+      }
+      if (updated) {
+        setState((prev) => ({ ...prev, cachedImages: newCache }));
+      } else if (Object.keys(newCache).length && Object.keys(newCache).length !== Object.keys(state.cachedImages).length) {
+        setState((prev) => ({ ...prev, cachedImages: newCache }));
+      }
+    };
+    loadImages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const openModal = (image: string) => {
-    setModalImage(image);
-  };
+  // =========================
+  // Gestion de l'ouverture des étapes du guide
+  // =========================
+  const toggleStep = useCallback((index: number) => {
+    setState((prev) => ({ ...prev, openStep: prev.openStep === index ? null : index }));
+  }, []);
 
-  const closeModal = () => {
-    setModalImage(null);
-  };
+  // =========================
+  // Gestion du modal d'image
+  // =========================
+  const openModal = useCallback((image: string) => {
+    setState((prev) => ({ ...prev, modalImage: image }));
+  }, []);
+  const closeModal = useCallback(() => {
+    setState((prev) => ({ ...prev, modalImage: null }));
+  }, []);
 
   return (
     <Layout>
@@ -182,55 +323,15 @@ const Creators = () => {
         <h2 className="text-2xl font-bold">Guide étape par étape</h2>
         
         {steps.map((step, index) => (
-          <Card key={index} className="overflow-hidden">
-            <Collapsible open={openStep === index} onOpenChange={() => toggleStep(index)}>
-              <CollapsibleTrigger className="w-full">
-                <div className="p-6 cursor-pointer flex flex-row items-center justify-between hover:bg-transparent transition-colors">
-                  <div className="flex-1">
-                    <CardTitle className="flex items-center">
-                      <span className="bg-solo-purple text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">
-                        {index + 1}
-                      </span>
-                      <span className="flex-1">{step.title}</span>
-                    </CardTitle>
-                  </div>
-                  <div className="ml-4">
-                    {openStep === index ? 
-                      <ChevronUp className="h-5 w-5 text-muted-foreground" /> : 
-                      <ChevronDown className="h-5 w-5 text-muted-foreground" />
-                    }
-                  </div>
-                </div>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <CardContent className="pb-6">
-                  <div className="flex flex-col md:flex-row gap-6">
-                    <div
-                      className="w-full md:w-1/3 aspect-video bg-muted rounded-lg overflow-hidden cursor-pointer"
-                      onClick={() => openModal(step.image)}
-                    >
-                      <img
-                        src={step.image}
-                        alt={`Étape ${index + 1}`}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-muted-foreground mb-4">{formatDescription(step.description)}</p>
-                      {step.action && (
-                        <Button asChild>
-                          <a href={step.action} target="_blank" rel="noopener noreferrer">
-                            {step.actionText}
-                            <ExternalLink className="ml-2 h-4 w-4" />
-                          </a>
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                </CardContent>
-              </CollapsibleContent>
-            </Collapsible>
-          </Card>
+          <StepCard
+            key={index}
+            step={step}
+            index={index}
+            open={state.openStep === index}
+            onToggle={toggleStep}
+            onOpenModal={openModal}
+            cachedImages={state.cachedImages}
+          />
         ))}
       </div>
 
@@ -270,7 +371,7 @@ const Creators = () => {
       </Card>
 
       {/* Modal pour afficher l'image en grand */}
-      {modalImage && (
+      {state.modalImage && (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
     <div className="relative w-full h-full p-2 flex items-center justify-center">
       <button
@@ -280,7 +381,7 @@ const Creators = () => {
         <X className="h-6 w-6" />
       </button>
       <img
-        src={modalImage}
+        src={state.cachedImages[state.modalImage] || state.modalImage}
         alt="Agrandissement"
         className="max-w-full max-h-full object-contain rounded-lg"
       />

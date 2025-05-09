@@ -27,3 +27,5 @@ export const teamChasseursTiers = {
   C: [],
   D: [],
 };
+
+// Harper / Charlotte / Isla
