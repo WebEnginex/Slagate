@@ -17,6 +17,7 @@ export type ChasseurBuild = {
         statPrincipale: string;
       }[];
     };
+    ombre?: number; // Ajouté comme optionnel
     sets_bonus: { id: number }[];
     stats: Record<string, string>;
   }[];

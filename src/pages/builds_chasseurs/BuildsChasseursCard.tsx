@@ -52,6 +52,8 @@ type Props = {
   ombres: { id: number; nom: string; image: string; description: string; created_at?: string }[];
   setsBonus: SetBonus[];
   elementId?: string;
+  isOpen: boolean;
+  onToggle: (isOpen: boolean) => void;
 };
 
 
@@ -128,6 +130,8 @@ export default function BuildChasseurCard({
   ombres,
   setsBonus,
   elementId,
+  isOpen,
+  onToggle,
 }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedBuildIndex, setSelectedBuildIndex] = useState(0);
@@ -171,6 +175,16 @@ export default function BuildChasseurCard({
     }));
   };
 
+  useEffect(() => {
+    // Si l'état isOpen fourni en prop est différent de l'état local
+    setIsExpanded(isOpen);
+  }, [isOpen]);
+
+  const toggleOpen = () => {
+    const newIsOpen = !isExpanded;
+    setIsExpanded(newIsOpen);
+    onToggle(newIsOpen); // Notifier le parent du changement
+  };
 
   return (
     <Card
@@ -179,7 +193,7 @@ export default function BuildChasseurCard({
     >
       <CardHeader
         className="p-4 flex flex-row items-center justify-between bg-sidebar cursor-pointer"
-        onClick={() => setIsExpanded((prev) => !prev)}
+        onClick={toggleOpen}
       >
         <CardTitle className="text-xl font-bold flex items-center gap-4 text-white">
           <Avatar className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24">
