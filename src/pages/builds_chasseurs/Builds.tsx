@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 import { buildsChasseurs } from "@/config/builds/buildsChasseurs";
@@ -9,8 +9,7 @@ import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedD
 import { Separator } from "@/components/ui/separator";
 import { FiRefreshCw } from "react-icons/fi";
 import { useLocation } from "react-router-dom";
-import SEO from "@/components/SEO"; 
-
+import SEO from "@/components/SEO";
 
 export default function BuildsPage() {
   type Chasseur = Database["public"]["Tables"]["chasseurs"]["Row"];
@@ -28,63 +27,96 @@ export default function BuildsPage() {
   const [search, setSearch] = useState("");
   const [selectedElement, setSelectedElement] = useState<string | null>(null);
 
-  // ...existing code...
-const elementIcons = [
-  {
-    id: "jinwoo",
-    image:
-      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/hunter-portrait//SungJinWoo_Jeju_Portrait.png",
-  },
-  {
-    id: "feu",
-    image:
-      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Feu_element.webp",
-  },
-  {
-    id: "eau",
-    image:
-      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Eau_element.webp",
-  },
-  {
-    id: "vent",
-    image:
-      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Vent_element.webp",
-  },
-  {
-    id: "lumiere",
-    image:
-      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Lumiere_element.webp",
-  },
-  {
-    id: "tenebres",
-    image:
-      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Tenebre_element.webp",
-  },
-];
-// ...existing code...
+  const elementIcons = [
+    {
+      id: "jinwoo",
+      image:
+        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/hunter-portrait//SungJinWoo_Jeju_Portrait.png",
+    },
+    {
+      id: "feu",
+      image:
+        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Feu_element.webp",
+    },
+    {
+      id: "eau",
+      image:
+        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Eau_element.webp",
+    },
+    {
+      id: "vent",
+      image:
+        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Vent_element.webp",
+    },
+    {
+      id: "lumiere",
+      image:
+        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Lumiere_element.webp",
+    },
+    {
+      id: "tenebres",
+      image:
+        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Tenebre_element.webp",
+    },
+  ];
 
-  const location = useLocation(); // Ajoute ceci
+  const location = useLocation();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const [chasseurData, artefactData, noyauData, ombreData, setBonusData] =
-        await Promise.all([
-          supabase.from("chasseurs").select("*"),
-          supabase.from("artefacts").select("*"),
-          supabase.from("noyaux").select("*"),
-          supabase.from("ombres").select("*"),
-          supabase.from("sets_bonus").select("*"),
-        ]);
+  const fetchData = async () => {
+    const cacheKey = "buildsData_v1.0";
+    const cacheDuration = 1000 * 60 * 60 * 24 * 30; // 30 jours
+    const cachedData = localStorage.getItem(cacheKey);
 
-      if (chasseurData.data) setChasseurs(chasseurData.data);
-      if (artefactData.data) setArtefacts(artefactData.data);
-      if (noyauData.data) setNoyaux(noyauData.data);
-      if (ombreData.data) setOmbres(ombreData.data);
-      if (setBonusData.data) setSetsBonus(setBonusData.data);
+    if (cachedData) {
+      const parsedData = JSON.parse(cachedData);
+      if (Date.now() - parsedData.timestamp < cacheDuration) {
+        console.log("✅ Données chargées depuis le cache.");
+        setChasseurs(parsedData.chasseurs);
+        setArtefacts(parsedData.artefacts);
+        setNoyaux(parsedData.noyaux);
+        setOmbres(parsedData.ombres);
+        setSetsBonus(parsedData.setsBonus);
+        return;
+      }
+    }
+
+    const { data: chasseurData } = await supabase
+      .from("chasseurs")
+      .select("id, nom, image, element, rarete");
+    const { data: artefactData } = await supabase
+      .from("artefacts")
+      .select("id, nom, image, categorie");
+    const { data: noyauData } = await supabase
+      .from("noyaux")
+      .select("id, nom, image, description");
+    const { data: ombreData } = await supabase
+      .from("ombres")
+      .select("id, nom, image, description");
+    const { data: setBonusData } = await supabase
+      .from("sets_bonus")
+      .select("id, nom, description");
+
+    const dataToCache = {
+      timestamp: Date.now(),
+      chasseurs: chasseurData || [],
+      artefacts: artefactData || [],
+      noyaux: noyauData || [],
+      ombres: ombreData || [],
+      setsBonus: setBonusData || [],
     };
 
-    fetchData();
-  }, []);
+    localStorage.setItem(cacheKey, JSON.stringify(dataToCache));
+    setChasseurs(dataToCache.chasseurs);
+    setArtefacts(dataToCache.artefacts);
+    setNoyaux(dataToCache.noyaux);
+    setOmbres(dataToCache.ombres);
+    setSetsBonus(dataToCache.setsBonus);
+  };
+
+  fetchData();
+}, []);
+
 
   useEffect(() => {
     // Quand les builds sont chargés, tente de scroller sur l'ancre
@@ -94,7 +126,8 @@ const elementIcons = [
         const el = document.getElementById(id);
         if (el) {
           const yOffset = -40; // Décalage en pixels (ajuste selon ton header)
-          const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          const y =
+            el.getBoundingClientRect().top + window.pageYOffset + yOffset;
           window.scrollTo({ top: y, behavior: "smooth" });
           // Ajoute la classe d'animation
           el.classList.add("animate-pulse-once");
@@ -105,8 +138,16 @@ const elementIcons = [
   }, [location, chasseurs, artefacts, noyaux, ombres, setsBonus]);
   // Ajoute toutes les dépendances qui déclenchent le rendu des cartes
 
+  // Indexer les chasseurs pour un accès plus rapide
+  const chasseurIndex = useMemo(() => {
+    const index = new Map<number, Chasseur>();
+    chasseurs.forEach((c) => index.set(c.id, c));
+    return index;
+  }, [chasseurs]);
+
+  // Utiliser l'index pour filtrer les builds
   const filteredBuilds = buildsChasseurs.filter((entry) => {
-    const chasseur = chasseurs.find((c) => c.id === entry.chasseurId);
+    const chasseur = chasseurIndex.get(entry.chasseurId);
     if (!chasseur) return false;
 
     const matchSearch = chasseur.nom
@@ -135,13 +176,19 @@ const elementIcons = [
                 Builds de Chasseurs pour Solo Leveling: ARISE
               </h1>
               <p className="text-base md:text-lg text-gray-300 text-center md:text-left">
-                Découvrez les meilleures configurations pour vos chasseurs dans Solo Leveling: ARISE. Ce guide inclut des statistiques, artefacts, noyaux et bonus de sets pour optimiser vos équipes.
+                Découvrez les meilleures configurations pour vos chasseurs dans
+                Solo Leveling: ARISE. Ce guide inclut des statistiques,
+                artefacts, noyaux et bonus de sets pour optimiser vos équipes.
               </p>
               <p className="text-base md:text-lg text-gray-300 text-center md:text-left">
-                Utilisez les outils de recherche et de filtres pour trouver rapidement un chasseur spécifique ou explorer les meilleures configurations adaptées à chaque chasseur.
+                Utilisez les outils de recherche et de filtres pour trouver
+                rapidement un chasseur spécifique ou explorer les meilleures
+                configurations adaptées à chaque chasseur.
               </p>
               <p className="text-base md:text-lg text-gray-300 text-center md:text-left">
-                Que vous soyez débutant à la recherche d'une configuration de départ ou expert cherchant à affiner vos équipes, cette section est conçue pour vous aider à maximiser vos performances.
+                Que vous soyez débutant à la recherche d'une configuration de
+                départ ou expert cherchant à affiner vos équipes, cette section
+                est conçue pour vous aider à maximiser vos performances.
               </p>
               {/* Dernières modifications */}
               <div className="text-center md:text-left">
@@ -227,4 +274,28 @@ const elementIcons = [
       </div>
     </Layout>
   );
+  // Fonction de vérification du cache
+  (function checkCacheStatus() {
+    const cacheKey = "buildsData_v1.0";
+    const cachedData = localStorage.getItem(cacheKey);
+    const timestamp = localStorage.getItem("buildsTimestamp");
+
+    if (cachedData) {
+      console.log(
+        "%c✅ Les données sont chargées depuis le cache Local Storage.",
+        "color: green; font-weight: bold;"
+      );
+      console.log("🔹 Cache Key:", cacheKey);
+      console.log(
+        "🔹 Date de cache:",
+        new Date(parseInt(timestamp)).toLocaleString()
+      );
+      console.log("🔹 Données en cache:", JSON.parse(cachedData));
+    } else {
+      console.log(
+        "%c❌ Les données n'ont pas été chargées depuis le cache, une requête a été envoyée à Supabase.",
+        "color: red; font-weight: bold;"
+      );
+    }
+  })();
 }
