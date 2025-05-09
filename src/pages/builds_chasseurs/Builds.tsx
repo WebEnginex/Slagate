@@ -12,11 +12,21 @@ import { useLocation } from "react-router-dom";
 import SEO from "@/components/SEO";
 
 export default function BuildsPage() {
-  type Chasseur = Database["public"]["Tables"]["chasseurs"]["Row"];
-  type Artefact = Database["public"]["Tables"]["artefacts"]["Row"];
-  type Noyau = Database["public"]["Tables"]["noyaux"]["Row"];
-  type Ombre = Database["public"]["Tables"]["ombres"]["Row"];
-  type SetBonus = Database["public"]["Tables"]["sets_bonus"]["Row"];
+  type Chasseur = Omit<Database["public"]["Tables"]["chasseurs"]["Row"], "created_at"> & {
+  created_at?: string;
+};
+type Artefact = Omit<Database["public"]["Tables"]["artefacts"]["Row"], "created_at"> & {
+  created_at?: string;
+};
+type Noyau = Omit<Database["public"]["Tables"]["noyaux"]["Row"], "created_at"> & {
+  created_at?: string;
+};
+type Ombre = Omit<Database["public"]["Tables"]["ombres"]["Row"], "created_at"> & {
+  created_at?: string;
+};
+type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created_at"> & {
+  created_at?: string;
+};
 
   const [chasseurs, setChasseurs] = useState<Chasseur[]>([]);
   const [artefacts, setArtefacts] = useState<Artefact[]>([]);
@@ -64,7 +74,7 @@ export default function BuildsPage() {
 
   useEffect(() => {
   const fetchData = async () => {
-    const cacheKey = "buildsData_v1.1";
+    const cacheKey = "buildsData_v1.0";
     const cacheDuration = 1000 * 60 * 60 * 24 * 30; // 30 jours
     const cachedData = localStorage.getItem(cacheKey);
 

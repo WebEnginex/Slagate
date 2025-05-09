@@ -47,12 +47,13 @@ type Build = {
 type Props = {
   chasseur: Chasseur;
   builds: Build[];
-  artefacts: Artefact[];
-  noyaux: Noyau[];
-  ombres: Ombre[];
+  artefacts: { id: number; nom: string; image: string; categorie: string; created_at?: string }[];
+  noyaux: { id: number; nom: string; image: string; description: string; created_at?: string }[];
+  ombres: { id: number; nom: string; image: string; description: string; created_at?: string }[];
   setsBonus: SetBonus[];
   elementId?: string;
 };
+
 
 function formatTextWithBrackets(text: string) {
   const regex = /(\[[^\]]+\])|(\d+(?:[.,]\d+)? ?%?)|(\bseconde(?:s)?\b)|(\bPV\b|\bpv\b)|(\bPM\b|\bpm\b)/gi;
