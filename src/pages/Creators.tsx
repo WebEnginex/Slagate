@@ -178,28 +178,27 @@ const Creators = () => {
       description: "Accédez à la page Netmarble Creator puis connectez vous à votre compte.",
       action:
         "https://members.netmarble.com/auth/signin?idpViewType=B&redirectUrl=https%3A%2F%2Fcreator.netmarble.com%2Fcreator%2Fsignin%2Fcallback%3FredirectUrl%3Dhttps%3A%2F%2Fcreator.netmarble.com%2Fen%2Fsololv%2Franking%2Fsohoven",
-      actionText: "Se connecter au site",
-      image: "/images/creator_images/tuto_creator_1.png",
+      actionText: "Se connecter au site",      image: "/images/creator_images/tuto_creator_1.webp",
     },
     {
       title: "Accéder à votre profil",
       description: 'Cliquez sur le bouton en haut à droite pour ouvrir le menu, puis allez dans "My Page" pour accéder aux paramètres.',
-      image: "/images/creator_images/tuto_creator_2.png",
+      image: "/images/creator_images/tuto_creator_2.webp",
     },
     {
       title: "Ouvrez la fenêtre qui permet de lier son compte",
       description: 'Cliquez sur le bouton "Link Game Account" pour ouvrir la fenêtre qui permet de lier son compte Solo Leveling au site Netmarble Creator.',
-      image: "/images/creator_images/tuto_creator_3.png",
+      image: "/images/creator_images/tuto_creator_3.webp",
     },
     {
       title: "Lier votre compte",
       description: 'Cliquez sur le bouton "Link account" pour lier votre compte Solo Leveling au site Netmarble Creator. Si le site vous demande une connexion quand vous cliquez sur le bouton, reconnectez vous avec le même compte qu\'au début.',
-      image: "/images/creator_images/tuto_creator_4.png",
+      image: "/images/creator_images/tuto_creator_4.webp",
     },
     {
       title: "Supporter le créateur",
       description: 'Cliquez sur le bouton "Support", acceptez les conditions et cliquez sur "Yes".',
-      image: "/images/creator_images/tuto_creator_5.png",
+      image: "/images/creator_images/tuto_creator_5.webp",
     },
   ];
 
@@ -213,7 +212,6 @@ const Creators = () => {
     openStep: 0,
     modalImage: null,
   });
-
   // =========================
   // Chargement et cache des images du guide étape par étape
   // =========================
@@ -222,23 +220,34 @@ const Creators = () => {
       const newCache: Record<string, string> = { ...state.cachedImages };
       let updated = false;
       for (const step of steps) {
-        const imageName = step.image.replace(GUIDE_IMAGE_PATH, "");
-        const cacheKey = `creatorGuideImg_${imageName}`;
-        let base64 = localStorage.getItem(cacheKey);
-        if (!base64) {
-          base64 = await fetchImageAsBase64(step.image);
+        // D'abord, on vérifie le cache React
+        if (!newCache[step.image]) {
+          // Ensuite, on vérifie le localStorage
+          const imageName = step.image.replace(GUIDE_IMAGE_PATH, "");
+          const cacheKey = `creatorGuideImg_${imageName}`;
+          let base64 = localStorage.getItem(cacheKey);
+          
+          // Si pas en localStorage, on télécharge et on stocke
+          if (!base64) {
+            base64 = await fetchImageAsBase64(step.image);
+            if (base64) {
+              try {
+                localStorage.setItem(cacheKey, base64);
+              } catch (e) {
+                console.warn("Erreur de stockage localStorage (quota dépassé)", e);
+                // On continue sans stocker
+              }
+            }
+          }
+          
+          // On met à jour le cache React
           if (base64) {
-            localStorage.setItem(cacheKey, base64);
             newCache[step.image] = base64;
             updated = true;
           }
-        } else {
-          newCache[step.image] = base64;
         }
       }
-      if (updated) {
-        setState((prev) => ({ ...prev, cachedImages: newCache }));
-      } else if (Object.keys(newCache).length && Object.keys(newCache).length !== Object.keys(state.cachedImages).length) {
+      if (updated || (Object.keys(newCache).length && Object.keys(newCache).length !== Object.keys(state.cachedImages).length)) {
         setState((prev) => ({ ...prev, cachedImages: newCache }));
       }
     };

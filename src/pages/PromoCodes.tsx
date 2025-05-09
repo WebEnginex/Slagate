@@ -255,52 +255,50 @@ const PromoCodes = () => {
     modalImage: null,
     openStep: 0,
   });
-
   const steps = [
     {
       title: "Lancez le jeu Solo Leveling: Arise",
       description:
         "Assurez-vous d'être connecté à votre compte. Pour cela il suffit de rentrer vos identifiants et de vous connecter au jeu.",
-      image: "/images/code_promo/tuto_pomo_code_1.png",
+      image: "/images/code_promo/tuto_pomo_code_1.webp",
     },
     {
       title: "Ouvrez le menu principal",
       description:
         "Pour ouvrir le menu principal, appuyez sur l'icône avec les quatre carrés dans le coin supérieur droit de l'écran.",
-      image: "/images/code_promo/tuto_pomo_code_2.png",
+      image: "/images/code_promo/tuto_pomo_code_2.webp",
     },
     {
       title: "Accédez au menu des paramètres",
       description:
         "Ensuite dans le menu principal, cliquez sur l'icône \"d'engrenage\" en bas à droite pour ouvrir le menu des paramètres.",
-      image: "/images/code_promo/tuto_pomo_code_3.png",
+      image: "/images/code_promo/tuto_pomo_code_3.webp",
     },
     {
       title: "Accédez à la gestion du compte",
       description:
         'Cliquez sur "Comptes" dans le menu latéral à gauche pour accéder au menu de la gestion du compte.',
-      image: "/images/code_promo/tuto_pomo_code_4.png",
+      image: "/images/code_promo/tuto_pomo_code_4.webp",
     },
     {
       title: "Ouvrez l'interface pour saisir un code",
       description:
         'Cliquez sur le bouton "Saisir un code" en bas à droite pour ouvrir l\'interface qui permet de rentrer et valider un code promotionnel.',
-      image: "/images/code_promo/tuto_pomo_code_5.png",
+      image: "/images/code_promo/tuto_pomo_code_5.webp",
     },
     {
       title: "Entrez votre code",
       description:
         'Une fenêtre s\'ouvre. Vous pouvez coller avec le code copié avec le raccourci "ctrl+v" ou écrire le code vous-même, puis cliquer sur "Utiliser" pour valider le code.',
-      image: "/images/code_promo/tuto_pomo_code_6.png",
+      image: "/images/code_promo/tuto_pomo_code_6.webp",
     },
     {
       title: "Récupérez vos récompenses",
       description:
         'Les récompenses seront envoyées directement dans votre "messagerie" en jeu. Ouvrez-la pour les récupérer.',
-      image: "/images/code_promo/tuto_pomo_code_7.png",
+      image: "/images/code_promo/tuto_pomo_code_7.webp",
     },
   ];
-
   // =========================
   // Chargement et cache des images du guide étape par étape
   // =========================
@@ -308,24 +306,35 @@ const PromoCodes = () => {
     const loadImages = async () => {
       const newCache: Record<string, string> = { ...state.cachedImages };
       let updated = false;
-      for (const step of steps) {
-        const imageName = step.image.replace(GUIDE_IMAGE_PATH, "");
-        const cacheKey = `promoGuideImg_${imageName}`;
-        let base64 = localStorage.getItem(cacheKey);
-        if (!base64) {
-          base64 = await fetchImageAsBase64(step.image);
+      for (const stepObj of steps) {
+        // D'abord, on vérifie le cache React
+        if (!newCache[stepObj.image]) {
+          // Ensuite, on vérifie le localStorage
+          const imageName = stepObj.image.replace(GUIDE_IMAGE_PATH, "");
+          const cacheKey = `promoGuideImg_${imageName}`;
+          let base64 = localStorage.getItem(cacheKey);
+          
+          // Si pas en localStorage, on télécharge et on stocke
+          if (!base64) {
+            base64 = await fetchImageAsBase64(stepObj.image);
+            if (base64) {
+              try {
+                localStorage.setItem(cacheKey, base64);
+              } catch (e) {
+                console.warn("Erreur de stockage localStorage (quota dépassé)", e);
+                // On continue sans stocker
+              }
+            }
+          }
+          
+          // On met à jour le cache React
           if (base64) {
-            localStorage.setItem(cacheKey, base64);
-            newCache[step.image] = base64;
+            newCache[stepObj.image] = base64;
             updated = true;
           }
-        } else {
-          newCache[step.image] = base64;
         }
       }
-      if (updated) {
-        setState((prev) => ({ ...prev, cachedImages: newCache }));
-      } else if (Object.keys(newCache).length && Object.keys(newCache).length !== Object.keys(state.cachedImages).length) {
+      if (updated || (Object.keys(newCache).length && Object.keys(newCache).length !== Object.keys(state.cachedImages).length)) {
         setState((prev) => ({ ...prev, cachedImages: newCache }));
       }
     };

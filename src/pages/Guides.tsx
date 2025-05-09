@@ -17,7 +17,7 @@ const guides = [
     comingSoon: true,
   },
   {
-    id: 3,
+    id: 2,
     title: "Guide des Ombres",
     description:
       "Découvrez tout ce qu'il faut savoir sur l'Armée des Ombres de Jinwoo. Apprenez à extraire, promouvoir et améliorer vos ombres, déverrouillez de puissants bonus et maîtrisez les stratégies pour maximiser leur potentiel.",
