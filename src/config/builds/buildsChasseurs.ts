@@ -7376,7 +7376,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
       },
       {
         id: 271,
-        nom: "Général 3",
+        nom: "Général 2",
         stats: {
           "PV supplémentaire": "Le plus possible",
           "Défense supplémentaire": "-",
