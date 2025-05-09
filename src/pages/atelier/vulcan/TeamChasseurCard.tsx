@@ -423,6 +423,10 @@ export default function TeamChasseurCard({
             const slotNumber = parseInt(slot, 10);
             const activeIndex = activeNoyauIndices[slotNumber] || 0;
             const noyau = noyauxList[activeIndex];
+
+            // Vérification ajoutée pour éviter les erreurs si noyau ou noyau.id est indéfini
+            if (!noyau || !noyau.id) return null;
+
             const noyauData = getFromList(noyaux, noyau.id);
 
             if (!noyauData) return null;
