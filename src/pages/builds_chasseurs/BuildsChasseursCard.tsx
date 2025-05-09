@@ -171,7 +171,6 @@ export default function BuildChasseurCard({
     }));
   };
 
-  console.log("Props reçues :", { builds, noyaux });
 
   return (
     <Card
