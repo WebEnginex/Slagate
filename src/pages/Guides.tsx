@@ -31,7 +31,7 @@ const guides = [
     description:
       "Plongez dans l'univers des Portails, un mode de jeu essentiel pour obtenir des ressources précieuses et relever des défis de plus en plus intenses. Maîtrisez les mécaniques des portails pour maximiser vos récompenses et optimiser votre progression.",
     image:
-      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Guide_Portails.png",
+      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Guide_Portails.webp",
     link: "/guides/portals",
   },
   {
