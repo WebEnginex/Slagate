@@ -392,7 +392,7 @@ const PromoCodes = () => {
           <div className="flex flex-col sm:flex-row items-center gap-6">
             <div className="aspect-square w-32 h-32 overflow-hidden rounded-full bg-muted border-4 border-white/10">
               <img
-                src="/images/logo/Sohoven_Logo.png"
+                src="/images/logo/Sohoven_Logo.webp"
                 alt="Sohoven"
                 className="h-full w-full object-cover"
               />

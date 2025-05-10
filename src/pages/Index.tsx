@@ -55,7 +55,7 @@ const HunterCard = memo(({ hunter, imageUrl }: { hunter: Hunter, imageUrl: strin
           className="relative flex justify-center items-end h-64 bg-gray-700 p-0"
           style={{
             backgroundImage:
-              "url('https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Bg_AchievePage_1.png')",
+              "url('https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Bg_AchievePage_1.webp')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -111,17 +111,17 @@ const Index = () => {
     {
       id: 43,
       nom: "Cha Hae-In",
-      image: "/images/hunter_body/ChaHaeIn_MM_Portrait_Body.png",
+      image: "/images/hunter_body/ChaHaeIn_MM_Portrait_Body.webp",
     },
     {
       id: 41,
       nom: "Seo Lin",
-      image: "/images/hunter_body/SeoLin_Portrait_Body.png",
+      image: "/images/hunter_body/SeoLin_Portrait_Body.webp",
     },
     {
       id: 13,
       nom: "Goto Ryuji",
-      image: "/images/hunter_body/GotoRyuji_Portrait_Body.png",
+      image: "/images/hunter_body/GotoRyuji_Portrait_Body.webp",
     },
   ];
 

@@ -1,6 +1,5 @@
-
 export const teamChasseursTiers = {
-  'S+': [
+  "S+": [
     {
       id: 1,
       name: "Team Feu",
@@ -23,9 +22,15 @@ export const teamChasseursTiers = {
     },
   ],
   A: [],
-  B: [],
+  B: [
+    {
+      id: 5,
+      name: "Team Ténèbres",
+      hunters: [16, 7, 19],
+    },
+  ],
   C: [],
   D: [],
 };
 
-// Harper / Charlotte / Isla
+

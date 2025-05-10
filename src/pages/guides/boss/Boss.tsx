@@ -5,7 +5,7 @@ const bosses = [
   {
     id: "ennio",
     name: "Ennio",
-    image: "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/boss//WorldBoss_Ennio_Portrait.png",
+    image: "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/boss//WorldBoss_Ennio_Portrait.webp",
   },
   // Ajoutez d'autres boss ici si nécessaire
 ];

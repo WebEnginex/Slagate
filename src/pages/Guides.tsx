@@ -12,7 +12,7 @@ const guides = [
     description:
       "Découvrez les meilleurs chasseurs à recruter et d'autres informations à propos des chasseurs.",
     image:
-      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Guide_Chasseur.png",
+      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Guide_Chasseur.webp",
     link: "/guides/hunters",
     comingSoon: true,
   },
@@ -22,7 +22,7 @@ const guides = [
     description:
       "Découvrez tout ce qu'il faut savoir sur l'Armée des Ombres de Jinwoo. Apprenez à extraire, promouvoir et améliorer vos ombres, déverrouillez de puissants bonus et maîtrisez les stratégies pour maximiser leur potentiel.",
     image:
-      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Guide_Ombres.png",
+      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Guide_Ombres.webp",
     link: "/guides/ombres",
   },
   {
@@ -31,7 +31,7 @@ const guides = [
     description:
       "Plongez dans l'univers des Portails, un mode de jeu essentiel pour obtenir des ressources précieuses et relever des défis de plus en plus intenses. Maîtrisez les mécaniques des portails pour maximiser vos récompenses et optimiser votre progression.",
     image:
-      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Guide_Portails.png",
+      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Guide_Portails.webp",
     link: "/guides/portals",
   },
   {
@@ -39,7 +39,7 @@ const guides = [
     title: "Guide du simulateur de portails",
     description: "Explorez le Simulateur de Portails, un mode de jeu stratégique où vous affronterez des vagues d'ennemis dans des stages virtuels. Choisissez vos chemins, collectionnez des Codes uniques et surmontez les défis pour renforcer vos chasseurs.",
     image:
-      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Simulation.png",
+      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Simulation.webp",
     link: "/guides/simulation",
   },
   {
@@ -47,7 +47,7 @@ const guides = [
     title: "Guide des Boss",
     description: "Découvrez les stratégies pour vaincre les boss.",
     image:
-      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Guide_Boss.png",
+      "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Guide_Boss.webp",
     link: "/guides/boss",
     comingSoon: true,
   },

@@ -108,7 +108,7 @@ const Ennio = () => {
       {/* Image du boss en pleine largeur sans overflow */}
       <div className="-mx-4 sm:mx-0">
         <img
-          src="https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Guide_Ennio.png"
+          src="https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Guide_Ennio.webp"
           alt="Ennio"
           className="w-full h-64 sm:h-72 md:h-96 object-cover"
         />
