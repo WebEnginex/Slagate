@@ -18,7 +18,7 @@ export default function Simulation() {
       {/* Bannière pleine largeur */}
       <div className="relative w-full h-72 sm:h-96 mb-8 overflow-hidden">
         <img
-          src="https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Simulation.png"
+          src="https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Simulation.webp"
           alt="Bannière Simulation"
           className="w-full h-full object-cover"
         />

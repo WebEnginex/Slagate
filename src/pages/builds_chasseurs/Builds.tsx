@@ -41,7 +41,7 @@ type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created
     {
       id: "jinwoo",
       image:
-        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/hunter-portrait//SungJinWoo_Jeju_Portrait.png",
+        "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/hunter-portrait//SungJinWoo_Jeju_Portrait.webp",
     },
     {
       id: "feu",

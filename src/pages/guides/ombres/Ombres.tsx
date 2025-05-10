@@ -33,7 +33,7 @@ export default function Ombres() {
       {/* Bannière pleine largeur */}
       <div className="relative w-full h-72 sm:h-96 mb-8 overflow-hidden">
         <img
-          src="https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Guide_Ombres.png"
+          src="https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Guide_Ombres.webp"
           alt="Bannière Armée des Ombres"
           className="w-full h-full object-cover"
         />

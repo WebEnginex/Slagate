@@ -64,7 +64,8 @@ const App = () => (
           <Route path="/tier-list" element={<TierList />} />
           <Route path="/builds" element={<Builds />} />;
 
-          <Route path="/atelier" element={<AtelierDeLaLumiere />} />
+          {/* <Route path="/atelier" element={<AtelierDeLaLumiere />} /> */}
+          <Route path="/atelier" element={<Prochainement />} />
           <Route path="/atelier/Vulcan" element={<Vulcan />} />
           <Route path="/atelier/Baran" element={<Baran />} />
           <Route path="/atelier/Deimos" element={<Deimos />} />
