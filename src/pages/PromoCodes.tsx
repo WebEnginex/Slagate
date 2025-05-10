@@ -427,6 +427,25 @@ const PromoCodes = () => {
         </div>
       </Card>
 
+      {/* Section des codes promo */}
+      <div className="space-y-4 mb-8">
+        <h2 className="text-2xl font-bold">Codes Promo Disponibles</h2>
+        <p>
+          {/* Ajout de la date de dernière modification */}
+          <LastModified date={lastModifiedDates.promoCodes} />
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+          {promoCodes.map((promo, index) => (
+            <PromoCard
+              key={index}
+              promo={promo}
+              onCopy={handleCopy}
+              copiedCode={state.copiedCode}
+            />
+          ))}
+        </div>
+      </div>
+
       {/* Guide étape par étape */}
       <div className="space-y-4 mb-8">
         <h2 className="text-2xl font-bold">Guide étape par étape</h2>
@@ -501,24 +520,7 @@ const PromoCodes = () => {
         </div>
       )}
 
-      {/* Section des codes promo */}
-      <div className="space-y-4 mb-8">
-        <h2 className="text-2xl font-bold">Codes Promo Disponibles</h2>
-        <p>
-          {/* Ajout de la date de dernière modification */}
-          <LastModified date={lastModifiedDates.promoCodes} />
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-          {promoCodes.map((promo, index) => (
-            <PromoCard
-              key={index}
-              promo={promo}
-              onCopy={handleCopy}
-              copiedCode={state.copiedCode}
-            />
-          ))}
-        </div>
-      </div>
+      
     </Layout>
   );
 };
