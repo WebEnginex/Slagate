@@ -15,6 +15,7 @@ import { Separator } from "@/components/ui/separator";
 import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
 import SEO from "@/components/SEO";
+import { useNavigate } from "react-router-dom"; 
 
 // Types Supabase
 type Chasseur = Database["public"]["Tables"]["chasseurs"]["Row"];
@@ -115,6 +116,7 @@ export default function TierListPage() {
 
 function HuntersTab() {
   const [chasseurs, setChasseurs] = useState<Chasseur[]>([]);
+  const navigate = useNavigate(); // Utiliser useNavigate au lieu de useRouter
 
   useEffect(() => {
     // Récupère tous les chasseurs depuis Supabase
@@ -136,6 +138,11 @@ function HuntersTab() {
     {} as Record<string, Chasseur[]>
   );
 
+  // Handler mis à jour pour naviguer vers le fragment d'ancrage approprié
+  const handleHunterClick = (hunterId: number) => {
+    navigate(`/builds#chasseur-${hunterId}`);
+  };
+
   return (
     <div className="space-y-8">
       {Object.entries(huntersByTier).map(([tier, hunters]) => (
@@ -151,7 +158,8 @@ function HuntersTab() {
               {hunters.map((hunter) => (
                 <div
                   key={hunter.id}
-                  className="relative bg-sidebar-accent rounded-lg shadow-md p-2 text-center hover:scale-[1.03] transition-transform border border-sidebar-border hover:border-solo-purple"
+                  className="relative bg-sidebar-accent rounded-lg shadow-md p-2 text-center hover:scale-[1.03] transition-transform border border-sidebar-border hover:border-solo-purple cursor-pointer"
+                  onClick={() => handleHunterClick(Number(hunter.id))}
                 >
                   {/* Élément icon en haut à gauche */}
                   {hunter.element && (
