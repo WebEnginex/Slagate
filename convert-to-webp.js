@@ -20,10 +20,10 @@ const stat = promisify(fs.stat);
 // node convert-to-webp.js
 
 // Dossier source contenant les images PNG
-const SOURCE_DIR = path.join(__dirname, 'public', 'images', 'logo');
+const SOURCE_DIR = path.join(__dirname, 'public', 'images', 'test');
 
 // Dossier de destination pour les images WebP (même que la source par défaut)
-const DESTINATION_DIR = path.join(__dirname, 'public', 'images', 'logo');
+const DESTINATION_DIR = path.join(__dirname, 'public', 'images', 'test');
 
 // Qualité de la compression WebP (0-100, 100 étant la meilleure qualité)
 const QUALITY = 85;
@@ -32,7 +32,7 @@ const QUALITY = 85;
 const MAX_WIDTH = null;
 
 // Supprimer les fichiers PNG originaux après conversion réussie (true/false)
-const DELETE_ORIGINALS = false;
+const DELETE_ORIGINALS = true;
 
 // Extension à rechercher
 const SOURCE_EXTENSION = '.png';

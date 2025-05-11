@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 import { buildsChasseurs } from "@/config/builds/buildsChasseurs";
@@ -11,22 +11,26 @@ import { FiRefreshCw } from "react-icons/fi";
 import { useLocation } from "react-router-dom";
 import SEO from "@/components/SEO";
 
+// Créer un cache global pour les images (sera préservé entre les rendus)
+// Ce cache sera maintenu tant que l'onglet/page reste ouvert
+const imageCache = new Map<string, string>();
+
 export default function BuildsPage() {
   type Chasseur = Omit<Database["public"]["Tables"]["chasseurs"]["Row"], "created_at"> & {
-  created_at?: string;
-};
-type Artefact = Omit<Database["public"]["Tables"]["artefacts"]["Row"], "created_at"> & {
-  created_at?: string;
-};
-type Noyau = Omit<Database["public"]["Tables"]["noyaux"]["Row"], "created_at"> & {
-  created_at?: string;
-};
-type Ombre = Omit<Database["public"]["Tables"]["ombres"]["Row"], "created_at"> & {
-  created_at?: string;
-};
-type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created_at"> & {
-  created_at?: string;
-};
+    created_at?: string;
+  };
+  type Artefact = Omit<Database["public"]["Tables"]["artefacts"]["Row"], "created_at"> & {
+    created_at?: string;
+  };
+  type Noyau = Omit<Database["public"]["Tables"]["noyaux"]["Row"], "created_at"> & {
+    created_at?: string;
+  };
+  type Ombre = Omit<Database["public"]["Tables"]["ombres"]["Row"], "created_at"> & {
+    created_at?: string;
+  };
+  type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created_at"> & {
+    created_at?: string;
+  };
 
   // États pour les données de base
   const [chasseurs, setChasseurs] = useState<Chasseur[]>([]);
@@ -42,6 +46,14 @@ type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created
 
   const [search, setSearch] = useState("");
   const [selectedElement, setSelectedElement] = useState<string | null>(null);
+  
+  // Cache en mémoire des données de chasseurs
+  const chasseursDataCache = useRef<Map<number, {
+    artefacts: Artefact[],
+    noyaux: Noyau[],
+    ombres: Ombre[],
+    setsBonus: SetBonus[]
+  }>>(new Map());
 
   const elementIcons = [
     {
@@ -78,15 +90,14 @@ type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created
 
   const location = useLocation();
   
-  // Ajoutez cette fonction utilitaire en haut du fichier
+  // Fonction pour charger une image et la mettre en cache
   const fetchImageAsBase64 = async (url: string): Promise<string> => {
     try {
       // Vérifier d'abord si l'image est déjà en cache
-      const imageCache = localStorage.getItem(`image_cache_${url}`);
-      if (imageCache) {
-        return imageCache;
+      if (imageCache.has(url)) {
+        return imageCache.get(url)!;
       }
-  
+      
       // Si pas en cache, télécharger l'image
       const response = await fetch(url);
       const blob = await response.blob();
@@ -96,12 +107,7 @@ type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created
         reader.onloadend = () => {
           const base64data = reader.result as string;
           // Mettre en cache l'image encodée
-          try {
-            localStorage.setItem(`image_cache_${url}`, base64data);
-          } catch (e) {
-            console.warn(`⚠️ Impossible de mettre l'image en cache (probablement trop grande): ${url}`, e);
-            // On continue quand même en retournant l'image
-          }
+          imageCache.set(url, base64data);
           resolve(base64data);
         };
         reader.onerror = reject;
@@ -122,75 +128,58 @@ type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created
     
     console.log(`🔍 Chargement des données pour le chasseur #${chasseurId}...`);
     
-    const cacheKey = `chasseurData_${chasseurId}_v1.1`; // Incrémenté pour la gestion des images
-    const cacheDuration = 1000 * 60 * 60 * 24 * 7; // 7 jours
-    const cachedData = localStorage.getItem(cacheKey);
-    
-    if (cachedData) {
-      try {
-        const parsedData = JSON.parse(cachedData);
-        if (Date.now() - parsedData.timestamp < cacheDuration) {
-          console.log(`✅ Données du chasseur #${chasseurId} chargées depuis le cache`);
-          
-          // Mettre à jour les états avec les données en cache
-          if (parsedData.artefacts && parsedData.artefacts.length > 0) {
-            setArtefacts(prev => {
-              const newArtefacts = [...prev];
-              parsedData.artefacts.forEach((artefact: Artefact) => {
-                if (!newArtefacts.some(a => a.id === artefact.id)) {
-                  newArtefacts.push(artefact);
-                }
-              });
-              return newArtefacts;
-            });
+    // Vérifier si les données sont en cache mémoire
+    if (chasseursDataCache.current.has(chasseurId)) {
+      const cachedData = chasseursDataCache.current.get(chasseurId)!;
+      
+      // Utiliser les données en cache pour mettre à jour les états
+      setArtefacts(prev => {
+        const newArtefacts = [...prev];
+        cachedData.artefacts.forEach(artefact => {
+          if (!newArtefacts.some(a => a.id === artefact.id)) {
+            newArtefacts.push(artefact);
           }
-          
-          if (parsedData.noyaux && parsedData.noyaux.length > 0) {
-            setNoyaux(prev => {
-              const newNoyaux = [...prev];
-              parsedData.noyaux.forEach((noyau: Noyau) => {
-                if (!newNoyaux.some(n => n.id === noyau.id)) {
-                  newNoyaux.push(noyau);
-                }
-              });
-              return newNoyaux;
-            });
+        });
+        return newArtefacts;
+      });
+      
+      setNoyaux(prev => {
+        const newNoyaux = [...prev];
+        cachedData.noyaux.forEach(noyau => {
+          if (!newNoyaux.some(n => n.id === noyau.id)) {
+            newNoyaux.push(noyau);
           }
-          
-          if (parsedData.ombres && parsedData.ombres.length > 0) {
-            setOmbres(prev => {
-              const newOmbres = [...prev];
-              parsedData.ombres.forEach((ombre: Ombre) => {
-                if (!newOmbres.some(o => o.id === ombre.id)) {
-                  newOmbres.push(ombre);
-                }
-              });
-              return newOmbres;
-            });
+        });
+        return newNoyaux;
+      });
+      
+      setOmbres(prev => {
+        const newOmbres = [...prev];
+        cachedData.ombres.forEach(ombre => {
+          if (!newOmbres.some(o => o.id === ombre.id)) {
+            newOmbres.push(ombre);
           }
-          
-          if (parsedData.setsBonus && parsedData.setsBonus.length > 0) {
-            setSetsBonus(prev => {
-              const newSets = [...prev];
-              parsedData.setsBonus.forEach((setBonus: SetBonus) => {
-                if (!newSets.some(s => s.id === setBonus.id)) {
-                  newSets.push(setBonus);
-                }
-              });
-              return newSets;
-            });
+        });
+        return newOmbres;
+      });
+      
+      setSetsBonus(prev => {
+        const newSets = [...prev];
+        cachedData.setsBonus.forEach(setBonus => {
+          if (!newSets.some(s => s.id === setBonus.id)) {
+            newSets.push(setBonus);
           }
-          
-          // Marquer ce chasseur comme chargé
-          setLoadedChasseurs(prev => new Set(prev).add(chasseurId));
-          return;
-        }
-      } catch (error) {
-        console.error(`Erreur lors de la lecture du cache pour le chasseur #${chasseurId}:`, error);
-      }
+        });
+        return newSets;
+      });
+      
+      // Marquer ce chasseur comme chargé
+      setLoadedChasseurs(prev => new Set(prev).add(chasseurId));
+      console.log(`✅ Données du chasseur #${chasseurId} chargées depuis le cache mémoire`);
+      return;
     }
     
-    // Si pas de cache valide, charger depuis Supabase
+    // Si pas de cache, charger depuis Supabase
     try {
       // Obtenir les builds associés à ce chasseur
       const chasseurBuild = buildsChasseurs.find(b => b.chasseurId === chasseurId);
@@ -225,13 +214,12 @@ type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created
         build.sets_bonus.forEach(set => setBonusIds.add(set.id));
       });
       
-      // Préparer les données à mettre en cache avec les images encodées
-      const dataToCache = {
-        timestamp: Date.now(),
-        artefacts: [],
-        noyaux: [],
-        ombres: [],
-        setsBonus: []
+      // Préparer les conteneurs pour les données récupérées
+      const fetchedData = {
+        artefacts: [] as Artefact[],
+        noyaux: [] as Noyau[],
+        ombres: [] as Ombre[],
+        setsBonus: [] as SetBonus[]
       };
       
       // Récupérer les artefacts si nécessaire
@@ -261,7 +249,7 @@ type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created
             })
           );
           
-          dataToCache.artefacts = artefactsWithImages;
+          fetchedData.artefacts = artefactsWithImages;
           setArtefacts(prev => {
             const newArtefacts = [...prev];
             artefactsWithImages.forEach(artefact => {
@@ -304,7 +292,7 @@ type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created
             })
           );
           
-          dataToCache.noyaux = noyauxWithImages;
+          fetchedData.noyaux = noyauxWithImages;
           setNoyaux(prev => {
             const newNoyaux = [...prev];
             noyauxWithImages.forEach(noyau => {
@@ -347,7 +335,7 @@ type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created
             })
           );
           
-          dataToCache.ombres = ombresWithImages;
+          fetchedData.ombres = ombresWithImages;
           setOmbres(prev => {
             const newOmbres = [...prev];
             ombresWithImages.forEach(ombre => {
@@ -371,7 +359,7 @@ type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created
           .in("id", Array.from(setBonusIds));
         
         if (setBonusData && setBonusData.length > 0) {
-          dataToCache.setsBonus = setBonusData;
+          fetchedData.setsBonus = setBonusData;
           setSetsBonus(prev => {
             const newSets = [...prev];
             setBonusData.forEach(setBonus => {
@@ -388,27 +376,8 @@ type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created
       }
       
       // Mettre en cache les données récupérées
-      try {
-        localStorage.setItem(cacheKey, JSON.stringify(dataToCache));
-        console.log(`💾 Données du chasseur #${chasseurId} mises en cache avec les images`);
-      } catch (e) {
-        console.warn(`⚠️ Erreur lors du stockage des données du chasseur #${chasseurId} dans localStorage`, e);
-        
-        // Essayer sans les images si le stockage échoue (probablement en raison de la taille)
-        try {
-          const lightDataToCache = {
-            timestamp: Date.now(),
-            artefacts: dataToCache.artefacts.map(a => ({ ...a, image: a.image.startsWith('data:') ? null : a.image })),
-            noyaux: dataToCache.noyaux.map(n => ({ ...n, image: n.image.startsWith('data:') ? null : n.image })),
-            ombres: dataToCache.ombres.map(o => ({ ...o, image: o.image.startsWith('data:') ? null : o.image })),
-            setsBonus: dataToCache.setsBonus
-          };
-          localStorage.setItem(`${cacheKey}_light`, JSON.stringify(lightDataToCache));
-          console.log(`💾 Version légère des données du chasseur #${chasseurId} mise en cache (sans images)`);
-        } catch (e2) {
-          console.error(`❌ Impossible de mettre en cache même les données légères pour le chasseur #${chasseurId}`, e2);
-        }
-      }
+      chasseursDataCache.current.set(chasseurId, fetchedData);
+      console.log(`💾 Données du chasseur #${chasseurId} mises en cache mémoire`);
       
       // Marquer ce chasseur comme chargé
       setLoadedChasseurs(prev => new Set(prev).add(chasseurId));
@@ -436,25 +405,10 @@ type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created
 
   useEffect(() => {
     const fetchInitialData = async () => {
-      // Ne charger que les infos de base des chasseurs au chargement initial
-      const cacheKey = "chasseursBasicData_v1.1"; // Incrémenté pour la gestion des images
-      const cacheDuration = 1000 * 60 * 60 * 24 * 30; // 30 jours
-      const cachedData = localStorage.getItem(cacheKey);
+      // Préparer un conteneur pour les données des chasseurs
+      let chasseursData: Chasseur[] = [];
       
-      if (cachedData) {
-        try {
-          const parsedData = JSON.parse(cachedData);
-          if (Date.now() - parsedData.timestamp < cacheDuration) {
-            console.log("🔍 Utilisation des données de base des chasseurs depuis le cache...");
-            setChasseurs(parsedData.chasseurs);
-            return;
-          }
-        } catch (error) {
-          console.error("Erreur lors de la lecture du cache des chasseurs:", error);
-        }
-      }
-      
-      // Si pas de cache valide, charger les données de base depuis Supabase
+      // Charger depuis Supabase
       console.log("🔄 Récupération des données de base des chasseurs depuis Supabase...");
       const { data: chasseurData } = await supabase
         .from("chasseurs")
@@ -480,38 +434,24 @@ type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created
           })
         );
         
+        chasseursData = chasseursWithImages;
         setChasseurs(chasseursWithImages);
-        
-        // Mettre en cache avec les images encodées
-        try {
-          localStorage.setItem(cacheKey, JSON.stringify({
-            timestamp: Date.now(),
-            chasseurs: chasseursWithImages
-          }));
-          console.log("💾 Données de base des chasseurs mises en cache avec les images");
-        } catch (e) {
-          console.warn("⚠️ Erreur lors du stockage dans localStorage (probablement trop d'images)", e);
-          
-          // Tenter de stocker sans les images
-          try {
-            localStorage.setItem(`${cacheKey}_light`, JSON.stringify({
-              timestamp: Date.now(),
-              chasseurs: chasseursWithImages.map(c => ({ ...c, image: c.image.startsWith('data:') ? null : c.image }))
-            }));
-            console.log("💾 Version légère des données de base des chasseurs mise en cache (sans images)");
-          } catch (e2) {
-            console.error("❌ Impossible de mettre en cache même les données légères", e2);
-          }
-        }
+        console.log("✅ Données de base des chasseurs chargées avec les images en cache mémoire");
       }
     };
 
     fetchInitialData();
+    
+    // Précharger les images des éléments (utilisées pour le filtrage)
+    elementIcons.forEach(el => {
+      fetchImageAsBase64(el.image);
+    });
+    
   }, []);
 
   useEffect(() => {
     // Quand les builds sont chargés, tente de scroller sur l'ancre
-    if (location.hash) {
+    if (location.hash && chasseurs.length > 0) {
       const id = location.hash.replace("#", "");
       setTimeout(() => {
         const el = document.getElementById(id);
@@ -523,10 +463,13 @@ type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created
           setTimeout(() => el.classList.remove("animate-pulse-once"), 900);
           
           // Si un chasseur est ciblé directement par l'ancre, charger ses données
-          const chasseurId = parseInt(id);
-          if (!isNaN(chasseurId)) {
-            loadChasseurData(chasseurId);
-            setOpenChasseurs(prev => new Set(prev).add(chasseurId));
+          const chasseurMatch = id.match(/chasseur-(\d+)/);
+          if (chasseurMatch) {
+            const chasseurId = parseInt(chasseurMatch[1]);
+            if (!isNaN(chasseurId)) {
+              loadChasseurData(chasseurId);
+              setOpenChasseurs(prev => new Set(prev).add(chasseurId));
+            }
           }
         }
       }, 200);
@@ -629,7 +572,7 @@ type SetBonus = Omit<Database["public"]["Tables"]["sets_bonus"]["Row"], "created
                     className="relative w-8 h-8 md:w-10 md:h-10 cursor-pointer transition-all duration-200 hover:scale-105"
                   >
                     <img
-                      src={el.image}
+                      src={imageCache.get(el.image) || el.image}
                       alt={el.id}
                       className="w-full h-full object-contain"
                     />
