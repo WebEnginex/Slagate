@@ -11,9 +11,19 @@ import { FiRefreshCw } from "react-icons/fi";
 import { useLocation } from "react-router-dom";
 import SEO from "@/components/SEO";
 
-// Créer un cache global pour les images (sera préservé entre les rendus)
+// Créer un cache global pour les images basé sur les URLs (sera préservé entre les rendus)
 // Ce cache sera maintenu tant que l'onglet/page reste ouvert
 const imageCache = new Map<string, string>();
+
+// Compteurs pour suivre l'efficacité du cache
+const cacheStats = {
+  hits: 0,
+  misses: 0,
+  get hitRate() {
+    const total = this.hits + this.misses;
+    return total > 0 ? `${(this.hits / total * 100).toFixed(1)}%` : '0%';
+  }
+};
 
 export default function BuildsPage() {
   type Chasseur = Omit<Database["public"]["Tables"]["chasseurs"]["Row"], "created_at"> & {
@@ -47,7 +57,7 @@ export default function BuildsPage() {
   const [search, setSearch] = useState("");
   const [selectedElement, setSelectedElement] = useState<string | null>(null);
   
-  // Cache en mémoire des données de chasseurs
+  // Cache en mémoire des données de chasseurs (pour éviter de refaire des requêtes)
   const chasseursDataCache = useRef<Map<number, {
     artefacts: Artefact[],
     noyaux: Noyau[],
@@ -90,32 +100,56 @@ export default function BuildsPage() {
 
   const location = useLocation();
   
-  // Fonction pour charger une image et la mettre en cache
+  // Fonction pour normaliser les URLs (éliminer différences mineures qui pointent vers la même ressource)
+  const normalizeUrl = (url: string): string => {
+    try {
+      // Supprimer les paramètres potentiels de query string
+      return url.split('?')[0];
+    } catch (e) {
+      return url;
+    }
+  };
+  
+  // Fonction pour charger une image et la mettre en cache basé sur l'URL
   const fetchImageAsBase64 = async (url: string): Promise<string> => {
     try {
-      // Vérifier d'abord si l'image est déjà en cache
-      if (imageCache.has(url)) {
-        return imageCache.get(url)!;
+      if (!url) return ''; // Protection contre les URLs undefined ou vides
+      
+      // Normaliser l'URL pour une comparaison plus fiable
+      const normalizedUrl = normalizeUrl(url);
+      
+      // Vérifier d'abord si l'image est déjà en cache par URL normalisée
+      if (imageCache.has(normalizedUrl)) {
+        cacheStats.hits++;
+        console.log(`🔄 Image chargée depuis le cache: ${normalizedUrl.substring(0, 50)}... (Taux de réussite: ${cacheStats.hitRate})`);
+        return imageCache.get(normalizedUrl)!;
       }
       
+      cacheStats.misses++;
+      console.log(`📥 Téléchargement d'une nouvelle image: ${normalizedUrl.substring(0, 50)}... (Taux de réussite: ${cacheStats.hitRate})`);
       // Si pas en cache, télécharger l'image
       const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      
       const blob = await response.blob();
       
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onloadend = () => {
           const base64data = reader.result as string;
-          // Mettre en cache l'image encodée
-          imageCache.set(url, base64data);
+          // Mettre en cache l'image encodée avec l'URL normalisée comme clé
+          imageCache.set(normalizedUrl, base64data);
+          console.log(`✅ Image mise en cache: ${normalizedUrl.substring(0, 50)}...`);
           resolve(base64data);
         };
         reader.onerror = reject;
         reader.readAsDataURL(blob);
       });
     } catch (error) {
-      console.error(`❌ Erreur lors du chargement de l'image: ${url}`, error);
-      return url; // Fallback à l'URL originale en cas d'erreur
+      console.error(`❌ Erreur lors du chargement de l'image: ${url?.substring(0, 50) || 'URL invalide'}...`, error);
+      return url || ''; // Fallback à l'URL originale en cas d'erreur
     }
   };
   
@@ -405,9 +439,6 @@ export default function BuildsPage() {
 
   useEffect(() => {
     const fetchInitialData = async () => {
-      // Préparer un conteneur pour les données des chasseurs
-      let chasseursData: Chasseur[] = [];
-      
       // Charger depuis Supabase
       console.log("🔄 Récupération des données de base des chasseurs depuis Supabase...");
       const { data: chasseurData } = await supabase
@@ -434,9 +465,8 @@ export default function BuildsPage() {
           })
         );
         
-        chasseursData = chasseursWithImages;
         setChasseurs(chasseursWithImages);
-        console.log("✅ Données de base des chasseurs chargées avec les images en cache mémoire");
+        console.log(`✅ ${chasseursWithImages.length} chasseurs chargés avec leurs images`);
       }
     };
 
@@ -572,7 +602,7 @@ export default function BuildsPage() {
                     className="relative w-8 h-8 md:w-10 md:h-10 cursor-pointer transition-all duration-200 hover:scale-105"
                   >
                     <img
-                      src={imageCache.get(el.image) || el.image}
+                      src={imageCache.get(normalizeUrl(el.image)) || el.image}
                       alt={el.id}
                       className="w-full h-full object-contain"
                     />
@@ -607,6 +637,24 @@ export default function BuildsPage() {
                   />
                 );
               })}
+              
+              {/* Afficher un message si aucun résultat n'est trouvé */}
+              {filteredBuilds.length === 0 && (
+                <div className="bg-sidebar p-8 rounded-lg border border-sidebar-border text-center">
+                  <p className="text-lg text-gray-300">
+                    Aucun chasseur ne correspond à votre recherche.
+                  </p>
+                  <button
+                    onClick={() => {
+                      setSearch("");
+                      setSelectedElement(null);
+                    }}
+                    className="mt-4 px-4 py-2 bg-solo-purple text-white rounded-md hover:bg-solo-purple-dark transition-colors"
+                  >
+                    Réinitialiser les filtres
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
