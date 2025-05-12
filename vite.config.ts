@@ -22,13 +22,23 @@ export default defineConfig(({ mode }) => ({
       name: 'copy-robots-txt',
       closeBundle() {
         const source = path.resolve(__dirname, 'public/robots.txt');
-        const destination = path.resolve(__dirname, 'dist/robots.txt');
-        if (fs.existsSync(source)) {
-          fs.copyFileSync(source, destination);
-          console.log('✅ robots.txt copié avec succès dans dist/');
-        } else {
-          console.warn('⚠️ robots.txt introuvable dans public/.');
+        const destinationDir = path.resolve(__dirname, 'dist');
+        const destination = path.join(destinationDir, 'robots.txt');
+
+        // Vérifie que le dossier dist existe, sinon le crée
+        if (!fs.existsSync(destinationDir)) {
+          fs.mkdirSync(destinationDir, { recursive: true });
         }
+
+        // Si robots.txt n'existe pas dans public, il est créé automatiquement
+        if (!fs.existsSync(source)) {
+          console.warn('⚠️ robots.txt introuvable dans public/. Un fichier par défaut sera créé.');
+          fs.writeFileSync(source, 'User-agent: *\nDisallow:', 'utf8');
+        }
+
+        // Copie robots.txt de public vers dist
+        fs.copyFileSync(source, destination);
+        console.log('✅ robots.txt copié avec succès dans dist/');
       }
     }
   ].filter(Boolean),
