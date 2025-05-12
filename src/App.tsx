@@ -36,7 +36,6 @@ import PromoCodes from "@/pages/PromoCodes";
 import MentionsLegales from "@/pages/legal/MentionsLegales";
 import ConditionsUtilisation from "@/pages/legal/ConditionsUtilisation";
 import PolitiqueConfidentialite from "@/pages/legal/PolitiqueConfidentialite";
-import Cookies from "@/pages/legal/Cookies";
 
 
 import NotFound from "@/pages/NotFound";
@@ -79,7 +78,6 @@ const App = () => (
           <Route path="/mentions-legales" element={<MentionsLegales />} />
           <Route path="/cgu" element={<ConditionsUtilisation />} />
           <Route path="/confidentialite" element={<PolitiqueConfidentialite />} />
-          <Route path="/cookies" element={<Cookies />} />
 
 
           <Route path="*" element={<NotFound />} />

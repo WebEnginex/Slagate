@@ -93,9 +93,6 @@ const Footer = () => {
           >
             Confidentialité
           </Link>
-          <Link to="/cookies" className="hover:underline hover:text-white">
-            Cookies
-          </Link>
         </div>
 
         <p className="text-xs text-muted-foreground mt-4">
