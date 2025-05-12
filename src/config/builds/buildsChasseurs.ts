@@ -8121,7 +8121,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 19,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -8193,7 +8193,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 12,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -8265,7 +8265,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bague: {
             id: 19,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
