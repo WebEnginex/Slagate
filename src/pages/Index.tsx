@@ -368,7 +368,7 @@ const Index = () => {
           </div>
         </div>
         {/* Section YouTube */}
-        <div className="mb-16">
+        {/* <div className="mb-16">
           <h2 className="text-3xl font-bold text-center text-violet-400 mb-8">
             Dernière vidéo YouTube
           </h2>
@@ -379,8 +379,8 @@ const Index = () => {
               Chargement de la dernière vidéo...
             </p>
           )}{" "}
-        </div>{" "}
-        
+        </div>{" "} */}
+
         {/* Panneau de débogage caché - à supprimer en production */}
         {import.meta.env.DEV && (
           <CacheDebugPanel
