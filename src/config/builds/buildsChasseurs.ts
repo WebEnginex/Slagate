@@ -7174,42 +7174,42 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         artefacts: {
           casque: {
-            id: 60,
+            id: 57,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
-            id: 7,
+            id: 1,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
-            id: 85,
+            id: 78,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
-            id: 29,
+            id: 22,
             statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
-            id: 76,
+            id: 68,
             statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           bracelet: {
-            id: 54,
+            id: 47,
             statPrincipale: "Dégâts de vent",
             statsSecondaires: ["-"],
           },
           bague: {
-            id: 19,
+            id: 12,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
-            id: 43,
+            id: 36,
             statPrincipale: "PM",
             statsSecondaires: ["-"],
           },
@@ -7245,42 +7245,42 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         artefacts: {
           casque: {
-            id: 60,
+            id: 57,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
-            id: 7,
+            id: 1,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
-            id: 85,
+            id: 78,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
-            id: 29,
+            id: 22,
             statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
-            id: 76,
+            id: 68,
             statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           bracelet: {
-            id: 54,
+            id: 47,
             statPrincipale: "Dégâts de vent",
             statsSecondaires: ["-"],
           },
           bague: {
-            id: 19,
+            id: 12,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
-            id: 43,
+            id: 36,
             statPrincipale: "PM",
             statsSecondaires: ["-"],
           },
@@ -7316,42 +7316,42 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         artefacts: {
           casque: {
-            id: 60,
+            id: 57,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
-            id: 7,
+            id: 1,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
-            id: 85,
+            id: 78,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
-            id: 29,
+            id: 22,
             statPrincipale: "Dégâts de coup critique | Défense (%)",
             statsSecondaires: ["-"],
           },
           collier: {
-            id: 76,
+            id: 68,
             statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           bracelet: {
-            id: 54,
+            id: 47,
             statPrincipale: "Dégâts de vent",
             statsSecondaires: ["-"],
           },
           bague: {
-            id: 19,
+            id: 12,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
-            id: 43,
+            id: 36,
             statPrincipale: "PM",
             statsSecondaires: ["-"],
           },
