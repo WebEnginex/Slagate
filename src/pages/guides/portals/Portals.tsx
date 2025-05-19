@@ -262,7 +262,7 @@ export default function Portals() {
           <p className="text-base sm:text-lg">
             Pendant 24 heures après avoir terminé un portail, les utilisateurs
             peuvent exploiter ce portail dans l'onglet{" "}
-            <strong>"Aller au Minage de Portail"</strong>, situé en bas à gauche
+            <strong>"Aller à l'extraction minière de portail"</strong>, situé en bas à gauche
             de l'écran des portails, ou via le menu rapide. Le minage d'un
             portail offre des ressources supplémentaires. Le temps de minage
             dépend du rang du portail, et les récompenses dépendent de son rang
