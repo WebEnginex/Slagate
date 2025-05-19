@@ -3421,7 +3421,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 57,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
@@ -3493,7 +3493,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 57,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
@@ -3565,7 +3565,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 57,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
@@ -3637,7 +3637,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 57,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
@@ -3709,7 +3709,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 57,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
@@ -3819,7 +3819,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 27,
-            statPrincipale: "PV (%)| Dégâts de coup critique",
+            statPrincipale: "PV (%) | Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -3891,7 +3891,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 27,
-            statPrincipale: "PV (%)| Dégâts de coup critique",
+            statPrincipale: "PV (%) | Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -3963,7 +3963,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 27,
-            statPrincipale: "PV (%)| Dégâts de coup critique",
+            statPrincipale: "PV (%) | Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
