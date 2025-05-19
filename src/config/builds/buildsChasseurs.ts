@@ -40,7 +40,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Force": "695 Points",
           "Vitalité": "-",
           "Agilité": "-",
-          "Intélligence": "-",
+          "Intelligence": "-",
           "Perception": "-",
           "PV supplémentaire": "-",
           "Défense supplémentaire": "-",
@@ -3819,7 +3819,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 27,
-            statPrincipale: "PV supplémentaire| Dégâts de coup critique",
+            statPrincipale: "PV (%)| Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -3891,7 +3891,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 27,
-            statPrincipale: "PV supplémentaire| Dégâts de coup critique",
+            statPrincipale: "PV (%)| Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -3963,7 +3963,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 27,
-            statPrincipale: "PV supplémentaire| Dégâts de coup critique",
+            statPrincipale: "PV (%)| Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
