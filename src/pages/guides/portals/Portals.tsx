@@ -318,9 +318,7 @@ export default function Portals() {
             <li>Rang D : 3 XP</li>
             <li>Rang E : 2 XP</li>
           </ul>
-        </section>
-
-        {/* Section Tableau */}
+        </section>        {/* Section Tableau */}
         <section className="bg-[hsl(240_17%_10%)] p-6 rounded-lg shadow-lg">
           <h2
             className="text-2xl sm:text-3xl font-bold mb-4"
@@ -338,36 +336,46 @@ export default function Portals() {
               </thead>
               <tbody>
                 {[
-                  { level: 1, effect: "Or obtenu +4%" },
-                  { level: 2, effect: "Temps de minage -2%" },
-                  { level: 3, effect: "Taux de récompenses bonus +2%" },
-                  { level: 4, effect: "Or obtenu +4%" },
-                  { level: 5, effect: "Temps de minage -2%" },
-                  { level: 6, effect: "Taux de récompenses bonus +2%" },
-                  { level: 7, effect: "Or obtenu +4%" },
-                  { level: 8, effect: "Temps de minage -2%" },
-                  { level: 9, effect: "Taux de récompenses bonus +2%" },
-                  { level: 10, effect: "Cristaux de Mana obtenus +10%" },
-                  { level: 11, effect: "Emplacements de minage +1" },
-                  { level: 12, effect: "Or obtenu +4%" },
-                  { level: 13, effect: "Temps de minage -2%" },
-                  { level: 14, effect: "Taux de récompenses bonus +2%" },
-                  { level: 15, effect: "Cristaux de Mana obtenus +10%" },
-                  { level: 16, effect: "Or obtenu +4%" },
-                  { level: 17, effect: "Temps de minage -2%" },
-                  { level: 18, effect: "Taux de récompenses bonus +2%" },
-                  { level: 19, effect: "Cristaux de Mana obtenus +10%" },
-                  { level: 20, effect: "Or obtenu +4%" },
-                  { level: 21, effect: "Temps de minage -3%" },
-                  { level: 22, effect: "Taux de récompenses bonus +2%" },
-                  { level: 23, effect: "Cristaux de Mana obtenus +10%" },
-                  { level: 24, effect: "Or obtenu +6%" },
-                  { level: 25, effect: "Temps de minage -4%" },
-                  { level: 26, effect: "Taux de récompenses bonus +3%" },
-                  { level: 27, effect: "Cristaux de Mana obtenus +10%" },
-                  { level: 28, effect: "Or obtenu +8%" },
-                  { level: 29, effect: "Temps de minage -5%" },
-                  { level: 30, effect: "Emplacements de minage +1" },
+                  { level: 1, effect: "Golds obtenus +4%" },
+                  { level: 2, effect: "Durée d'extraction minière -2%" },
+                  { level: 3, effect: "Taux de récompenses supplémentaires +2%" },
+                  { level: 4, effect: "Golds obtenus +4%" },
+                  { level: 5, effect: "Durée d'extraction minière -2%" },
+                  { level: 6, effect: "Taux de récompenses supplémentaires +2%" },
+                  { level: 7, effect: "Golds obtenus +4%" },
+                  { level: 8, effect: "Durée d'extraction minière -2%" },
+                  { level: 9, effect: "Taux de récompenses supplémentaires +2%" },
+                  { level: 10, effect: "Cristal de mana obtenu +10%" },
+                  { level: 11, effect: "Emplacements d'extraction +1" },
+                  { level: 12, effect: "Golds obtenus +4%" },
+                  { level: 13, effect: "Durée d'extraction minière -2%" },
+                  { level: 14, effect: "Taux de récompenses supplémentaires +2%" },
+                  { level: 15, effect: "Cristal de mana obtenu +10%" },
+                  { level: 16, effect: "Golds obtenus +4%" },
+                  { level: 17, effect: "Durée d'extraction minière -2%" },
+                  { level: 18, effect: "Taux de récompenses supplémentaires +2%" },
+                  { level: 19, effect: "Cristal de mana obtenu +10%" },
+                  { level: 20, effect: "Golds obtenus +4%" },
+                  { level: 21, effect: "Durée d'extraction minière -3%" },
+                  { level: 22, effect: "Taux de récompenses supplémentaires +2%" },
+                  { level: 23, effect: "Cristal de mana obtenu +10%" },
+                  { level: 24, effect: "Golds obtenus +6%" },
+                  { level: 25, effect: "Durée d'extraction minière -4%" },
+                  { level: 26, effect: "Taux de récompenses supplémentaires +3%" },
+                  { level: 27, effect: "Cristal de mana obtenu +10%" },
+                  { level: 28, effect: "Golds obtenus +8%" },
+                  { level: 29, effect: "Durée d'extraction minière -5%" },
+                  { level: 30, effect: "Emplacements d'extraction +1" },
+                  { level: 31, effect: "Golds obtenus +5%" },
+                  { level: 32, effect: "Durée d'extraction minière -1.5%" },
+                  { level: 33, effect: "Cristal de mana obtenu +3%" },
+                  { level: 34, effect: "Taux de récompenses supplémentaires +2%" },
+                  { level: 35, effect: "Golds obtenus +5%" },
+                  { level: 36, effect: "Golds obtenus +5%" },
+                  { level: 37, effect: "Durée d'extraction minière -1.5%" },
+                  { level: 38, effect: "Cristal de mana obtenu +3%" },
+                  { level: 39, effect: "Taux de récompenses supplémentaires +2%" },
+                  { level: 40, effect: "Golds obtenus +5%" },
                 ].map((row, index) => (
                   <tr
                     key={index}
@@ -378,6 +386,44 @@ export default function Portals() {
                     </td>
                     <td className="border border-gray-600 px-4 py-2">
                       {row.effect}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h3
+            className="text-xl sm:text-2xl font-bold mt-8 mb-4"
+            style={{ color: "rgb(167 139, 250)" }}
+          >
+            Total des Buffs
+          </h3>
+          <div className="mt-4 overflow-x-auto">
+            <table className="table-auto w-full border-collapse border border-gray-600 text-left text-sm sm:text-base">
+              <thead>
+                <tr className="bg-gray-800 text-white">
+                  <th className="border border-gray-600 px-4 py-2">Type de Bonus</th>
+                  <th className="border border-gray-600 px-4 py-2">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { type: "Golds obtenus", total: "+37%" },
+                  { type: "Durée d'extraction minière", total: "-21%" },
+                  { type: "Taux de récompenses supplémentaires", total: "+15%" },
+                  { type: "Cristal de mana obtenu", total: "+46%" },
+                  { type: "Emplacements d'extraction", total: "+2" },
+                ].map((row, index) => (
+                  <tr
+                    key={index}
+                    className={index % 2 === 0 ? "bg-gray-700" : "bg-gray-800"}
+                  >
+                    <td className="border border-gray-600 px-4 py-2">
+                      {row.type}
+                    </td>
+                    <td className="border border-gray-600 px-4 py-2">
+                      {row.total}
                     </td>
                   </tr>
                 ))}
