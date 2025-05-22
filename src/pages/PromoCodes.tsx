@@ -17,7 +17,7 @@ import { X, ChevronDown, ChevronUp } from "lucide-react";
 import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
 import SEO from "@/components/SEO";
-import { loadPageImageAsBase64 } from "@/services/cacheImages";
+import { loadPageImageAsBase64 } from "@/services/cacheImages/index";
 
 type SocialLink = {
   type: "youtube" | "twitch" | "twitter" | "instagram" | "website" | "tiktok";
