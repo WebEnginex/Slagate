@@ -3197,7 +3197,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 57,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
@@ -3269,7 +3269,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 57,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
@@ -3341,7 +3341,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         artefacts: {
           casque: {
             id: 57,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
