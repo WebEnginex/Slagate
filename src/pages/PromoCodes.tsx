@@ -17,6 +17,7 @@ import { X, ChevronDown, ChevronUp } from "lucide-react";
 import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
 import SEO from "@/components/SEO";
+import { loadPageImageAsBase64 } from "@/services/cacheImages";
 
 type SocialLink = {
   type: "youtube" | "twitch" | "twitter" | "instagram" | "website" | "tiktok";
@@ -78,6 +79,38 @@ const getSocialIcon = (type: SocialLink["type"]) => {
 
 // Mettre les récompenses en listes
 const promoCodes = [
+  {
+    code: "JUICYZAFF",
+    rewards: [
+      "Gold x100,000",
+      "Poudre de bénédiction x50",
+    ],
+    date: "?",
+  },
+  {
+    code: "BOTKING",
+    rewards: [
+      "Gold x100,000",
+      "Fragment de rune x100",
+    ],
+    date: "?",
+  },
+  {
+    code: "PAYNECHULED",
+    rewards: [
+      "Gold x100,000",
+      "Poudre de bénédiction x50",
+    ],
+    date: "?",
+  },
+  {
+    code: "HIVEPORDY",
+    rewards: [
+      "Gold x100,000",
+      "Fragment de rune x100",
+    ],
+    date: "?",
+  },
   {
     code: "WHITEVALKYRIE",
     rewards: [
@@ -145,6 +178,7 @@ const promoCodes = [
     ],
     date: "?",
   },
+  
 ];
 
 // Fonction pour formatter le texte avec mise en évidence des mots entre guillemets
@@ -185,27 +219,12 @@ const highlightNumbers = (text: string) => {
 };
 
 // =========================
-// Gestion du cache local des images du guide étape par étape
+// Utilisation du service de cache centralisé avec contexte de page
 // =========================
-const GUIDE_IMAGE_PATH = "/images/code_promo/";
 
-// Fonction utilitaire pour charger une image et la convertir en base64
-const fetchImageAsBase64 = async (url: string): Promise<string | null> => {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Image fetch failed");
-    const blob = await response.blob();
-    return await new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result as string);
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
-  } catch (error) {
-    console.error(`Erreur lors du chargement de l'image ${url}:`, error);
-    return null;
-  }
-};
+// Constante pour identifier cette page dans le système de logs
+const PAGE_ID = "PromoCodes";
+const GUIDE_IMAGE_PATH = "/images/code_promo/";
 
 // =========================
 // Composant Memo pour les cartes de codes promo
@@ -298,46 +317,44 @@ const PromoCodes = () => {
         'Les récompenses seront envoyées directement dans votre "messagerie" en jeu. Ouvrez-la pour les récupérer.',
       image: "/images/code_promo/tuto_pomo_code_7.webp",
     },
-  ];
-  // =========================
-  // Chargement et cache des images du guide étape par étape
+  ];  // =========================
+  // Chargement et cache des images du guide étape par étape avec contexte de page
   // =========================
   useEffect(() => {
+    // Fonction pour charger les images et les mettre en cache avec le contexte de page
     const loadImages = async () => {
-      const newCache: Record<string, string> = { ...state.cachedImages };
-      let updated = false;
-      for (const stepObj of steps) {
-        // D'abord, on vérifie le cache React
-        if (!newCache[stepObj.image]) {
-          // Ensuite, on vérifie le localStorage
-          const imageName = stepObj.image.replace(GUIDE_IMAGE_PATH, "");
-          const cacheKey = `promoGuideImg_${imageName}`;
-          let base64 = localStorage.getItem(cacheKey);
-          
-          // Si pas en localStorage, on télécharge et on stocke
-          if (!base64) {
-            base64 = await fetchImageAsBase64(stepObj.image);
+      try {
+        const newCache: Record<string, string> = { ...state.cachedImages };
+        let updated = false;
+        
+        // Extraire toutes les URLs d'images pour les passer en contexte au worker
+        const imageUrls = steps.map(step => step.image);
+        
+        // Charger toutes les images du guide
+        for (const stepObj of steps) {
+          // Si l'image n'est pas déjà dans le cache React
+          if (!newCache[stepObj.image]) {
+            // Récupérer l'image avec le contexte de page et la liste des images pertinentes
+            const base64 = await loadPageImageAsBase64(stepObj.image, PAGE_ID, imageUrls);
+            
+            // Mettre à jour le cache React
             if (base64) {
-              try {
-                localStorage.setItem(cacheKey, base64);
-              } catch (e) {
-                console.warn("Erreur de stockage localStorage (quota dépassé)", e);
-                // On continue sans stocker
-              }
+              newCache[stepObj.image] = base64;
+              updated = true;
             }
           }
-          
-          // On met à jour le cache React
-          if (base64) {
-            newCache[stepObj.image] = base64;
-            updated = true;
-          }
         }
-      }
-      if (updated || (Object.keys(newCache).length && Object.keys(newCache).length !== Object.keys(state.cachedImages).length)) {
-        setState((prev) => ({ ...prev, cachedImages: newCache }));
+        
+        // Mise à jour de l'état avec les nouvelles images en cache
+        if (updated || (Object.keys(newCache).length && Object.keys(newCache).length !== Object.keys(state.cachedImages).length)) {
+          setState((prev) => ({ ...prev, cachedImages: newCache }));
+        }
+      } catch (error) {
+        console.error("Erreur lors du chargement des images:", error);
+        // En cas d'erreur, on continue sans mise en cache
       }
     };
+    
     loadImages();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

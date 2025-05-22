@@ -3,7 +3,7 @@ export const lastModifiedDates: Record<string, string> = {
     tierList: "11 Mai 2025 | 01:23",
     builds: "11 Mai 2025 | 01:23",
     atelier: "11 Mai 2025 | 01:23",
-    promoCodes: "11 Mai 2025 | 01:23",
+    promoCodes: "22 Mai 2025 | 19:30",
     creators: "11 Mai 2025 | 01:23",
     ennio: "11 Mai 2025 | 01:23",
     bdg: "11 Mai 2025 | 01:23",
