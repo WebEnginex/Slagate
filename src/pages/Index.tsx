@@ -6,7 +6,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import CacheDebugPanel from "@/components/tools/CacheDebugPanel";
-import { resetAllCaches, syncCacheStatus } from "@/utils/clearCache";
+import {
+  resetAllCaches,
+  syncCacheStatus,
+  fetchImageFromWorker,
+  checkIndexedDBSupport,
+} from "@/services/cacheImages";
 
 // Composant YouTube pour intégrer une vidéo
 const YoutubeEmbed = ({ videoId }: { videoId: string }) => {
@@ -67,17 +72,16 @@ const HunterCard = ({
 // Composant principal
 // =========================
 const Index = () => {
-  const hunterIds = [43, 41, 13];
+  const hunterIds = [44, 43, 41];
   const [hunters, setHunters] = useState<
     { id: number; nom: string; image: string }[]
   >([]);
   const [images, setImages] = useState<{ [key: number]: string }>({});
-  const [latestVideoId, setLatestVideoId] = useState("");
-  // État pour suivre si le cache est disponible
+  const [latestVideoId, setLatestVideoId] = useState(""); // État pour suivre si le cache est disponible
   const [cacheAvailable, setCacheAvailable] = useState(
     localStorage.getItem("indexedDBFailed") !== "true"
   );
-  // Cette première déclaration sera supprimée
+
   // Fonction de chargement des images extraite en dehors de useEffect
   const loadImages = async (
     huntersToLoad: { id: number; nom: string; image: string }[]
@@ -90,7 +94,10 @@ const Index = () => {
       totalImages++;
       try {
         const startTime = performance.now();
-        const imageResponse = await fetchImageFromWorker(hunter.image);
+        const imageResponse = await fetchImageFromWorker(
+          hunter.image,
+          setCacheAvailable
+        );
         const loadTime = Math.round(performance.now() - startTime);
 
         if (
@@ -110,16 +117,7 @@ const Index = () => {
         loadedImages[hunter.id] = hunter.image;
       }
     }
-
-    setImages(loadedImages);
-
-    // Message récapitulatif simplifié
-    const cachePercent = Math.round((cacheHits / totalImages) * 100);
-    console.log(
-      `📊 Images: ${cacheHits}/${totalImages} (${cachePercent}%) depuis IndexedDB, ${
-        totalImages - cacheHits
-      } depuis Supabase`
-    );
+    setImages(loadedImages); // Les statistiques de cache sont maintenant gérées dans les services
   };
   // La fonction resetCache a été déplacée dans le composant CacheDebugPanel
   useEffect(() => {
@@ -136,148 +134,32 @@ const Index = () => {
           .from("chasseurs")
           .select("id, nom, image")
           .in("id", hunterIds);
-
         if (error) {
-          console.error(
-            "❌ Erreur lors de la récupération des chasseurs :",
-            error
-          );
+          // Gestion silencieuse de l'erreur
           return;
-        }
-
-        if (data) {
-          setHunters(data);
-          loadImages(data);
+        }        if (data) {
+          // Trier les données dans l'ordre défini par hunterIds
+          const sortedData = [...data].sort((a, b) => {
+            return hunterIds.indexOf(a.id) - hunterIds.indexOf(b.id);
+          });
+          setHunters(sortedData);
+          loadImages(sortedData);
         }
       } catch (e) {
-        console.error("Erreur lors de l'initialisation:", e);
+        // Gestion silencieuse des erreurs d'initialisation
       }
     };
 
     initializeApp();
     loadLatestYouTubeVideo();
   }, []);
+
   useEffect(() => {
     // Vérifier si le cache IndexedDB fonctionne
-    const checkIndexedDBSupport = async () => {
-      try {
-        // D'abord synchroniser l'état du cache pour corriger un éventuel drapeau bloqué
-        const wasFixed = await syncCacheStatus();
-        if (wasFixed) {
-          console.log("🔄 État du cache corrigé au démarrage");
-          // Mettre à jour l'état local en fonction du résultat
-          setCacheAvailable(localStorage.getItem("indexedDBFailed") !== "true");
-        }
-
-        const worker = new Worker(
-          new URL("@/workers/BuildWorker.ts", import.meta.url)
-        );
-        worker.postMessage({ type: "checkAccess" });
-
-        worker.onmessage = (event) => {
-          const { success } = event.data;
-          if (success) {
-            console.log("✅ Cache IndexedDB opérationnel");
-            // Explicitement définir le drapeau à "false" si IndexedDB fonctionne
-            localStorage.setItem("indexedDBFailed", "false");
-            setCacheAvailable(true);
-          } else {
-            console.log("⚠️ Cache IndexedDB désactivé");
-            localStorage.setItem("indexedDBFailed", "true");
-            setCacheAvailable(false);
-          }
-          worker.terminate();
-        };
-
-        worker.onerror = () => {
-          console.warn("⚠️ IndexedDB: Worker non supporté");
-          localStorage.setItem("indexedDBFailed", "true");
-          worker.terminate();
-        };
-      } catch (error) {
-        console.error("❌ IndexedDB: Inaccessible");
-      }
-    };
-
-    checkIndexedDBSupport();
+    checkIndexedDBSupport(setCacheAvailable);
     // ...reste du code
   }, []);
-
-  // =========================
-  // Utilitaire pour charger une image via le Worker IndexedDB
-  // =========================
-
-  const fetchImageFromWorker = async (
-    url: string
-  ): Promise<{ url: string; fromCache: boolean } | string> => {
-    // Essayer de synchroniser l'état du cache
-    await syncCacheStatus();
-
-    // Vérifier l'état du cache IndexedDB
-    const indexedDBFailed = localStorage.getItem("indexedDBFailed") === "true";
-
-    // Si IndexedDB a échoué précédemment et que l'état n'a pas été réinitialisé, utiliser directement l'URL
-    if (indexedDBFailed) {
-      // Mise à jour de l'état du cache pour la cohérence de l'UI
-      setCacheAvailable(false);
-      return url;
-    }
-
-    return new Promise((resolve) => {
-      // Créer une nouvelle instance de Worker
-      const worker = new Worker(
-        new URL("@/workers/BuildWorker.ts", import.meta.url)
-      );
-
-      // Définir un timeout plus court (5 secondes au lieu de 10)
-      const timeoutId = setTimeout(() => {
-        console.warn("⏱️ Timeout du worker - utilisation de l'URL directe");
-        worker.terminate();
-        localStorage.setItem("indexedDBFailed", "true");
-        setCacheAvailable(false);
-        resolve(url);
-      }, 5000);
-
-      worker.postMessage({ type: "getImage", url });
-
-      worker.onmessage = (event) => {
-        clearTimeout(timeoutId);
-        const { imageBlob, fromCache, error } = event.data;
-        const filename = url.split("/").pop() || url;
-
-        if (error) {
-          console.error(
-            `❌ Erreur: ${error.substring(0, 100)}${
-              error.length > 100 ? "..." : ""
-            }`
-          );
-          resolve(url);
-          worker.terminate();
-          return;
-        }
-
-        if (imageBlob) {
-          const blobUrl = URL.createObjectURL(imageBlob);
-          // Si nous avons réussi à obtenir une image, le cache fonctionne
-          localStorage.setItem("indexedDBFailed", "false");
-          setCacheAvailable(true);
-          resolve({ url: blobUrl, fromCache: fromCache });
-        } else {
-          console.warn(`⚠️ Aucune image reçue pour: ${filename}`);
-          resolve(url);
-        }
-
-        worker.terminate();
-      };
-
-      worker.onerror = (error) => {
-        clearTimeout(timeoutId);
-        console.error("❌ Erreur du worker");
-        resolve(url);
-        worker.terminate();
-      };
-    });
-  };
+  // Aucun utilitaire de chargement d'image n'est défini ici car nous utilisons directement fetchImageFromWorker importé
 
   // =========================
   // Récupération de la dernière vidéo YouTube (cache 24h)
@@ -307,10 +189,7 @@ const Index = () => {
         localStorage.setItem(cacheTimeKey, now.toString());
       }
     } catch (error) {
-      console.error(
-        "Erreur lors de la récupération de la dernière vidéo :",
-        error
-      );
+      // Gestion silencieuse des erreurs YouTube
     }
   };
 
