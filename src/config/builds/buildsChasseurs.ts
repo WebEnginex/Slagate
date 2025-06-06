@@ -251,11 +251,11 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [
-            { id: 4, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire" },
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [
+            { id: 12, statPrincipale: "Défense supplémentaire" },
+            { id: 6, statPrincipale: "Défense supplémentaire" },
           ],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire" },
@@ -325,11 +325,11 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [
-            { id: 4, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire" },
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [
+            { id: 12, statPrincipale: "Défense supplémentaire" },
+            { id: 6, statPrincipale: "Défense supplémentaire" },
           ],
-          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire" },
