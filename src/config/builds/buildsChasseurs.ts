@@ -1,6 +1,6 @@
 export type ChasseurBuild = {
   chasseurId: number;
-  element: "feu" | "eau" | "vent" | "lumiere" | "tenebres" | "jinwoo"; 
+  element: "feu" | "eau" | "vent" | "lumiere" | "tenebres" | "jinwoo";
   builds: {
     id: number;
     nom: string;
@@ -26,8 +26,6 @@ export type ChasseurBuild = {
 // Eléments possibles : "feu", "eau", "vent", "lumiere", "tenebres"
 
 export const buildsChasseurs: ChasseurBuild[] = [
-
-
   // Sung Jinwoo
   {
     chasseurId: 40,
@@ -37,16 +35,16 @@ export const buildsChasseurs: ChasseurBuild[] = [
         id: 1,
         nom: "Général",
         stats: {
-          "Force": "695 Points",
-          "Vitalité": "-",
-          "Agilité": "-",
-          "Intelligence": "-",
-          "Perception": "-",
+          Force: "695 Points",
+          Vitalité: "-",
+          Agilité: "-",
+          Intelligence: "-",
+          Perception: "-",
           "PV supplémentaire": "-",
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -100,9 +98,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
         },
         noyaux: {
-          1: [
-            { id: 8, statPrincipale: "Attaque supplémentaire" },
-          ],
+          1: [{ id: 8, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 2, statPrincipale: "PV supplémentaire" },
@@ -114,6 +110,235 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
+  // Lennart Niermann
+  {
+    chasseurId: 44,
+    element: "vent",
+    builds: [
+      {
+        id: 1300,
+        nom: "Général",
+        stats: {
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "Le plus possible",
+          "PM ": "-",
+          "Attaque supplémentaire": "-",
+          Précision: "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 121,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 122,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 123,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 124,
+            statPrincipale: "Dégâts de coup critique",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Dégâts d'eau",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [
+            { id: 12, statPrincipale: "Défense supplémentaire" },
+            { id: 6, statPrincipale: "Défense supplémentaire" },
+          ],
+          3: [
+            { id: 7, statPrincipale: "PV supplémentaire" },
+            { id: 2, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 48 }, { id: 49 }, { id: 39 }, { id: 40 }],
+      },
+      {
+        id: 403,
+        nom: "POD",
+        stats: {
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "Le plus possible",
+          "PM ": "-",
+          "Attaque supplémentaire": "-",
+          Précision: "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 113,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 114,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 115,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 116,
+            statPrincipale: "Dégâts de coup critique",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 117,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 118,
+            statPrincipale: "Dégâts d'eau",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 119,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 120,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 4, statPrincipale: "Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 7, statPrincipale: "PV supplémentaire" },
+            { id: 2, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 58 }, { id: 59 }, { id: 60 }],
+      },
+      {
+        id: 404,
+        nom: "BDG",
+        stats: {
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "Le plus possible",
+          "PM ": "-",
+          "Attaque supplémentaire": "-",
+          Précision: "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 113,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 114,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 115,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 116,
+            statPrincipale: "Dégâts de coup critique",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 117,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 118,
+            statPrincipale: "Dégâts d'eau",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 119,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 120,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 4, statPrincipale: "Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 7, statPrincipale: "PV supplémentaire" },
+            { id: 2, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 58 }, { id: 59 }, { id: 60 }],
+      },
+    ],
+  },
 
   // Cha Hae-Valkyrie
   {
@@ -128,7 +353,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -184,17 +409,17 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 4, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire" }
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
-            { id: 2, statPrincipale: "PV supplémentaire" }
+            { id: 2, statPrincipale: "PV supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 29 }, { id: 58 }, { id: 39 }, { id: 40 }],
       },
-            {
+      {
         id: 401,
         nom: "Général 2",
         stats: {
@@ -202,7 +427,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -258,12 +483,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 4, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire" }
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
-            { id: 2, statPrincipale: "PV supplémentaire" }
+            { id: 2, statPrincipale: "PV supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 58 }, { id: 59 }, { id: 39 }, { id: 40 }],
@@ -276,7 +501,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -332,12 +557,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 4, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire" }
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
-            { id: 2, statPrincipale: "PV supplémentaire" }
+            { id: 2, statPrincipale: "PV supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 58 }, { id: 59 }, { id: 60 }],
@@ -350,7 +575,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -406,12 +631,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 4, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire" }
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
-            { id: 2, statPrincipale: "PV supplémentaire" }
+            { id: 2, statPrincipale: "PV supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 58 }, { id: 59 }, { id: 60 }],
@@ -432,7 +657,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -506,7 +731,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -570,7 +795,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             { id: 3, statPrincipale: "PV supplémentaire" },
           ],
         },
-        sets_bonus: [{ id: 32 },{ id: 33 },{ id: 55 }, { id: 56 }],
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 55 }, { id: 56 }],
       },
       {
         id: 392,
@@ -580,7 +805,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -654,7 +879,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -718,7 +943,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             { id: 3, statPrincipale: "PV supplémentaire" },
           ],
         },
-        sets_bonus: [{ id: 32 },{ id: 33 },{ id: 55 }, { id: 56 }],
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 55 }, { id: 56 }],
       },
       {
         id: 394,
@@ -728,7 +953,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -802,7 +1027,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -866,7 +1091,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             { id: 3, statPrincipale: "PV supplémentaire" },
           ],
         },
-        sets_bonus: [{ id: 32 },{ id: 33 },{ id: 55 }, { id: 56 }],
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 55 }, { id: 56 }],
       },
     ],
   },
@@ -884,7 +1109,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -956,7 +1181,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -1028,7 +1253,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -1100,7 +1325,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -1180,7 +1405,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -1251,7 +1476,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -1322,7 +1547,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -1387,7 +1612,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
       },
     ],
   },
-  
+
   // Esil Radir
   {
     chasseurId: 10,
@@ -1401,7 +1626,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -1476,7 +1701,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -1551,7 +1776,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -1626,7 +1851,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -1709,7 +1934,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -1767,7 +1992,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
-            { id: 2, statPrincipale: "PV supplémentaire" }
+            { id: 2, statPrincipale: "PV supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 9 }, { id: 10 }, { id: 41 }, { id: 42 }],
@@ -1780,7 +2005,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -1838,7 +2063,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
-            { id: 2, statPrincipale: "PV supplémentaire" }
+            { id: 2, statPrincipale: "PV supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
@@ -1851,7 +2076,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -1909,7 +2134,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
-            { id: 2, statPrincipale: "PV supplémentaire" }
+            { id: 2, statPrincipale: "PV supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 43 }, { id: 44 }, { id: 45 }],
@@ -1922,7 +2147,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -1980,7 +2205,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
-            { id: 2, statPrincipale: "PV supplémentaire" }
+            { id: 2, statPrincipale: "PV supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 9 }, { id: 10 }, { id: 41 }, { id: 42 }],
@@ -1993,7 +2218,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -2051,7 +2276,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
-            { id: 2, statPrincipale: "PV supplémentaire" }
+            { id: 2, statPrincipale: "PV supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
@@ -2064,7 +2289,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -2122,7 +2347,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
-            { id: 2, statPrincipale: "PV supplémentaire" }
+            { id: 2, statPrincipale: "PV supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 9 }, { id: 10 }, { id: 41 }, { id: 42 }],
@@ -2135,7 +2360,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -2193,7 +2418,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
-            { id: 2, statPrincipale: "PV supplémentaire" }
+            { id: 2, statPrincipale: "PV supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
@@ -2214,7 +2439,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -2285,7 +2510,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -2356,7 +2581,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -2435,7 +2660,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "Le plus possible",
@@ -2507,7 +2732,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "Le plus possible",
@@ -2579,7 +2804,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "Le plus possible",
@@ -2651,7 +2876,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "Le plus possible",
@@ -2723,7 +2948,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "Le plus possible",
@@ -2803,7 +3028,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -2878,7 +3103,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -2950,7 +3175,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -3030,7 +3255,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -3102,7 +3327,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -3174,7 +3399,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -3241,7 +3466,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
-   // Harper
+  // Harper
   {
     chasseurId: 16,
     element: "tenebres",
@@ -3254,7 +3479,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -3326,7 +3551,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -3398,7 +3623,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -3478,7 +3703,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -3550,7 +3775,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -3622,7 +3847,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -3694,7 +3919,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -3766,7 +3991,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -3833,21 +4058,6 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
-
-  
-  
-  
-  
-  
-  
-
-
-
-
-
-
-
-
   // Han Se-Mi
   {
     chasseurId: 14,
@@ -3861,7 +4071,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -3933,7 +4143,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -4005,7 +4215,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -4077,7 +4287,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -4144,7 +4354,6 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
-
   // Amamiya Mirei
   {
     chasseurId: 2,
@@ -4158,7 +4367,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "1500+",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "100% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -4188,7 +4397,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 30,
-            statPrincipale: "Dégâts de coup critique",	
+            statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4230,7 +4439,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "1500+",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "100% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -4260,7 +4469,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 30,
-            statPrincipale: "Dégâts de coup critique",	
+            statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4302,7 +4511,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "1500+",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "100% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -4332,7 +4541,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 30,
-            statPrincipale: "Dégâts de coup critique",	
+            statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4374,7 +4583,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "1500+",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "100% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -4404,7 +4613,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 30,
-            statPrincipale: "Dégâts de coup critique",	
+            statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4446,7 +4655,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "1500+",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "100% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -4476,7 +4685,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bottes: {
             id: 30,
-            statPrincipale: "Dégâts de coup critique",	
+            statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
@@ -4513,8 +4722,6 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
-  
-
   // Yoo Soohyun
   {
     chasseurId: 39,
@@ -4528,7 +4735,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -4602,7 +4809,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "10% - 20%",
@@ -4676,7 +4883,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -4750,7 +4957,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -4832,7 +5039,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -4904,7 +5111,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -4976,7 +5183,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -5048,7 +5255,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -5128,7 +5335,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -5202,7 +5409,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -5276,7 +5483,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -5350,7 +5557,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -5419,7 +5626,6 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
-
   // Cha Hae-In
   {
     chasseurId: 6,
@@ -5433,7 +5639,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -5508,7 +5714,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -5583,7 +5789,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -5658,7 +5864,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -5728,7 +5934,6 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
-
   // Baek Yunho à crinière argentée
   {
     chasseurId: 5,
@@ -5742,7 +5947,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -5814,7 +6019,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -5886,7 +6091,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -5966,7 +6171,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -6040,7 +6245,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -6104,7 +6309,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             { id: 3, statPrincipale: "PV supplémentaire" },
           ],
         },
-        sets_bonus: [{ id: 32 },{ id: 33 },{ id: 55 }, { id: 56 }],
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 55 }, { id: 56 }],
       },
       {
         id: 392,
@@ -6114,7 +6319,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -6188,7 +6393,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -6252,7 +6457,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             { id: 3, statPrincipale: "PV supplémentaire" },
           ],
         },
-        sets_bonus: [{ id: 32 },{ id: 33 },{ id: 55 }, { id: 56 }],
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 55 }, { id: 56 }],
       },
       {
         id: 394,
@@ -6262,7 +6467,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -6336,7 +6541,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -6400,11 +6605,10 @@ export const buildsChasseurs: ChasseurBuild[] = [
             { id: 3, statPrincipale: "PV supplémentaire" },
           ],
         },
-        sets_bonus: [{ id: 32 },{ id: 33 },{ id: 39 }, { id: 40 }],
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 39 }, { id: 40 }],
       },
     ],
   },
-
 
   // Emma Laurent
   {
@@ -6419,7 +6623,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "-",
           "Hausse des dégâts ": "30% +",
@@ -6491,7 +6695,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "-",
           "Hausse des dégâts ": "30% +",
@@ -6563,7 +6767,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "-",
           "Hausse des dégâts ": "30% +",
@@ -6635,7 +6839,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "-",
           "Hausse des dégâts ": "30% +",
@@ -6707,7 +6911,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "-",
           "Hausse des dégâts ": "30% +",
@@ -6774,10 +6978,6 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
-
-  
-
-
   // Lee Bora
   {
     chasseurId: 24,
@@ -6791,7 +6991,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -6848,7 +7048,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 8, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire" },],
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
+          ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
@@ -6865,7 +7066,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -6922,7 +7123,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 8, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire" },],
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
+          ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
@@ -6939,7 +7141,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -6996,7 +7198,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 8, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire" },],
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
+          ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 7, statPrincipale: "PV supplémentaire" },
@@ -7021,7 +7224,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -7093,7 +7296,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -7165,7 +7368,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -7237,7 +7440,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -7309,7 +7512,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -7376,7 +7579,6 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
-
   // Min Byeonggu
   {
     chasseurId: 28,
@@ -7390,7 +7592,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "Le plus possible",
           "Hausse des dégâts ": "30% +",
@@ -7448,7 +7650,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 2, statPrincipale: "PV supplémentaire" },
-            { id: 7, statPrincipale: "PV supplémentaire" }
+            { id: 7, statPrincipale: "PV supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
@@ -7461,7 +7663,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "Le plus possible",
           "Hausse des dégâts ": "30% +",
@@ -7519,7 +7721,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 2, statPrincipale: "PV supplémentaire" },
-            { id: 7, statPrincipale: "PV supplémentaire" }
+            { id: 7, statPrincipale: "PV supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 43 }, { id: 44 }, { id: 45 }],
@@ -7532,7 +7734,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "Le plus possible",
           "Hausse des dégâts ": "30% +",
@@ -7590,7 +7792,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 2, statPrincipale: "PV supplémentaire" },
-            { id: 7, statPrincipale: "PV supplémentaire" }
+            { id: 7, statPrincipale: "PV supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
@@ -7603,7 +7805,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "Le plus possible",
           "Hausse des dégâts ": "30% +",
@@ -7661,14 +7863,13 @@ export const buildsChasseurs: ChasseurBuild[] = [
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
             { id: 2, statPrincipale: "PV supplémentaire" },
-            { id: 7, statPrincipale: "PV supplémentaire" }
+            { id: 7, statPrincipale: "PV supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
       },
     ],
   },
-
 
   // Woo Jincheol
   {
@@ -7683,7 +7884,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -7754,7 +7955,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -7825,7 +8026,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -7896,7 +8097,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -7962,7 +8163,6 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
-
   // Choi Jongin
   {
     chasseurId: 8,
@@ -7976,7 +8176,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "-",
           "Dégâts de coup critique ": "-",
           "Hausse des dégâts ": "30% +",
@@ -8051,7 +8251,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "-",
           "Dégâts de coup critique ": "-",
           "Hausse des dégâts ": "30% +",
@@ -8126,7 +8326,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "-",
           "Dégâts de coup critique ": "-",
           "Hausse des dégâts ": "30% +",
@@ -8201,7 +8401,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "-",
           "Dégâts de coup critique ": "-",
           "Hausse des dégâts ": "30% +",
@@ -8267,9 +8467,6 @@ export const buildsChasseurs: ChasseurBuild[] = [
           ],
         },
         sets_bonus: [{ id: 5 }, { id: 6 }, { id: 52 }, { id: 53 }],
-      
-      
-      
       },
       {
         id: 74,
@@ -8279,7 +8476,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "-",
           "Dégâts de coup critique ": "-",
           "Hausse des dégâts ": "30% +",
@@ -8354,7 +8551,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "-",
           "Dégâts de coup critique ": "-",
           "Hausse des dégâts ": "30% +",
@@ -8421,7 +8618,6 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
-
   // Lim Taegyu
   {
     chasseurId: 26,
@@ -8435,7 +8631,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -8492,7 +8688,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 8, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire" }
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
@@ -8510,7 +8706,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -8567,7 +8763,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 8, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire" }
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
@@ -8585,7 +8781,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -8642,7 +8838,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [
             { id: 8, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire" }
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
@@ -8654,7 +8850,6 @@ export const buildsChasseurs: ChasseurBuild[] = [
       },
     ],
   },
-
 
   // Baek Yunho
   {
@@ -8669,7 +8864,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -8741,7 +8936,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -8813,7 +9008,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -8880,17 +9075,6 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
-
-
-
-
-
-
-
-
-
-
-
   // Anna Ruiz
   {
     chasseurId: 3,
@@ -8904,7 +9088,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -8979,7 +9163,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -9054,7 +9238,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -9124,25 +9308,6 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-
- 
-
-  
-
-  
-
   // Han Songyi
   {
     chasseurId: 15,
@@ -9156,7 +9321,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -9225,7 +9390,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -9282,9 +9447,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 29 }, { id: 30 }, { id: 25 }, { id: 26 }],
       },
@@ -9296,7 +9459,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -9353,19 +9516,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 29 }, { id: 30 }, { id: 25 }, { id: 26 }],
       },
     ],
   },
-
-  
-
-  
-
 
   // Hwang Dongsuk A Finir
   {
@@ -9380,7 +9536,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -9437,9 +9593,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
       },
@@ -9451,7 +9605,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -9508,9 +9662,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
       },
@@ -9522,7 +9674,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -9579,17 +9731,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
       },
     ],
   },
-  
-
-  
 
   // Jo Kyuhwan A finir
   {
@@ -9604,7 +9751,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -9661,9 +9808,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
-          3: [
-            { id: 2, statPrincipale: "PV supplémentaire" },
-          ],
+          3: [{ id: 2, statPrincipale: "PV supplémentaire" }],
         },
         sets_bonus: [{ id: 29 }, { id: 30 }, { id: 25 }, { id: 26 }],
       },
@@ -9675,7 +9820,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -9732,9 +9877,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
-          3: [
-            { id: 2, statPrincipale: "PV supplémentaire" },
-          ],
+          3: [{ id: 2, statPrincipale: "PV supplémentaire" }],
         },
         sets_bonus: [{ id: 29 }, { id: 30 }, { id: 25 }, { id: 26 }],
       },
@@ -9746,7 +9889,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -9803,9 +9946,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
-          3: [
-            { id: 2, statPrincipale: "PV supplémentaire" },
-          ],
+          3: [{ id: 2, statPrincipale: "PV supplémentaire" }],
         },
         sets_bonus: [{ id: 29 }, { id: 30 }, { id: 25 }, { id: 26 }],
       },
@@ -9825,7 +9966,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -9882,9 +10023,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
-          3: [
-            { id: 2, statPrincipale: "PV supplémentaire" },
-          ],
+          3: [{ id: 2, statPrincipale: "PV supplémentaire" }],
         },
         sets_bonus: [{ id: 29 }, { id: 30 }, { id: 25 }, { id: 26 }],
       },
@@ -9896,7 +10035,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -9953,9 +10092,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
-          3: [
-            { id: 2, statPrincipale: "PV supplémentaire" },
-          ],
+          3: [{ id: 2, statPrincipale: "PV supplémentaire" }],
         },
         sets_bonus: [{ id: 29 }, { id: 30 }, { id: 25 }, { id: 26 }],
       },
@@ -9967,7 +10104,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -10024,9 +10161,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
-          3: [
-            { id: 2, statPrincipale: "PV supplémentaire" },
-          ],
+          3: [{ id: 2, statPrincipale: "PV supplémentaire" }],
         },
         sets_bonus: [{ id: 29 }, { id: 30 }, { id: 25 }, { id: 26 }],
       },
@@ -10046,7 +10181,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -10103,9 +10238,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
       },
@@ -10117,7 +10250,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -10174,9 +10307,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
       },
@@ -10188,7 +10319,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -10245,9 +10376,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
       },
@@ -10267,7 +10396,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -10324,9 +10453,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
       },
@@ -10338,7 +10465,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -10395,9 +10522,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
       },
@@ -10409,7 +10534,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -10466,18 +10591,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
       },
     ],
   },
-
-  
-
-
 
   // Lee Juhee A finir
   {
@@ -10492,7 +10611,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -10549,9 +10668,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 43 }, { id: 44 }, { id: 41 }, { id: 42 }],
       },
@@ -10563,7 +10680,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -10620,9 +10737,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 43 }, { id: 44 }, { id: 41 }, { id: 42 }],
       },
@@ -10634,7 +10749,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -10691,21 +10806,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 43 }, { id: 44 }, { id: 41 }, { id: 42 }],
       },
     ],
   },
-
-
-  
-
-  
-
-  
 
   // Nam Chae-Young
   {
@@ -10720,7 +10826,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -10777,9 +10883,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
-          3: [
-            { id: 2, statPrincipale: "PV supplémentaire" },
-          ],
+          3: [{ id: 2, statPrincipale: "PV supplémentaire" }],
         },
         sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
       },
@@ -10791,7 +10895,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -10848,9 +10952,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
-          3: [
-            { id: 2, statPrincipale: "PV supplémentaire" },
-          ],
+          3: [{ id: 2, statPrincipale: "PV supplémentaire" }],
         },
         sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
       },
@@ -10862,7 +10964,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -10919,9 +11021,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
-          3: [
-            { id: 2, statPrincipale: "PV supplémentaire" },
-          ],
+          3: [{ id: 2, statPrincipale: "PV supplémentaire" }],
         },
         sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
       },
@@ -10941,7 +11041,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -10998,9 +11098,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
-          3: [
-            { id: 2, statPrincipale: "PV supplémentaire" },
-          ],
+          3: [{ id: 2, statPrincipale: "PV supplémentaire" }],
         },
         sets_bonus: [{ id: 29 }, { id: 30 }, { id: 25 }, { id: 26 }],
       },
@@ -11012,7 +11110,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -11069,9 +11167,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
-          3: [
-            { id: 2, statPrincipale: "PV supplémentaire" },
-          ],
+          3: [{ id: 2, statPrincipale: "PV supplémentaire" }],
         },
         sets_bonus: [{ id: 29 }, { id: 30 }, { id: 25 }, { id: 26 }],
       },
@@ -11083,7 +11179,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -11140,15 +11236,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
-          3: [
-            { id: 2, statPrincipale: "PV supplémentaire" },
-          ],
+          3: [{ id: 2, statPrincipale: "PV supplémentaire" }],
         },
         sets_bonus: [{ id: 29 }, { id: 30 }, { id: 25 }, { id: 26 }],
       },
     ],
   },
-
 
   // Park Heejin
   {
@@ -11163,7 +11256,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -11230,11 +11323,6 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
-
-  
-
-  
-
   // Song Chiyul
   {
     chasseurId: 34,
@@ -11248,7 +11336,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -11305,9 +11393,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 29 }, { id: 30 }, { id: 25 }, { id: 26 }],
       },
@@ -11319,7 +11405,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -11376,9 +11462,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 29 }, { id: 30 }, { id: 25 }, { id: 26 }],
       },
@@ -11390,7 +11474,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "-",
           "PM ": "-",
           "Attaque supplémentaire": "Le plus possible",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -11447,20 +11531,12 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 29 }, { id: 30 }, { id: 25 }, { id: 26 }],
       },
     ],
   },
-
-  
-
-  
-
-  
 
   // Yoo Jinho
   {
@@ -11475,7 +11551,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -11532,9 +11608,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
       },
@@ -11546,7 +11620,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -11603,9 +11677,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
       },
@@ -11617,7 +11689,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
           "Attaque supplémentaire": "-",
-          "Précision": "-",
+          Précision: "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
@@ -11674,33 +11746,10 @@ export const buildsChasseurs: ChasseurBuild[] = [
         noyaux: {
           1: [{ id: 9, statPrincipale: "a faire" }],
           2: [{ id: 12, statPrincipale: "a faire" }],
-          3: [
-            { id: 2, statPrincipale: "a faire" },
-          ],
+          3: [{ id: 2, statPrincipale: "a faire" }],
         },
         sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
       },
     ],
   },
-
-  
-
- 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ];
