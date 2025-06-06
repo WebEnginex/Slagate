@@ -116,7 +116,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
     element: "vent",
     builds: [
       {
-        id: 1300,
+        id: 2000,
         nom: "Général",
         stats: {
           "PV supplémentaire": "-",
@@ -190,7 +190,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         sets_bonus: [{ id: 48 }, { id: 49 }, { id: 39 }, { id: 40 }],
       },
       {
-        id: 403,
+        id: 2001,
         nom: "POD",
         stats: {
           "PV supplémentaire": "-",
@@ -264,7 +264,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
         sets_bonus: [{ id: 58 }, { id: 59 }, { id: 60 }],
       },
       {
-        id: 404,
+        id: 2002,
         nom: "BDG",
         stats: {
           "PV supplémentaire": "-",
