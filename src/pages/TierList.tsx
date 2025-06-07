@@ -9,18 +9,23 @@ import { teamBdgTiers } from "@/config/tier-list/teamBdg";
 import Layout from "@/components/Layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
+import { Image } from "@/components/ui/Image";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Flame, Sword } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
 import SEO from "@/components/SEO";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import { loadPageImage, preloadPageImages } from "@/services/cacheImages/pageImageLoader";
 
 // Types Supabase
 type Chasseur = Database["public"]["Tables"]["chasseurs"]["Row"];
 type Arme = Database["public"]["Tables"]["jinwoo_armes"]["Row"];
 type Jinwoo = Database["public"]["Tables"]["jinwoo"]["Row"];
+
+// Constante pour identifier cette page dans le système de logs
+const PAGE_ID = "TierList";
 
 const tabs = [
   "Chasseurs",
@@ -114,15 +119,50 @@ export default function TierListPage() {
   );
 }
 
+// Composant pour afficher l'image d'un chasseur avec mise en cache
+const CachedHunterImage = ({ imageUrl, altText }: { imageUrl: string | null, altText: string }) => {
+  return (
+    <Image
+      src={imageUrl || ""}
+      alt={altText}
+      pageId={PAGE_ID}
+      className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
+      skeleton={true}
+      shimmer={true}
+    />
+  );
+};
+
+// Composant pour afficher l'image d'une arme avec mise en cache
+const CachedWeaponImage = ({ imageUrl, altText }: { imageUrl: string | null, altText: string }) => {
+  return (
+    <Image
+      src={imageUrl || ""}
+      alt={altText}
+      pageId={PAGE_ID}
+      className="w-full h-full object-contain"
+      skeleton={true}
+      shimmer={true}
+    />
+  );
+};
+
 function HuntersTab() {
   const [chasseurs, setChasseurs] = useState<Chasseur[]>([]);
   const navigate = useNavigate(); // Utiliser useNavigate au lieu de useRouter
-
   useEffect(() => {
     // Récupère tous les chasseurs depuis Supabase
     const fetchChasseurs = async () => {
       const { data } = await supabase.from("chasseurs").select("*");
-      if (data) setChasseurs(data);
+      if (data) {
+        setChasseurs(data);
+        
+        // Préchargement des images avec le contexte de la page
+        const imageUrls = data.map(hunter => hunter.image).filter(Boolean) as string[];
+        if (imageUrls.length > 0) {
+          preloadPageImages(imageUrls, PAGE_ID);
+        }
+      }
     };
     fetchChasseurs();
   }, []);
@@ -174,10 +214,9 @@ function HuntersTab() {
 
                   {/* Image du chasseur */}
                   <div className="relative mx-auto w-14 sm:w-16 md:w-20 h-14 sm:h-16 md:h-20 mb-2">
-                    <img
-                      src={hunter.image || ""}
-                      alt={hunter.nom}
-                      className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
+                    <CachedHunterImage 
+                      imageUrl={hunter.image} 
+                      altText={hunter.nom}
                     />
                   </div>
 
@@ -198,12 +237,19 @@ function HuntersTab() {
 
 function WeaponsTab() {
   const [armes, setArmes] = useState<Arme[]>([]);
-
   useEffect(() => {
     // Récupère toutes les armes depuis Supabase
     const fetchArmes = async () => {
       const { data } = await supabase.from("jinwoo_armes").select("*");
-      if (data) setArmes(data);
+      if (data) {
+        setArmes(data);
+        
+        // Préchargement des images avec le contexte de la page
+        const imageUrls = data.map(arme => arme.image).filter(Boolean) as string[];
+        if (imageUrls.length > 0) {
+          preloadPageImages(imageUrls, PAGE_ID);
+        }
+      }
     };
     fetchArmes();
   }, []);
@@ -245,10 +291,9 @@ function WeaponsTab() {
                   )}
 
                   <div className="relative mx-auto w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 mb-2">
-                    <img
-                      src={arme.image || ""}
-                      alt={arme.nom}
-                      className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
+                    <CachedWeaponImage
+                      imageUrl={arme.image || ""}
+                      altText={arme.nom}
                     />
                   </div>
                   <p className="font-medium mt-1 text-xs sm:text-sm truncate">
@@ -268,18 +313,49 @@ function TeamsTab({
   tiers,
   teamSize,
 }: {
-  tiers: Record<string, { id: number; name: string; hunters: number[] }[]>;
+  tiers: Record<string, { 
+    id: number; 
+    name: string; 
+    hunters: number[];
+    alternative?: {
+      hunters: number[];
+      description?: string;
+    }
+  }[]>;
   teamSize: 3 | 4;
 }) {
   const [chasseurs, setChasseurs] = useState<Chasseur[]>([]);
-
+  // État pour suivre quelles équipes montrent leur alternative
+  const [showingAlternative, setShowingAlternative] = useState<Set<number>>(new Set());
+  
   useEffect(() => {
     const fetchChasseurs = async () => {
       const { data } = await supabase.from("chasseurs").select("*");
-      if (data) setChasseurs(data);
+      if (data) {
+        setChasseurs(data);
+        
+        // Préchargement des images des chasseurs pour cette équipe
+        const imageUrls = data.map(chasseur => chasseur.image).filter(Boolean) as string[];
+        if (imageUrls.length > 0) {
+          preloadPageImages(imageUrls, PAGE_ID);
+        }
+      }
     };
     fetchChasseurs();
   }, []);
+
+  // Fonction pour basculer entre la composition principale et l'alternative
+  const toggleAlternative = (teamId: number) => {
+    setShowingAlternative(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(teamId)) {
+        newSet.delete(teamId);
+      } else {
+        newSet.add(teamId);
+      }
+      return newSet;
+    });
+  };
 
   return (
     <div className="space-y-8">
@@ -293,20 +369,71 @@ function TeamsTab({
           </div>
           <CardContent className="p-4 md:p-6">
             <div className="space-y-6">
-              {teams.map((team) => (
+              {teams.map((team) => {
+                const isShowingAlternative = showingAlternative.has(team.id);
+                const currentHunters = isShowingAlternative && team.alternative 
+                  ? team.alternative.hunters 
+                  : team.hunters;
+                
+                return (
                 <div key={team.id} className="mb-5">
-                  <h3 className="text-lg font-semibold mb-3 px-3 py-1.5 bg-sidebar-accent inline-block rounded-lg border border-sidebar-border">
-                    {team.name}
-                  </h3>
+                  <div className="flex flex-wrap items-center gap-3 mb-3">
+                    <h3 className="text-lg font-semibold px-3 py-1.5 bg-sidebar-accent inline-block rounded-lg border border-sidebar-border">
+                      {team.name}
+                    </h3>
+                      {/* Bouton d'alternative seulement si une alternative existe */}
+                    {team.alternative && (
+                      <button 
+                        onClick={() => toggleAlternative(team.id)}
+                        className={`px-3 py-1.5 text-sm rounded-lg border transition-colors flex items-center gap-1.5 font-medium ${
+                          isShowingAlternative 
+                            ? 'bg-solo-purple border-solo-purple text-white shadow-md' 
+                            : 'bg-gray-700 border-gray-600 text-white hover:bg-solo-purple/70 hover:border-solo-purple/70 shadow-sm'
+                        }`}
+                      >
+                        {/* Icône pour rendre le bouton plus visible */}
+                        <svg 
+                          xmlns="http://www.w3.org/2000/svg" 
+                          width="16" 
+                          height="16" 
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="2" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round"
+                          className={isShowingAlternative ? "rotate-180 transition-transform" : "transition-transform"}
+                        >
+                          <path d="M8 3H5a2 2 0 0 0-2 2v3" />
+                          <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
+                          <path d="M3 16v3a2 2 0 0 0 2 2h3" />
+                          <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
+                          <path d="M12 8v8" />
+                          <path d="m16 12-4 4-4-4" />
+                        </svg>
+                        {isShowingAlternative 
+                          ? 'Composition principale' 
+                          : 'Voir l\'alternative'
+                        }
+                      </button>
+                    )}
+                      {/* Afficher la description de l'alternative si disponible */}
+                    {isShowingAlternative && team.alternative?.description && (
+                      <span className="text-sm text-violet-300 italic px-2 py-1 bg-sidebar/50 rounded-md">
+                        {team.alternative.description}
+                      </span>
+                    )}
+                  </div>
+                  
                   <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-                    {team.hunters.map((hunterId) => {
+                    {currentHunters.map((hunterId) => {
                       const hunter = chasseurs.find(
                         (h) => Number(h.id) === hunterId
                       );
                       return (
                         hunter && (
                           <div
-                            key={hunter.id}
+                            key={`${team.id}-${hunter.id}-${isShowingAlternative ? 'alt' : 'main'}`}
                             className="relative bg-sidebar-accent rounded-lg shadow-md p-3 text-center hover:scale-[1.03] transition-transform border border-sidebar-border hover:border-solo-purple"
                           >
                             {/* Élément icon en haut à gauche */}
@@ -322,10 +449,9 @@ function TeamsTab({
 
                             {/* Image du chasseur */}
                             <div className="relative mx-auto w-14 sm:w-16 md:w-20 h-14 sm:h-16 md:h-20 mb-2">
-                              <img
-                                src={hunter.image || ""}
-                                alt={hunter.nom}
-                                className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
+                              <CachedHunterImage 
+                                imageUrl={hunter.image} 
+                                altText={hunter.nom}
                               />
                             </div>
 
@@ -339,7 +465,7 @@ function TeamsTab({
                     })}
                   </div>
                 </div>
-              ))}
+              )})}
             </div>
           </CardContent>
         </Card>
@@ -360,7 +486,15 @@ function TeamsPodTab({
       const { data: chasseursData } = await supabase
         .from("chasseurs")
         .select("*");
-      if (chasseursData) setChasseurs(chasseursData);
+      if (chasseursData) {
+        setChasseurs(chasseursData);
+        
+        // Préchargement des images avec le contexte de la page
+        const imageUrls = chasseursData.map(chasseur => chasseur.image).filter(Boolean) as string[];
+        if (imageUrls.length > 0) {
+          preloadPageImages(imageUrls, PAGE_ID);
+        }
+      }
     };
 
     fetchChasseurs();
@@ -402,10 +536,9 @@ function TeamsPodTab({
                               </div>
                             )}
                             <div className="relative mx-auto w-16 sm:w-20 h-16 sm:h-20 mb-2">
-                              <img
-                                src={hunter.image || ""}
-                                alt={hunter.nom}
-                                className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
+                              <CachedHunterImage
+                                imageUrl={hunter.image}
+                                altText={hunter.nom}
                               />
                             </div>
                             <p className="font-medium mt-1 text-xs sm:text-sm truncate">
@@ -438,7 +571,15 @@ function TeamsBdgTab({
       const { data: chasseursData } = await supabase
         .from("chasseurs")
         .select("*");
-      if (chasseursData) setChasseurs(chasseursData);
+      if (chasseursData) {
+        setChasseurs(chasseursData);
+        
+        // Préchargement des images avec le contexte de la page
+        const imageUrls = chasseursData.map(chasseur => chasseur.image).filter(Boolean) as string[];
+        if (imageUrls.length > 0) {
+          preloadPageImages(imageUrls, PAGE_ID);
+        }
+      }
     };
 
     fetchChasseurs();
@@ -480,10 +621,9 @@ function TeamsBdgTab({
                               </div>
                             )}
                             <div className="relative mx-auto w-16 sm:w-20 h-16 sm:h-20 mb-2">
-                              <img
-                                src={hunter.image || ""}
-                                alt={hunter.nom}
-                                className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
+                              <CachedHunterImage
+                                imageUrl={hunter.image}
+                                altText={hunter.nom}
                               />
                             </div>
                             <p className="font-medium mt-1 text-xs sm:text-sm truncate">

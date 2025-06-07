@@ -8,7 +8,12 @@ export const teamChasseursTiers = {
     {
       id: 2,
       name: "Team Vent",
-      hunters: [13, 14, 2],
+      hunters: [13, 14, 44],
+      // Exemple d'alternative pour la team Vent avec Lennart Niermann au lieu de Mirei
+      alternative: {
+        hunters: [13, 14, 2], // Alternative avec Lennart au lieu de Mirei
+        description: "Alternative avec Mirei" // Description de l'alternative
+      }
     },
     {
       id: 3,
