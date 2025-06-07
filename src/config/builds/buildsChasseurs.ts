@@ -162,7 +162,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 54,
-            statPrincipale: "Dégâts d'eau",
+            statPrincipale: "Dégâts de vent",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -236,7 +236,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 118,
-            statPrincipale: "Dégâts d'eau",
+            statPrincipale: "Dégâts de vent",
             statsSecondaires: ["-"],
           },
           bague: {
@@ -310,7 +310,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
           },
           bracelet: {
             id: 118,
-            statPrincipale: "Dégâts d'eau",
+            statPrincipale: "Dégâts de vent",
             statsSecondaires: ["-"],
           },
           bague: {
