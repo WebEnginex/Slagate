@@ -523,11 +523,9 @@ export default function TeamJinwooCard({
       </div>
     </CollapsibleContent>
   </Collapsible>
-</div>
-
-                  {/* Sections spécifiques à Jinwoo */}
+</div>                  {/* Sections spécifiques à Jinwoo */}
                   {selectedChasseurId === team.chasseurs[0]?.id && (
-                    <>
+                    <div>
                       {/* Compétences */}
 <div className="bg-sidebar/50 rounded-lg overflow-hidden">
   <Collapsible
@@ -746,8 +744,7 @@ export default function TeamJinwooCard({
       </div>
     </CollapsibleContent>
   </Collapsible>
-</div>
-                    </>
+</div>                    </div>
                   )}
                 </div>
               );

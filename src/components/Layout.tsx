@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SideNav from "./SideNav";
 import { Menu } from "lucide-react";
 import Footer from "./Footer";
+import LogSettingsPanel from "./tools/LogSettingsPanel";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -22,11 +23,12 @@ const Layout = ({ children }: LayoutProps) => {
             onClick={() => setIsMobileOpen(true)}
           >
             <Menu size={24} />
-          </button>
-
-          <div className="container mx-auto py-8 px-4 lg:px-8">
+          </button>          <div className="container mx-auto py-8 px-4 lg:px-8">
             {children}
           </div>
+          
+          {/* Panel de contrôle des logs d'images pour les développeurs */}
+          {import.meta.env.DEV && <LogSettingsPanel />}
         </main>
 
         <Footer />

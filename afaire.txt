@@ -1,5 +1,54 @@
-Les artefacts s'ouvrent automatiquement lorsque vous accédez à un onglet.
+✅ - Dans l'onglet statistiques à viser mettre un - à la place de
+" 90%+ " en Précision 
 
-🔹 Si vous changez de build pour un même chasseur, les onglets restent ouverts et ne se ferment plus.
 
-🔹 En sélectionnant un autre chasseur, les onglets se ferment automatiquement, et seul celui du chasseur sélectionné s'ouvre avec les artefacts visibles. 
+✅- Sur Gina inverser l'alternative du noyaux 1 ( genre afficher
+le gris en premier et le orange en second ) (uniquement sur le premier build?)
+
+✅- Yoo Soohyun dans stuff général 2 remplacer Malédiction Ardente par Armed 
+( le set avec la tête de Lion ) 
+Et inverser les stats entre la DEF PEN et Hausse de Dégats (uniquement sur le stuff général 2?)
+
+✅ - Choi changer le noyaux 1 et mettre le gris, pareil pour le noyau 3 (c'est déjà comme ça?)
+
+✅ - Meilin inverser l'alternative du noyau 3
+
+✅ - Seo Jiwoo copier les artefacts de Seorin pour Général, Général 2, POD, POD 2, BDG et BDG 2 faire 4 Avarice Ardente + Capacité Exceptionnelle 
+
+✅ - Goto Ryuji :
+Général = 4 avarice + 4 Desire
+Général 2 = 4 avarice + 4 obsi 
+
+✅ - Han Se-Mi ajouter Général 2 8 bénédiction ardente
+
+✅ - Mirei dans :
+Général 1 = 2 malédiction ardente et 2 infamy
+général 2 = et faire 4 malédiction ardente 4 expert
+général 3 = 4 malédiction ardente 4 obsidienne
+(Général 2 pareil donc supprimé?)
+
+✅ - Pour Jinchul :
+général 1 = 4 avarice 4 desire 
+général 2 = 8 avarice, pareil pour POD et BDG 
+
+✅ - Cha Hae-In ( light ) :
+général 1 = faire 2 malédiction ardente 2 infamy
+général 2 = faire 4 malédiction ardente
+POD et BDG = changer 4 malédiction ardente par 2 malédiction ardente 2 infamy 
+Changer l'alternative du noyau 1 
+
+✅ - Min changer l'alternative du noyau 3 
+
+- Lee Bora créer un POD 2 mettre 8 pieces voeu chaotique
+changer l'alternative noyau 3
+
+✅ - La nouvelle arme ( faux de type eau ) dans le tier S
+
+- Et dans l'onglet team chasseurs, si y'a moyen de créer un bouton alternative c'est cool en vrai, et ça serait par exemple dans la team Vent on affiche Lennart, et alternative Mirei, team lumière on laisse afficher Shimizu, et alternative Min, team Water en alternative de Seorin on met Seo Jiwoo
+J'crois qu'avec ça on est pas mal déjà, après restera à voir pour le POD et l'Atelier voir ce que t'as cook, pour le BDG vu que c'est ANT Queen pour l'instant pas de strats trouvées
+
+
+
+a push : 
+- config arme
+- Build.tsx

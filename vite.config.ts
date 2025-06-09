@@ -9,10 +9,9 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: true,
     port: 8080,
-  },
-  plugins: [
+  },  plugins: [
     react(),
-    mode === 'development' && componentTagger(),
+    mode === 'development' && !process.env.DISABLE_TAGGER && componentTagger(),
     ViteSitemap({
       hostname: 'https://slagate.fr', // Ton domaine
       generateRobotsTxt: false, // On désactive la génération automatique de robots.txt

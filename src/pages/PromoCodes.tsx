@@ -17,7 +17,7 @@ import { X, ChevronDown, ChevronUp } from "lucide-react";
 import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
 import SEO from "@/components/SEO";
-import { loadPageImageAsBase64 } from "@/services/cacheImages/index";
+import { loadPageImageAsBase64 } from "@/services/cacheImages";
 
 type SocialLink = {
   type: "youtube" | "twitch" | "twitter" | "instagram" | "website" | "tiktok";
@@ -124,29 +124,6 @@ const promoCodes = [
     code: "OREARA1STANNIV",
     rewards: ["Pierres de l'esprit x1,000"],
     date: "?",
-  },
-  {
-    code: "365THXHUNTER365",
-    rewards: ["Marques du temps I x200", "Marques du temps II x100"],
-    date: "31 Mai 2025 à 2h du matin",
-  },
-  {
-    code: "LDH1YEARGIFT",
-    rewards: [
-      "Énergie de l'ombre x3,000",
-      "Traces d'ombres x200",
-      "Cristal abyssal x15",
-    ],
-    date: "31 Mai 2025 à 2h du matin",
-  },
-  {
-    code: "JSKSPECIAL365",
-    rewards: [
-      "Ticket de tirage personnalisé d'arme x10",
-      "Ticket de tirage personnalisé x10",
-      "Ticket d'augmentation du taux de tirage x10",
-    ],
-    date: "31 Mai 2025 à 2h du matin",
   },
   {
     code: "CMIRONGIFT",

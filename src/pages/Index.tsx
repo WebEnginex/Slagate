@@ -137,13 +137,11 @@ const Index = () => {
         if (error) {
           // Gestion silencieuse de l'erreur
           return;
-        }        if (data) {
-          // Trier les données dans l'ordre défini par hunterIds
-          const sortedData = [...data].sort((a, b) => {
-            return hunterIds.indexOf(a.id) - hunterIds.indexOf(b.id);
-          });
-          setHunters(sortedData);
-          loadImages(sortedData);
+        }
+
+        if (data) {
+          setHunters(data);
+          loadImages(data);
         }
       } catch (e) {
         // Gestion silencieuse des erreurs d'initialisation

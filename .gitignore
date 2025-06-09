@@ -1,4 +1,4 @@
-# Logs
+# Logs et fichiers de débogage
 logs
 *.log
 npm-debug.log*
@@ -7,22 +7,30 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dépendances et modules
 node_modules
+
+# Fichiers de build générés
 dist
 dist-ssr
+
+# Fichiers locaux spécifiques à l'environnement de développement
 *.local
 
-# Editor directories and files
+# Éditeurs et IDE
 .vscode/*
-!.vscode/extensions.json
+!.vscode/extensions.json  # On garde la liste des extensions recommandées
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
 
+# Fichiers système
+.DS_Store  # Fichiers de métadonnées macOS
 
-# .gitignore
-.env
+# Variables d'environnement et secrets
+.env        # Fichier principal d'environnement
+.env.*      # Tous les fichiers d'environnement spécifiques (dev, prod, etc.)
+!.env.example  # Exception: fichier exemple pour montrer la structure requise

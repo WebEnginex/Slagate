@@ -9,7 +9,7 @@ import { fetchImageFromWorker } from './chargeurImages';
  * Charge une image pour une page spécifique, en utilisant le contexte de page
  * pour améliorer les logs et le suivi de performance
  * 
- * @param url L'URL de l'image à charger
+ * @param url L'URL de l'image à charger (sans paramètres de timestamp)
  * @param pageId Identifiant de la page (ex: "PromoCodes", "Creators")
  * @param pageImages Liste des images associées à cette page pour le filtrage des logs
  * @returns L'URL de l'image (Blob URL si chargée depuis le cache, URL originale sinon)
@@ -22,25 +22,28 @@ export const loadPageImage = async (
   // Si l'URL est vide, retourner une chaîne vide immédiatement
   if (!url) return '';
   
+  // Normaliser l'URL pour éviter les paramètres qui causent des rechargements
+  const normalizedUrl = url.split('?')[0];
+  
   // Importer la stratégie de réessai à la demande
   const { withRetry, DEFAULT_RETRY_CONFIG } = await import('./retryStrategy');
   
   try {
-    // Utiliser le système de cache avec réessais
+    // Utiliser le système de cache avec un nombre limité de réessais
     const result = await withRetry(
-      async () => fetchImageFromWorker(url, undefined, pageId, pageImages),
-      { ...DEFAULT_RETRY_CONFIG, maxAttempts: 2 } // Configuration personnalisée: seulement 2 tentatives max
+      async () => fetchImageFromWorker(normalizedUrl, undefined, pageId, pageImages),
+      { ...DEFAULT_RETRY_CONFIG, maxAttempts: 1 } // Une seule tentative pour éviter les cycles de rechargement
     );
     
     // Gérer le résultat selon son type
     if (typeof result === 'object' && result.url) {
       return result.url;
     } else {
-      return url; // Fallback à l'URL originale
+      return normalizedUrl; // Retourner l'URL normalisée
     }
   } catch (error) {
     console.error(`Erreur lors du chargement de l'image pour ${pageId}:`, error);
-    return url; // En cas d'erreur, utiliser l'URL originale
+    return normalizedUrl; // En cas d'erreur, utiliser l'URL normalisée
   }
 };
 
@@ -88,11 +91,11 @@ export const loadPageImageAsBase64 = async (
 };
 
 /**
- * Précharge plusieurs images pour une page spécifique
+ * Précharge plusieurs images pour une page spécifique de manière optimisée
  * 
  * @param urls Liste des URLs d'images à précharger
  * @param pageId Identifiant de la page
- * @returns Un objet Record contenant les URLs ou Base64 des images chargées
+ * @returns Un objet Record contenant les URLs des images chargées
  */
 export const preloadPageImages = async (
   urls: string[],
@@ -100,22 +103,48 @@ export const preloadPageImages = async (
 ): Promise<Record<string, string>> => {
   const cache: Record<string, string> = {};
   
-  // Filtrer les URLs vides
-  const validUrls = urls.filter(u => !!u);
+  // Filtrer les URLs vides et duplicates
+  const uniqueUrls = [...new Set(urls.filter(u => !!u))];
+  
+  // Fonction pour normaliser les URLs (retirer les paramètres)
+  const normalizeUrl = (url: string): string => url.split('?')[0];
+  
+  // Normaliser toutes les URLs avant traitement
+  const normalizedUrls = uniqueUrls.map(normalizeUrl);
   
   try {
-    // Informer le worker du contexte de page actuel et des images à précharger
-    // pour optimiser les logs et le suivi
-    await Promise.all(validUrls.map(async (url) => {
-      const result = await loadPageImage(url, pageId, validUrls);
-      if (result) {
-        cache[url] = result;
+    // Limiter le nombre de requêtes simultanées pour éviter de surcharger le worker
+    const batchSize = 5;
+    
+    for (let i = 0; i < normalizedUrls.length; i += batchSize) {
+      const batchUrls = normalizedUrls.slice(i, i + batchSize);
+      
+      // Traiter ce lot en parallèle
+      const results = await Promise.allSettled(
+        batchUrls.map(async (url) => {
+          try {
+            const result = await loadPageImage(url, pageId, uniqueUrls);
+            if (result) {
+              cache[url] = result;
+              return { url, cachedUrl: result };
+            }
+            return { url, success: false };
+          } catch (error) {
+            console.warn(`⚠️ Échec du préchargement pour ${url}:`, error);
+            return { url, success: false };
+          }
+        })
+      );
+      
+      // Attendre un court délai entre les lots pour ne pas surcharger le worker
+      if (i + batchSize < normalizedUrls.length) {
+        await new Promise(resolve => setTimeout(resolve, 100));
       }
-    }));
+    }
     
     return cache;
   } catch (error) {
-    console.error(`Erreur lors du préchargement des images pour ${pageId}:`, error);
+    console.error(`❌ Erreur lors du préchargement des images pour ${pageId}:`, error);
     return cache;
   }
 };

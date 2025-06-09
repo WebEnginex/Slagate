@@ -49,438 +49,671 @@ export type TeamGroup = {
 export const teamEnnioJinwooGroups: TeamGroup[] = [
   {
     id: 1,
-    nom: "Faiblesse Lumière | Feu",
+    nom: "Team Feu | Lumière",
     team1: {
-      id: 1,
-      nom: "Team Lumière",
-      chasseurs: [
-        {
-          id: 40,
-          stats: {
-            "Force": "25000",
-            "Vitalité": "30000",
-            "Agilité": "1000",
-            "Intelligence": "15",
-            "Perception": "8000",
-            "PV": "25000",
-            "Attaque": "30000",
-            "PM": "1000",
-            "Précision": "15",
-            "Défense": "8000",
-          },
-          artefacts: {
-            casque: {
-              id: 1,
-              statPrincipale: "PV",
-              statsSecondaires: ["Attaque", "Défense"],
-            },
-            armure: {
-              id: 2,
-              statPrincipale: "Défense",
-              statsSecondaires: ["PV", "Agilité"],
-            },
-          },
-          noyaux: {
-            1: [
-              { id: 1, statPrincipale: "Attaque (%)" },
-              { id: 2, statPrincipale: "Taux de coup critique" },
-            ],
-            2: [
-              { id: 3, statPrincipale: "Défense" },
-              { id: 4, statPrincipale: "PV" },
-            ],
-            3: [
-              { id: 5, statPrincipale: "Attaque" },
-              { id: 6, statPrincipale: "Précision" },
-            ],
-          },
-          sets_bonus: [{ id: 29 }, { id: 30 }],
-        },
-        {
-          id: 1,
-          stats: {
-            "Force": "25000",
-            "Vitalité": "30000",
-            "Agilité": "1000",
-            "Intelligence": "15",
-            "Perception": "8000",
-            "PV": "25000",
-            "Attaque": "30000",
-            "PM": "1000",
-            "Précision": "15",
-            "Défense": "8000",
-          },
-          artefacts: {
-            casque: {
-              id: 1,
-              statPrincipale: "PV",
-              statsSecondaires: ["Attaque", "Défense"],
-            },
-            armure: {
-              id: 2,
-              statPrincipale: "Défense",
-              statsSecondaires: ["PV", "Agilité"],
-            },
-          },
-          noyaux: {
-            1: [
-              { id: 1, statPrincipale: "Attaque (%)" },
-              { id: 2, statPrincipale: "Taux de coup critique" },
-            ],
-            2: [
-              { id: 3, statPrincipale: "Défense" },
-              { id: 4, statPrincipale: "PV" },
-            ],
-            3: [
-              { id: 5, statPrincipale: "Attaque" },
-              { id: 6, statPrincipale: "Précision" },
-            ],
-          },
-          sets_bonus: [{ id: 29 }, { id: 30 }],
-        },
-        {
-          id: 1,
-          stats: {
-            "Force": "25000",
-            "Vitalité": "30000",
-            "Agilité": "1000",
-            "Intelligence": "15",
-            "Perception": "8000",
-            "PV": "25000",
-            "Attaque": "30000",
-            "PM": "1000",
-            "Précision": "15",
-            "Défense": "8000",
-          },
-          artefacts: {
-            casque: {
-              id: 1,
-              statPrincipale: "PV",
-              statsSecondaires: ["Attaque", "Défense"],
-            },
-            armure: {
-              id: 2,
-              statPrincipale: "Défense",
-              statsSecondaires: ["PV", "Agilité"],
-            },
-          },
-          noyaux: {
-            1: [
-              { id: 1, statPrincipale: "Attaque (%)" },
-              { id: 2, statPrincipale: "Taux de coup critique" },
-            ],
-            2: [
-              { id: 3, statPrincipale: "Défense" },
-              { id: 4, statPrincipale: "PV" },
-            ],
-            3: [
-              { id: 5, statPrincipale: "Attaque" },
-              { id: 6, statPrincipale: "Précision" },
-            ],
-          },
-          sets_bonus: [{ id: 29 }, { id: 30 }],
-        },
-        {
-          id: 1,
-          stats: {
-            "Force": "25000",
-            "Vitalité": "30000",
-            "Agilité": "1000",
-            "Intelligence": "15",
-            "Perception": "8000",
-            "PV": "25000",
-            "Attaque": "30000",
-            "PM": "1000",
-            "Précision": "15",
-            "Défense": "8000",
-          },
-          artefacts: {
-            casque: {
-              id: 1,
-              statPrincipale: "PV",
-              statsSecondaires: ["Attaque", "Défense"],
-            },
-            armure: {
-              id: 2,
-              statPrincipale: "Défense",
-              statsSecondaires: ["PV", "Agilité"],
-            },
-          },
-          noyaux: {
-            1: [
-              { id: 1, statPrincipale: "Attaque (%)" },
-              { id: 2, statPrincipale: "Taux de coup critique" },
-            ],
-            2: [
-              { id: 3, statPrincipale: "Défense" },
-              { id: 4, statPrincipale: "PV" },
-            ],
-            3: [
-              { id: 5, statPrincipale: "Attaque" },
-              { id: 6, statPrincipale: "Précision" },
-            ],
-          },
-          sets_bonus: [{ id: 29 }, { id: 30 }],
-        },
-        // Ajoutez 3 autres chasseurs ici
-      ],
-      ombres: [
-        { id: 1, description: "Augmente l'attaque de 10% pendant 20 secondes après une compétence" },
-      ],
-      arme1: 1,
-      arme2: 2,
-      competence1: 1,
-      competence2: 2,
-      qte1: 1,
-      qte2: 2,
-      pierre_benediction_booster1: 1,
-      pierre_benediction_booster2: 2,
-      pierre_benediction_booster3: 3,
-      pierre_benediction_booster4: 4,
-      pierre_benediction_survie1: 5,
-      pierre_benediction_survie2: 6,
-      pierre_benediction_survie3: 7,
-      pierre_benediction_survie4: 8,
-    },
-    team2: {
-      id: 1,
+      id: 10,
       nom: "Team 1",
       chasseurs: [
         {
+          // Sung Jinwoo
           id: 40,
           stats: {
-            "Force": "25000",
-            "Vitalité": "30000",
-            "Agilité": "1000",
-            "Intelligence": "15",
-            "Perception": "8000",
-            "PV": "25000",
-            "Attaque": "30000",
-            "PM": "1000",
-            "Précision": "15",
-            "Défense": "8000",
-          },
+          "Force": "175",
+          "Vitalité": "-",
+          "Agilité": "-",
+          "Intelligence": "520",
+          "Perception": "-",
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "-",
+          "PM ": "-",
+          "Attaque supplémentaire": "Le plus possible",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
           artefacts: {
-            casque: {
-              id: 1,
-              statPrincipale: "PV",
-              statsSecondaires: ["Attaque", "Défense"],
-            },
-            armure: {
-              id: 2,
-              statPrincipale: "Défense",
-              statsSecondaires: ["PV", "Agilité"],
-            },
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
           },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Dégâts de coup critique",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Dégâts de l’élément adapté à l’événement",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
           noyaux: {
-            1: [
-              { id: 1, statPrincipale: "Attaque (%)" },
-              { id: 2, statPrincipale: "Taux de coup critique" },
-            ],
-            2: [
-              { id: 3, statPrincipale: "Défense" },
-              { id: 4, statPrincipale: "PV" },
-            ],
+            1: [{ id: 8, statPrincipale: "Attaque supplémentaire" }],
+            2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
             3: [
-              { id: 5, statPrincipale: "Attaque" },
-              { id: 6, statPrincipale: "Précision" },
+              { id: 2, statPrincipale: "PV supplémentaire" },
+              { id: 7, statPrincipale: "PV supplémentaire" },
             ],
           },
-          sets_bonus: [{ id: 29 }, { id: 30 }],
+          sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
         },
         {
-          id: 1,
+          // Kanae
+          id: 35,
           stats: {
-            "Force": "25000",
-            "Vitalité": "30000",
-            "Agilité": "1000",
-            "Intelligence": "15",
-            "Perception": "8000",
-            "PV": "25000",
-            "Attaque": "30000",
-            "PM": "1000",
-            "Précision": "15",
-            "Défense": "8000",
-          },
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "-",
+          "PM ": "-",
+          "Attaque supplémentaire": "Le plus possible",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
           artefacts: {
-            casque: {
-              id: 1,
-              statPrincipale: "PV",
-              statsSecondaires: ["Attaque", "Défense"],
-            },
-            armure: {
-              id: 2,
-              statPrincipale: "Défense",
-              statsSecondaires: ["PV", "Agilité"],
-            },
+          casque: {
+            id: 64,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
           },
+          armure: {
+            id: 94,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Dégâts de coup critique",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Dégâts de feu",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
           noyaux: {
-            1: [
-              { id: 1, statPrincipale: "Attaque (%)" },
-              { id: 2, statPrincipale: "Taux de coup critique" },
-            ],
-            2: [
-              { id: 3, statPrincipale: "Défense" },
-              { id: 4, statPrincipale: "PV" },
-            ],
-            3: [
-              { id: 5, statPrincipale: "Attaque" },
-              { id: 6, statPrincipale: "Précision" },
-            ],
-          },
-          sets_bonus: [{ id: 29 }, { id: 30 }],
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 7, statPrincipale: "PV supplémentaire" },
+            { id: 3, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+          sets_bonus: [{ id: 9 }, { id: 29 }, { id: 23 }, { id: 24 }],
         },
         {
-          id: 1,
+          // Esil
+          id: 10,
           stats: {
-            "Force": "25000",
-            "Vitalité": "30000",
-            "Agilité": "1000",
-            "Intelligence": "15",
-            "Perception": "8000",
-            "PV": "25000",
-            "Attaque": "30000",
-            "PM": "1000",
-            "Précision": "15",
-            "Défense": "8000",
-          },
-          artefacts: {
-            casque: {
-              id: 1,
-              statPrincipale: "PV",
-              statsSecondaires: ["Attaque", "Défense"],
-            },
-            armure: {
-              id: 2,
-              statPrincipale: "Défense",
-              statsSecondaires: ["PV", "Agilité"],
-            },
-          },
-          noyaux: {
-            1: [
-              { id: 1, statPrincipale: "Attaque (%)" },
-              { id: 2, statPrincipale: "Taux de coup critique" },
-            ],
-            2: [
-              { id: 3, statPrincipale: "Défense" },
-              { id: 4, statPrincipale: "PV" },
-            ],
-            3: [
-              { id: 5, statPrincipale: "Attaque" },
-              { id: 6, statPrincipale: "Précision" },
-            ],
-          },
-          sets_bonus: [{ id: 29 }, { id: 30 }],
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "-",
+          "PM ": "-",
+          "Attaque supplémentaire": "Le plus possible",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Réduction du temps de rechargement ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
         },
+          artefacts: {
+          casque: {
+            id: 57,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 1,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 78,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 22,
+            statPrincipale: "Dégâts de coup critique",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 68,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 47,
+            statPrincipale: "Dégâts de feu",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 12,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 36,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 8, statPrincipale: "Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 7, statPrincipale: "PV supplémentaire" },
+            { id: 2, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
+      },
         {
-          id: 1,
+          // Gina
+          id: 11,
           stats: {
-            "Force": "25000",
-            "Vitalité": "30000",
-            "Agilité": "1000",
-            "Intelligence": "15",
-            "Perception": "8000",
-            "PV": "25000",
-            "Attaque": "30000",
-            "PM": "1000",
-            "Précision": "15",
-            "Défense": "8000",
-          },
-          artefacts: {
-            casque: {
-              id: 1,
-              statPrincipale: "PV",
-              statsSecondaires: ["Attaque", "Défense"],
-            },
-            armure: {
-              id: 2,
-              statPrincipale: "Défense",
-              statsSecondaires: ["PV", "Agilité"],
-            },
-          },
-          noyaux: {
-            1: [
-              { id: 1, statPrincipale: "Attaque (%)" },
-              { id: 2, statPrincipale: "Taux de coup critique" },
-            ],
-            2: [
-              { id: 3, statPrincipale: "Défense" },
-              { id: 4, statPrincipale: "PV" },
-            ],
-            3: [
-              { id: 5, statPrincipale: "Attaque" },
-              { id: 6, statPrincipale: "Précision" },
-            ],
-          },
-          sets_bonus: [{ id: 29 }, { id: 30 }],
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "-",
+          "PM ": "-",
+          "Attaque supplémentaire": "Le plus possible",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Réduction du temps de rechargement ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
         },
-        // Ajoutez 3 autres chasseurs ici
+        artefacts: {
+          casque: {
+            id: 59,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 6,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 83,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 27,
+            statPrincipale: "Dégâts de coup critique",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Dégâts de feu",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
+            { id: 8, statPrincipale: "Attaque supplémentaire" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 7, statPrincipale: "Attaque supplémentaire" },
+            { id: 2, statPrincipale: "Attaque supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+      },
       ],
       ombres: [
-        { id: 1, description: "Augmente l'attaque de 10% pendant 20 secondes après une compétence" },
+        { id: 8 },
+        { id: 2 },
+        { id: 6 },
       ],
-      arme1: 1,
-      arme2: 2,
+      arme1: 5,
+      arme2: 16,
       competence1: 1,
       competence2: 2,
       qte1: 1,
       qte2: 2,
-      pierre_benediction_booster1: 1,
-      pierre_benediction_booster2: 2,
-      pierre_benediction_booster3: 3,
-      pierre_benediction_booster4: 4,
-      pierre_benediction_survie1: 5,
+      pierre_benediction_booster1: 26,
+      pierre_benediction_booster2: 24,
+      pierre_benediction_booster3: 17,
+      pierre_benediction_booster4: 27,
+      pierre_benediction_survie1: 8,
       pierre_benediction_survie2: 6,
-      pierre_benediction_survie3: 7,
-      pierre_benediction_survie4: 8,
-    },
-  },
-  {
-    id: 2,
-    nom: "Team 2",
-    team1: {
-      id: 3,
-      nom: "Team Jinwoo Gamma",
-      chasseurs: [
-        // Ajoutez les chasseurs ici
-      ],
-      ombres: [],
-      arme1: 0,
-      arme2: 0,
-      competence1: 0,
-      competence2: 0,
-      qte1: 0,
-      qte2: 0,
-      pierre_benediction_booster1: 0,
-      pierre_benediction_booster2: 0,
-      pierre_benediction_booster3: 0,
-      pierre_benediction_booster4: 0,
-      pierre_benediction_survie1: 0,
-      pierre_benediction_survie2: 0,
-      pierre_benediction_survie3: 0,
-      pierre_benediction_survie4: 0,
+      pierre_benediction_survie3: 30,
+      pierre_benediction_survie4: 4,
     },
     team2: {
-      id: 4,
-      nom: "Team Jinwoo Delta",
+      id: 20,
+      nom: "Team 2",
       chasseurs: [
-        // Ajoutez les chasseurs ici
+        {
+          // Sung Jinwoo
+          id: 40,
+          stats: {
+          "Force": "175",
+          "Vitalité": "-",
+          "Agilité": "-",
+          "Intelligence": "520",
+          "Perception": "-",
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "-",
+          "PM ": "-",
+          "Attaque supplémentaire": "Le plus possible",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+          artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Dégâts de coup critique",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Dégâts de l’élément adapté à l’événement",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+          noyaux: {
+            1: [{ id: 8, statPrincipale: "Attaque supplémentaire" }],
+            2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+            3: [
+              { id: 2, statPrincipale: "PV supplémentaire" },
+              { id: 7, statPrincipale: "PV supplémentaire" },
+            ],
+          },
+          sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+        },
+        {
+          // Choi
+          id: 8,
+          stats: {
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "-",
+          "PM ": "-",
+          "Attaque supplémentaire": "Le plus possible",
+          "Précision": "-",
+          "Taux de coup critique ": "-",
+          "Dégâts de coup critique ": "-",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Réduction du temps de rechargement ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 97,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 98,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 99,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 100,
+            statPrincipale: "Pénétration de défense",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 101,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 102,
+            statPrincipale: "Dégâts de feu",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 103,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 104,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 8, statPrincipale: "Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 7, statPrincipale: "PV supplémentaire" },
+            { id: 2, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 52 }, { id: 53 }, { id: 54 }],
+      },
+        {
+          // Meilin
+          id: 27,
+          stats: {
+          "PV supplémentaire": "Le plus possible",
+          "Défense supplémentaire": "-",
+          "PM ": "-",
+          "Attaque supplémentaire": "-",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Réduction du temps de rechargement ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 59,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 6,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 83,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 27,
+            statPrincipale: "Dégâts de coup critique",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Dégâts de feu",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
+            { id: 8, statPrincipale: "Attaque supplémentaire" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 7, statPrincipale: "Attaque supplémentaire" },
+            { id: 2, statPrincipale: "Attaque supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+      },
+      {
+          // Isla
+          id: 19,
+          stats: {
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "Le plus possible",
+          "PM ": "-",
+          "Attaque supplémentaire": "-",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "Le plus possible",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Réduction du temps de rechargement ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 58,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 2,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 79,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 23,
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 70,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 49,
+            statPrincipale: "Dégâts de ténèbres",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 14,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 38,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [{ id: 9, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 7, statPrincipale: "PV supplémentaire" },
+            { id: 2, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 43 }, { id: 44 }, { id: 45 }],
+      },
       ],
-      ombres: [],
-      arme1: 0,
-      arme2: 0,
-      competence1: 0,
-      competence2: 0,
-      qte1: 0,
-      qte2: 0,
-      pierre_benediction_booster1: 0,
-      pierre_benediction_booster2: 0,
-      pierre_benediction_booster3: 0,
-      pierre_benediction_booster4: 0,
-      pierre_benediction_survie1: 0,
-      pierre_benediction_survie2: 0,
-      pierre_benediction_survie3: 0,
-      pierre_benediction_survie4: 0,
+      ombres: [
+        { id: 8 },
+        { id: 2 },
+        { id: 6 },
+      ],
+      arme1: 5,
+      arme2: 16,
+      competence1: 1,
+      competence2: 2,
+      qte1: 1,
+      qte2: 2,
+      pierre_benediction_booster1: 26,
+      pierre_benediction_booster2: 24,
+      pierre_benediction_booster3: 17,
+      pierre_benediction_booster4: 27,
+      pierre_benediction_survie1: 8,
+      pierre_benediction_survie2: 6,
+      pierre_benediction_survie3: 30,
+      pierre_benediction_survie4: 4,
     },
   },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ];

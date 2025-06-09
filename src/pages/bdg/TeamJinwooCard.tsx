@@ -12,6 +12,10 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useExpandedTeam } from "@/contexts/ExpandedTeamContext";
 import { TeamBdgJinwoo } from "@/config/bdg/teamBdgJinwoo";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
+import { Image } from "@/components/ui/Image";
+
+// Constante pour identifier cette page dans les logs du worker et le cache
+const PAGE_ID = "BDG_TEAM";
 
 type Props = {
   team: TeamBdgJinwoo;
@@ -37,11 +41,11 @@ export default function TeamJinwooCard({
   competences,
   qtes,
   pierres,
-}: Props) {
-  const { expandedTeamId, setExpandedTeamId } = useExpandedTeam();
+}: Props) {  const { expandedTeamId, setExpandedTeamId } = useExpandedTeam();
   const [selectedChasseurId, setSelectedChasseurId] = useState<number | null>(null);
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({});
-
+  const [expandedDescriptions, setExpandedDescriptions] = useState<{ [key: string]: boolean }>({});
+  const [activeNoyauIndices, setActiveNoyauIndices] = useState<{ [key: string]: number }>({});
   const toggleTeam = (teamId: number) => {
     setExpandedTeamId(expandedTeamId === teamId ? null : teamId);
     setSelectedChasseurId(null); // Réinitialiser le chasseur sélectionné
@@ -49,12 +53,15 @@ export default function TeamJinwooCard({
 
   const getFromList = <T extends { id: number | string }>(list: T[], id: number | string) =>
     list.find((item) => item.id.toString() === id.toString());
-
   const toggleSection = (section: string) => {
     setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
 
   const isSectionOpen = (section: string) => openSections[section];
+  
+  const toggleDescription = (id: string) => {
+    setExpandedDescriptions(prev => ({ ...prev, [id]: !prev[id] }));
+  };
 
   function formatTextWithBrackets(text: string) {
     const regex =
@@ -123,48 +130,53 @@ export default function TeamJinwooCard({
   }
 
   return (
-    <Card className="mb-10 bg-sidebar border-sidebar-border overflow-hidden">
-      <CardHeader
-        className="p-4 flex flex-row items-center justify-between bg-sidebar cursor-pointer transition-colors hover:bg-sidebar/90"
+    <Card className="mb-10 bg-sidebar border-sidebar-border overflow-hidden">      <CardHeader
+        className="p-3 sm:p-4 flex flex-row items-center justify-between bg-sidebar cursor-pointer transition-colors hover:bg-sidebar/90"
         onClick={() => toggleTeam(team.id)}
       >
-        <CardTitle className="text-xl font-bold flex items-center gap-2 text-white">
-          <User className="h-5 w-5 text-solo-purple" />
-          {team.nom}
+        <CardTitle className="text-lg sm:text-xl font-bold flex items-center gap-1.5 sm:gap-2 text-white truncate">
+          <User className="h-4 sm:h-5 w-4 sm:w-5 text-solo-purple flex-shrink-0" />
+          <span className="truncate">{team.nom}</span>
         </CardTitle>
         {expandedTeamId === team.id ? (
-          <ChevronUp className="h-5 w-5 text-white" />
+          <ChevronUp className="h-5 w-5 text-white flex-shrink-0" />
         ) : (
-          <ChevronDown className="h-5 w-5 text-white" />
+          <ChevronDown className="h-5 w-5 text-white flex-shrink-0" />
         )}
-      </CardHeader>
-
-      {expandedTeamId === team.id && (
-        <CardContent className="p-4 pt-6 bg-sidebar-accent">
-          <div className="space-y-6">
-            {/* Sélection des chasseurs */}
-            <div className="flex flex-wrap gap-3 justify-center">
+      </CardHeader>      {expandedTeamId === team.id && (
+        <CardContent className="p-3 sm:p-4 pt-4 sm:pt-6 bg-sidebar-accent">
+          <div className="space-y-4 sm:space-y-6">
+            {/* Sélection des chasseurs */}            <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
               {team.chasseurs.map((chasseur, idx) => {
                 const chasseurData = getFromList(chasseurs, chasseur.id);
-                return (
-                  <div
+                return (                  <div
                     key={idx}
-                    className={`relative group cursor-pointer transition-all duration-200 hover:scale-105`}
-                    onClick={() => setSelectedChasseurId(chasseur.id)}
+                    className="relative group cursor-pointer transition-all duration-200 hover:scale-105"
+                    onClick={() => {
+                      setSelectedChasseurId(chasseur.id);
+                      // Ouvrir l'onglet "artefacts" lorsqu'un chasseur est sélectionné
+                      setOpenSections((prev) => ({ ...prev, artefacts: true, stats: false }));
+                    }}
                   >
                     <div
-                      className={`w-20 h-20 rounded-full overflow-hidden border-2 ${
+                      className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 ${
                         selectedChasseurId === chasseur.id
-                          ? "border-solo-purple"
+                          ? "border-solo-purple shadow-lg shadow-solo-purple/30"
                           : "border-sidebar-border"
                       }`}
                     >
-                      <img
+                      <Image
                         src={chasseurData?.image || ""}
-                        alt={chasseurData?.nom}
+                        alt={chasseurData?.nom || "Chasseur"}
+                        pageId={PAGE_ID}
                         className="w-full h-full object-cover"
+                        skeleton={true}
+                        shimmer={true}
                       />
                     </div>
+                    <p className="mt-1 sm:mt-2 text-2xs sm:text-xs text-white text-center w-full truncate">
+                      {chasseurData?.nom}
+                    </p>
                   </div>
                 );
               })}
@@ -182,8 +194,9 @@ export default function TeamJinwooCard({
                   </h3>
                   <Accordion type="single" collapsible>
                     {/* Stats Section */}
-                    <div className="space-y-4 md:space-y-6 lg:space-y-8">
-                      <div className="bg-sidebar/50 rounded-lg overflow-hidden">
+                    <div className="space-y-6">
+                      {/* 1. Statistiques */}
+                      <div className="bg-sidebar/50 rounded-lg overflow-hidden mb-6">
                         <Collapsible open={isSectionOpen('stats')} onOpenChange={() => toggleSection('stats')}>
                           <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
                             <BarChart2 className="h-4 w-4 text-solo-purple" />
@@ -204,9 +217,9 @@ export default function TeamJinwooCard({
                         </Collapsible>
                       </div>
 
-                      {/* Armes */}
+                      {/* 2. Armes (Premier chasseur uniquement) */}
                       {selectedChasseurId === team.chasseurs[0]?.id && (
-                        <div className="bg-sidebar/50 rounded-lg overflow-hidden">
+                        <div className="bg-sidebar/50 rounded-lg overflow-hidden mb-6">
                           <Collapsible open={isSectionOpen('armes')} onOpenChange={() => toggleSection('armes')}>
                             <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
                               <Swords className="h-4 w-4 text-solo-purple" />
@@ -219,11 +232,24 @@ export default function TeamJinwooCard({
                                     const arme = getFromList(armes, armeId);
                                     if (!arme) return null;
                                     return (
-                                      <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border text-center w-32">
-                                        <div className="relative mb-2">
-                                          <img src={arme.image} className="w-20 h-20 mx-auto object-contain" />
+                                      <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border text-center w-32">                                        <div className="relative mb-2">
+                                          <Image 
+                                            src={arme.image} 
+                                            alt={arme.nom || "Arme"} 
+                                            pageId={PAGE_ID} 
+                                            className="w-20 h-20 mx-auto object-contain"
+                                            skeleton={true}
+                                            shimmer={true}
+                                          />
                                           <div className="absolute -bottom-1 -right-1">
-                                            <img src={arme.arme_element} className="w-6 h-6 rounded-full border border-sidebar-border" />
+                                            <Image 
+                                              src={arme.arme_element} 
+                                              alt="Élément d'arme" 
+                                              pageId={PAGE_ID} 
+                                              className="w-6 h-6 rounded-full border border-sidebar-border"
+                                              skeleton={true}
+                                              shimmer={true}
+                                            />
                                           </div>
                                         </div>
                                         <p className="text-sm font-medium truncate text-white">{arme.nom}</p>
@@ -237,30 +263,32 @@ export default function TeamJinwooCard({
                         </div>
                       )}
 
-                      {/* Artefacts Section */}
-                      <div className="bg-sidebar/50 rounded-lg overflow-hidden">
+                      {/* 3. Artefacts Section */}
+                      <div className="bg-sidebar/50 rounded-lg overflow-hidden mb-6">
                         <Collapsible open={isSectionOpen('artefacts')} onOpenChange={() => toggleSection('artefacts')}>
                           <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
                             <GemIcon className="h-4 w-4 text-solo-purple" />
                             <span className="flex-1 text-left">Artefacts</span>
-                          </CollapsibleTrigger>
-                          <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden">
-                            <div className="p-4">
-                              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                          </CollapsibleTrigger>                          <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden">
+                            <div className="p-3 sm:p-4">
+                              <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4">
                                 {Object.entries(chasseur.artefacts).map(([slot, data]) => {
                                   const art = getFromList(artefacts, data.id);
                                   return (
-                                    <div key={slot} className="bg-sidebar p-3 rounded-lg border border-sidebar-border">
-                                      <div className="flex flex-col items-center">
-                                        <p className="mb-2 text-xs font-semibold text-solo-light-purple">{slot.charAt(0).toUpperCase() + slot.slice(1)}</p>
-                                        <img
+                                    <div key={slot} className="bg-sidebar p-2 sm:p-3 rounded-lg border border-sidebar-border">
+                                      <div className="flex flex-col items-center">                                        
+                                        <p className="mb-1 text-[10px] sm:text-2xs font-semibold text-solo-light-purple">{slot.charAt(0).toUpperCase() + slot.slice(1)}</p>
+                                        <Image
                                           src={art?.image || ""}
-                                          className="w-16 h-16 mx-auto object-contain"
                                           alt={art?.nom || "Artefact"}
+                                          pageId={PAGE_ID}
+                                          className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mx-auto object-contain"
+                                          skeleton={true}
+                                          shimmer={true}
                                         />
-                                        <p className="mt-1 text-xs font-medium text-center text-white">{art?.nom}</p>
-                                        <div className="w-full mt-2">
-                                          <div className="text-xs bg-solo-purple/20 text-white px-2 py-1 rounded font-medium text-center">
+                                        <p className="mt-1 text-[10px] sm:text-2xs font-medium text-center text-white truncate w-full">{art?.nom}</p>
+                                        <div className="w-full mt-1">
+                                          <div className="text-[10px] sm:text-2xs bg-solo-purple/20 text-white px-1 py-0.5 rounded font-medium text-center truncate">
                                             {data.statPrincipale}
                                           </div>
                                         </div>
@@ -274,8 +302,8 @@ export default function TeamJinwooCard({
                         </Collapsible>
                       </div>
 
-                      {/* Sets Bonus Section */}
-                      <div className="bg-sidebar/50 rounded-lg overflow-hidden">
+                      {/* 4. Sets Bonus Section */}
+                      <div className="bg-sidebar/50 rounded-lg overflow-hidden mb-6">
                         <Collapsible
                           open={isSectionOpen("sets")}
                           onOpenChange={() => toggleSection("sets")}
@@ -297,15 +325,17 @@ export default function TeamJinwooCard({
                                     >
                                       <p className="font-semibold text-sm text-solo-purple">
                                         {bonus.nom}
-                                      </p>
-                                      <p className="text-xs text-gray-300 mt-2">
-                                        {bonus.description.split('\n').map((line, index) => (
-                                          <React.Fragment key={index}>
-                                            {formatTextWithBrackets(line)}
-                                            <br />
-                                          </React.Fragment>
-                                        ))}
-                                      </p>
+                                      </p>                                        <div className="text-xs text-gray-300 mt-2 space-y-1">
+                                        {bonus.description?.split("<br>").map((line, index) => (
+                                          <p key={index}>{formatTextWithBrackets(line)}</p>
+                                        )) || (
+                                          bonus.description?.split("\n").map((line, index) => (
+                                            <p key={index}>{formatTextWithBrackets(line)}</p>
+                                          )) || (
+                                            <p>{formatTextWithBrackets(bonus.description || "")}</p>
+                                          )
+                                        )}
+                                      </div>
                                     </div>
                                   );
                                 })}
@@ -315,34 +345,68 @@ export default function TeamJinwooCard({
                         </Collapsible>
                       </div>
 
-
-                      {/* Noyaux Section */}
-                      <div className="bg-sidebar/50 rounded-lg overflow-hidden">
+                      {/* 5. Noyaux Section */}
+                      <div className="bg-sidebar/50 rounded-lg overflow-hidden mb-6">
                         <Collapsible open={isSectionOpen('noyaux')} onOpenChange={() => toggleSection('noyaux')}>
                           <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
                             <Dna className="h-4 w-4 text-solo-purple" />
                             <span className="flex-1 text-left">Noyaux</span>
-                          </CollapsibleTrigger>
-                          <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden">
-                            <div className="p-4">
-                              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                {Object.values(chasseur.noyaux).flat().map((n, i) => {
-                                  const noyau = getFromList(noyaux, n.id);
+                          </CollapsibleTrigger>                          <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden">
+                            <div className="p-3 sm:p-4">
+                              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                                {Object.entries(chasseur.noyaux).map(([slot, noyauxSlot]) => {
+                                  const slotKey = `${chasseur.id}-${slot}`;
+                                  const activeIndex = activeNoyauIndices[slotKey] || 0;
+                                  const noyauData = noyauxSlot[activeIndex];
+                                  const noyau = getFromList(noyaux, noyauData.id);
+
+                                  if (!noyau) return null;
+
                                   return (
-                                    <div key={i} className="bg-sidebar p-4 rounded-lg border border-sidebar-border">
-                                      <div className="flex flex-col">
-                                        <div className="flex flex-col items-center mb-3">
-                                          <img
+                                    <div key={slot} className="bg-sidebar p-2 sm:p-4 rounded-lg border border-sidebar-border">
+                                      <div className="flex flex-col">                                        
+                                        <div className="flex flex-col items-center mb-2">
+                                          <Image
                                             src={noyau?.image || ""}
-                                            className="w-16 h-16 object-contain mb-2"
                                             alt={noyau?.nom || "Noyau"}
+                                            pageId={PAGE_ID}
+                                            className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 object-contain mb-1"
+                                            skeleton={true}
+                                            shimmer={true}
                                           />
-                                          <p className="text-sm font-semibold text-white text-center">{noyau?.nom}</p>
+                                          <p className="text-[10px] sm:text-xs font-semibold text-white text-center truncate w-full">{noyau?.nom}</p>
                                         </div>
-                                        <div className="bg-solo-purple/20 text-white text-xs px-3 py-1.5 rounded-md text-center font-medium">
-                                          {n.statPrincipale}
+                                        <div className="bg-solo-purple/20 text-white text-[10px] sm:text-2xs px-2 py-0.5 sm:py-1 rounded-md text-center font-medium truncate">
+                                          {noyauData.statPrincipale}
+                                        </div>                                        <div className="text-[10px] sm:text-2xs text-gray-300 mt-1 text-center space-y-1">
+                                          {noyau?.description?.split("<br>").map((line, index) => (
+                                            <p key={index}>{formatTextWithBrackets(line)}</p>
+                                          )) || (
+                                            noyau?.description?.split("\n").map((line, index) => (
+                                              <p key={index}>{formatTextWithBrackets(line)}</p>
+                                            )) || (
+                                              <p>{formatTextWithBrackets(noyau?.description || "")}</p>
+                                            )
+                                          )}
                                         </div>
-                                        <p className="text-xs text-gray-300 mt-1.5 text-center">{formatTextWithBrackets(noyau?.description)}</p>
+                                        
+                                        {noyauxSlot.length > 1 && (
+                                          <button
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              setActiveNoyauIndices((prev) => ({
+                                                ...prev,
+                                                [slotKey]:
+                                                  (prev[slotKey] || 0) + 1 >= noyauxSlot.length
+                                                    ? 0
+                                                    : (prev[slotKey] || 0) + 1,
+                                              }));
+                                            }}
+                                            className="mt-1 bg-solo-purple/90 hover:bg-solo-purple text-white text-[10px] sm:text-2xs px-2 py-0.5 rounded text-center mx-auto block"
+                                          >
+                                            {activeIndex === 0 ? "Alternative" : "Meilleur"}
+                                          </button>
+                                        )}
                                       </div>
                                     </div>
                                   );
@@ -353,60 +417,14 @@ export default function TeamJinwooCard({
                         </Collapsible>
                       </div>
                     </div>
-                  
-
-                    {/* Ombres Section */}
-                    <div className="bg-sidebar/50 rounded-lg overflow-hidden">
-                      <Collapsible
-                        open={isSectionOpen("ombres")}
-                        onOpenChange={() => toggleSection("ombres")}
-                      >
-                        <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                          <Sparkles className="h-4 w-4 text-solo-purple" />
-                          <span className="flex-1 text-left">Ombres</span>
-                        </CollapsibleTrigger>
-                        <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden">
-                          <div className="p-4">
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                              {team.ombres.map((o, i) => {
-                                const ombre = getFromList(ombres, o.id);
-                                if (!ombre) return null;
-                                return (
-                                  <div
-                                    key={i}
-                                    className="bg-sidebar p-4 rounded-lg border border-sidebar-border flex flex-col items-center"
-                                  >
-                                    <div className="relative mb-2">
-                                      <img
-                                        src={ombre.image || ""}
-                                        className="w-16 h-16 object-contain"
-                                      />
-                                      <div className="absolute -top-2 -right-2 bg-solo-purple text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center text-white border-2 border-sidebar">
-                                        {i + 1}
-                                      </div>
-                                    </div>
-                                    <p className="text-sm font-medium text-white text-center">
-                                      {ombre.nom}
-                                    </p>
-                                    {ombre.description && (
-                                      <p className="text-xs text-gray-300 mt-3 text-center">                             
-                                        {formatTextWithBrackets(ombre.description)}
-                                      </p>
-                                    )}
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        </CollapsibleContent>
-                      </Collapsible>
-                    </div>
-
-                    {/* Sections spécifiques à Jinwoo */}
+                    
+                    {/* Ajout d'un espace visuel pour séparer les sections */}
+                    <div className="mb-6"></div>
+                      {/* Sections spécifiques à Jinwoo */}
                     {selectedChasseurId === team.chasseurs[0]?.id && (
-                      <>
-                        {/* Compétences Section */}
-                        <div className="bg-sidebar/50 rounded-lg overflow-hidden">
+                      <div className="space-y-6">
+                        {/* 6. Compétences Section */}
+                        <div className="bg-sidebar/50 rounded-lg overflow-hidden mb-6">
                           <Collapsible
                             open={isSectionOpen("competences")}
                             onOpenChange={() => toggleSection("competences")}
@@ -427,28 +445,46 @@ export default function TeamJinwooCard({
                                         className="bg-sidebar p-4 rounded-lg border border-sidebar-border flex flex-col sm:flex-row items-center sm:items-start gap-4"
                                       >
                                         <div className="relative">
-                                          <img
+                                          <Image
                                             src={skill.image || ""}
-                                            alt={skill.nom}
+                                            alt={skill.nom || "Compétence"}
+                                            pageId={PAGE_ID}
                                             className="w-24 h-24 sm:w-32 sm:h-32 object-contain"
+                                            skeleton={true}
+                                            shimmer={true}
                                           />
                                           {skill.element && skill.element !== "EMPTY" && skill.element !== "NULL" && (
-                                            <img
+                                            <Image
                                               src={skill.element}
                                               alt="Element"
+                                              pageId={PAGE_ID}
                                               className="absolute top-1 left-1 w-8 h-8 object-contain"
+                                              skeleton={true}
+                                              shimmer={true}
                                             />
                                           )}
-                                        </div>
-                                        <div className="flex-1">
+                                        </div>                                        <div className="flex-1">
                                           <p className="text-sm sm:text-base font-medium text-white mb-2">
                                             {skill.nom}
                                           </p>
-                                          <div className="text-xs sm:text-sm text-gray-300 space-y-2">
-                                            {skill.description?.split("<br>").map((line, index) => (
-                                              <p key={index}>{formatTextWithBrackets(line)}</p>
-                                            ))}
+                                          <div className="flex items-center gap-1 mb-1">
+                                            <button 
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                toggleDescription(`competence-${i}`);
+                                              }} 
+                                              className="text-xs bg-solo-purple/30 text-white px-2 py-1 rounded-md hover:bg-solo-purple/50 transition-colors"
+                                            >
+                                              {expandedDescriptions[`competence-${i}`] ? "Cacher détails" : "Voir détails"}
+                                            </button>
                                           </div>
+                                          {expandedDescriptions[`competence-${i}`] && (
+                                            <div className="text-xs sm:text-sm text-gray-300 space-y-2 mt-2">
+                                              {skill.description?.split("<br>").map((line, index) => (
+                                                <p key={index}>{formatTextWithBrackets(line)}</p>
+                                              ))}
+                                            </div>
+                                          )}
                                         </div>
                                       </div>
                                     );
@@ -459,8 +495,8 @@ export default function TeamJinwooCard({
                           </Collapsible>
                         </div>
 
-                        {/* QTE Section */}
-                        <div className="bg-sidebar/50 rounded-lg overflow-hidden">
+                        {/* 7. QTE Section */}
+                        <div className="bg-sidebar/50 rounded-lg overflow-hidden mb-6">
                           <Collapsible
                             open={isSectionOpen("qte")}
                             onOpenChange={() => toggleSection("qte")}
@@ -481,42 +517,66 @@ export default function TeamJinwooCard({
                                         className="bg-sidebar p-4 rounded-lg border border-sidebar-border flex flex-col sm:flex-row items-center sm:items-start gap-4"
                                       >
                                         <div className="relative">
-                                          <img
+                                          <Image
                                             src={qte.image || ""}
-                                            alt={qte.nom}
+                                            alt={qte.nom || "QTE"}
+                                            pageId={PAGE_ID}
                                             className="w-24 h-24 sm:w-32 sm:h-32 object-contain"
+                                            skeleton={true}
+                                            shimmer={true}
                                           />
                                           {qte.element && qte.element !== "EMPTY" && qte.element !== "NULL" && (
-                                            <img
+                                            <Image
                                               src={qte.element}
                                               alt="Element"
+                                              pageId={PAGE_ID}
                                               className="absolute top-1 left-1 w-8 h-8 object-contain"
+                                              skeleton={true}
+                                              shimmer={true}
                                             />
                                           )}
                                           {qte.element2 && qte.element2 !== "EMPTY" && qte.element2 !== "NULL" && (
-                                            <img
+                                            <Image
                                               src={qte.element2}
                                               alt="Element2"
+                                              pageId={PAGE_ID}
                                               className="absolute top-1 right-1 w-8 h-8 object-contain"
+                                              skeleton={true}
+                                              shimmer={true}
                                             />
                                           )}
                                           {qte.element3 && qte.element3 !== "EMPTY" && qte.element3 !== "NULL" && (
-                                            <img
+                                            <Image
                                               src={qte.element3}
                                               alt="Element3"
+                                              pageId={PAGE_ID}
                                               className="absolute bottom-1 right-1 w-8 h-8 object-contain"
+                                              skeleton={true}
+                                              shimmer={true}
                                             />
                                           )}
-                                        </div>
-                                        <div className="flex-1">
+                                        </div>                                        <div className="flex-1">
                                           <p className="text-sm sm:text-base font-medium text-white mb-2">
                                             {qte.nom}
                                           </p>
-                                          <div className="text-xs sm:text-sm text-gray-300 space-y-2">
-                                            {qte.description?.split("<br>").map((line, index) => (
-                                              <p key={index}>{formatTextWithBrackets(line)}</p>
-                                            ))}
+                                          <div className="flex items-center gap-1 mb-1">
+                                            <button 
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                toggleDescription(`qte-${i}`);
+                                              }} 
+                                              className="text-xs bg-solo-purple/30 text-white px-2 py-1 rounded-md hover:bg-solo-purple/50 transition-colors"
+                                            >
+                                              {expandedDescriptions[`qte-${i}`] ? "Cacher détails" : "Voir détails"}
+                                            </button>
                                           </div>
+                                          {expandedDescriptions[`qte-${i}`] && (
+                                            <div className="text-xs sm:text-sm text-gray-300 space-y-2 mt-2">
+                                              {qte.description?.split("<br>").map((line, index) => (
+                                                <p key={index}>{formatTextWithBrackets(line)}</p>
+                                              ))}
+                                            </div>
+                                          )}
                                         </div>
                                       </div>
                                     );
@@ -527,8 +587,8 @@ export default function TeamJinwooCard({
                           </Collapsible>
                         </div>
 
-                        {/* Pierres de bénédiction */}
-                        <div className="bg-sidebar/50 rounded-lg overflow-hidden">
+                        {/* 8. Pierres de bénédiction */}
+                        <div className="bg-sidebar/50 rounded-lg overflow-hidden mb-6">
                           <Collapsible open={isSectionOpen('pierres')} onOpenChange={() => toggleSection('pierres')}>
                             <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
                               <FlaskConical className="h-4 w-4 text-solo-purple" />
@@ -537,10 +597,8 @@ export default function TeamJinwooCard({
                             <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden">
                               <div className="p-4">
                                 <div className="space-y-4">
-                                  <div>
-                                    <h6 className="text-xs font-medium mb-3 text-solo-light-purple ml-1">Pierres Booster</h6>
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                      {[
+                                  <div>                                    <h6 className="text-xs font-medium mb-3 text-solo-light-purple ml-1">Pierres Booster</h6>
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">                                      {[
                                         team.pierre_benediction_booster1,
                                         team.pierre_benediction_booster2,
                                         team.pierre_benediction_booster3,
@@ -550,24 +608,44 @@ export default function TeamJinwooCard({
                                         if (!pierre) return null;
                                         return (
                                           <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border flex flex-col items-center">
-                                            <img
+                                            <Image
                                               src={pierre.image || ""}
+                                              alt={pierre.nom || "Pierre de bénédiction"}
+                                              pageId={PAGE_ID}
                                               className="w-12 h-12 object-contain mb-2"
+                                              skeleton={true}
+                                              shimmer={true}
                                             />
                                             <p className="text-xs font-medium text-white text-center">{pierre.nom}</p>
-                                            <p className="text-xs text-gray-300 mt-2 text-center">
-                                              {formatTextWithBrackets(pierre.description)}
-                                            </p>
+                                            <button 
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                toggleDescription(`pierre-booster-${i}`);
+                                              }} 
+                                              className="text-xs bg-solo-purple/30 text-white px-2 py-1 rounded-md mt-2 hover:bg-solo-purple/50 transition-colors"
+                                            >
+                                              {expandedDescriptions[`pierre-booster-${i}`] ? "Cacher détails" : "Voir détails"}
+                                            </button>                                            {expandedDescriptions[`pierre-booster-${i}`] && (
+                                              <div className="text-xs text-gray-300 mt-2 space-y-2">
+                                                {pierre.description?.split("<br>").map((line, index) => (
+                                                  <p key={index} className="text-center">{formatTextWithBrackets(line)}</p>
+                                                )) || (
+                                                  pierre.description?.split("\n").map((line, index) => (
+                                                    <p key={index} className="text-center">{formatTextWithBrackets(line)}</p>
+                                                  )) || (
+                                                    <p className="text-center">{formatTextWithBrackets(pierre.description || "")}</p>
+                                                  )
+                                                )}
+                                              </div>
+                                            )}
                                           </div>
                                         );
                                       })}
                                     </div>
                                   </div>
                                   
-                                  <div>
-                                    <h6 className="text-xs font-medium mb-3 text-solo-light-purple ml-1">Pierres Survie</h6>
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                      {[
+                                  <div>                                    <h6 className="text-xs font-medium mb-3 text-solo-light-purple ml-1">Pierres Survie</h6>
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">                                      {[
                                         team.pierre_benediction_survie1,
                                         team.pierre_benediction_survie2,
                                         team.pierre_benediction_survie3,
@@ -577,14 +655,36 @@ export default function TeamJinwooCard({
                                         if (!pierre) return null;
                                         return (
                                           <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border flex flex-col items-center">
-                                            <img
+                                            <Image
                                               src={pierre.image || ""}
+                                              alt={pierre.nom || "Pierre de bénédiction"}
+                                              pageId={PAGE_ID}
                                               className="w-12 h-12 object-contain mb-2"
+                                              skeleton={true}
+                                              shimmer={true}
                                             />
                                             <p className="text-xs font-medium text-white text-center">{pierre.nom}</p>
-                                            <p className="text-xs text-gray-300 mt-2 text-center">
-                                              {formatTextWithBrackets(pierre.description)}
-                                            </p>
+                                            <button 
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                toggleDescription(`pierre-survie-${i}`);
+                                              }} 
+                                              className="text-xs bg-solo-purple/30 text-white px-2 py-1 rounded-md mt-2 hover:bg-solo-purple/50 transition-colors"
+                                            >
+                                              {expandedDescriptions[`pierre-survie-${i}`] ? "Cacher détails" : "Voir détails"}
+                                            </button>                                            {expandedDescriptions[`pierre-survie-${i}`] && (
+                                              <div className="text-xs text-gray-300 mt-2 space-y-2">
+                                                {pierre.description?.split("<br>").map((line, index) => (
+                                                  <p key={index} className="text-center">{formatTextWithBrackets(line)}</p>
+                                                )) || (
+                                                  pierre.description?.split("\n").map((line, index) => (
+                                                    <p key={index} className="text-center">{formatTextWithBrackets(line)}</p>
+                                                  )) || (
+                                                    <p className="text-center">{formatTextWithBrackets(pierre.description || "")}</p>
+                                                  )
+                                                )}
+                                              </div>
+                                            )}
                                           </div>
                                         );
                                       })}
@@ -595,13 +695,67 @@ export default function TeamJinwooCard({
                             </CollapsibleContent>
                           </Collapsible>
                         </div>
-                      </>
+
+                        {/* 9. Ombres Section - Spécifique à Jinwoo */}
+                        <div className="bg-sidebar/50 rounded-lg overflow-hidden mb-6">
+                          <Collapsible
+                            open={isSectionOpen("ombres")}
+                            onOpenChange={() => toggleSection("ombres")}
+                          >
+                            <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
+                              <Sparkles className="h-4 w-4 text-solo-purple" />
+                              <span className="flex-1 text-left">Ombres</span>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden">
+                              <div className="p-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                  {team.ombres.map((o, i) => {
+                                    const ombre = getFromList(ombres, o.id);
+                                    if (!ombre) return null;
+                                    return (
+                                      <div
+                                        key={i}
+                                        className="bg-sidebar p-4 rounded-lg border border-sidebar-border flex flex-col items-center"
+                                      >
+                                        <div className="relative mb-2">
+                                          <Image
+                                            src={ombre.image || ""}
+                                            alt={ombre.nom || "Ombre"}
+                                            pageId={PAGE_ID}
+                                            className="w-16 h-16 object-contain"
+                                            skeleton={true}
+                                            shimmer={true}
+                                          />
+                                          <div className="absolute -top-2 -right-2 bg-solo-purple text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center text-white border-2 border-sidebar">
+                                            {i + 1}
+                                          </div>
+                                        </div>
+                                        <p className="text-sm font-medium text-white text-center">
+                                          {ombre.nom}
+                                        </p>                                        {ombre.description && (
+                                          <div className="text-xs text-gray-300 mt-3 space-y-2">
+                                            {ombre.description?.split("<br>").map((line, index) => (
+                                              <p key={index} className="text-center">{formatTextWithBrackets(line)}</p>
+                                            )) || (
+                                              ombre.description?.split("\n").map((line, index) => (
+                                                <p key={index} className="text-center">{formatTextWithBrackets(line)}</p>
+                                              )) || (
+                                                <p className="text-center">{formatTextWithBrackets(ombre.description || "")}</p>
+                                              )
+                                            )}
+                                          </div>
+                                        )}
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            </CollapsibleContent>
+                          </Collapsible>
+                        </div>
+                      </div>
                     )}
                   </Accordion>
-
-                  
-
-
                 </div>
               );
             })}

@@ -49,11 +49,31 @@
   * {
     @apply border-border;
   }
+  
+  /* Animations pour les états de chargement d'images */
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
+  @keyframes blur-in {
+    0% {
+      filter: blur(8px);
+    }
+    100% {
+      filter: blur(0);
+    }
+  }
+}
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden; /* Empêche tout dépassement horizontal */
   }
-}
+
 
 @layer components {
   .feature-card {

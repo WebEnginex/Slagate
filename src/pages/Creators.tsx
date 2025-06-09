@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Image } from "@/components/ui/Image";
 import { Button } from "@/components/ui/button";
 import {
   Collapsible,
@@ -15,6 +16,7 @@ import {
 } from "@/components/ui/collapsible";
 import { ExternalLink, ChevronDown, ChevronUp, X } from "lucide-react";
 import SEO from "@/components/SEO";
+import { loadPageImage, preloadPageImages } from "@/services/cacheImages/pageImageLoader";
 
 // Fonction pour afficher les icônes des réseaux sociaux
 const getSocialIcon = (type: SocialLink["type"]) => {
@@ -27,6 +29,7 @@ const getSocialIcon = (type: SocialLink["type"]) => {
     website: "/icons/external-link.svg", // Icône générique pour les liens externes
   };
 
+  // Les icônes SVG étant légères, on peut utiliser l'image directement sans passer par le cache
   return (
     <img
       src={iconMap[type]}
@@ -43,6 +46,9 @@ type SocialLink = {
   url: string;
   label: string;
 };
+
+// Constante pour identifier cette page dans le système de logs
+const PAGE_ID = "Creators";
 
 // Fonction pour formatter le texte avec mise en évidence des mots entre guillemets
 const formatDescription = (text: React.ReactNode) => {
@@ -75,38 +81,48 @@ type Step = {
 };
 
 // =========================
-// Gestion du cache local des images du guide étape par étape
+// Configuration des images du guide
 // =========================
 const GUIDE_IMAGE_PATH = "/images/creator_images/";
 
-// Fonction utilitaire pour charger une image et la convertir en base64
-const fetchImageAsBase64 = async (url: string): Promise<string | null> => {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Image fetch failed");
-    const blob = await response.blob();
-    return await new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result as string);
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
-  } catch (error) {
-    console.error(`Erreur lors du chargement de l'image ${url}:`, error);
-    return null;
-  }
-};
+// =========================
+// Composant pour afficher une image avec mise en cache contextuelle
+// =========================
+const CachedImage = memo(({ 
+  imageUrl, 
+  altText, 
+  className, 
+  onClick 
+}: { 
+  imageUrl: string; 
+  altText: string; 
+  className?: string;
+  onClick?: () => void;
+}) => {
+  return (
+    <Image
+      src={imageUrl}
+      alt={altText}
+      pageId={PAGE_ID}
+      className={className}
+      skeleton={true}
+      shimmer={true}
+      showErrorMessage={false}
+      onClick={onClick}
+    />
+  );
+});
+CachedImage.displayName = "CachedImage";
 
 // =========================
-// Composant Memo pour chaque étape du guide (corrigé)
+// Composant Memo pour chaque étape du guide
 // =========================
-const StepCard = memo(({ step, index, open, onToggle, onOpenModal, cachedImages }: {
+const StepCard = memo(({ step, index, open, onToggle, onOpenModal }: {
   step: Step;
   index: number;
   open: boolean;
   onToggle: (idx: number) => void;
   onOpenModal: (img: string) => void;
-  cachedImages: Record<string, string>;
 }) => (
   <Card className="overflow-hidden">
     <Collapsible open={open} onOpenChange={() => onToggle(index)}>
@@ -131,10 +147,9 @@ const StepCard = memo(({ step, index, open, onToggle, onOpenModal, cachedImages 
             <div
               className="w-full md:w-1/3 aspect-video bg-muted rounded-lg overflow-hidden cursor-pointer"
               onClick={() => onOpenModal(step.image)}
-            >
-              <img
-                src={cachedImages[step.image] || step.image}
-                alt={`Étape ${index + 1}`}
+            >              <CachedImage
+                imageUrl={step.image}
+                altText={`Étape ${index + 1}`}
                 className="h-full w-full object-cover"
               />
             </div>
@@ -201,58 +216,39 @@ const Creators = () => {
       image: "/images/creator_images/tuto_creator_5.webp",
     },
   ];
-
-  // Centralisation de l'état : images en cache + étape ouverte + image modale
+  // Centralisation de l'état : étape ouverte + image modale
   const [state, setState] = useState<{
-    cachedImages: Record<string, string>;
     openStep: number | null;
     modalImage: string | null;
   }>({
-    cachedImages: {},
     openStep: 0,
     modalImage: null,
-  });
-  // =========================
-  // Chargement et cache des images du guide étape par étape
+  });  // =========================
+  // Préchargement des images du guide étape par étape avec page context
   // =========================
   useEffect(() => {
-    const loadImages = async () => {
-      const newCache: Record<string, string> = { ...state.cachedImages };
-      let updated = false;
-      for (const step of steps) {
-        // D'abord, on vérifie le cache React
-        if (!newCache[step.image]) {
-          // Ensuite, on vérifie le localStorage
-          const imageName = step.image.replace(GUIDE_IMAGE_PATH, "");
-          const cacheKey = `creatorGuideImg_${imageName}`;
-          let base64 = localStorage.getItem(cacheKey);
-          
-          // Si pas en localStorage, on télécharge et on stocke
-          if (!base64) {
-            base64 = await fetchImageAsBase64(step.image);
-            if (base64) {
-              try {
-                localStorage.setItem(cacheKey, base64);
-              } catch (e) {
-                console.warn("Erreur de stockage localStorage (quota dépassé)", e);
-                // On continue sans stocker
-              }
-            }
-          }
-          
-          // On met à jour le cache React
-          if (base64) {
-            newCache[step.image] = base64;
-            updated = true;
-          }
-        }
-      }
-      if (updated || (Object.keys(newCache).length && Object.keys(newCache).length !== Object.keys(state.cachedImages).length)) {
-        setState((prev) => ({ ...prev, cachedImages: newCache }));
+    const preloadImages = async () => {
+      // Collecter les URLs d'images des étapes du guide
+      const imageUrls = steps.map(step => step.image);
+      
+      // Ajouter le logo de Sohoven à la liste d'images à précharger
+      imageUrls.push("/images/logo/Sohoven_Logo.webp");
+      
+      if (imageUrls.length > 0) {
+        // Précharger toutes les images avec le contexte de page
+        preloadPageImages(imageUrls, PAGE_ID);
       }
     };
-    loadImages();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
+    preloadImages();
+  }, [steps]);
+
+  // =========================
+  // Préchargement des icônes sociales
+  // =========================
+  useEffect(() => {
+    // Préchargement du logo
+    preloadPageImages(["/images/logo/Sohoven_Logo.webp"], PAGE_ID);
   }, []);
 
   // =========================
@@ -289,11 +285,10 @@ const Creators = () => {
       {/* Section réseaux sociaux de Sohoven */}
       <Card className="mb-8 overflow-hidden bg-gradient-to-r from-solo-purple to-solo-dark-purple">
         <div className="p-6">
-          <div className="flex flex-col sm:flex-row items-center gap-6">
-            <div className="aspect-square w-32 h-32 overflow-hidden rounded-full bg-muted border-4 border-white/10">
-              <img
-                src="/images/logo/Sohoven_Logo.webp"
-                alt="Sohoven"
+          <div className="flex flex-col sm:flex-row items-center gap-6">            <div className="aspect-square w-32 h-32 overflow-hidden rounded-full bg-muted border-4 border-white/10">
+              <CachedImage
+                imageUrl="/images/logo/Sohoven_Logo.webp"
+                altText="Sohoven"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -330,8 +325,7 @@ const Creators = () => {
       {/* Guide étape par étape */}
       <div className="space-y-4 mb-8">
         <h2 className="text-2xl font-bold">Guide étape par étape</h2>
-        
-        {steps.map((step, index) => (
+          {steps.map((step, index) => (
           <StepCard
             key={index}
             step={step}
@@ -339,7 +333,6 @@ const Creators = () => {
             open={state.openStep === index}
             onToggle={toggleStep}
             onOpenModal={openModal}
-            cachedImages={state.cachedImages}
           />
         ))}
       </div>
@@ -379,8 +372,7 @@ const Creators = () => {
         </CardContent>
       </Card>
 
-      {/* Modal pour afficher l'image en grand */}
-      {state.modalImage && (
+      {/* Modal pour afficher l'image en grand */}      {state.modalImage && (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
     <div className="relative w-full h-full p-2 flex items-center justify-center">
       <button
@@ -389,9 +381,9 @@ const Creators = () => {
       >
         <X className="h-6 w-6" />
       </button>
-      <img
-        src={state.cachedImages[state.modalImage] || state.modalImage}
-        alt="Agrandissement"
+      <CachedImage
+        imageUrl={state.modalImage}
+        altText="Agrandissement"
         className="max-w-full max-h-full object-contain rounded-lg"
       />
     </div>

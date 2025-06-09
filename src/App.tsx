@@ -68,8 +68,8 @@ const App = () => (
           <Route path="/atelier/Baran" element={<Prochainement />} />
           <Route path="/atelier/Deimos" element={<Prochainement />} />
 
-          <Route path="/ennio" element={<Prochainement />} />
-          <Route path="/bdg" element={<Prochainement />} />
+          <Route path="/ennio" element={<Ennio />} />
+          <Route path="/bdg" element={<BossDeGuilde />} />
 
 
           <Route path="/promo-codes" element={<PromoCodes />} />

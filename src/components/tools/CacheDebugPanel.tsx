@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { resetAllCaches, syncCacheStatus } from "@/utils/clearCache";
+import { resetAllCaches, syncCacheStatus } from "@/services/cacheImages";
 import "./CacheDebugPanel.css";
 
 interface CacheDebugPanelProps {
@@ -80,17 +80,14 @@ const CacheDebugPanel: React.FC<CacheDebugPanelProps> = ({
             <span className="mr-2">{cacheAvailable ? "🔄" : "🔧"}</span>
             {cacheAvailable ? "Réinitialiser le cache" : "Réparer le cache"}
           </button>
-          <div className="flex space-x-2 mb-2">
-            <button
+          <div className="flex space-x-2 mb-2">            <button
               onClick={() => {
                 // Afficher les statistiques locales
-                import("@/utils/clearCache").then((module) => {
+                import("@/services/cacheImages").then((module) => {
                   module.displayCacheStats();
-                });
-
-                // Afficher les statistiques détaillées depuis le worker
+                });                // Afficher les statistiques détaillées depuis le worker
                 const worker = new Worker(
-                  new URL("@/workers/BuildWorker.ts", import.meta.url)
+                  new URL("../../workers/BuildWorker.ts", import.meta.url)
                 );
                 worker.postMessage({ type: "debugCache" });
 
