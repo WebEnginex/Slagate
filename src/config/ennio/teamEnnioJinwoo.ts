@@ -384,6 +384,7 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
           // Sung Jinwoo
           id: 40,
           stats: {
+          "Infos": "L'intelligence change selon si vous avez Re-éveil en mythique ou légendaire. Avec la version mythique il faut que 250 d'intelligence et mettre le reste en force tandis qu'avec la version légendaire ou inférieure il faut mettre 520 d'intelligence et le reste en force.",
           "Force": "175",
           "Vitalité": "-",
           "Agilité": "-",
