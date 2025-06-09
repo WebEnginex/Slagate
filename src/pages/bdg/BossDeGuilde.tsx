@@ -3,12 +3,16 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 import { Card, CardContent } from "@/components/ui/card";
-import TeamJinwooCard from "@/pages/bdg/TeamJinwooCard"; 
-import { TeamBdgJinwoo } from "@/config/bdg/teamBdgJinwoo"; 
+import TeamJinwooCard from "@/pages/bdg/TeamJinwooCard";
+import { TeamBdgJinwoo } from "@/config/bdg/teamBdgJinwoo";
 import { ExpandedTeamProvider } from "@/contexts/ExpandedTeamContext";
 import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
-import { loadPageImage, loadPageImageAsBase64, preloadPageImages } from "@/services/cacheImages/pageImageLoader";
+import {
+  loadPageImage,
+  loadPageImageAsBase64,
+  preloadPageImages,
+} from "@/services/cacheImages/pageImageLoader";
 import { Image } from "@/components/ui/Image";
 
 // Constante pour identifier cette page dans les logs du worker et le cache
@@ -26,7 +30,7 @@ export default function BdgPage() {
   type JinwooQte = Database["public"]["Tables"]["jinwoo_qte"]["Row"];
   type PierreBenediction =
     Database["public"]["Tables"]["pierres_benediction"]["Row"];
-  const bossName = "Fachtna";
+  const bossName = "Reine des Fourmis";
   const [boss, setBdg] = useState<
     Database["public"]["Tables"]["boss_de_guilde"]["Row"] | null
   >(null);
@@ -71,38 +75,53 @@ export default function BdgPage() {
           supabase.from("jinwoo_competences").select("*"),
           supabase.from("jinwoo_qte").select("*"),
           supabase.from("pierres_benediction").select("*"),
-        ]);        if (bossData.data) {
+        ]);
+        if (bossData.data) {
           console.log("Image URL du boss:", bossData.data.image);
           setBdg(bossData.data);
-            // Précharger l'image du boss avec le contexte de page
+          // Précharger l'image du boss avec le contexte de page
           if (bossData.data.image) {
             try {
-              console.log(`🔄 [${PAGE_ID}] Préchargement de l'image du boss: ${bossData.data.image}`);
-              
+              console.log(
+                `🔄 [${PAGE_ID}] Préchargement de l'image du boss: ${bossData.data.image}`
+              );
+
               // Utiliser loadPageImage au lieu de loadPageImageAsBase64 pour éviter les problèmes de conversion
-              const cachedImage = await loadPageImage(bossData.data.image, PAGE_ID);
+              const cachedImage = await loadPageImage(
+                bossData.data.image,
+                PAGE_ID
+              );
               if (cachedImage) {
-                console.log(`✅ [${PAGE_ID}] Image du boss mise en cache avec succès à: ${cachedImage}`);
+                console.log(
+                  `✅ [${PAGE_ID}] Image du boss mise en cache avec succès à: ${cachedImage}`
+                );
               } else {
-                console.warn(`⚠️ [${PAGE_ID}] Échec du préchargement de l'image du boss`);
+                console.warn(
+                  `⚠️ [${PAGE_ID}] Échec du préchargement de l'image du boss`
+                );
               }
             } catch (err) {
-              console.warn(`⚠️ [${PAGE_ID}] Impossible de mettre en cache l'image du boss:`, err);
+              console.warn(
+                `⚠️ [${PAGE_ID}] Impossible de mettre en cache l'image du boss:`,
+                err
+              );
             }
           }
-        }        // Pour les chasseurs, charger et mettre en cache leurs images
+        } // Pour les chasseurs, charger et mettre en cache leurs images
         if (chasseursData.data) {
           setChasseurs(chasseursData.data);
-          
+
           // Collecter les URLs d'images pour le préchargement
           const chasseurImageUrls = chasseursData.data
-            .filter(chasseur => chasseur.image)
-            .map(chasseur => chasseur.image);
-            
+            .filter((chasseur) => chasseur.image)
+            .map((chasseur) => chasseur.image);
+
           if (chasseurImageUrls.length > 0) {
             // Précharger toutes les images des chasseurs
             await preloadPageImages(chasseurImageUrls, PAGE_ID);
-            console.log(`✅ [${PAGE_ID}] ${chasseurImageUrls.length} images de chasseurs préchargées`);
+            console.log(
+              `✅ [${PAGE_ID}] ${chasseurImageUrls.length} images de chasseurs préchargées`
+            );
           }
         }
 
@@ -115,7 +134,10 @@ export default function BdgPage() {
         if (qtesData.data) setQtes(qtesData.data);
         if (pierresData.data) setPierres(pierresData.data);
       } catch (error) {
-        console.error(`❌ [${PAGE_ID}] Erreur lors de la récupération des données:`, error);
+        console.error(
+          `❌ [${PAGE_ID}] Erreur lors de la récupération des données:`,
+          error
+        );
       }
     };
 
@@ -124,11 +146,17 @@ export default function BdgPage() {
 
   return (
     <Layout>
-      <div className="w-full max-w-[90rem] 2xl:max-w-[100%] mx-auto px-6 py-6">        <div className="max-w-[100%] mx-auto">          <Card className="bg-sidebar border-sidebar-border overflow-hidden mb-8 relative">
+      <div className="w-full max-w-[90rem] 2xl:max-w-[100%] mx-auto px-6 py-6">
+        {" "}
+        <div className="max-w-[100%] mx-auto">
+          {" "}
+          <Card className="bg-sidebar border-sidebar-border overflow-hidden mb-8 relative">
             {/* Bannière hero avec aspect ratio contrôlé */}
             <div className="relative w-full">
-              {/* Conteneur d'image avec hauteur responsive */}              <div className="w-full h-48 sm:h-64 md:h-80 lg:h-96 xl:h-[28rem] 2xl:h-[32rem] overflow-hidden">
-                {boss?.image ? (                  <img
+              {/* Conteneur d'image avec hauteur responsive */}{" "}
+              <div className="w-full h-48 sm:h-64 md:h-80 lg:h-96 xl:h-[28rem] 2xl:h-[32rem] overflow-hidden">
+                {boss?.image ? (
+                  <img
                     src={boss.image}
                     alt={boss.nom || "Fachtna"}
                     className="w-full h-full object-cover object-center"
@@ -136,28 +164,39 @@ export default function BdgPage() {
                     referrerPolicy="no-referrer"
                     data-page-id={PAGE_ID}
                     data-cached-image="true"
-                    onLoad={() => console.log(`✅ [${PAGE_ID}] Image de Fachtna chargée avec succès`)}
+                    onLoad={() =>
+                      console.log(
+                        `✅ [${PAGE_ID}] Image de Fachtna chargée avec succès`
+                      )
+                    }
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
-                      console.error(`❌ [${PAGE_ID}] Erreur lors du chargement de l'image du boss:`, target.src);
-                      console.warn("Vérifiez les paramètres CORS dans votre bucket Supabase");
+                      console.error(
+                        `❌ [${PAGE_ID}] Erreur lors du chargement de l'image du boss:`,
+                        target.src
+                      );
+                      console.warn(
+                        "Vérifiez les paramètres CORS dans votre bucket Supabase"
+                      );
                       console.warn("URL d'origine:", window.location.origin);
                       console.warn("URL de l'image:", boss?.image);
-                      
+
                       target.onerror = null;
                       target.style.display = "none";
                     }}
                   />
                 ) : (
                   <div className="w-full h-full bg-sidebar-accent flex items-center justify-center">
-                    <p className="text-gray-400">Image en cours de chargement...</p>
+                    <p className="text-gray-400">
+                      Image en cours de chargement...
+                    </p>
                   </div>
                 )}
               </div>
               {/* Superposition du contenu sur l'image - gradient plus élégant */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent flex flex-col justify-end items-center p-4 sm:p-6 md:p-8 lg:p-10 text-center">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-violet-400 text-shadow-lg drop-shadow-lg">
-                  Bienvenue sur la page des builds de Fachtna !
+                  Bienvenue sur la page des builds de la Reine des Fourmis !
                 </h1>
                 <p className="text-xs sm:text-sm md:text-base lg:text-lg max-w-3xl text-gray-200 mt-2 md:mt-4 font-medium drop-shadow-md">
                   Vous y trouverez des configurations optimisées pour chaque
@@ -168,7 +207,6 @@ export default function BdgPage() {
               </div>
             </div>
           </Card>
-
           {/* Display Teams */}
           <ExpandedTeamProvider>
             {TeamBdgJinwoo.map((team) => (
