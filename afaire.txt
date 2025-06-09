@@ -1,54 +1,22 @@
-✅ - Dans l'onglet statistiques à viser mettre un - à la place de
-" 90%+ " en Précision 
+✅ Pour la stat en INT sur Sung je pense qu'en vrai c'est bien de différencier ceux qui ont la version LEG et MYTHIQUE c'est pour ça que j'ai précisé 520 et 250 ( sur la page de Sung du coup mettre 250 et 520 )
+niveau DEF PEN on en cherche pas donc mettre entre 5-10% plutôt que 10-20% ( et pour tous les persos en POD )
 
+✅ le set de Sung c'est 2 Malédiction et 2 Infamy + 4 Expert
 
-✅- Sur Gina inverser l'alternative du noyaux 1 ( genre afficher
-le gris en premier et le orange en second ) (uniquement sur le premier build?)
+✅-Le noyau 1 c'est le violet et alternative le gris
 
-✅- Yoo Soohyun dans stuff général 2 remplacer Malédiction Ardente par Armed 
-( le set avec la tête de Lion ) 
-Et inverser les stats entre la DEF PEN et Hausse de Dégats (uniquement sur le stuff général 2?)
+✅ Le noyau 3 c'est le violet qu'il faut et en alternative le gris
 
-✅ - Choi changer le noyaux 1 et mettre le gris, pareil pour le noyau 3 (c'est déjà comme ça?)
+✅ Pour Esil c'est 4 pièces Avarice + 4 pièces Desire, et le noyau 3 faut inverser l'alternative
 
-✅ - Meilin inverser l'alternative du noyau 3
+✅ Pour Gina inverser alternative noyau 1 et 3 ( je sais pas pourquoi genre c'est différent l'afficher comparé à Sung et Kanae mdrrrr' ) moi j'ai pareil faudra que tu me dise ce que tu vois avec un screen il peut y avoir un bug mais de mon côté j'ai rien
 
-✅ - Seo Jiwoo copier les artefacts de Seorin pour Général, Général 2, POD, POD 2, BDG et BDG 2 faire 4 Avarice Ardente + Capacité Exceptionnelle 
+✅ Pour Choi noyau 1 mettre en alternative celui en rouge et pas orange et noyau 3 mettre en premier le gris et en alternative
+le violet 
 
-✅ - Goto Ryuji :
-Général = 4 avarice + 4 Desire
-Général 2 = 4 avarice + 4 obsi 
+✅ Pour Meilin noyau 1 changer l'alternative et mettre le violet
+et noyau 3 inverser l'alternative
 
-✅ - Han Se-Mi ajouter Général 2 8 bénédiction ardente
+- le QTE mort c'est normal que le logo neutre soit si petit ? mdrrr' | Oui il faut que je regarde pourquoi il a la même taille mais se comporte pas pareil, je pense qu'on va devoir le refaire nous même :/
 
-✅ - Mirei dans :
-Général 1 = 2 malédiction ardente et 2 infamy
-général 2 = et faire 4 malédiction ardente 4 expert
-général 3 = 4 malédiction ardente 4 obsidienne
-(Général 2 pareil donc supprimé?)
-
-✅ - Pour Jinchul :
-général 1 = 4 avarice 4 desire 
-général 2 = 8 avarice, pareil pour POD et BDG 
-
-✅ - Cha Hae-In ( light ) :
-général 1 = faire 2 malédiction ardente 2 infamy
-général 2 = faire 4 malédiction ardente
-POD et BDG = changer 4 malédiction ardente par 2 malédiction ardente 2 infamy 
-Changer l'alternative du noyau 1 
-
-✅ - Min changer l'alternative du noyau 3 
-
-- Lee Bora créer un POD 2 mettre 8 pieces voeu chaotique
-changer l'alternative noyau 3
-
-✅ - La nouvelle arme ( faux de type eau ) dans le tier S
-
-- Et dans l'onglet team chasseurs, si y'a moyen de créer un bouton alternative c'est cool en vrai, et ça serait par exemple dans la team Vent on affiche Lennart, et alternative Mirei, team lumière on laisse afficher Shimizu, et alternative Min, team Water en alternative de Seorin on met Seo Jiwoo
-J'crois qu'avec ça on est pas mal déjà, après restera à voir pour le POD et l'Atelier voir ce que t'as cook, pour le BDG vu que c'est ANT Queen pour l'instant pas de strats trouvées
-
-
-
-a push : 
-- config arme
-- Build.tsx
+- Blessing défensives on peut enlever bénédiction de Kandiaru ( la 4e ) et la remplacer par " la meilleure défense c'est l'attaque " c'est celle qui ressemble à la deuxième blessing sur le site) | La meilleur défense c'est l'attaque elle est deja mise (c'est la deuxieme qui s'appelle défense aggréssive)

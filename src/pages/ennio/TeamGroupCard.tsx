@@ -273,22 +273,44 @@ export default function TeamGroupCard({
                           performances de ce chasseur. Adaptez-les en fonction
                           de votre style de jeu et des besoins de votre équipe.
                         </p>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
-                          {Object.entries(chasseur.stats).map(
-                            ([label, value]) => (
-                              <div
-                                key={label}
-                                className="bg-sidebar p-2 sm:p-3 rounded border border-sidebar-border"
-                              >
-                                {" "}
-                                <div className="text-[10px] sm:text-2xs text-solo-light-purple mb-0.5 sm:mb-1 truncate">
+                        
+                        {/* Affichage séparé pour les Infos */}
+                        {Object.entries(chasseur.stats).map(([label, value]) => {
+                          if (label === "Infos") {
+                            return (
+                              <div key={label} className="bg-sidebar p-3 sm:p-4 rounded border border-sidebar-border mb-4">
+                                <div className="text-xs sm:text-sm text-solo-light-purple mb-1 sm:mb-2 font-medium">
                                   {label}
                                 </div>
-                                <div className="font-medium text-[12px] sm:text-sm md:text-base text-white truncate">
+                                <div className="text-gray-300 text-[9px] sm:text-xs leading-tight max-h-[80px] overflow-y-auto">
                                   {value}
                                 </div>
                               </div>
-                            )
+                            );
+                          }
+                          return null;
+                        })}
+                        
+                        {/* Grille pour les autres statistiques */}
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
+                          {Object.entries(chasseur.stats).map(
+                            ([label, value]) => {
+                              if (label === "Infos") return null; // Skip Infos car déjà affiché au-dessus
+                              
+                              return (
+                                <div
+                                  key={label}
+                                  className="bg-sidebar p-2 sm:p-3 rounded border border-sidebar-border h-[70px] sm:h-[80px] flex flex-col"
+                                >
+                                  <div className="text-[10px] sm:text-2xs text-solo-light-purple mb-0.5 sm:mb-1 truncate">
+                                    {label}
+                                  </div>
+                                  <div className="font-medium flex-1 flex items-center">
+                                    <span className="text-white text-[14px] sm:text-base">{value}</span>
+                                  </div>
+                                </div>
+                              );
+                            }
                           )}
                         </div>
                       </SectionCollapsible>                      {/* 2. Armes (Premier chasseur uniquement) */}

@@ -49,7 +49,7 @@ export type TeamGroup = {
 export const teamEnnioJinwooGroups: TeamGroup[] = [
   {
     id: 1,
-    nom: "Team Feu | Lumière",
+    nom: "Power Of Destruction Feu et Lumière",
     team1: {
       id: 10,
       nom: "Team 1",
@@ -58,10 +58,11 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
           // Sung Jinwoo
           id: 40,
           stats: {
-          "Force": "175",
+          "Infos": "L'intelligence change selon si vous avez Re-éveil en mythique ou légendaire. Avec la version mythique il faut que 250 d'intelligence et mettre le reste en force tandis qu'avec la version légendaire ou inférieure il faut mettre 520 d'intelligence et le reste en force.",
+          "Force": "445 ou 175",
           "Vitalité": "-",
           "Agilité": "-",
-          "Intelligence": "520",
+          "Intelligence": "250 ou 520",
           "Perception": "-",
           "PV supplémentaire": "-",
           "Défense supplémentaire": "-",
@@ -71,7 +72,7 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
-          "Pénétration de défense ": "10% - 20%",
+          "Pénétration de défense": "5% - 10%",
           "Réduction des dégâts ": "-",
           "Hausse des soins donnés ": "-",
           "Hausse des soins reçus ": "-",
@@ -80,12 +81,12 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
         },
           artefacts: {
           casque: {
-            id: 61,
+            id: 113,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
-            id: 8,
+            id: 114,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
@@ -121,14 +122,17 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
           },
         },
           noyaux: {
-            1: [{ id: 8, statPrincipale: "Attaque supplémentaire" }],
+            1: [
+              { id: 4, statPrincipale: "PV supplémentaire" },
+              { id: 8, statPrincipale: "PV supplémentaire" },
+            ],
             2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
             3: [
-              { id: 2, statPrincipale: "PV supplémentaire" },
               { id: 7, statPrincipale: "PV supplémentaire" },
+              { id: 2, statPrincipale: "PV supplémentaire" },
             ],
           },
-          sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+          sets_bonus: [{ id: 58 }, { id: 29 }, { id: 23 }, { id: 24 }],
         },
         {
           // Kanae
@@ -142,7 +146,7 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
-          "Pénétration de défense ": "10% - 20%",
+          "Pénétration de défense": "5% - 10%",
           "Réduction des dégâts ": "-",
           "Hausse des soins donnés ": "-",
           "Hausse des soins reçus ": "-",
@@ -213,7 +217,7 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
-          "Pénétration de défense ": "10% - 20%",
+          "Pénétration de défense": "5% - 10%",
           "Réduction des dégâts ": "-",
           "Réduction du temps de rechargement ": "-",
           "Hausse des soins donnés ": "-",
@@ -223,22 +227,22 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
         },
           artefacts: {
           casque: {
-            id: 57,
+            id: 105,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
-            id: 1,
+            id: 106,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
-            id: 78,
+            id: 107,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
-            id: 22,
+            id: 108,
             statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
@@ -270,11 +274,11 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
-            { id: 7, statPrincipale: "PV supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire" },
+            { id: 7, statPrincipale: "PV supplémentaire" },
           ],
         },
-        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
+        sets_bonus: [{ id: 55 }, { id: 56 }, { id: 32 }, { id: 33 }],
       },
         {
           // Gina
@@ -288,7 +292,7 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
-          "Pénétration de défense ": "10% - 20%",
+          "Pénétration de défense": "5% - 10%",
           "Réduction des dégâts ": "-",
           "Réduction du temps de rechargement ": "-",
           "Hausse des soins donnés ": "-",
@@ -340,13 +344,13 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
         },
         noyaux: {
           1: [
-            { id: 9, statPrincipale: "Attaque supplémentaire" },
             { id: 8, statPrincipale: "Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
-            { id: 7, statPrincipale: "Attaque supplémentaire" },
             { id: 2, statPrincipale: "Attaque supplémentaire" },
+            { id: 7, statPrincipale: "Attaque supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
@@ -393,7 +397,7 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
-          "Pénétration de défense ": "10% - 20%",
+          "Pénétration de défense": "5% - 10%",
           "Réduction des dégâts ": "-",
           "Hausse des soins donnés ": "-",
           "Hausse des soins reçus ": "-",
@@ -402,12 +406,12 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
         },
           artefacts: {
           casque: {
-            id: 61,
+            id: 113,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
-            id: 8,
+            id: 114,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
@@ -443,14 +447,17 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
           },
         },
           noyaux: {
-            1: [{ id: 8, statPrincipale: "Attaque supplémentaire" }],
+            1: [
+              { id: 4, statPrincipale: "PV supplémentaire" },
+              { id: 8, statPrincipale: "PV supplémentaire" },
+            ],
             2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
             3: [
-              { id: 2, statPrincipale: "PV supplémentaire" },
               { id: 7, statPrincipale: "PV supplémentaire" },
+              { id: 2, statPrincipale: "PV supplémentaire" },
             ],
           },
-          sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+          sets_bonus: [{ id: 58 }, { id: 29 }, { id: 23 }, { id: 24 }],
         },
         {
           // Choi
@@ -464,7 +471,7 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
           "Taux de coup critique ": "-",
           "Dégâts de coup critique ": "-",
           "Hausse des dégâts ": "30% +",
-          "Pénétration de défense ": "10% - 20%",
+          "Pénétration de défense": "5% - 10%",
           "Réduction des dégâts ": "-",
           "Réduction du temps de rechargement ": "-",
           "Hausse des soins donnés ": "-",
@@ -517,12 +524,12 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
         noyaux: {
           1: [
             { id: 8, statPrincipale: "Attaque supplémentaire" },
-            { id: 9, statPrincipale: "Attaque supplémentaire" },
+            { id: 5, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
-            { id: 7, statPrincipale: "PV supplémentaire" },
             { id: 2, statPrincipale: "PV supplémentaire" },
+            { id: 7, statPrincipale: "PV supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 52 }, { id: 53 }, { id: 54 }],
@@ -539,7 +546,7 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
-          "Pénétration de défense ": "10% - 20%",
+          "Pénétration de défense": "5% - 10%",
           "Réduction des dégâts ": "-",
           "Réduction du temps de rechargement ": "-",
           "Hausse des soins donnés ": "-",
@@ -592,12 +599,12 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
         noyaux: {
           1: [
             { id: 9, statPrincipale: "Attaque supplémentaire" },
-            { id: 8, statPrincipale: "Attaque supplémentaire" },
+            { id: 4, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
-            { id: 7, statPrincipale: "Attaque supplémentaire" },
             { id: 2, statPrincipale: "Attaque supplémentaire" },
+            { id: 7, statPrincipale: "Attaque supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
@@ -614,7 +621,7 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "Le plus possible",
-          "Pénétration de défense ": "10% - 20%",
+          "Pénétration de défense": "5% - 10%",
           "Réduction des dégâts ": "-",
           "Réduction du temps de rechargement ": "-",
           "Hausse des soins donnés ": "-",
