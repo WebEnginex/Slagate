@@ -615,16 +615,23 @@ export default function TeamGroupCard({
                                   className="bg-sidebar p-4 rounded-lg border border-sidebar-border text-center w-72 relative"
                                 >
                                   {" "}
-                                  {qte.element && (                                    <div className="absolute top-2 left-2 z-10">
-                                      {" "}
+                                  {qte.element && (
+                                    <div className="absolute top-2 left-2 z-10 w-7 h-7 flex items-center justify-center">
                                       <Image
                                         src={qte.element}
                                         alt="Élément"
                                         pageId={PAGE_ID}
-                                        className="w-6 h-6 sm:w-7 sm:h-7 object-contain"
+                                        width={28}
+                                        height={28}
+                                        className="w-full h-full object-contain"
                                         skeleton={true}
                                         shimmer={true}
                                         showErrorMessage={false}
+                                        style={{
+                                          maxWidth: "28px",
+                                          maxHeight: "28px",
+                                          objectFit: "contain"
+                                        }}
                                       />
                                     </div>
                                   )}{" "}
