@@ -140,42 +140,42 @@ export const TeamBdgJinwoo: TeamBdgJinwoo[] = [
         },
         artefacts: {
           casque: {
-            id: 57,
+            id: 64,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
-            id: 1,
+            id: 94,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
-            id: 78,
+            id: 86,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
-            id: 22,
+            id: 30,
             statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
           collier: {
-            id: 68,
+            id: 71,
             statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           bracelet: {
-            id: 47,
+            id: 50,
             statPrincipale: "Dégâts de feu",
             statsSecondaires: ["-"],
           },
           bague: {
-            id: 12,
+            id: 15,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
-            id: 36,
+            id: 39,
             statPrincipale: "PM",
             statsSecondaires: ["-"],
           },
