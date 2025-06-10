@@ -374,7 +374,7 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
       pierre_benediction_survie1: 8,
       pierre_benediction_survie2: 6,
       pierre_benediction_survie3: 30,
-      pierre_benediction_survie4: 4,
+      pierre_benediction_survie4: 35,
     },
     team2: {
       id: 20,
@@ -701,7 +701,7 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
       pierre_benediction_survie1: 8,
       pierre_benediction_survie2: 6,
       pierre_benediction_survie3: 30,
-      pierre_benediction_survie4: 4,
+      pierre_benediction_survie4: 35,
     },
   },
 

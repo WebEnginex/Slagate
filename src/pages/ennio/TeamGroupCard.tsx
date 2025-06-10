@@ -628,6 +628,7 @@ export default function TeamGroupCard({
                                       />
                                     </div>
                                   )}{" "}
+                                  
                                   <Image
                                     src={qte.image || ""}
                                     alt={qte.nom}
@@ -635,7 +636,8 @@ export default function TeamGroupCard({
                                     className="w-20 h-20 mx-auto object-contain"
                                     skeleton={true}
                                     shimmer={true}
-                                    showErrorMessage={false}
+                                    showErrorMessage={false} 
+                                    style={{ aspectRatio: '1/1' }} // Force un ratio carré
                                   />{" "}                                      <p className="text-sm font-medium text-white mt-2">
                                       {qte.nom}
                                     </p>
