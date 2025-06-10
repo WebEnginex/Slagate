@@ -541,13 +541,31 @@ export default function TeamGroupCard({
                                   <div
                                     key={i}
                                     className="bg-sidebar p-4 rounded-lg border border-sidebar-border text-center w-72 relative"
-                                  >
-                                    {" "}
-                                    {competence.element && (                                      <div className="absolute top-2 left-2 z-10">
+                                  >                                    {" "}
+                                    {/* Premier élément en haut à gauche */}
+                                    {competence.element && (
+                                      <div className="absolute top-2 left-2 z-10">
                                         {" "}
                                         <Image
                                           src={competence.element}
                                           alt="Élément"
+                                          pageId={PAGE_ID}
+                                          className="w-6 h-6 sm:w-7 sm:h-7 object-contain"
+                                          skeleton={true}
+                                          shimmer={true}
+                                          showErrorMessage={false}
+                                        />
+                                      </div>
+                                    )}{" "}
+                                    
+                                    {/* Second élément en dessous du premier */}
+                                    {(competence as any).element2 && 
+                                      (competence as any).element2 !== "EMPTY" && 
+                                      (competence as any).element2 !== "NULL" && (
+                                      <div className="absolute top-11 left-2 z-10">
+                                        <Image
+                                          src={(competence as any).element2}
+                                          alt="Élément 2"
                                           pageId={PAGE_ID}
                                           className="w-6 h-6 sm:w-7 sm:h-7 object-contain"
                                           skeleton={true}
@@ -613,13 +631,37 @@ export default function TeamGroupCard({
                                 <div
                                   key={i}
                                   className="bg-sidebar p-4 rounded-lg border border-sidebar-border text-center w-72 relative"
-                                >
-                                  {" "}
+                                >                                  {" "}
+                                  {/* Premier élément en haut à gauche */}
                                   {qte.element && (
                                     <div className="absolute top-2 left-2 z-10 w-7 h-7 flex items-center justify-center">
                                       <Image
                                         src={qte.element}
                                         alt="Élément"
+                                        pageId={PAGE_ID}
+                                        width={28}
+                                        height={28}
+                                        className="w-full h-full object-contain"
+                                        skeleton={true}
+                                        shimmer={true}
+                                        showErrorMessage={false}
+                                        style={{
+                                          maxWidth: "28px",
+                                          maxHeight: "28px",
+                                          objectFit: "contain"
+                                        }}
+                                      />
+                                    </div>
+                                  )}{" "}
+                                  
+                                  {/* Second élément en dessous du premier */}
+                                  {qte.element2 && 
+                                    qte.element2 !== "EMPTY" && 
+                                    qte.element2 !== "NULL" && (
+                                    <div className="absolute top-12 left-2 z-10 w-7 h-7 flex items-center justify-center">
+                                      <Image
+                                        src={qte.element2}
+                                        alt="Élément 2"
                                         pageId={PAGE_ID}
                                         width={28}
                                         height={28}

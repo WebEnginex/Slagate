@@ -46,6 +46,7 @@ export default function BdgPage() {
   const [cacheAvailable, setCacheAvailable] = useState(
     localStorage.getItem("indexedDBFailed") !== "true"
   );
+  
   useEffect(() => {
     const fetchAll = async () => {
       try {
@@ -143,7 +144,7 @@ export default function BdgPage() {
 
     fetchAll();
   }, []);
-
+<br />
   return (
     <Layout>
       <div className="w-full max-w-[90rem] 2xl:max-w-[100%] mx-auto px-6 py-6">

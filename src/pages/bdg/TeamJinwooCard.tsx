@@ -7,7 +7,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { User, ChevronDown, ChevronUp, Dna, BarChart2, GemIcon, Swords, Layers, Sparkles, Award, CirclePlay, FlaskConical } from "lucide-react";
+import { User, ChevronDown, ChevronUp, Dna, BarChart2, GemIcon, Swords, Layers, Sparkles, Award, CirclePlay, FlaskConical, Zap, Gem } from "lucide-react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useExpandedTeam } from "@/contexts/ExpandedTeamContext";
 import { TeamBdgJinwoo } from "@/config/bdg/teamBdgJinwoo";
@@ -422,328 +422,95 @@ export default function TeamJinwooCard({
                     <div className="mb-6"></div>
                       {/* Sections spécifiques à Jinwoo */}
                     {selectedChasseurId === team.chasseurs[0]?.id && (
-                      <div className="space-y-6">
-                        {/* 6. Compétences Section */}
+                      <div className="space-y-6">                        {/* 6. Compétences Section */}
                         <div className="bg-sidebar/50 rounded-lg overflow-hidden mb-6">
                           <Collapsible
                             open={isSectionOpen("competences")}
                             onOpenChange={() => toggleSection("competences")}
                           >
                             <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                              <Award className="h-4 w-4 text-solo-purple" />
+                              <Zap className="h-4 w-4 text-solo-purple" />
                               <span className="flex-1 text-left">Compétences</span>
                             </CollapsibleTrigger>
                             <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden">
                               <div className="p-4">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                  {[team.competence1, team.competence2].map((id, i) => {
+                                <div className="flex flex-wrap gap-4 justify-center">                                  {[team.competence1, team.competence2].map((id, i) => {
                                     const skill = getFromList(competences, id);
                                     if (!skill) return null;
-                                    return (
-                                      <div
+                                    return (                                      <div
                                         key={i}
-                                        className="bg-sidebar p-4 rounded-lg border border-sidebar-border flex flex-col sm:flex-row items-center sm:items-start gap-4"
+                                        className="bg-sidebar p-4 rounded-lg border border-sidebar-border text-center w-full md:w-72 relative"
                                       >
-                                        <div className="relative">
-                                          <Image
-                                            src={skill.image || ""}
-                                            alt={skill.nom || "Compétence"}
-                                            pageId={PAGE_ID}
-                                            className="w-24 h-24 sm:w-32 sm:h-32 object-contain"
-                                            skeleton={true}
-                                            shimmer={true}
-                                          />
-                                          {skill.element && skill.element !== "EMPTY" && skill.element !== "NULL" && (
+                                        <div className="flex items-start">                                          <div className="flex-1">                                            {/* First element at top left */}
+                                            {skill.element && (
+                                              <div className="absolute top-2 left-2 z-10">
+                                                <Image
+                                                  src={skill.element}
+                                                  alt="Élément"
+                                                  pageId={PAGE_ID}
+                                                  className="w-6 h-6 sm:w-7 sm:h-7 object-contain"
+                                                  skeleton={true}
+                                                  shimmer={true}
+                                                  showErrorMessage={false}
+                                                />
+                                              </div>
+                                            )}
+                                              {/* Second element below the first */}
+                                            {(skill as any).element2 && 
+                                              (skill as any).element2 !== "EMPTY" && 
+                                              (skill as any).element2 !== "NULL" && (
+                                              <div className="absolute top-11 left-2 z-10">
+                                                <Image
+                                                  src={(skill as any).element2}
+                                                  alt="Élément 2"
+                                                  pageId={PAGE_ID}
+                                                  className="w-6 h-6 sm:w-7 sm:h-7 object-contain"
+                                                  skeleton={true}
+                                                  shimmer={true}
+                                                  showErrorMessage={false}
+                                                />
+                                              </div>
+                                            )}
+                                            
                                             <Image
-                                              src={skill.element}
-                                              alt="Element"
+                                              src={skill.image || ""}
+                                              alt={skill.nom || "Compétence"}
                                               pageId={PAGE_ID}
-                                              className="absolute top-1 left-1 w-8 h-8 object-contain"
+                                              className="w-16 h-16 sm:w-20 sm:h-20 mx-auto object-contain"
                                               skeleton={true}
                                               shimmer={true}
+                                              showErrorMessage={false}
                                             />
-                                          )}
-                                        </div>                                        <div className="flex-1">
-                                          <p className="text-sm sm:text-base font-medium text-white mb-2">
-                                            {skill.nom}
-                                          </p>
-                                          <div className="flex items-center gap-1 mb-1">
+                                            
+                                            <p className="text-sm font-medium text-white mt-2">
+                                              {skill.nom}
+                                            </p>
+                                          </div>
+                                        </div>
+                                        
+                                        {skill.description && (
+                                          <>
                                             <button 
                                               onClick={(e) => {
                                                 e.stopPropagation();
                                                 toggleDescription(`competence-${i}`);
                                               }} 
-                                              className="text-xs bg-solo-purple/30 text-white px-2 py-1 rounded-md hover:bg-solo-purple/50 transition-colors"
+                                              className="mt-3 text-[10px] sm:text-xs bg-solo-purple/30 text-white px-2 py-1 rounded-md hover:bg-solo-purple/50 transition-colors"
                                             >
                                               {expandedDescriptions[`competence-${i}`] ? "Cacher détails" : "Voir détails"}
                                             </button>
-                                          </div>
-                                          {expandedDescriptions[`competence-${i}`] && (
-                                            <div className="text-xs sm:text-sm text-gray-300 space-y-2 mt-2">
-                                              {skill.description?.split("<br>").map((line, index) => (
-                                                <p key={index}>{formatTextWithBrackets(line)}</p>
-                                              ))}
-                                            </div>
-                                          )}
-                                        </div>
-                                      </div>
-                                    );
-                                  })}
-                                </div>
-                              </div>
-                            </CollapsibleContent>
-                          </Collapsible>
-                        </div>
-
-                        {/* 7. QTE Section */}
-                        <div className="bg-sidebar/50 rounded-lg overflow-hidden mb-6">
-                          <Collapsible
-                            open={isSectionOpen("qte")}
-                            onOpenChange={() => toggleSection("qte")}
-                          >
-                            <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                              <CirclePlay className="h-4 w-4 text-solo-purple" />
-                              <span className="flex-1 text-left">QTE</span>
-                            </CollapsibleTrigger>
-                            <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden">
-                              <div className="p-4">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                  {[team.qte1, team.qte2].map((id, i) => {
-                                    const qte = getFromList(qtes, id);
-                                    if (!qte) return null;
-                                    return (
-                                      <div
-                                        key={i}
-                                        className="bg-sidebar p-4 rounded-lg border border-sidebar-border flex flex-col sm:flex-row items-center sm:items-start gap-4"
-                                      >
-                                        <div className="relative">
-                                          <Image
-                                            src={qte.image || ""}
-                                            alt={qte.nom || "QTE"}
-                                            pageId={PAGE_ID}
-                                            className="w-24 h-24 sm:w-32 sm:h-32 object-contain"
-                                            skeleton={true}
-                                            shimmer={true}
-                                          />
-                                          {qte.element && qte.element !== "EMPTY" && qte.element !== "NULL" && (
-                                            <Image
-                                              src={qte.element}
-                                              alt="Element"
-                                              pageId={PAGE_ID}
-                                              className="absolute top-1 left-1 w-8 h-8 object-contain"
-                                              skeleton={true}
-                                              shimmer={true}
-                                            />
-                                          )}
-                                          {qte.element2 && qte.element2 !== "EMPTY" && qte.element2 !== "NULL" && (
-                                            <Image
-                                              src={qte.element2}
-                                              alt="Element2"
-                                              pageId={PAGE_ID}
-                                              className="absolute top-1 right-1 w-8 h-8 object-contain"
-                                              skeleton={true}
-                                              shimmer={true}
-                                            />
-                                          )}
-                                          {qte.element3 && qte.element3 !== "EMPTY" && qte.element3 !== "NULL" && (
-                                            <Image
-                                              src={qte.element3}
-                                              alt="Element3"
-                                              pageId={PAGE_ID}
-                                              className="absolute bottom-1 right-1 w-8 h-8 object-contain"
-                                              skeleton={true}
-                                              shimmer={true}
-                                            />
-                                          )}
-                                        </div>                                        <div className="flex-1">
-                                          <p className="text-sm sm:text-base font-medium text-white mb-2">
-                                            {qte.nom}
-                                          </p>
-                                          <div className="flex items-center gap-1 mb-1">
-                                            <button 
-                                              onClick={(e) => {
-                                                e.stopPropagation();
-                                                toggleDescription(`qte-${i}`);
-                                              }} 
-                                              className="text-xs bg-solo-purple/30 text-white px-2 py-1 rounded-md hover:bg-solo-purple/50 transition-colors"
-                                            >
-                                              {expandedDescriptions[`qte-${i}`] ? "Cacher détails" : "Voir détails"}
-                                            </button>
-                                          </div>
-                                          {expandedDescriptions[`qte-${i}`] && (
-                                            <div className="text-xs sm:text-sm text-gray-300 space-y-2 mt-2">
-                                              {qte.description?.split("<br>").map((line, index) => (
-                                                <p key={index}>{formatTextWithBrackets(line)}</p>
-                                              ))}
-                                            </div>
-                                          )}
-                                        </div>
-                                      </div>
-                                    );
-                                  })}
-                                </div>
-                              </div>
-                            </CollapsibleContent>
-                          </Collapsible>
-                        </div>
-
-                        {/* 8. Pierres de bénédiction */}
-                        <div className="bg-sidebar/50 rounded-lg overflow-hidden mb-6">
-                          <Collapsible open={isSectionOpen('pierres')} onOpenChange={() => toggleSection('pierres')}>
-                            <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                              <FlaskConical className="h-4 w-4 text-solo-purple" />
-                              <span className="flex-1 text-left">Pierres de Bénédiction</span>
-                            </CollapsibleTrigger>
-                            <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden">
-                              <div className="p-4">
-                                <div className="space-y-4">
-                                  <div>                                    <h6 className="text-xs font-medium mb-3 text-solo-light-purple ml-1">Pierres Booster</h6>
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">                                      {[
-                                        team.pierre_benediction_booster1,
-                                        team.pierre_benediction_booster2,
-                                        team.pierre_benediction_booster3,
-                                        team.pierre_benediction_booster4,
-                                      ].map((id, i) => {
-                                        const pierre = getFromList(pierres, id);
-                                        if (!pierre) return null;
-                                        return (
-                                          <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border flex flex-col items-center">
-                                            <Image
-                                              src={pierre.image || ""}
-                                              alt={pierre.nom || "Pierre de bénédiction"}
-                                              pageId={PAGE_ID}
-                                              className="w-12 h-12 object-contain mb-2"
-                                              skeleton={true}
-                                              shimmer={true}
-                                            />
-                                            <p className="text-xs font-medium text-white text-center">{pierre.nom}</p>
-                                            <button 
-                                              onClick={(e) => {
-                                                e.stopPropagation();
-                                                toggleDescription(`pierre-booster-${i}`);
-                                              }} 
-                                              className="text-xs bg-solo-purple/30 text-white px-2 py-1 rounded-md mt-2 hover:bg-solo-purple/50 transition-colors"
-                                            >
-                                              {expandedDescriptions[`pierre-booster-${i}`] ? "Cacher détails" : "Voir détails"}
-                                            </button>                                            {expandedDescriptions[`pierre-booster-${i}`] && (
-                                              <div className="text-xs text-gray-300 mt-2 space-y-2">
-                                                {pierre.description?.split("<br>").map((line, index) => (
-                                                  <p key={index} className="text-center">{formatTextWithBrackets(line)}</p>
-                                                )) || (
-                                                  pierre.description?.split("\n").map((line, index) => (
-                                                    <p key={index} className="text-center">{formatTextWithBrackets(line)}</p>
-                                                  )) || (
-                                                    <p className="text-center">{formatTextWithBrackets(pierre.description || "")}</p>
-                                                  )
-                                                )}
+                                            
+                                            {expandedDescriptions[`competence-${i}`] && (
+                                              <div className="text-xs text-gray-300 mt-2 space-y-2 text-left">
+                                                {skill.description
+                                                  ?.replace(/<br\s*\/?>/gi, "\n")
+                                                  ?.split("\n")
+                                                  .map((line, idx) => (
+                                                    <p key={idx}>{formatTextWithBrackets(line)}</p>
+                                                  ))}
                                               </div>
                                             )}
-                                          </div>
-                                        );
-                                      })}
-                                    </div>
-                                  </div>
-                                  
-                                  <div>                                    <h6 className="text-xs font-medium mb-3 text-solo-light-purple ml-1">Pierres Survie</h6>
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">                                      {[
-                                        team.pierre_benediction_survie1,
-                                        team.pierre_benediction_survie2,
-                                        team.pierre_benediction_survie3,
-                                        team.pierre_benediction_survie4,
-                                      ].map((id, i) => {
-                                        const pierre = getFromList(pierres, id);
-                                        if (!pierre) return null;
-                                        return (
-                                          <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border flex flex-col items-center">
-                                            <Image
-                                              src={pierre.image || ""}
-                                              alt={pierre.nom || "Pierre de bénédiction"}
-                                              pageId={PAGE_ID}
-                                              className="w-12 h-12 object-contain mb-2"
-                                              skeleton={true}
-                                              shimmer={true}
-                                            />
-                                            <p className="text-xs font-medium text-white text-center">{pierre.nom}</p>
-                                            <button 
-                                              onClick={(e) => {
-                                                e.stopPropagation();
-                                                toggleDescription(`pierre-survie-${i}`);
-                                              }} 
-                                              className="text-xs bg-solo-purple/30 text-white px-2 py-1 rounded-md mt-2 hover:bg-solo-purple/50 transition-colors"
-                                            >
-                                              {expandedDescriptions[`pierre-survie-${i}`] ? "Cacher détails" : "Voir détails"}
-                                            </button>                                            {expandedDescriptions[`pierre-survie-${i}`] && (
-                                              <div className="text-xs text-gray-300 mt-2 space-y-2">
-                                                {pierre.description?.split("<br>").map((line, index) => (
-                                                  <p key={index} className="text-center">{formatTextWithBrackets(line)}</p>
-                                                )) || (
-                                                  pierre.description?.split("\n").map((line, index) => (
-                                                    <p key={index} className="text-center">{formatTextWithBrackets(line)}</p>
-                                                  )) || (
-                                                    <p className="text-center">{formatTextWithBrackets(pierre.description || "")}</p>
-                                                  )
-                                                )}
-                                              </div>
-                                            )}
-                                          </div>
-                                        );
-                                      })}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </CollapsibleContent>
-                          </Collapsible>
-                        </div>
-
-                        {/* 9. Ombres Section - Spécifique à Jinwoo */}
-                        <div className="bg-sidebar/50 rounded-lg overflow-hidden mb-6">
-                          <Collapsible
-                            open={isSectionOpen("ombres")}
-                            onOpenChange={() => toggleSection("ombres")}
-                          >
-                            <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
-                              <Sparkles className="h-4 w-4 text-solo-purple" />
-                              <span className="flex-1 text-left">Ombres</span>
-                            </CollapsibleTrigger>
-                            <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden">
-                              <div className="p-4">
-                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                  {team.ombres.map((o, i) => {
-                                    const ombre = getFromList(ombres, o.id);
-                                    if (!ombre) return null;
-                                    return (
-                                      <div
-                                        key={i}
-                                        className="bg-sidebar p-4 rounded-lg border border-sidebar-border flex flex-col items-center"
-                                      >
-                                        <div className="relative mb-2">
-                                          <Image
-                                            src={ombre.image || ""}
-                                            alt={ombre.nom || "Ombre"}
-                                            pageId={PAGE_ID}
-                                            className="w-16 h-16 object-contain"
-                                            skeleton={true}
-                                            shimmer={true}
-                                          />
-                                          <div className="absolute -top-2 -right-2 bg-solo-purple text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center text-white border-2 border-sidebar">
-                                            {i + 1}
-                                          </div>
-                                        </div>
-                                        <p className="text-sm font-medium text-white text-center">
-                                          {ombre.nom}
-                                        </p>                                        {ombre.description && (
-                                          <div className="text-xs text-gray-300 mt-3 space-y-2">
-                                            {ombre.description?.split("<br>").map((line, index) => (
-                                              <p key={index} className="text-center">{formatTextWithBrackets(line)}</p>
-                                            )) || (
-                                              ombre.description?.split("\n").map((line, index) => (
-                                                <p key={index} className="text-center">{formatTextWithBrackets(line)}</p>
-                                              )) || (
-                                                <p className="text-center">{formatTextWithBrackets(ombre.description || "")}</p>
-                                              )
-                                            )}
-                                          </div>
+                                          </>
                                         )}
                                       </div>
                                     );
@@ -752,7 +519,230 @@ export default function TeamJinwooCard({
                               </div>
                             </CollapsibleContent>
                           </Collapsible>
-                        </div>
+                        </div>                        {/* 7. QTE Section */}
+                        <div className="bg-sidebar/50 rounded-lg overflow-hidden mb-6">
+                          <Collapsible
+                            open={isSectionOpen("qte")}
+                            onOpenChange={() => toggleSection("qte")}
+                          >
+                            <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
+                              <Zap className="h-4 w-4 text-solo-purple" />
+                              <span className="flex-1 text-left">QTE</span>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden">
+                              <div className="p-4">
+                                <div className="flex flex-wrap gap-4 justify-center">
+                                  {[team.qte1, team.qte2].map((id, i) => {
+                                    const qte = getFromList(qtes, id);
+                                    if (!qte) return null;
+                                    return (                                      <div
+                                        key={i}
+                                        className="bg-sidebar p-4 rounded-lg border border-sidebar-border text-center w-full md:w-72 relative"
+                                      >                                        {/* First element at top left */}
+                                        {qte.element && (
+                                          <div className="absolute top-2 left-2 z-10 w-7 h-7 flex items-center justify-center">
+                                            <Image
+                                              src={qte.element}
+                                              alt="Élément"
+                                              pageId={PAGE_ID}
+                                              width={28}
+                                              height={28}
+                                              className="w-full h-full object-contain"
+                                              skeleton={true}
+                                              shimmer={true}
+                                              showErrorMessage={false}
+                                              style={{
+                                                maxWidth: "28px",
+                                                maxHeight: "28px",
+                                                objectFit: "contain"
+                                              }}
+                                            />
+                                          </div>
+                                        )}
+                                        
+                                        {/* Second element below the first */}
+                                        {qte.element2 && 
+                                          qte.element2 !== "EMPTY" && 
+                                          qte.element2 !== "NULL" && (
+                                          <div className="absolute top-12 left-2 z-10 w-7 h-7 flex items-center justify-center">
+                                            <Image
+                                              src={qte.element2}
+                                              alt="Élément 2"
+                                              pageId={PAGE_ID}
+                                              width={28}
+                                              height={28}
+                                              className="w-full h-full object-contain"
+                                              skeleton={true}
+                                              shimmer={true}
+                                              showErrorMessage={false}
+                                              style={{
+                                                maxWidth: "28px",
+                                                maxHeight: "28px",
+                                                objectFit: "contain"
+                                              }}
+                                            />
+                                          </div>
+                                        )}
+                                        
+                                        <Image
+                                          src={qte.image || ""}
+                                          alt={qte.nom || "QTE"}
+                                          pageId={PAGE_ID}
+                                          className="w-20 h-20 mx-auto object-contain"
+                                          skeleton={true}
+                                          shimmer={true}
+                                          showErrorMessage={false}
+                                          style={{ aspectRatio: '1/1' }}
+                                        />
+                                        
+                                        <p className="text-sm font-medium text-white mt-2">
+                                          {qte.nom}
+                                        </p>
+                                        
+                                        {qte.description && (
+                                          <>
+                                            <button 
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                toggleDescription(`qte-${i}`);
+                                              }} 
+                                              className="mt-2 text-[10px] sm:text-xs bg-solo-purple/30 text-white px-2 py-1 rounded-md hover:bg-solo-purple/50 transition-colors"
+                                            >
+                                              {expandedDescriptions[`qte-${i}`] ? "Cacher détails" : "Voir détails"}
+                                            </button>
+                                            
+                                            {expandedDescriptions[`qte-${i}`] && (
+                                              <div className="text-xs text-gray-300 mt-2 space-y-2">
+                                                {qte.description
+                                                  ?.replace(/<br\s*\/?>/gi, "\n")
+                                                  ?.split("\n")
+                                                  .map((line, idx) => (
+                                                    <p key={idx}>{formatTextWithBrackets(line)}</p>
+                                                  ))}
+                                              </div>
+                                            )}
+                                          </>
+                                        )}
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            </CollapsibleContent>
+                          </Collapsible>
+                        </div>                        {/* 8. Pierres de bénédiction */}
+                        <div className="bg-sidebar/50 rounded-lg overflow-hidden mb-6">
+                          <Collapsible open={isSectionOpen('pierres')} onOpenChange={() => toggleSection('pierres')}>
+                            <CollapsibleTrigger className="w-full p-4 font-medium flex items-center gap-1.5 text-sm text-white border-b border-sidebar-border">
+                              <Gem className="h-4 w-4 text-solo-purple" />
+                              <span className="flex-1 text-left">Pierres de bénédiction</span>
+                            </CollapsibleTrigger>                            <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden">
+                              <div className="p-4">
+                                <div className="space-y-6">
+                                  <div>
+                                    <h4 className="text-base font-medium text-solo-purple mb-3">
+                                      Pierres de bénédiction - Booster
+                                    </h4>
+                                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                      {[
+                                        team.pierre_benediction_booster1,
+                                        team.pierre_benediction_booster2,
+                                        team.pierre_benediction_booster3,
+                                        team.pierre_benediction_booster4,
+                                      ].map((id, i) => {
+                                        const pierre = getFromList(pierres, id);
+                                        if (!pierre) return null;
+                                        return (
+                                          <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border text-center">
+                                            <Image
+                                              src={pierre.image || ""}
+                                              alt={pierre.nom || "Pierre de bénédiction"}
+                                              pageId={PAGE_ID}
+                                              className="w-16 h-16 mx-auto object-contain"
+                                              skeleton={true}
+                                              shimmer={true}
+                                            />
+                                            <p className="text-sm font-medium text-white mt-2">{pierre.nom}</p>
+                                            <button 
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                toggleDescription(`pierre-booster-${i}`);
+                                              }} 
+                                              className="mt-2 text-[10px] sm:text-xs bg-solo-purple/30 text-white px-2 py-1 rounded-md hover:bg-solo-purple/50 transition-colors"
+                                            >
+                                              {expandedDescriptions[`pierre-booster-${i}`] ? "Cacher détails" : "Voir détails"}
+                                            </button>{expandedDescriptions[`pierre-booster-${i}`] && (
+                                              <div className="text-xs text-gray-300 mt-2 space-y-2">
+                                                {pierre.description?.split("<br>").map((line, index) => (
+                                                  <p key={index} className="text-center">{formatTextWithBrackets(line)}</p>
+                                                )) || (
+                                                  pierre.description?.split("\n").map((line, index) => (
+                                                    <p key={index} className="text-center">{formatTextWithBrackets(line)}</p>
+                                                  )) || (
+                                                    <p className="text-center">{formatTextWithBrackets(pierre.description || "")}</p>
+                                                  )
+                                                )}
+                                              </div>
+                                            )}
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  </div>
+                                    <div>
+                                    <h4 className="text-base font-medium text-solo-purple mb-3">
+                                      Pierres de bénédiction - Survie
+                                    </h4>
+                                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                      {[
+                                        team.pierre_benediction_survie1,
+                                        team.pierre_benediction_survie2,
+                                        team.pierre_benediction_survie3,
+                                        team.pierre_benediction_survie4,
+                                      ].map((id, i) => {
+                                        const pierre = getFromList(pierres, id);
+                                        if (!pierre) return null;
+                                        return (
+                                          <div key={i} className="bg-sidebar p-3 rounded-lg border border-sidebar-border text-center">
+                                            <Image
+                                              src={pierre.image || ""}
+                                              alt={pierre.nom || "Pierre de bénédiction"}
+                                              pageId={PAGE_ID}
+                                              className="w-16 h-16 mx-auto object-contain"
+                                              skeleton={true}
+                                              shimmer={true}
+                                            />
+                                            <p className="text-sm font-medium text-white mt-2">{pierre.nom}</p>
+                                            <button 
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                toggleDescription(`pierre-survie-${i}`);
+                                              }} 
+                                              className="mt-2 text-[10px] sm:text-xs bg-solo-purple/30 text-white px-2 py-1 rounded-md hover:bg-solo-purple/50 transition-colors"
+                                            >
+                                              {expandedDescriptions[`pierre-survie-${i}`] ? "Cacher détails" : "Voir détails"}
+                                            </button>{expandedDescriptions[`pierre-survie-${i}`] && (
+                                              <div className="text-xs text-gray-300 mt-2 space-y-2">
+                                                {pierre.description?.split("<br>").map((line, index) => (
+                                                  <p key={index} className="text-center">{formatTextWithBrackets(line)}</p>
+                                                )) || (
+                                                  pierre.description?.split("\n").map((line, index) => (
+                                                    <p key={index} className="text-center">{formatTextWithBrackets(line)}</p>
+                                                  )) || (
+                                                    <p className="text-center">{formatTextWithBrackets(pierre.description || "")}</p>
+                                                  )
+                                                )}
+                                              </div>
+                                            )}
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </CollapsibleContent>
+                          </Collapsible>                        </div>
                       </div>
                     )}
                   </Accordion>
