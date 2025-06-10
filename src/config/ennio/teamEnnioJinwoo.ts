@@ -558,7 +558,7 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
         artefacts: {
           casque: {
             id: 59,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
@@ -583,12 +583,12 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
           },
           bracelet: {
             id: 55,
-            statPrincipale: "Dégâts de feu",
+            statPrincipale: "Dégâts d'eau",
             statsSecondaires: ["-"],
           },
           bague: {
             id: 20,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
