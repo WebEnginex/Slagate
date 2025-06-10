@@ -347,12 +347,12 @@ export const TeamBdgJinwoo: TeamBdgJinwoo[] = [
         },
         artefacts: {
           casque: {
-            id: 57,
+            id: 61,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: [""],
           },
           armure: {
-            id: 1,
+            id: 8,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: [""],
           },
