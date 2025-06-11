@@ -123,8 +123,8 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
         },
           noyaux: {
             1: [
-              { id: 4, statPrincipale: "PV supplémentaire" },
-              { id: 8, statPrincipale: "PV supplémentaire" },
+              { id: 4, statPrincipale: "Attaque supplémentaire" },
+              { id: 8, statPrincipale: "Attaque supplémentaire" },
             ],
             2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
             3: [
@@ -449,8 +449,8 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
         },
           noyaux: {
             1: [
-              { id: 4, statPrincipale: "PV supplémentaire" },
-              { id: 8, statPrincipale: "PV supplémentaire" },
+              { id: 4, statPrincipale: "Attaque supplémentaire" },
+              { id: 8, statPrincipale: "Attaque supplémentaire" },
             ],
             2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
             3: [
