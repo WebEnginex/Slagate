@@ -828,7 +828,7 @@ export const TeamBdgJinwoo: TeamBdgJinwoo[] = [
           },
         },
         noyaux: {
-          1: [{ id: 8, statPrincipale: "Attaque" }],
+          1: [{ id: 9, statPrincipale: "Attaque" }],
           2: [{ id: 12, statPrincipale: "Défense" }],
           3: [{ id: 7, statPrincipale: "PV" }],
         },
