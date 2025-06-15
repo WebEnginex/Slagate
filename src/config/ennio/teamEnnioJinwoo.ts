@@ -739,12 +739,12 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
         },
           artefacts: {
           casque: {
-            id: 113,
+            id: 61,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
-            id: 114,
+            id: 8,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
@@ -779,19 +779,16 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
             statsSecondaires: ["-"],
           },
         },
-          noyaux: {
-            1: [
-              { id: 4, statPrincipale: "Attaque supplémentaire" },
-              { id: 8, statPrincipale: "Attaque supplémentaire" },
-            ],
-            2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
-            3: [
-              { id: 7, statPrincipale: "PV supplémentaire" },
-              { id: 2, statPrincipale: "PV supplémentaire" },
-            ],
-          },
-          sets_bonus: [{ id: 58 }, { id: 29 }, { id: 23 }, { id: 24 }],
+        noyaux: {
+          1: [{ id: 8, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 2, statPrincipale: "PV supplémentaire" },
+            { id: 7, statPrincipale: "PV supplémentaire" },
+          ],
         },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
         {
           // Lee Bora
           id: 24,
@@ -1024,7 +1021,7 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
       arme2: 12,
       competence1: 5,
       competence2: 6,
-      qte1: 1,
+      qte1: 4,
       qte2: 2,
       pierre_benediction_booster1: 26,
       pierre_benediction_booster2: 24,
@@ -1065,12 +1062,12 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
         },
           artefacts: {
           casque: {
-            id: 113,
+            id: 61,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
-            id: 114,
+            id: 8,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
@@ -1105,19 +1102,16 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
             statsSecondaires: ["-"],
           },
         },
-          noyaux: {
-            1: [
-              { id: 4, statPrincipale: "Attaque supplémentaire" },
-              { id: 8, statPrincipale: "Attaque supplémentaire" },
-            ],
-            2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
-            3: [
-              { id: 7, statPrincipale: "PV supplémentaire" },
-              { id: 2, statPrincipale: "PV supplémentaire" },
-            ],
-          },
-          sets_bonus: [{ id: 58 }, { id: 29 }, { id: 23 }, { id: 24 }],
+        noyaux: {
+          1: [{ id: 8, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 2, statPrincipale: "PV supplémentaire" },
+            { id: 7, statPrincipale: "PV supplémentaire" },
+          ],
         },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
         {
           // Seo Lin
           id: 41,
@@ -1352,7 +1346,7 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
       arme2: 12,
       competence1: 5,
       competence2: 6,
-      qte1: 1,
+      qte1: 4,
       qte2: 2,
       pierre_benediction_booster1: 26,
       pierre_benediction_booster2: 24,
