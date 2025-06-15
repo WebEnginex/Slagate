@@ -49,7 +49,7 @@ export type TeamGroup = {
 export const teamEnnioJinwooGroups: TeamGroup[] = [
   {
     id: 1,
-    nom: "Puissance de la Destruction",
+    nom: "Puissance de la Destruction - Feu | Lumière",
     team1: {
       id: 10,
       nom: "Team 1",
