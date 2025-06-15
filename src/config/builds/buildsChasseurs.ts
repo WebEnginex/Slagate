@@ -644,7 +644,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
-  // Seo Lin (FAIT)
+  // Seo Lin 
   {
     chasseurId: 41,
     element: "eau",
@@ -9153,7 +9153,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             { id: 3, statPrincipale: "PV supplémentaire" },
           ],
         },
-        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+        sets_bonus: [{ id: 32 }, { id: 33 }, { id: 34 }],
       },
       {
         id: 511,
