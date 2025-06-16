@@ -242,8 +242,7 @@ export default function TeamGroupCard({
                             skeleton={true}
                             shimmer={true}
                           />
-                        </div>
-                        <p className="mt-1 sm:mt-2 text-2xs sm:text-xs text-white text-center w-full truncate">
+                        </div>                        <p className="mt-1 sm:mt-2 text-2xs sm:text-xs text-white text-center w-16 sm:w-20 mx-auto overflow-hidden text-ellipsis whitespace-nowrap">
                           {chasseurData?.nom}
                         </p>
                       </div>

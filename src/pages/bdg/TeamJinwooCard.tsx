@@ -173,8 +173,7 @@ export default function TeamJinwooCard({
                         skeleton={true}
                         shimmer={true}
                       />
-                    </div>
-                    <p className="mt-1 sm:mt-2 text-2xs sm:text-xs text-white text-center w-full truncate">
+                    </div>                    <p className="mt-1 sm:mt-2 text-2xs sm:text-xs text-white text-center w-16 sm:w-20 mx-auto overflow-hidden text-ellipsis whitespace-nowrap">
                       {chasseurData?.nom}
                     </p>
                   </div>
@@ -188,8 +187,7 @@ export default function TeamJinwooCard({
               const chasseurData = getFromList(chasseurs, chasseur.id);
 
               return (
-                <div key={chasseur.id}>
-                  <h3 className="text-lg font-bold text-white text-center mb-4">
+                <div key={chasseur.id}>                  <h3 className="text-lg font-bold text-white text-center mb-4 px-2 max-w-[95%] mx-auto overflow-hidden text-ellipsis whitespace-nowrap">
                     {chasseurData?.nom}
                   </h3>
                   <Accordion type="single" collapsible>

@@ -1187,20 +1187,19 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
         sets_bonus: [{ id: 55 }, { id: 56 }, { id: 57 }],
       },
         {
-          // Cha
-          id: 6,
+          // Cha Hae V2
+          id: 43,
           stats: {
           "PV supplémentaire": "-",
-          "Défense supplémentaire": "-",
+          "Défense supplémentaire": "Le plus possible",
           "PM ": "-",
-          "Attaque supplémentaire": "Le plus possible",
+          "Attaque supplémentaire": "-",
           "Précision": "-",
           "Taux de coup critique ": "50%",
           "Dégâts de coup critique ": "200% - 210%",
           "Hausse des dégâts ": "30% +",
-          "Pénétration de défense ": "10 - 20%",
+          "Pénétration de défense ": "10% - 20%",
           "Réduction des dégâts ": "-",
-          "Réduction du temps de rechargement ": "-",
           "Hausse des soins donnés ": "-",
           "Hausse des soins reçus ": "-",
           "Hausse du taux de récupération des PM ": "-",
@@ -1209,7 +1208,7 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
         artefacts: {
           casque: {
             id: 113,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
@@ -1234,12 +1233,12 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
           },
           bracelet: {
             id: 118,
-            statPrincipale: "Dégâts de lumière",
+            statPrincipale: "Dégâts d'eau",
             statsSecondaires: ["-"],
           },
           bague: {
             id: 119,
-            statPrincipale: "Attaque supplémentaire",
+            statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
@@ -1250,8 +1249,8 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
         },
         noyaux: {
           1: [
-            { id: 8, statPrincipale: "Attaque supplémentaire" },
             { id: 4, statPrincipale: "Attaque supplémentaire" },
+            { id: 9, statPrincipale: "Attaque supplémentaire" },
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
