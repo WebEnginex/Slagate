@@ -133,7 +133,7 @@ const Index = () => {
         const { data, error } = await supabase
           .from("chasseurs")
           .select("id, nom, image")
-          .in("id", hunterIds);
+          .in("id", hunterIds); // hunterIds est utilisé ici
         if (error) {
           // Gestion silencieuse de l'erreur
           return;
@@ -149,8 +149,8 @@ const Index = () => {
     };
 
     initializeApp();
-    loadLatestYouTubeVideo();
-  }, []);
+    // loadLatestYouTubeVideo(); // Désactivé pour ne pas récupérer la vidéo YouTube
+  }, [hunterIds]); // Ajoutez hunterIds ici
 
   useEffect(() => {
     // Vérifier si le cache IndexedDB fonctionne
@@ -162,34 +162,34 @@ const Index = () => {
   // =========================
   // Récupération de la dernière vidéo YouTube (cache 24h)
   // =========================
-  const loadLatestYouTubeVideo = async () => {
-    const cacheKey = "latestYoutubeVideoId";
-    const cacheTimeKey = "latestYoutubeVideoId_time";
-    const now = Date.now();
-    const cacheTime = localStorage.getItem(cacheTimeKey);
-    const cacheId = localStorage.getItem(cacheKey);
+  // const loadLatestYouTubeVideo = async () => {
+  //   const cacheKey = "latestYoutubeVideoId";
+  //   const cacheTimeKey = "latestYoutubeVideoId_time";
+  //   const now = Date.now();
+  //   const cacheTime = localStorage.getItem(cacheTimeKey);
+  //   const cacheId = localStorage.getItem(cacheKey);
 
-    if (cacheId && cacheTime && now - parseInt(cacheTime, 10) < 86400000) {
-      setLatestVideoId(cacheId);
-      return;
-    }
+  //   if (cacheId && cacheTime && now - parseInt(cacheTime, 10) < 86400000) {
+  //     setLatestVideoId(cacheId);
+  //     return;
+  //   }
 
-    const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
-    const CHANNEL_ID = "UCT9h3NfvJJ6eT7_Iri6CwFg";
-    const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=1`;
+  //   const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
+  //   const CHANNEL_ID = "UCT9h3NfvJJ6eT7_Iri6CwFg";
+  //   const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=1`;
 
-    try {
-      const response = await axios.get(url);
-      const video = response.data.items[0];
-      if (video && video.id.videoId) {
-        setLatestVideoId(video.id.videoId);
-        localStorage.setItem(cacheKey, video.id.videoId);
-        localStorage.setItem(cacheTimeKey, now.toString());
-      }
-    } catch (error) {
-      // Gestion silencieuse des erreurs YouTube
-    }
-  };
+  //   try {
+  //     const response = await axios.get(url);
+  //     const video = response.data.items[0];
+  //     if (video && video.id.videoId) {
+  //       setLatestVideoId(video.id.videoId);
+  //       localStorage.setItem(cacheKey, video.id.videoId);
+  //       localStorage.setItem(cacheTimeKey, now.toString());
+  //     }
+  //   } catch (error) {
+  //     // Gestion silencieuse des erreurs YouTube
+  //   }
+  // };
 
   return (
     <Layout>
