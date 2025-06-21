@@ -2422,42 +2422,42 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
         },
         artefacts: {
           casque: {
-            id: 59,
+            id: 58,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           armure: {
-            id: 6,
+            id: 2,
             statPrincipale: "Défense supplémentaire",
             statsSecondaires: ["-"],
           },
           gants: {
-            id: 83,
+            id: 79,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           bottes: {
-            id: 27,
+            id: 23,
             statPrincipale: "Pénétration de défense",
             statsSecondaires: ["-"],
           },
           collier: {
-            id: 73,
+            id: 70,
             statPrincipale: "PV supplémentaire",
             statsSecondaires: ["-"],
           },
           bracelet: {
-            id: 55,
+            id: 49,
             statPrincipale: "Dégâts de feu",
             statsSecondaires: ["-"],
           },
           bague: {
-            id: 20,
+            id: 14,
             statPrincipale: "Attaque supplémentaire",
             statsSecondaires: ["-"],
           },
           boucles: {
-            id: 44,
+            id: 38,
             statPrincipale: "PM",
             statsSecondaires: ["-"],
           },
@@ -2471,7 +2471,7 @@ export const teamEnnioJinwooGroups: TeamGroup[] = [
             { id: 2, statPrincipale: "PV supplémentaire" }
           ],
         },
-        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+        sets_bonus: [{ id: 43 }, { id: 44 }, { id: 45 }],
       },
         {
           // Lee Bora
