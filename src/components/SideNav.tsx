@@ -76,7 +76,7 @@ const SideNav = ({ isMobileOpen, setIsMobileOpen }: SideNavProps) => {
         {/* Logo */}
 <Link to="/" className="flex items-center gap-3 px-3 py-4">
   <img
-    src="/images/logo/Sohoven_Logo.png"
+    src="/images/logo/Sohoven_Logo.webp"
     alt="Sohoven Logo"
     className="h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 rounded object-cover"
   />
