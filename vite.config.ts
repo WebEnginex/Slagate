@@ -44,70 +44,11 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
-    sourcemap: false, // Désactiver les sourcemaps en production pour réduire la taille
     rollupOptions: {
       output: {
         assetFileNames: 'assets/[name].[hash].[ext]',
-        manualChunks: (id) => {
-          // Vendor chunks pour les bibliothèques principales
-          if (id.includes('node_modules')) {
-            if (id.includes('react') && !id.includes('react-router') && !id.includes('react-icons')) {
-              return 'react-vendor';
-            }
-            if (id.includes('react-router-dom')) {
-              return 'router-vendor';
-            }
-            if (id.includes('@radix-ui') || id.includes('class-variance-authority') || id.includes('clsx') || id.includes('tailwind-merge')) {
-              return 'ui-vendor';
-            }
-            if (id.includes('@supabase') || id.includes('supabase')) {
-              return 'supabase-vendor';
-            }
-            if (id.includes('lucide-react') || id.includes('react-icons')) {
-              return 'icons-vendor';
-            }
-            if (id.includes('swr') || id.includes('use-swr')) {
-              return 'swr-vendor';
-            }
-            if (id.includes('@tanstack') || id.includes('react-query')) {
-              return 'query-vendor';
-            }
-            // Autres vendors
-            return 'vendor';
-          }
-          
-          // Pages chunks pour le code splitting par page
-          if (id.includes('src/pages/builds_chasseurs/')) {
-            return 'builds-page';
-          }
-          if (id.includes('src/pages/ennio/')) {
-            return 'ennio-page';
-          }
-          if (id.includes('src/pages/bdg/')) {
-            return 'bdg-page';
-          }
-          if (id.includes('src/pages/atelier/')) {
-            return 'atelier-page';
-          }
-          if (id.includes('src/pages/guides/')) {
-            return 'guides-page';
-          }
-          if (id.includes('src/pages/legal/')) {
-            return 'legal-page';
-          }
-          
-          // Configs et services
-          if (id.includes('src/config/')) {
-            return 'config';
-          }
-          if (id.includes('src/services/')) {
-            return 'services';
-          }
-        }
       },
     },
-    // Augmenter la limite pour éviter les warnings sur les chunks volontairement gros
-    chunkSizeWarningLimit: 600,
   },
   resolve: {
     alias: {

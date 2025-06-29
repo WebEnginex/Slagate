@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo } from "react";
+import React, { useState, useEffect, useCallback, memo } from "react";
 import Layout from "@/components/Layout";
 import {
   Card,
@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Image } from "@/components/ui/Image";
 import { Button } from "@/components/ui/button";
 import {
   Collapsible,
@@ -15,9 +16,9 @@ import {
 } from "@/components/ui/collapsible";
 import { ExternalLink, ChevronDown, ChevronUp, X } from "lucide-react";
 import SEO from "@/components/SEO";
-import LazyImage from "@/lib/lazy";
+import { loadPageImage, preloadPageImages } from "@/services/cacheImages/pageImageLoader";
 
-// Fonction pour afficher les icônes des réseaux sociaux mise à jour pour utiliser LazyImage
+// Fonction pour afficher les icônes des réseaux sociaux
 const getSocialIcon = (type: SocialLink["type"]) => {
   const iconMap: Record<SocialLink["type"], string> = {
     youtube: "/icons/youtube.svg",
@@ -25,16 +26,16 @@ const getSocialIcon = (type: SocialLink["type"]) => {
     tiktok: "/icons/tiktok.svg",
     twitter: "/icons/twitter.svg",
     instagram: "/icons/instagram.svg",
-    website: "/icons/external-link.svg",
+    website: "/icons/external-link.svg", // Icône générique pour les liens externes
   };
 
+  // Les icônes SVG étant légères, on peut utiliser l'image directement sans passer par le cache
   return (
-    <LazyImage
+    <img
       src={iconMap[type]}
       alt={type}
       className="h-5 w-5"
-      showSpinner={false}
-      fallbackClassName="h-5 w-5"
+      style={{ display: "inline-block" }}
     />
   );
 };
@@ -45,10 +46,6 @@ type SocialLink = {
   url: string;
   label: string;
 };
-
-// =========================
-// Utilisation conforme au guide d'implémentation
-// =========================
 
 // Constante pour identifier cette page dans le système de logs
 const PAGE_ID = "Creators";
@@ -84,6 +81,40 @@ type Step = {
 };
 
 // =========================
+// Configuration des images du guide
+// =========================
+const GUIDE_IMAGE_PATH = "/images/creator_images/";
+
+// =========================
+// Composant pour afficher une image avec mise en cache contextuelle
+// =========================
+const CachedImage = memo(({ 
+  imageUrl, 
+  altText, 
+  className, 
+  onClick 
+}: { 
+  imageUrl: string; 
+  altText: string; 
+  className?: string;
+  onClick?: () => void;
+}) => {
+  return (
+    <Image
+      src={imageUrl}
+      alt={altText}
+      pageId={PAGE_ID}
+      className={className}
+      skeleton={true}
+      shimmer={true}
+      showErrorMessage={false}
+      onClick={onClick}
+    />
+  );
+});
+CachedImage.displayName = "CachedImage";
+
+// =========================
 // Composant Memo pour chaque étape du guide
 // =========================
 const StepCard = memo(({ step, index, open, onToggle, onOpenModal }: {
@@ -116,13 +147,10 @@ const StepCard = memo(({ step, index, open, onToggle, onOpenModal }: {
             <div
               className="w-full md:w-1/3 aspect-video bg-muted rounded-lg overflow-hidden cursor-pointer"
               onClick={() => onOpenModal(step.image)}
-            >
-              <LazyImage
-                src={step.image}
-                alt={`Étape ${index + 1}`}
+            >              <CachedImage
+                imageUrl={step.image}
+                altText={`Étape ${index + 1}`}
                 className="h-full w-full object-cover"
-                showSpinner={true}
-                fallbackClassName="h-full w-full"
               />
             </div>
             <div className="flex-1">
@@ -195,13 +223,33 @@ const Creators = () => {
   }>({
     openStep: 0,
     modalImage: null,
-  });
-  
-  // Log de développement pour valider l'implémentation
-  if (process.env.NODE_ENV === 'development') {
-    console.log(`🎬 ${PAGE_ID}: Page initialisée avec ${steps.length} étapes du guide`);
-    console.log(`🎬 ${PAGE_ID}: Toutes les images gérées par LazyImage + IndexedDB (conforme au guide)`);
-  }
+  });  // =========================
+  // Préchargement des images du guide étape par étape avec page context
+  // =========================
+  useEffect(() => {
+    const preloadImages = async () => {
+      // Collecter les URLs d'images des étapes du guide
+      const imageUrls = steps.map(step => step.image);
+      
+      // Ajouter le logo de Sohoven à la liste d'images à précharger
+      imageUrls.push("/images/logo/Sohoven_Logo.webp");
+      
+      if (imageUrls.length > 0) {
+        // Précharger toutes les images avec le contexte de page
+        preloadPageImages(imageUrls, PAGE_ID);
+      }
+    };
+    
+    preloadImages();
+  }, [steps]);
+
+  // =========================
+  // Préchargement des icônes sociales
+  // =========================
+  useEffect(() => {
+    // Préchargement du logo
+    preloadPageImages(["/images/logo/Sohoven_Logo.webp"], PAGE_ID);
+  }, []);
 
   // =========================
   // Gestion de l'ouverture des étapes du guide
@@ -215,11 +263,6 @@ const Creators = () => {
   // =========================
   const openModal = useCallback((image: string) => {
     setState((prev) => ({ ...prev, modalImage: image }));
-    
-    // Log de développement
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`🎬 ${PAGE_ID}: Modal ouvert pour l'image: ${image.split('/').pop()}`);
-    }
   }, []);
   const closeModal = useCallback(() => {
     setState((prev) => ({ ...prev, modalImage: null }));
@@ -234,7 +277,7 @@ const Creators = () => {
 />
       <div className="mb-8">
         <h1 className="mb-2 text-3xl font-bold">Soutenir un créateur</h1>
-        <p className="">
+        <p className="text-muted-foreground">
           Suivez ce guide pour apprendre comment supporter vos créateurs de contenu préférés pour Solo Leveling: Arise sur le site Netmarble Creator.
         </p>
       </div>
@@ -243,17 +286,15 @@ const Creators = () => {
       <Card className="mb-8 overflow-hidden bg-gradient-to-r from-solo-purple to-solo-dark-purple">
         <div className="p-6">
           <div className="flex flex-col sm:flex-row items-center gap-6">            <div className="aspect-square w-32 h-32 overflow-hidden rounded-full bg-muted border-4 border-white/10">
-              <LazyImage
-                src="/images/logo/Sohoven_Logo.webp"
-                alt="Sohoven"
+              <CachedImage
+                imageUrl="/images/logo/Sohoven_Logo.webp"
+                altText="Sohoven"
                 className="h-full w-full object-cover"
-                showSpinner={true}
-                fallbackClassName="h-full w-full"
               />
             </div>
             <div className="flex-1 text-center sm:text-left">
               <h2 className="text-2xl font-bold mb-2">Sohoven</h2>
-              <p className="mb-4">
+              <p className="text-muted-foreground mb-4">
                 Créateur de contenu français pour Solo Leveling: Arise
               </p>
               <div className="flex flex-wrap justify-center sm:justify-start gap-3">
@@ -340,12 +381,10 @@ const Creators = () => {
       >
         <X className="h-6 w-6" />
       </button>
-      <LazyImage
-        src={state.modalImage}
-        alt="Agrandissement"
+      <CachedImage
+        imageUrl={state.modalImage}
+        altText="Agrandissement"
         className="max-w-full max-h-full object-contain rounded-lg"
-        showSpinner={true}
-        fallbackClassName="max-w-full max-h-full rounded-lg"
       />
     </div>
   </div>

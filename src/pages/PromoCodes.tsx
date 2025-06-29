@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo } from "react";
+import React, { useState, useCallback, useEffect, memo } from "react";
 import Layout from "@/components/Layout";
 import {
   Card,
@@ -17,7 +17,7 @@ import { X, ChevronDown, ChevronUp } from "lucide-react";
 import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
 import SEO from "@/components/SEO";
-import LazyImage from "@/lib/lazy";
+import { loadPageImageAsBase64 } from "@/services/cacheImages";
 
 type SocialLink = {
   type: "youtube" | "twitch" | "twitter" | "instagram" | "website" | "tiktok";
@@ -56,7 +56,7 @@ const copyToClipboard = (code: string) => {
   alert(`Code promo "${code}" copié dans le presse-papiers !`);
 };
 
-// Mise à jour de la fonction getSocialIcon pour utiliser LazyImage
+// Mise à jour de la fonction getSocialIcon pour utiliser les SVG locaux
 const getSocialIcon = (type: SocialLink["type"]) => {
   const iconMap: Record<SocialLink["type"], string> = {
     youtube: "/icons/youtube.svg",
@@ -68,12 +68,11 @@ const getSocialIcon = (type: SocialLink["type"]) => {
   };
 
   return (
-    <LazyImage
+    <img
       src={iconMap[type]}
       alt={type}
       className="h-5 w-5"
-      showSpinner={false}
-      fallbackClassName="h-5 w-5"
+      style={{ display: "inline-block" }}
     />
   );
 };
@@ -197,11 +196,12 @@ const highlightNumbers = (text: string) => {
 };
 
 // =========================
-// Utilisation conforme au guide d'implémentation
+// Utilisation du service de cache centralisé avec contexte de page
 // =========================
 
 // Constante pour identifier cette page dans le système de logs
 const PAGE_ID = "PromoCodes";
+const GUIDE_IMAGE_PATH = "/images/code_promo/";
 
 // =========================
 // Composant Memo pour les cartes de codes promo
@@ -239,12 +239,14 @@ PromoCard.displayName = "PromoCard";
 // Composant principal
 // =========================
 const PromoCodes = () => {
-  // État simplifié : code copié + modal + étape ouverte
+  // Centralisation de l'état : images en cache + code copié + modal
   const [state, setState] = useState<{
+    cachedImages: Record<string, string>; // chemin => base64
     copiedCode: string | null;
     modalImage: string | null;
     openStep: number | null;
   }>({
+    cachedImages: {},
     copiedCode: null,
     modalImage: null,
     openStep: 0,
@@ -292,13 +294,47 @@ const PromoCodes = () => {
         'Les récompenses seront envoyées directement dans votre "messagerie" en jeu. Ouvrez-la pour les récupérer.',
       image: "/images/code_promo/tuto_pomo_code_7.webp",
     },
-  ];
-
-  // Log de développement pour valider l'implémentation
-  if (process.env.NODE_ENV === 'development') {
-    console.log(`🎫 ${PAGE_ID}: Page initialisée avec ${promoCodes.length} codes promo et ${steps.length} étapes du guide`);
-    console.log(`🎫 ${PAGE_ID}: Toutes les images gérées par LazyImage + IndexedDB (conforme au guide)`);
-  }
+  ];  // =========================
+  // Chargement et cache des images du guide étape par étape avec contexte de page
+  // =========================
+  useEffect(() => {
+    // Fonction pour charger les images et les mettre en cache avec le contexte de page
+    const loadImages = async () => {
+      try {
+        const newCache: Record<string, string> = { ...state.cachedImages };
+        let updated = false;
+        
+        // Extraire toutes les URLs d'images pour les passer en contexte au worker
+        const imageUrls = steps.map(step => step.image);
+        
+        // Charger toutes les images du guide
+        for (const stepObj of steps) {
+          // Si l'image n'est pas déjà dans le cache React
+          if (!newCache[stepObj.image]) {
+            // Récupérer l'image avec le contexte de page et la liste des images pertinentes
+            const base64 = await loadPageImageAsBase64(stepObj.image, PAGE_ID, imageUrls);
+            
+            // Mettre à jour le cache React
+            if (base64) {
+              newCache[stepObj.image] = base64;
+              updated = true;
+            }
+          }
+        }
+        
+        // Mise à jour de l'état avec les nouvelles images en cache
+        if (updated || (Object.keys(newCache).length && Object.keys(newCache).length !== Object.keys(state.cachedImages).length)) {
+          setState((prev) => ({ ...prev, cachedImages: newCache }));
+        }
+      } catch (error) {
+        console.error("Erreur lors du chargement des images:", error);
+        // En cas d'erreur, on continue sans mise en cache
+      }
+    };
+    
+    loadImages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // =========================
   // Gestion du copier/coller des codes promo
@@ -307,11 +343,6 @@ const PromoCodes = () => {
     navigator.clipboard.writeText(code);
     setState((prev) => ({ ...prev, copiedCode: code }));
     setTimeout(() => setState((prev) => ({ ...prev, copiedCode: null })), 2000);
-    
-    // Log de développement
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`🎫 ${PAGE_ID}: Code promo copié: ${code}`);
-    }
   }, []);
 
   // =========================
@@ -319,11 +350,6 @@ const PromoCodes = () => {
   // =========================
   const openModal = useCallback((image: string) => {
     setState((prev) => ({ ...prev, modalImage: image }));
-    
-    // Log de développement
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`🎫 ${PAGE_ID}: Modal ouvert pour l'image: ${image.split('/').pop()}`);
-    }
   }, []);
   const closeModal = useCallback(() => {
     setState((prev) => ({ ...prev, modalImage: null }));
@@ -348,7 +374,7 @@ const PromoCodes = () => {
 />
       <div className="mb-8">
         <h1 className="mb-2 text-3xl font-bold">Codes Promotionnels</h1>
-        <p className="">
+        <p className="text-muted-foreground">
           Utilisez ces codes dans le jeu pour obtenir des récompenses gratuites.
           N'oubliez pas de les utiliser avant leur expiration!
         </p>
@@ -359,17 +385,15 @@ const PromoCodes = () => {
         <div className="p-6">
           <div className="flex flex-col sm:flex-row items-center gap-6">
             <div className="aspect-square w-32 h-32 overflow-hidden rounded-full bg-muted border-4 border-white/10">
-              <LazyImage
+              <img
                 src="/images/logo/Sohoven_Logo.webp"
                 alt="Sohoven"
                 className="h-full w-full object-cover"
-                showSpinner={true}
-                fallbackClassName="h-full w-full bg-gray-600"
               />
             </div>
             <div className="flex-1 text-center sm:text-left">
               <h2 className="text-2xl font-bold mb-2">Sohoven</h2>
-              <p className=" mb-4">
+              <p className="text-muted-foreground mb-4">
                 Créateur de contenu français pour Solo Leveling: Arise
               </p>
               <div className="flex flex-wrap justify-center sm:justify-start gap-3">
@@ -452,12 +476,10 @@ const PromoCodes = () => {
                       className="w-full md:w-1/3 aspect-video bg-muted rounded-lg overflow-hidden cursor-pointer"
                       onClick={() => openModal(step.image)}
                     >
-                      <LazyImage
-                        src={step.image}
+                      <img
+                        src={state.cachedImages[step.image] || step.image}
                         alt={`Étape ${index + 1}`}
                         className="h-full w-full object-cover"
-                        showSpinner={true}
-                        fallbackClassName="h-full w-full bg-transparent rounded-lg"
                       />
                     </div>
                     <div className="flex-1">
@@ -483,12 +505,10 @@ const PromoCodes = () => {
             >
               <X className="h-6 w-6" />
             </button>
-            <LazyImage
-              src={state.modalImage}
+            <img
+              src={state.cachedImages[state.modalImage] || state.modalImage}
               alt="Agrandissement"
               className="max-w-full max-h-full object-contain rounded-lg"
-              showSpinner={true}
-              fallbackClassName="max-w-full max-h-full bg-gray-600 rounded-lg"
             />
           </div>
         </div>

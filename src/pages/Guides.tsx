@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Layout from "@/components/Layout";
 import { Youtube, Twitch, Twitter } from "lucide-react";
 import Footer from "@/components/Footer";
-import LazyImage from "@/lib/lazy";
-import SEO from "@/components/SEO";
 
 const guides = [
   {
@@ -54,26 +53,9 @@ const guides = [
   },
 ];
 
-// =========================
-// Utilisation conforme au guide d'implémentation
-// =========================
-
-// Constante pour identifier cette page dans le système de logs
-const PAGE_ID = "Guides";
-
 const Guides = () => {
-  // Log de développement pour valider l'implémentation
-  if (process.env.NODE_ENV === 'development') {
-    console.log(`📚 ${PAGE_ID}: Page initialisée avec ${guides.length} guides disponibles`);
-    console.log(`📚 ${PAGE_ID}: Toutes les images gérées par LazyImage + IndexedDB (conforme au guide)`);
-  }
   return (
     <Layout>
-      <SEO
-        title="Guides - Solo Leveling: ARISE"
-        description="Découvrez tous nos guides complets pour Solo Leveling: ARISE. Maîtrisez les chasseurs, les ombres, les portails et bien plus encore."
-        keywords="Solo Leveling, ARISE, guides, chasseurs, ombres, portails, stratégies, SLAGATE"
-      />
       <div className="w-full px-6 py-8">
         <h1 className="text-3xl font-bold text-white mb-8 text-center">
           Guides disponibles
@@ -84,14 +66,12 @@ const Guides = () => {
               key={guide.id}
               className="bg-sidebar border border-sidebar-border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col"
             >
-              {/* Image avec LazyImage conforme au guide */}
+              {/* Image avec taille fixe */}
               <div className="h-48 w-full overflow-hidden rounded-t-lg">
-                <LazyImage
+                <img
                   src={guide.image}
                   alt={guide.title}
                   className="w-full h-full object-cover"
-                  showSpinner={true}
-                  fallbackClassName="w-full h-full bg-gray-600"
                 />
               </div>
               {/* Contenu de la carte */}

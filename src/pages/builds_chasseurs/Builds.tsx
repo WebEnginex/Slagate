@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout";
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 import { buildsChasseurs } from "@/config/builds/buildsChasseurs";
@@ -10,17 +10,22 @@ import { Separator } from "@/components/ui/separator";
 import { FiRefreshCw } from "react-icons/fi";
 import { useLocation } from "react-router-dom";
 import SEO from "@/components/SEO";
-import LazyImage from '@/lib/lazy';
-import { useSupabaseFetch } from '@/lib';
+
+// Créer un cache global pour les images basé sur les URLs (sera préservé entre les rendus)
+// Ce cache sera maintenu tant que l'onglet/page reste ouvert
+const imageCache = new Map<string, string>();
+
+// Compteurs pour suivre l'efficacité du cache
+const cacheStats = {
+  hits: 0,
+  misses: 0,
+  get hitRate() {
+    const total = this.hits + this.misses;
+    return total > 0 ? `${(this.hits / total * 100).toFixed(1)}%` : '0%';
+  }
+};
 
 export default function BuildsPage() {
-  // =========================
-  // Utilisation conforme au guide d'implémentation
-  // =========================
-  
-  // Constante pour identifier cette page dans le système de logs
-  const PAGE_ID = "Builds";
-
   type Chasseur = Omit<Database["public"]["Tables"]["chasseurs"]["Row"], "created_at"> & {
     created_at?: string;
   };
@@ -52,7 +57,15 @@ export default function BuildsPage() {
   const [search, setSearch] = useState("");
   const [selectedElement, setSelectedElement] = useState<string | null>(null);
   
-  const elementIcons = useMemo(() => [
+  // Cache en mémoire des données de chasseurs (pour éviter de refaire des requêtes)
+  const chasseursDataCache = useRef<Map<number, {
+    artefacts: Artefact[],
+    noyaux: Noyau[],
+    ombres: Ombre[],
+    setsBonus: SetBonus[]
+  }>>(new Map());
+
+  const elementIcons = [
     {
       id: "jinwoo",
       image:
@@ -83,7 +96,7 @@ export default function BuildsPage() {
       image:
         "https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//Tenebre_element.webp",
     },
-  ], []);
+  ];
 
   const location = useLocation();
   
@@ -97,22 +110,108 @@ export default function BuildsPage() {
     }
   };
   
-  // Utiliser useSupabaseFetch pour charger les chasseurs de base
-  const { data: chasseursData } = useSupabaseFetch('supabase:chasseurs', async () => {
-    const { data } = await supabase
-      .from("chasseurs")
-      .select("id, nom, image, element, rarete");
-    return data;
-  });
-
-  // Fonction pour charger les données spécifiques à un chasseur avec useSupabaseFetch conditionnel
-  const loadChasseurData = useCallback(async (chasseurId: number) => {
+  // Fonction pour charger une image et la mettre en cache basé sur l'URL
+  const fetchImageAsBase64 = async (url: string): Promise<string> => {
+    try {
+      if (!url) return ''; // Protection contre les URLs undefined ou vides
+      
+      // Normaliser l'URL pour une comparaison plus fiable
+      const normalizedUrl = normalizeUrl(url);
+      
+      // Vérifier d'abord si l'image est déjà en cache par URL normalisée
+      if (imageCache.has(normalizedUrl)) {
+        cacheStats.hits++;
+        console.log(`🔄 Image chargée depuis le cache: ${normalizedUrl.substring(0, 50)}... (Taux de réussite: ${cacheStats.hitRate})`);
+        return imageCache.get(normalizedUrl)!;
+      }
+      
+      cacheStats.misses++;
+      console.log(`📥 Téléchargement d'une nouvelle image: ${normalizedUrl.substring(0, 50)}... (Taux de réussite: ${cacheStats.hitRate})`);
+      // Si pas en cache, télécharger l'image
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      
+      const blob = await response.blob();
+      
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const base64data = reader.result as string;
+          // Mettre en cache l'image encodée avec l'URL normalisée comme clé
+          imageCache.set(normalizedUrl, base64data);
+          console.log(`✅ Image mise en cache: ${normalizedUrl.substring(0, 50)}...`);
+          resolve(base64data);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+    } catch (error) {
+      console.error(`❌ Erreur lors du chargement de l'image: ${url?.substring(0, 50) || 'URL invalide'}...`, error);
+      return url || ''; // Fallback à l'URL originale en cas d'erreur
+    }
+  };
+  
+  // Fonction pour charger les données spécifiques à un chasseur
+  const loadChasseurData = async (chasseurId: number) => {
     if (loadedChasseurs.has(chasseurId)) {
       console.log(`🔄 Données déjà chargées pour le chasseur #${chasseurId}`);
       return;
     }
     
     console.log(`🔍 Chargement des données pour le chasseur #${chasseurId}...`);
+    
+    // Vérifier si les données sont en cache mémoire
+    if (chasseursDataCache.current.has(chasseurId)) {
+      const cachedData = chasseursDataCache.current.get(chasseurId)!;
+      
+      // Utiliser les données en cache pour mettre à jour les états
+      setArtefacts(prev => {
+        const newArtefacts = [...prev];
+        cachedData.artefacts.forEach(artefact => {
+          if (!newArtefacts.some(a => a.id === artefact.id)) {
+            newArtefacts.push(artefact);
+          }
+        });
+        return newArtefacts;
+      });
+      
+      setNoyaux(prev => {
+        const newNoyaux = [...prev];
+        cachedData.noyaux.forEach(noyau => {
+          if (!newNoyaux.some(n => n.id === noyau.id)) {
+            newNoyaux.push(noyau);
+          }
+        });
+        return newNoyaux;
+      });
+      
+      setOmbres(prev => {
+        const newOmbres = [...prev];
+        cachedData.ombres.forEach(ombre => {
+          if (!newOmbres.some(o => o.id === ombre.id)) {
+            newOmbres.push(ombre);
+          }
+        });
+        return newOmbres;
+      });
+      
+      setSetsBonus(prev => {
+        const newSets = [...prev];
+        cachedData.setsBonus.forEach(setBonus => {
+          if (!newSets.some(s => s.id === setBonus.id)) {
+            newSets.push(setBonus);
+          }
+        });
+        return newSets;
+      });
+      
+      // Marquer ce chasseur comme chargé
+      setLoadedChasseurs(prev => new Set(prev).add(chasseurId));
+      console.log(`✅ Données du chasseur #${chasseurId} chargées depuis le cache mémoire`);
+      return;
+    }
     
     // Si pas de cache, charger depuis Supabase
     try {
@@ -165,11 +264,29 @@ export default function BuildsPage() {
           .in("id", Array.from(artefactIds));
         
         if (artefactData && artefactData.length > 0) {
-          // Les images des artefacts seront gérées par LazyImage, pas besoin de fetchAndCacheImage
-          fetchedData.artefacts = artefactData;
+          // Traiter les images
+          const artefactsWithImages = await Promise.all(
+            artefactData.map(async (artefact) => {
+              if (artefact.image) {
+                try {
+                  const imageData = await fetchImageAsBase64(artefact.image);
+                  return {
+                    ...artefact,
+                    image: imageData
+                  };
+                } catch (e) {
+                  console.warn(`⚠️ Impossible de charger l'image pour l'artefact #${artefact.id}`, e);
+                  return artefact;
+                }
+              }
+              return artefact;
+            })
+          );
+          
+          fetchedData.artefacts = artefactsWithImages;
           setArtefacts(prev => {
             const newArtefacts = [...prev];
-            artefactData.forEach(artefact => {
+            artefactsWithImages.forEach(artefact => {
               const index = newArtefacts.findIndex(a => a.id === artefact.id);
               if (index >= 0) {
                 newArtefacts[index] = artefact;
@@ -190,11 +307,29 @@ export default function BuildsPage() {
           .in("id", Array.from(noyauIds));
         
         if (noyauData && noyauData.length > 0) {
-          // Les images des noyaux seront gérées par LazyImage, pas besoin de fetchAndCacheImage
-          fetchedData.noyaux = noyauData;
+          // Traiter les images
+          const noyauxWithImages = await Promise.all(
+            noyauData.map(async (noyau) => {
+              if (noyau.image) {
+                try {
+                  const imageData = await fetchImageAsBase64(noyau.image);
+                  return {
+                    ...noyau,
+                    image: imageData
+                  };
+                } catch (e) {
+                  console.warn(`⚠️ Impossible de charger l'image pour le noyau #${noyau.id}`, e);
+                  return noyau;
+                }
+              }
+              return noyau;
+            })
+          );
+          
+          fetchedData.noyaux = noyauxWithImages;
           setNoyaux(prev => {
             const newNoyaux = [...prev];
-            noyauData.forEach(noyau => {
+            noyauxWithImages.forEach(noyau => {
               const index = newNoyaux.findIndex(n => n.id === noyau.id);
               if (index >= 0) {
                 newNoyaux[index] = noyau;
@@ -215,11 +350,29 @@ export default function BuildsPage() {
           .in("id", Array.from(ombreIds));
         
         if (ombreData && ombreData.length > 0) {
-          // Les images des ombres seront gérées par LazyImage, pas besoin de fetchAndCacheImage
-          fetchedData.ombres = ombreData;
+          // Traiter les images
+          const ombresWithImages = await Promise.all(
+            ombreData.map(async (ombre) => {
+              if (ombre.image) {
+                try {
+                  const imageData = await fetchImageAsBase64(ombre.image);
+                  return {
+                    ...ombre,
+                    image: imageData
+                  };
+                } catch (e) {
+                  console.warn(`⚠️ Impossible de charger l'image pour l'ombre #${ombre.id}`, e);
+                  return ombre;
+                }
+              }
+              return ombre;
+            })
+          );
+          
+          fetchedData.ombres = ombresWithImages;
           setOmbres(prev => {
             const newOmbres = [...prev];
-            ombreData.forEach(ombre => {
+            ombresWithImages.forEach(ombre => {
               const index = newOmbres.findIndex(o => o.id === ombre.id);
               if (index >= 0) {
                 newOmbres[index] = ombre;
@@ -256,6 +409,10 @@ export default function BuildsPage() {
         }
       }
       
+      // Mettre en cache les données récupérées
+      chasseursDataCache.current.set(chasseurId, fetchedData);
+      console.log(`💾 Données du chasseur #${chasseurId} mises en cache mémoire`);
+      
       // Marquer ce chasseur comme chargé
       setLoadedChasseurs(prev => new Set(prev).add(chasseurId));
       console.log(`✅ Données du chasseur #${chasseurId} chargées depuis Supabase avec les images`);
@@ -263,7 +420,7 @@ export default function BuildsPage() {
     } catch (error) {
       console.error(`❌ Erreur lors du chargement des données pour le chasseur #${chasseurId}:`, error);
     }
-  }, [loadedChasseurs]);
+  };
   
   // Fonction pour gérer l'ouverture/fermeture d'un onglet de chasseur
   const handleChasseurToggle = (chasseurId: number, isOpen: boolean) => {
@@ -280,28 +437,53 @@ export default function BuildsPage() {
     });
   };
 
-  // Log de développement pour valider l'implémentation
-  if (process.env.NODE_ENV === 'development') {
-    console.log(`🏗️ ${PAGE_ID}: Page initialisée`);
-    console.log(`🏗️ ${PAGE_ID}: Toutes les images gérées par LazyImage + IndexedDB (conforme au guide)`);
-    console.log(`🏗️ ${PAGE_ID}: Images d'éléments, portraits et artefacts utilisent le cache automatique`);
-    if (chasseursData) {
-      console.log(`🏗️ ${PAGE_ID}: ${chasseursData.length} chasseurs chargés via SWR`);
-    }
-  }
-
-  // Synchroniser les données SWR avec l'état local (pour compatibilité avec le code existant)
   useEffect(() => {
-    if (chasseursData) {
-      setChasseurs(chasseursData);
-    }
-  }, [chasseursData]);
+    const fetchInitialData = async () => {
+      // Charger depuis Supabase
+      console.log("🔄 Récupération des données de base des chasseurs depuis Supabase...");
+      const { data: chasseurData } = await supabase
+        .from("chasseurs")
+        .select("id, nom, image, element, rarete");
+      
+      if (chasseurData) {
+        // Traiter les images des chasseurs
+        const chasseursWithImages = await Promise.all(
+          chasseurData.map(async (chasseur) => {
+            if (chasseur.image) {
+              try {
+                const imageData = await fetchImageAsBase64(chasseur.image);
+                return {
+                  ...chasseur,
+                  image: imageData
+                };
+              } catch (e) {
+                console.warn(`⚠️ Impossible de charger l'image pour le chasseur #${chasseur.id}`, e);
+                return chasseur;
+              }
+            }
+            return chasseur;
+          })
+        );
+        
+        setChasseurs(chasseursWithImages);
+        console.log(`✅ ${chasseursWithImages.length} chasseurs chargés avec leurs images`);
+      }
+    };
 
-  // Gestion du scroll vers l'ancre après chargement des chasseurs
+    fetchInitialData();
+    
+    // Précharger les images des éléments (utilisées pour le filtrage)
+    elementIcons.forEach(el => {
+      fetchImageAsBase64(el.image);
+    });
+    
+  }, []);
+
   useEffect(() => {
+    // Quand les builds sont chargés, tente de scroller sur l'ancre
     if (location.hash && chasseurs.length > 0) {
+      const id = location.hash.replace("#", "");
       setTimeout(() => {
-        const id = location.hash.replace("#", "");
         const el = document.getElementById(id);
         if (el) {
           const yOffset = -40;
@@ -322,7 +504,7 @@ export default function BuildsPage() {
         }
       }, 200);
     }
-  }, [location, chasseurs, loadChasseurData]);
+  }, [location, chasseurs]);
 
   // Indexer les chasseurs pour un accès plus rapide
   const chasseurIndex = useMemo(() => {
@@ -352,32 +534,32 @@ export default function BuildsPage() {
         keywords="Solo Leveling, builds chasseurs, artefacts, noyaux, sets bonus, ARISE"
       />
 
-      <div className="w-full px-3 sm:px-4 lg:px-6 py-4 sm:py-6">
-        <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8 lg:space-y-10">
-          <div className="space-y-4 sm:space-y-6">
+      <div className="w-full px-4 py-6">
+        <div className="max-w-7xl mx-auto space-y-10">
+          <div className="space-y-4">
             {/* Introduction */}
-            <div className="bg-sidebar-accent p-4 sm:p-6 lg:p-8 rounded-lg shadow-md space-y-3 sm:space-y-4">
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-violet-400 text-center lg:text-left">
+            <div className="bg-sidebar-accent p-6 rounded-lg shadow-md space-y-4">
+              <h1 className="text-3xl md:text-4xl font-extrabold text-violet-400 text-center md:text-left">
                 Builds de Chasseurs pour Solo Leveling: ARISE
               </h1>
-              <p className="text-sm sm:text-base lg:text-lg text-gray-300 text-center lg:text-left leading-relaxed">
+              <p className="text-base md:text-lg text-gray-300 text-center md:text-left">
                 Découvrez les meilleures configurations pour vos chasseurs dans
                 Solo Leveling: ARISE. Ce guide inclut des statistiques,
                 artefacts, noyaux et bonus de sets pour optimiser vos équipes.
               </p>
-              <p className="text-sm sm:text-base lg:text-lg text-gray-300 text-center lg:text-left leading-relaxed">
+              <p className="text-base md:text-lg text-gray-300 text-center md:text-left">
                 Utilisez les outils de recherche et de filtres pour trouver
                 rapidement un chasseur spécifique ou explorer les meilleures
                 configurations adaptées à chaque chasseur.
               </p>
-              <p className="text-sm sm:text-base lg:text-lg text-gray-300 text-center lg:text-left leading-relaxed">
+              <p className="text-base md:text-lg text-gray-300 text-center md:text-left">
                 Que vous soyez débutant à la recherche d'une configuration de
                 départ ou expert cherchant à affiner vos équipes, cette section
                 est conçue pour vous aider à maximiser vos performances.
               </p>
               {/* Dernières modifications */}
-              <div className="text-center lg:text-left">
-                <p className="text-xs sm:text-sm text-gray-400 italic">
+              <div className="text-center md:text-left">
+                <p className="text-sm text-gray-400 italic">
                   <span className="text-white font-medium">
                     <LastModified date={lastModifiedDates.builds} />
                   </span>
@@ -386,29 +568,29 @@ export default function BuildsPage() {
             </div>
 
             {/* Barre de recherche et filtres */}
-            <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-6">
+            <div className="flex flex-col items-center justify-center space-y-4">
               {/* Barre de recherche avec bouton reset */}
-              <div className="flex flex-col sm:flex-row items-center w-full sm:w-auto space-y-3 sm:space-y-0 sm:space-x-3">
+              <div className="flex items-center w-3/4 md:w-1/3 space-x-3">
                 <input
                   type="text"
                   placeholder="Rechercher un chasseur..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="w-full sm:w-64 lg:w-80 px-3 sm:px-4 py-2 sm:py-2.5 bg-sidebar-accent border border-sidebar-border rounded-md text-sm sm:text-base text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-solo-purple transition-all duration-200"
+                  className="flex-1 px-4 py-2 bg-sidebar-accent border border-sidebar-border rounded-md text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-solo-purple"
                 />
                 <button
                   onClick={() => {
                     setSearch("");
                     setSelectedElement(null);
                   }}
-                  className="w-full sm:w-auto px-4 sm:px-3 py-2 sm:py-2.5 text-sm sm:text-base bg-solo-purple text-white rounded-md shadow-md border border-solo-purple hover:bg-solo-purple-dark transition-colors duration-300"
+                  className="px-3 py-2 text-sm md:text-base bg-solo-purple text-white rounded-md shadow-md border border-solo-purple hover:bg-solo-purple-dark transition-colors duration-300"
                 >
                   Réinitialiser
                 </button>
               </div>
 
               {/* Filtres d'éléments */}
-              <div className="flex items-center justify-center flex-wrap gap-2 sm:gap-3 lg:gap-4">
+              <div className="flex items-center gap-3">
                 {elementIcons.map((el) => (
                   <div
                     key={el.id}
@@ -417,16 +599,15 @@ export default function BuildsPage() {
                         prev === el.id ? null : el.id
                       )
                     }
-                    className="relative w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95"
+                    className="relative w-8 h-8 md:w-10 md:h-10 cursor-pointer transition-all duration-200 hover:scale-105"
                   >
-                    <LazyImage
-                      src={el.image}
+                    <img
+                      src={imageCache.get(normalizeUrl(el.image)) || el.image}
                       alt={el.id}
-                      fallbackClassName="w-full h-full object-contain bg-transparent"
-                      showSpinner={true}
+                      className="w-full h-full object-contain"
                     />
                     {selectedElement === el.id && (
-                      <div className="absolute bottom-[-4px] sm:bottom-[-6px] left-1/4 w-1/2 h-[2px] bg-solo-purple rounded-full"></div>
+                      <div className="absolute bottom-[-6px] left-1/3 w-1/3 h-[1px] bg-solo-purple"></div>
                     )}
                   </div>
                 ))}

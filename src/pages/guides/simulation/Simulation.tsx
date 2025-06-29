@@ -1,34 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
-import LazyImage from "@/lib/lazy";
-
-// =========================
-// Utilisation conforme au guide d'implémentation
-// =========================
-
-// Constante pour identifier cette page dans le système de logs
-const PAGE_ID = "Simulation";
 
 export default function Simulation() {
   const navigate = useNavigate();
 
-  // Log de développement pour valider l'implémentation
-  if (process.env.NODE_ENV === 'development') {
-    console.log(`🎯 ${PAGE_ID}: Page initialisée`);
-    console.log(`🎯 ${PAGE_ID}: Images gérées par LazyImage + IndexedDB (conforme au guide)`);
-  }
+  useEffect(() => {
+    // Applique la couleur à tous les éléments <strong>
+    const strongElements = document.querySelectorAll("strong");
+    strongElements.forEach((element) => {
+      (element as HTMLElement).style.color = "rgb(167, 139, 250)";
+    });
+  }, []);
 
   return (
     <Layout>
       {/* Bannière pleine largeur */}
       <div className="relative w-full h-72 sm:h-96 mb-8 overflow-hidden">
-        <LazyImage
+        <img
           src="https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Background_Simulation.webp"
           alt="Bannière Simulation"
           className="w-full h-full object-cover"
-          showSpinner={true}
-          fallbackClassName="w-full h-full bg-gray-600"
         />
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
@@ -37,7 +29,7 @@ export default function Simulation() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-white space-y-12 [&_strong]:text-[rgb(167,139,250)]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-white space-y-12">
         {/* Lien Retour vers les guides */}
         <div className="mb-6">
           <button

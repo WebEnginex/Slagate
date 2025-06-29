@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect } from "react";
 import type { Database } from "@/integrations/supabase/types";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import {
@@ -18,15 +18,8 @@ import {
   Zap,
   Gem,
 } from "lucide-react";
-import LazyImage from "@/lib/lazy";
+import { Image } from "@/components/ui/Image";
 import type { TeamGroup } from "@/config/ennio/teamEnnioJinwoo";
-
-// =========================
-// Utilisation conforme au guide d'implémentation
-// =========================
-
-// Constante pour identifier ce composant dans le système de logs
-const PAGE_ID = "ENNIO_TEAM";
 type Props = {
   group: TeamGroup; // Un groupe contenant deux équipes
   chasseurs: (Omit<
@@ -65,10 +58,8 @@ type Props = {
   > & { created_at?: string })[];
 };
 
-// Type étendu pour les compétences avec element2 (optionnel)
-type ExtendedCompetence = Database["public"]["Tables"]["jinwoo_competences"]["Row"] & {
-  element2?: string;
-};
+// Constante pour identifier ce composant dans le système de logs
+const PAGE_ID = "EnnioTeamCard";
 
 // Fonction pour formater le texte avec des crochets et appliquer un style coloré
 function formatTextWithBrackets(text: string) {
@@ -158,37 +149,25 @@ export default function TeamGroupCard({
   >({}); // Pour alterner entre noyaux alternatifs
   const [expandedDescriptions, setExpandedDescriptions] = useState<{ [key: string]: boolean }>({}); // Pour afficher/masquer les descriptions
 
-  // Log de développement pour valider l'implémentation
-  if (process.env.NODE_ENV === 'development') {
-    console.log(`🏆 ${PAGE_ID}: Composant initialisé avec LazyImage (conforme au guide)`);
-  }
-
-  // =========================
-  // Callbacks optimisés avec useCallback
-  // =========================
-  
-  const toggleTeam = useCallback((teamId: number) => {
+  const toggleTeam = (teamId: number) => {
     setExpandedTeamId(expandedTeamId === teamId ? null : teamId);
     setSelectedChasseurId(null); // Réinitialiser le chasseur sélectionné
     setOpenSections(["stats"]); // Réinitialiser à la section stats
-  }, [expandedTeamId]);
+  };
 
-  const getFromList = useCallback(<T extends { id: number | string }>(
-    list: T[],
-    id: number | string
-  ) => list.find((item) => item.id.toString() === id.toString()), []);
-  
-  const toggleSection = useCallback((key: string) => {
+  const getFromList = (list: any[], id: number | string) =>
+    list.find((item) => item.id.toString() === id.toString());
+  const toggleSection = (key: string) => {
     setOpenSections((prev) =>
       prev.includes(key) ? prev.filter((s) => s !== key) : [...prev, key]
     );
-  }, []);
+  };
 
-  const isSectionOpen = useCallback((key: string) => openSections.includes(key), [openSections]);
+  const isSectionOpen = (key: string) => openSections.includes(key);
   
-  const toggleDescription = useCallback((id: string) => {
+  const toggleDescription = (id: string) => {
     setExpandedDescriptions(prev => ({ ...prev, [id]: !prev[id] }));
-  }, []);
+  };
 
   return (
     <Card className="mb-10 bg-sidebar border-sidebar-border overflow-hidden">
@@ -255,12 +234,13 @@ export default function TeamGroupCard({
                               : "border-gray-700"
                           }`}
                         >
-                          <LazyImage
+                          <Image
                             src={chasseurData?.image || ""}
                             alt={chasseurData?.nom || "Chasseur"}
+                            pageId="Ennio"
                             className="w-full h-full object-cover"
-                            showSpinner={true}
-                            fallbackClassName="w-full h-full bg-sidebar-accent"
+                            skeleton={true}
+                            shimmer={true}
                           />
                         </div>                        <p className="mt-1 sm:mt-2 text-2xs sm:text-xs text-white text-center w-16 sm:w-20 mx-auto overflow-hidden text-ellipsis whitespace-nowrap">
                           {chasseurData?.nom}
@@ -352,22 +332,23 @@ export default function TeamGroupCard({
                                   className="bg-sidebar p-3 sm:p-4 rounded-lg border border-sidebar-border text-center w-full sm:w-48 relative"
                                 >
                                   {arme.arme_element && (
-                                    <div className="absolute top-2 left-2 z-10">
-                                      <LazyImage
+                                    <div className="absolute top-2 left-2 z-10">                                        <Image
                                         src={arme.arme_element}
                                         alt="Élément"
+                                        pageId={PAGE_ID}
                                         className="w-6 h-6 sm:w-7 sm:h-7 object-contain"
-                                        showSpinner={true}
-                                        fallbackClassName="w-6 h-6 sm:w-7 sm:h-7 bg-transparent"
+                                        skeleton={true}
+                                        shimmer={true}
                                       />
                                     </div>
                                   )}
-                                  <LazyImage
+                                  <Image
                                     src={arme.image || ""}
                                     alt={arme.nom}
+                                    pageId={PAGE_ID}
                                     className="w-16 h-16 sm:w-24 sm:h-24 mx-auto object-contain"
-                                    showSpinner={true}
-                                    fallbackClassName="w-16 h-16 sm:w-24 sm:h-24 mx-auto bg-transparent"
+                                    skeleton={true}
+                                    shimmer={true}
                                   />
                                   <p className="text-xs sm:text-sm font-medium text-white mt-1 sm:mt-2 truncate">
                                     {arme.nom}
@@ -403,12 +384,13 @@ export default function TeamGroupCard({
                                       {slot.charAt(0).toUpperCase() +
                                         slot.slice(1)}
                                     </p>
-                                    <LazyImage
+                                    <Image
                                       src={artefact?.image || ""}
                                       alt={artefact?.nom || "Artefact"}
+                                      pageId={PAGE_ID}
                                       className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mx-auto object-contain"
-                                      showSpinner={true}
-                                      fallbackClassName="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mx-auto bg-transparent"
+                                      skeleton={true}
+                                      shimmer={true}
                                     />
                                     <p className="mt-1 text-[10px] sm:text-2xs font-medium text-center text-white truncate w-full">
                                       {artefact?.nom}
@@ -445,7 +427,9 @@ export default function TeamGroupCard({
                                 className="bg-sidebar p-2 sm:p-3 rounded-lg border border-sidebar-border"
                               >
                                 <p className="font-semibold text-xs sm:text-sm text-solo-purple">
-                                  {setBonus.nom}
+                                  {setBonus.nom}{" "}
+                                  {setBonus.pieces_count &&
+                                    `(${setBonus.pieces_count})`}
                                 </p>                                  <div className="text-2xs sm:text-xs text-gray-300 mt-1 sm:mt-2 space-y-1">
                                   {setBonus?.description
                                     ?.replace(/<br\s*\/?>/gi, "\n")
@@ -487,16 +471,14 @@ export default function TeamGroupCard({
                                 >
                                   {" "}
                                   <div className="flex flex-col items-center mb-2">
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 flex items-center justify-center mb-1">
-                                      <LazyImage
-                                        key={`noyau-${slotKey}-${activeIndex}`}
-                                        src={noyau.image || ""}
-                                        alt={noyau.nom || "Noyau"}
-                                        className="max-w-full max-h-full object-contain"
-                                        showSpinner={true}
-                                        fallbackClassName="w-full h-full bg-transparent"
-                                      />
-                                    </div>
+                                    <Image
+                                      src={noyau.image || ""}
+                                      alt={noyau.nom || "Noyau"}
+                                      pageId={PAGE_ID}
+                                      className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 object-contain mb-1"
+                                      skeleton={true}
+                                      shimmer={true}
+                                    />
                                     <p className="text-[10px] sm:text-xs font-semibold text-white text-center truncate w-full">
                                       {noyau.nom}
                                     </p>
@@ -563,36 +545,42 @@ export default function TeamGroupCard({
                                     {competence.element && (
                                       <div className="absolute top-2 left-2 z-10">
                                         {" "}
-                                        <LazyImage
+                                        <Image
                                           src={competence.element}
                                           alt="Élément"
+                                          pageId={PAGE_ID}
                                           className="w-6 h-6 sm:w-7 sm:h-7 object-contain"
-                                          showSpinner={false}
-                                          fallbackClassName="w-6 h-6 sm:w-7 sm:h-7 bg-transparent"
+                                          skeleton={true}
+                                          shimmer={true}
+                                          showErrorMessage={false}
                                         />
                                       </div>
                                     )}{" "}
                                     
                                     {/* Second élément en dessous du premier */}
-                                    {(competence as ExtendedCompetence).element2 && 
-                                      (competence as ExtendedCompetence).element2 !== "EMPTY" && 
-                                      (competence as ExtendedCompetence).element2 !== "NULL" && (
+                                    {(competence as any).element2 && 
+                                      (competence as any).element2 !== "EMPTY" && 
+                                      (competence as any).element2 !== "NULL" && (
                                       <div className="absolute top-11 left-2 z-10">
-                                        <LazyImage
-                                          src={(competence as ExtendedCompetence).element2!}
+                                        <Image
+                                          src={(competence as any).element2}
                                           alt="Élément 2"
+                                          pageId={PAGE_ID}
                                           className="w-6 h-6 sm:w-7 sm:h-7 object-contain"
-                                          showSpinner={true}
-                                          fallbackClassName="w-6 h-6 sm:w-7 sm:h-7 bg-transparent"
+                                          skeleton={true}
+                                          shimmer={true}
+                                          showErrorMessage={false}
                                         />
                                       </div>
                                     )}{" "}
-                                    <LazyImage
+                                    <Image
                                       src={competence.image || ""}
                                       alt={competence.nom}
+                                      pageId={PAGE_ID}
                                       className="w-20 h-20 mx-auto object-contain"
-                                      showSpinner={true}
-                                      fallbackClassName="w-20 h-20 mx-auto bg-transparent"
+                                      skeleton={true}
+                                      shimmer={true}
+                                      showErrorMessage={false}
                                     />{" "}                                    <p className="text-sm font-medium text-white mt-2">
                                       {competence.nom}
                                     </p>
@@ -646,12 +634,21 @@ export default function TeamGroupCard({
                                   {/* Premier élément en haut à gauche */}
                                   {qte.element && (
                                     <div className="absolute top-2 left-2 z-10 w-7 h-7 flex items-center justify-center">
-                                      <LazyImage
+                                      <Image
                                         src={qte.element}
                                         alt="Élément"
+                                        pageId={PAGE_ID}
+                                        width={28}
+                                        height={28}
                                         className="w-full h-full object-contain"
-                                        showSpinner={true}
-                                        fallbackClassName="w-full h-full bg-transparent"
+                                        skeleton={true}
+                                        shimmer={true}
+                                        showErrorMessage={false}
+                                        style={{
+                                          maxWidth: "28px",
+                                          maxHeight: "28px",
+                                          objectFit: "contain"
+                                        }}
                                       />
                                     </div>
                                   )}{" "}
@@ -661,22 +658,34 @@ export default function TeamGroupCard({
                                     qte.element2 !== "EMPTY" && 
                                     qte.element2 !== "NULL" && (
                                     <div className="absolute top-12 left-2 z-10 w-7 h-7 flex items-center justify-center">
-                                      <LazyImage
+                                      <Image
                                         src={qte.element2}
                                         alt="Élément 2"
+                                        pageId={PAGE_ID}
+                                        width={28}
+                                        height={28}
                                         className="w-full h-full object-contain"
-                                        showSpinner={true}
-                                        fallbackClassName="w-full h-full bg-transparent"
+                                        skeleton={true}
+                                        shimmer={true}
+                                        showErrorMessage={false}
+                                        style={{
+                                          maxWidth: "28px",
+                                          maxHeight: "28px",
+                                          objectFit: "contain"
+                                        }}
                                       />
                                     </div>
                                   )}{" "}
                                   
-                                  <LazyImage
+                                  <Image
                                     src={qte.image || ""}
                                     alt={qte.nom}
+                                    pageId={PAGE_ID}
                                     className="w-20 h-20 mx-auto object-contain"
-                                    showSpinner={true}
-                                    fallbackClassName="w-20 h-20 mx-auto bg-transparent"
+                                    skeleton={true}
+                                    shimmer={true}
+                                    showErrorMessage={false} 
+                                    style={{ aspectRatio: '1/1' }} // Force un ratio carré
                                   />{" "}                                      <p className="text-sm font-medium text-white mt-2">
                                       {qte.nom}
                                     </p>
@@ -737,12 +746,13 @@ export default function TeamGroupCard({
                                       key={i}
                                       className="bg-sidebar p-3 rounded-lg border border-sidebar-border text-center"
                                     >
-                                      <LazyImage
+                                      <Image
                                         src={pierre.image || ""}
                                         alt={pierre.nom}
+                                        pageId={PAGE_ID}
                                         className="w-16 h-16 mx-auto object-contain"
-                                        showSpinner={true}
-                                        fallbackClassName="w-16 h-16 mx-auto bg-transparent"
+                                        skeleton={true}
+                                        shimmer={true}
                                       />
                                       <p className="text-sm font-medium text-white mt-2">
                                         {pierre.nom}
@@ -792,12 +802,13 @@ export default function TeamGroupCard({
                                       key={i}
                                       className="bg-sidebar p-3 rounded-lg border border-sidebar-border text-center"
                                     >
-                                      <LazyImage
+                                      <Image
                                         src={pierre.image || ""}
                                         alt={pierre.nom}
+                                        pageId={PAGE_ID}
                                         className="w-16 h-16 mx-auto object-contain"
-                                        showSpinner={true}
-                                        fallbackClassName="w-16 h-16 mx-auto bg-transparent"
+                                        skeleton={true}
+                                        shimmer={true}
                                       />
                                       <p className="text-sm font-medium text-white mt-2">
                                         {pierre.nom}
@@ -853,12 +864,13 @@ export default function TeamGroupCard({
                                   className="bg-sidebar p-2 sm:p-4 rounded-lg border border-sidebar-border flex flex-col items-center"
                                 >
                                   <div className="relative mb-2">
-                                    <LazyImage
+                                    <Image
                                       src={ombre.image || ""}
                                       alt={ombre.nom || "Ombre"}
+                                      pageId={PAGE_ID}
                                       className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 object-contain"
-                                      showSpinner={true}
-                                      fallbackClassName="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-transparent"
+                                      skeleton={true}
+                                      shimmer={true}
                                     />
                                     <div className="absolute -top-2 -right-2 bg-solo-purple text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center text-white border-2 border-sidebar">
                                       {i + 1}
