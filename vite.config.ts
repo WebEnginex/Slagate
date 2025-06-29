@@ -47,6 +47,18 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         assetFileNames: 'assets/[name].[hash].[ext]',
+<<<<<<< HEAD
+=======
+        manualChunks: {
+          // Garder React ensemble pour éviter les problèmes de contexte
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-ui': ['@radix-ui/react-accordion', '@radix-ui/react-avatar', '@radix-ui/react-collapsible'],
+          'vendor-supabase': ['@supabase/supabase-js'],
+          'vendor-query': ['@tanstack/react-query'],
+          'vendor-icons': ['lucide-react', 'react-icons'],
+          'vendor-swr': ['swr']
+        }
+>>>>>>> 34d132e (fix: Correction bordure noire sur cartes chasseurs - Remplacement LazyImage par img normale pour background)
       },
     },
   },

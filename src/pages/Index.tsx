@@ -42,28 +42,20 @@ const HunterCard = ({
   return (
     <Link to={`/builds#chasseur-${hunter.id}`} className="block">
       <Card className="bg-gray-800 border border-gray-700 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg overflow-hidden">
-        <CardContent
-          className="relative flex justify-center items-end h-64 bg-gray-700 p-0"
-          style={{
-            backgroundImage:
-              "url('https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/background//Bg_AchievePage_1.webp')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <img
-            src={imageUrl}
+        <CardContent className="relative flex justify-center items-end h-64 bg-gray-700 p-0">
+          <LazyImage
+            src={hunter.image}
             alt={hunter.nom}
             className="w-full h-full object-contain"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = "/placeholder.svg";
-            }}
+            showSpinner={true}
           />
-          <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/70 to-transparent text-center p-2">
-            <h3 className="text-lg font-bold text-white">{hunter.nom}</h3>
-          </div>
-        </CardContent>
-      </Card>
+        </div>
+        
+        {/* Titre en bas */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent text-center p-2 rounded-b-lg">
+          <h3 className="text-lg font-bold text-white">{hunter.nom}</h3>
+        </div>
+      </div>
     </Link>
   );
 };
@@ -197,11 +189,11 @@ const Index = () => {
         title="Accueil - SLAGATE | Solo Leveling: ARISE"
         description="Bienvenue sur SLAGATE..."
       />
-      <div className="w-full px-6 py-12 text-gray-100">
-        <h1 className="text-4xl font-extrabold text-center text-violet-400 mb-10">
+      <div className="w-full px-3 sm:px-6 py-8 sm:py-12 text-gray-100">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-center text-violet-400 mb-8 sm:mb-10">
           Derniers chasseurs sortis
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
           {hunters.map((hunter) => (
             // Dans le rendu de votre composant Index
             <HunterCard
