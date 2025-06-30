@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import * as React from "react";
 import SideNav from "./SideNav";
 import { Menu } from "lucide-react";
 import Footer from "./Footer";
-import LogSettingsPanel from "./tools/LogSettingsPanel";
 
 type LayoutProps = {
   children: React.ReactNode;
 };
 
 const Layout = ({ children }: LayoutProps) => {
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = React.useState(false);
 
   return (
     <div className="flex min-h-screen w-full">
@@ -27,8 +26,7 @@ const Layout = ({ children }: LayoutProps) => {
             {children}
           </div>
           
-          {/* Panel de contrôle des logs d'images pour les développeurs */}
-          {import.meta.env.DEV && <LogSettingsPanel />}
+          
         </main>
 
         <Footer />

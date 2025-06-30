@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, forwardRef } from 'react';
+import * as React from "react";
 import { cn } from '@/lib/utils';
 import { loadPageImage } from '@/services/cacheImages/pageImageLoader';
 import { loadVisibleImage } from '@/services/cacheImages/imageQueue';
@@ -36,7 +36,7 @@ export interface ImageProps {
  * - Affichage conditionnel des messages d'erreur
  * - Timeout automatique pour éviter les chargements infinis
  */
-export const Image = forwardRef<HTMLImageElement, ImageProps>(({ 
+export const Image = React.forwardRef<HTMLImageElement, ImageProps>(({ 
   src, 
   alt, 
   pageId = "global", 
@@ -51,12 +51,12 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(({
   maxRetries = 2,
   ...imgProps 
 }, ref) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [cachedSrc, setCachedSrc] = useState<string>("");
-  const [error, setError] = useState<boolean>(false);
-  const [retryCount, setRetryCount] = useState(0);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-    useEffect(() => {
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [cachedSrc, setCachedSrc] = React.useState<string>("");
+  const [error, setError] = React.useState<boolean>(false);
+  const [retryCount, setRetryCount] = React.useState(0);
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+    React.useEffect(() => {
     if (!src) {
       setIsLoading(false);
       setError(true);
@@ -115,7 +115,7 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(({
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [src, pageId, error]);// Gérer l'événement onLoad pour s'assurer que l'image est bien chargée  // Gérer l'événement onLoad pour s'assurer que l'image est bien chargée
+  }, [src, pageId, error, cachedSrc]);// Gérer l'événement onLoad pour s'assurer que l'image est bien chargée  // Gérer l'événement onLoad pour s'assurer que l'image est bien chargée
   const handleImageLoad: React.ReactEventHandler<HTMLImageElement> = (e) => {
     setIsLoading(false);
     setError(false); // S'assurer que l'état d'erreur est réinitialisé lorsque l'image charge correctement

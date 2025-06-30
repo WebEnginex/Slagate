@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, memo } from "react";
+import * as React from "react";
 import Layout from "@/components/Layout";
 import {
   Card,
@@ -17,7 +17,7 @@ import { X, ChevronDown, ChevronUp } from "lucide-react";
 import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
 import SEO from "@/components/SEO";
-import { loadPageImageAsBase64 } from "@/services/cacheImages";
+import LazyImage from "@/lib/lazy";
 
 type SocialLink = {
   type: "youtube" | "twitch" | "twitter" | "instagram" | "website" | "tiktok";
@@ -56,7 +56,7 @@ const copyToClipboard = (code: string) => {
   alert(`Code promo "${code}" copié dans le presse-papiers !`);
 };
 
-// Mise à jour de la fonction getSocialIcon pour utiliser les SVG locaux
+// Mise à jour de la fonction getSocialIcon pour utiliser LazyImage
 const getSocialIcon = (type: SocialLink["type"]) => {
   const iconMap: Record<SocialLink["type"], string> = {
     youtube: "/icons/youtube.svg",
@@ -68,11 +68,12 @@ const getSocialIcon = (type: SocialLink["type"]) => {
   };
 
   return (
-    <img
+    <LazyImage
       src={iconMap[type]}
       alt={type}
       className="h-5 w-5"
-      style={{ display: "inline-block" }}
+      showSpinner={false}
+      fallbackClassName="h-5 w-5"
     />
   );
 };
@@ -196,17 +197,16 @@ const highlightNumbers = (text: string) => {
 };
 
 // =========================
-// Utilisation du service de cache centralisé avec contexte de page
+// Utilisation conforme au guide d'implémentation
 // =========================
 
 // Constante pour identifier cette page dans le système de logs
 const PAGE_ID = "PromoCodes";
-const GUIDE_IMAGE_PATH = "/images/code_promo/";
 
 // =========================
 // Composant Memo pour les cartes de codes promo
 // =========================
-const PromoCard = memo(({ promo, onCopy, copiedCode }: {
+const PromoCard = React.memo(({ promo, onCopy, copiedCode }: {
   promo: typeof promoCodes[0];
   onCopy: (code: string) => void;
   copiedCode: string | null;
@@ -239,14 +239,12 @@ PromoCard.displayName = "PromoCard";
 // Composant principal
 // =========================
 const PromoCodes = () => {
-  // Centralisation de l'état : images en cache + code copié + modal
-  const [state, setState] = useState<{
-    cachedImages: Record<string, string>; // chemin => base64
+  // État simplifié : code copié + modal + étape ouverte
+  const [state, setState] = React.useState<{
     copiedCode: string | null;
     modalImage: string | null;
     openStep: number | null;
   }>({
-    cachedImages: {},
     copiedCode: null,
     modalImage: null,
     openStep: 0,
@@ -294,71 +292,47 @@ const PromoCodes = () => {
         'Les récompenses seront envoyées directement dans votre "messagerie" en jeu. Ouvrez-la pour les récupérer.',
       image: "/images/code_promo/tuto_pomo_code_7.webp",
     },
-  ];  // =========================
-  // Chargement et cache des images du guide étape par étape avec contexte de page
-  // =========================
-  useEffect(() => {
-    // Fonction pour charger les images et les mettre en cache avec le contexte de page
-    const loadImages = async () => {
-      try {
-        const newCache: Record<string, string> = { ...state.cachedImages };
-        let updated = false;
-        
-        // Extraire toutes les URLs d'images pour les passer en contexte au worker
-        const imageUrls = steps.map(step => step.image);
-        
-        // Charger toutes les images du guide
-        for (const stepObj of steps) {
-          // Si l'image n'est pas déjà dans le cache React
-          if (!newCache[stepObj.image]) {
-            // Récupérer l'image avec le contexte de page et la liste des images pertinentes
-            const base64 = await loadPageImageAsBase64(stepObj.image, PAGE_ID, imageUrls);
-            
-            // Mettre à jour le cache React
-            if (base64) {
-              newCache[stepObj.image] = base64;
-              updated = true;
-            }
-          }
-        }
-        
-        // Mise à jour de l'état avec les nouvelles images en cache
-        if (updated || (Object.keys(newCache).length && Object.keys(newCache).length !== Object.keys(state.cachedImages).length)) {
-          setState((prev) => ({ ...prev, cachedImages: newCache }));
-        }
-      } catch (error) {
-        console.error("Erreur lors du chargement des images:", error);
-        // En cas d'erreur, on continue sans mise en cache
-      }
-    };
-    
-    loadImages();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  ];
+
+  // Log de développement pour valider l'implémentation
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`🎫 ${PAGE_ID}: Page initialisée avec ${promoCodes.length} codes promo et ${steps.length} étapes du guide`);
+    console.log(`🎫 ${PAGE_ID}: Toutes les images gérées par LazyImage + IndexedDB (conforme au guide)`);
+  }
 
   // =========================
   // Gestion du copier/coller des codes promo
   // =========================
-  const handleCopy = useCallback((code: string) => {
+  const handleCopy = React.useCallback((code: string) => {
     navigator.clipboard.writeText(code);
     setState((prev) => ({ ...prev, copiedCode: code }));
     setTimeout(() => setState((prev) => ({ ...prev, copiedCode: null })), 2000);
+    
+    // Log de développement
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`🎫 ${PAGE_ID}: Code promo copié: ${code}`);
+    }
   }, []);
 
   // =========================
   // Gestion du modal d'image
   // =========================
-  const openModal = useCallback((image: string) => {
+  const openModal = React.useCallback((image: string) => {
     setState((prev) => ({ ...prev, modalImage: image }));
+    
+    // Log de développement
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`🎫 ${PAGE_ID}: Modal ouvert pour l'image: ${image.split('/').pop()}`);
+    }
   }, []);
-  const closeModal = useCallback(() => {
+  const closeModal = React.useCallback(() => {
     setState((prev) => ({ ...prev, modalImage: null }));
   }, []);
 
   // =========================
   // Gestion de l'ouverture des étapes du guide
   // =========================
-  const toggleStep = useCallback((index: number) => {
+  const toggleStep = React.useCallback((index: number) => {
     setState((prev) => ({ ...prev, openStep: prev.openStep === index ? null : index }));
   }, []);
 
@@ -374,7 +348,7 @@ const PromoCodes = () => {
 />
       <div className="mb-8">
         <h1 className="mb-2 text-3xl font-bold">Codes Promotionnels</h1>
-        <p className="text-muted-foreground">
+        <p className="">
           Utilisez ces codes dans le jeu pour obtenir des récompenses gratuites.
           N'oubliez pas de les utiliser avant leur expiration!
         </p>
@@ -385,15 +359,17 @@ const PromoCodes = () => {
         <div className="p-6">
           <div className="flex flex-col sm:flex-row items-center gap-6">
             <div className="aspect-square w-32 h-32 overflow-hidden rounded-full bg-muted border-4 border-white/10">
-              <img
+              <LazyImage
                 src="/images/logo/Sohoven_Logo.webp"
                 alt="Sohoven"
                 className="h-full w-full object-cover"
+                showSpinner={true}
+                fallbackClassName="h-full w-full bg-gray-600"
               />
             </div>
             <div className="flex-1 text-center sm:text-left">
               <h2 className="text-2xl font-bold mb-2">Sohoven</h2>
-              <p className="text-muted-foreground mb-4">
+              <p className=" mb-4">
                 Créateur de contenu français pour Solo Leveling: Arise
               </p>
               <div className="flex flex-wrap justify-center sm:justify-start gap-3">
@@ -476,10 +452,12 @@ const PromoCodes = () => {
                       className="w-full md:w-1/3 aspect-video bg-muted rounded-lg overflow-hidden cursor-pointer"
                       onClick={() => openModal(step.image)}
                     >
-                      <img
-                        src={state.cachedImages[step.image] || step.image}
+                      <LazyImage
+                        src={step.image}
                         alt={`Étape ${index + 1}`}
                         className="h-full w-full object-cover"
+                        showSpinner={true}
+                        fallbackClassName="h-full w-full bg-transparent rounded-lg"
                       />
                     </div>
                     <div className="flex-1">
@@ -505,10 +483,12 @@ const PromoCodes = () => {
             >
               <X className="h-6 w-6" />
             </button>
-            <img
-              src={state.cachedImages[state.modalImage] || state.modalImage}
+            <LazyImage
+              src={state.modalImage}
               alt="Agrandissement"
               className="max-w-full max-h-full object-contain rounded-lg"
+              showSpinner={true}
+              fallbackClassName="max-w-full max-h-full bg-gray-600 rounded-lg"
             />
           </div>
         </div>

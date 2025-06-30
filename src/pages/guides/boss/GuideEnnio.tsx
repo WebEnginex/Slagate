@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import * as React from "react";
 import Layout from "@/components/Layout";
 
 const tabs = [
@@ -101,7 +101,7 @@ const tabs = [
 ];
 
 const Ennio = () => {
-  const [activeTab, setActiveTab] = useState("informations");
+  const [activeTab, setActiveTab] = React.useState("informations");
 
   return (
     <Layout>

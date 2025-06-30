@@ -6,5 +6,12 @@ export * from './avatar';
 export * from './badge';
 export * from './breadcrumb';
 export * from './button';
-export * from './Image'; // Export de notre nouveau composant d'image
-// Ajoutez ici les autres exports selon vos besoins
+export * from './Image';
+export * from './tooltip';
+export * from './form';
+export * from './sidebar';
+export * from './switch';
+export * from './slider';
+export * from './skeleton';
+// ...ajoute ici tous les autres fichiers .ts/.tsx du dossier UI, sauf sonner
+// NE PAS exporter './sonner' tant que le bug n'est pas résolu

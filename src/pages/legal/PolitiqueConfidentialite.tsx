@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import * as React from "react";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 
 const PolitiqueConfidentialite = () => {
-  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedEmail, setCopiedEmail] = React.useState(false);
   
   const copyEmail = () => {
     navigator.clipboard.writeText('contact@webengine.fr');

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 import { hunterTiers } from "@/config/tier-list/chasseurs";
@@ -9,7 +9,6 @@ import { teamBdgTiers } from "@/config/tier-list/teamBdg";
 import Layout from "@/components/Layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
-import { Image } from "@/components/ui/Image";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Flame, Sword } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
@@ -17,7 +16,8 @@ import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
 import SEO from "@/components/SEO";
 import { useNavigate } from "react-router-dom";
-import { loadPageImage, preloadPageImages } from "@/services/cacheImages/pageImageLoader";
+import { useSupabaseFetch } from "@/lib";
+import LazyImage from "@/lib/lazy";
 
 // Types Supabase
 type Chasseur = Database["public"]["Tables"]["chasseurs"]["Row"];
@@ -119,53 +119,39 @@ export default function TierListPage() {
   );
 }
 
-// Composant pour afficher l'image d'un chasseur avec mise en cache
+// Composant pour afficher l'image d'un chasseur avec lazy loading
 const CachedHunterImage = ({ imageUrl, altText }: { imageUrl: string | null, altText: string }) => {
   return (
-    <Image
+    <LazyImage
       src={imageUrl || ""}
       alt={altText}
-      pageId={PAGE_ID}
-      className="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30"
-      skeleton={true}
-      shimmer={true}
+      fallbackClassName="w-full h-full mx-auto rounded-full object-cover border-2 border-solo-purple/30 bg-gray-800"
+      showSpinner={true}
     />
   );
 };
 
-// Composant pour afficher l'image d'une arme avec mise en cache
+// Composant pour afficher l'image d'une arme avec lazy loading
 const CachedWeaponImage = ({ imageUrl, altText }: { imageUrl: string | null, altText: string }) => {
   return (
-    <Image
+    <LazyImage
       src={imageUrl || ""}
       alt={altText}
-      pageId={PAGE_ID}
-      className="w-full h-full object-contain"
-      skeleton={true}
-      shimmer={true}
+      fallbackClassName="w-full h-full object-contain bg-gray-800"
+      showSpinner={true}
     />
   );
 };
 
 function HuntersTab() {
-  const [chasseurs, setChasseurs] = useState<Chasseur[]>([]);
-  const navigate = useNavigate(); // Utiliser useNavigate au lieu de useRouter
-  useEffect(() => {
-    // Récupère tous les chasseurs depuis Supabase
-    const fetchChasseurs = async () => {
+  const navigate = useNavigate();
+  const { data: chasseurs = [] } = useSupabaseFetch(
+    "supabase:chasseurs",
+    async () => {
       const { data } = await supabase.from("chasseurs").select("*");
-      if (data) {
-        setChasseurs(data);
-        
-        // Préchargement des images avec le contexte de la page
-        const imageUrls = data.map(hunter => hunter.image).filter(Boolean) as string[];
-        if (imageUrls.length > 0) {
-          preloadPageImages(imageUrls, PAGE_ID);
-        }
-      }
-    };
-    fetchChasseurs();
-  }, []);
+      return data || [];
+    }
+  );
 
   const huntersByTier = Object.entries(hunterTiers).reduce(
     (acc, [tier, ids]) => {
@@ -236,23 +222,13 @@ function HuntersTab() {
 }
 
 function WeaponsTab() {
-  const [armes, setArmes] = useState<Arme[]>([]);
-  useEffect(() => {
-    // Récupère toutes les armes depuis Supabase
-    const fetchArmes = async () => {
+  const { data: armes = [] } = useSupabaseFetch(
+    "supabase:armes",
+    async () => {
       const { data } = await supabase.from("jinwoo_armes").select("*");
-      if (data) {
-        setArmes(data);
-        
-        // Préchargement des images avec le contexte de la page
-        const imageUrls = data.map(arme => arme.image).filter(Boolean) as string[];
-        if (imageUrls.length > 0) {
-          preloadPageImages(imageUrls, PAGE_ID);
-        }
-      }
-    };
-    fetchArmes();
-  }, []);
+      return data || [];
+    }
+  );
 
   const armesByTier = Object.entries(weaponTiers).reduce((acc, [tier, ids]) => {
     // Trier les armes selon l'ordre des IDs dans weaponTiers
@@ -324,26 +300,16 @@ function TeamsTab({
   }[]>;
   teamSize: 3 | 4;
 }) {
-  const [chasseurs, setChasseurs] = useState<Chasseur[]>([]);
+  const { data: chasseurs = [] } = useSupabaseFetch(
+    "supabase:chasseurs",
+    async () => {
+      const { data } = await supabase.from("chasseurs").select("*");
+      return data || [];
+    }
+  );
   // État pour suivre quelles équipes montrent leur alternative
   const [showingAlternative, setShowingAlternative] = useState<Set<number>>(new Set());
   
-  useEffect(() => {
-    const fetchChasseurs = async () => {
-      const { data } = await supabase.from("chasseurs").select("*");
-      if (data) {
-        setChasseurs(data);
-        
-        // Préchargement des images des chasseurs pour cette équipe
-        const imageUrls = data.map(chasseur => chasseur.image).filter(Boolean) as string[];
-        if (imageUrls.length > 0) {
-          preloadPageImages(imageUrls, PAGE_ID);
-        }
-      }
-    };
-    fetchChasseurs();
-  }, []);
-
   // Fonction pour basculer entre la composition principale et l'alternative
   const toggleAlternative = (teamId: number) => {
     setShowingAlternative(prev => {
@@ -479,26 +445,13 @@ function TeamsPodTab({
 }: {
   tiers: Record<string, { id: number; name: string; hunters: number[] }[]>;
 }) {
-  const [chasseurs, setChasseurs] = useState<Chasseur[]>([]);
-
-  useEffect(() => {
-    const fetchChasseurs = async () => {
-      const { data: chasseursData } = await supabase
-        .from("chasseurs")
-        .select("*");
-      if (chasseursData) {
-        setChasseurs(chasseursData);
-        
-        // Préchargement des images avec le contexte de la page
-        const imageUrls = chasseursData.map(chasseur => chasseur.image).filter(Boolean) as string[];
-        if (imageUrls.length > 0) {
-          preloadPageImages(imageUrls, PAGE_ID);
-        }
-      }
-    };
-
-    fetchChasseurs();
-  }, []);
+  const { data: chasseurs = [] } = useSupabaseFetch(
+    "supabase:chasseurs",
+    async () => {
+      const { data } = await supabase.from("chasseurs").select("*");
+      return data || [];
+    }
+  );
 
   return (
     <div className="space-y-8">
@@ -564,26 +517,13 @@ function TeamsBdgTab({
 }: {
   tiers: Record<string, { id: number; name: string; hunters: number[] }[]>;
 }) {
-  const [chasseurs, setChasseurs] = useState<Chasseur[]>([]);
-
-  useEffect(() => {
-    const fetchChasseurs = async () => {
-      const { data: chasseursData } = await supabase
-        .from("chasseurs")
-        .select("*");
-      if (chasseursData) {
-        setChasseurs(chasseursData);
-        
-        // Préchargement des images avec le contexte de la page
-        const imageUrls = chasseursData.map(chasseur => chasseur.image).filter(Boolean) as string[];
-        if (imageUrls.length > 0) {
-          preloadPageImages(imageUrls, PAGE_ID);
-        }
-      }
-    };
-
-    fetchChasseurs();
-  }, []);
+  const { data: chasseurs = [] } = useSupabaseFetch(
+    "supabase:chasseurs",
+    async () => {
+      const { data } = await supabase.from("chasseurs").select("*");
+      return data || [];
+    }
+  );
 
   return (
     <div className="space-y-8">

@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 import path from 'path';
 import { componentTagger } from 'lovable-tagger';
 import ViteSitemap from 'vite-plugin-sitemap';
@@ -44,15 +44,24 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    sourcemap: false, // Désactiver les sourcemaps en production pour réduire la taille
     rollupOptions: {
       output: {
         assetFileNames: 'assets/[name].[hash].[ext]',
+        // manualChunks désactivé pour éviter la duplication de React
+        // manualChunks: (id) => {
+        //   ...
+        // },
       },
     },
+    // Augmenter la limite pour éviter les warnings sur les chunks volontairement gros
+    chunkSizeWarningLimit: 600,
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      react: path.resolve('./node_modules/react'),
+      'react-dom': path.resolve('./node_modules/react-dom'),
     },
   },
 }));
