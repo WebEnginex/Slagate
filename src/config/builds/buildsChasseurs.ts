@@ -110,6 +110,591 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
+  // Miyeon
+  {
+    chasseurId: 46,
+    element: "lumiere",
+    builds: [
+      {
+        id: 958,
+        nom: "Général",
+        stats: {
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "Le plus possible",
+          "PM ": "-",
+          "Attaque supplémentaire": "-",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Defense Supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Defense Supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 115,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 116,
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Dégâts de lumière",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [{ id: 4, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 2, statPrincipale: "PV supplémentaire" },
+            { id: 7, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 58 }, { id: 39 }, { id: 40 }],
+      },
+      {
+        id: 959,
+        nom: "Général 2",
+        stats: {
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "Le plus possible",
+          "PM ": "-",
+          "Attaque supplémentaire": "-",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 113,
+            statPrincipale: "Defense Supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 114,
+            statPrincipale: "Defense Supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 115,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 116,
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Dégâts de lumière",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [{ id: 4, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 2, statPrincipale: "PV supplémentaire" },
+            { id: 7, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 58 }, { id: 59 }, { id: 39 }, { id: 40 }],
+      },
+      {
+        id: 959,
+        nom: "Général 3",
+        stats: {
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "Le plus possible",
+          "PM ": "-",
+          "Attaque supplémentaire": "-",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Defense Supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Defense Supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 76,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 54,
+            statPrincipale: "Dégâts de lumière",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 19,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 43,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [{ id: 4, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 2, statPrincipale: "PV supplémentaire" },
+            { id: 7, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 39 }, { id: 40 }],
+      },
+      
+      {
+        id: 351,
+        nom: "POD",
+        stats: {
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "Le plus possible",
+          "PM ": "-",
+          "Attaque supplémentaire": "-",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 113,
+            statPrincipale: "Defense Supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 114,
+            statPrincipale: "Defense Supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 115,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 116,
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 117,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 118,
+            statPrincipale: "Dégâts de lumière",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 119,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 120,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [{ id: 4, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 2, statPrincipale: "PV supplémentaire" },
+            { id: 7, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 58 }, { id: 59 }, { id: 60 }],
+      },
+      {
+        id: 352,
+        nom: "BDG",
+        stats: {
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "Le plus possible",
+          "PM ": "-",
+          "Attaque supplémentaire": "-",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 113,
+            statPrincipale: "Defense Supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 114,
+            statPrincipale: "Defense Supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 115,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 116,
+            statPrincipale: "Dégâts de coup critique | Défense (%)",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 117,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 118,
+            statPrincipale: "Dégâts de lumière",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 119,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 120,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [{ id: 4, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 2, statPrincipale: "PV supplémentaire" },
+            { id: 7, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 58 }, { id: 59 }, { id: 60 }],
+      },
+    ],
+  },
+
+  // Shuhua
+  {
+    chasseurId: 45,
+    element: "eau",
+    builds: [
+      {
+        id: 947,
+        nom: "Général",
+        stats: {
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "-",
+          "PM ": "-",
+          "Attaque supplémentaire": "Le plus possible",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Dégâts de coup critique",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Dégâts d'eau",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [{ id: 4, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 2, statPrincipale: "PV supplémentaire" },
+            { id: 7, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+      {
+        id: 3,
+        nom: "POD",
+        stats: {
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "-",
+          "PM ": "-",
+          "Attaque supplémentaire": "Le plus possible",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Dégâts de coup critique",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Dégâts d'eau",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [{ id: 4, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 2, statPrincipale: "PV supplémentaire" },
+            { id: 7, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+      {
+        id: 4,
+        nom: "BDG",
+        stats: {
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "-",
+          "PM ": "-",
+          "Attaque supplémentaire": "Le plus possible",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 61,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 8,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 86,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 30,
+            statPrincipale: "Dégâts de coup critique",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 71,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 50,
+            statPrincipale: "Dégâts d'eau",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 15,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 39,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [{ id: 4, statPrincipale: "Attaque supplémentaire" }],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 2, statPrincipale: "PV supplémentaire" },
+            { id: 7, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 29 }, { id: 30 }, { id: 23 }, { id: 24 }],
+      },
+    ],
+  },
+
   // Lennart Niermann
   {
     chasseurId: 44,
@@ -2426,7 +3011,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
-  // Thomas André (FAIT)
+  // Thomas André
   {
     chasseurId: 36,
     element: "lumiere",
