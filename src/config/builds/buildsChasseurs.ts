@@ -3674,8 +3674,8 @@ export const buildsChasseurs: ChasseurBuild[] = [
           ],
           2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
           3: [
-            { id: 7, statPrincipale: "Attaque supplémentaire" },
-            { id: 2, statPrincipale: "Attaque supplémentaire" },
+            { id: 7, statPrincipale: "PV supplémentaire" },
+            { id: 2, statPrincipale: "PV supplémentaire" },
           ],
         },
         sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
