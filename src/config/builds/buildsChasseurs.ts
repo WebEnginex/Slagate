@@ -110,6 +110,164 @@ export const buildsChasseurs: ChasseurBuild[] = [
     ],
   },
 
+  // Sung Jinah
+  {
+    chasseurId: 47,
+    element: "vent",
+    builds: [
+      {
+        id: 2001,
+        nom: "Général",
+        stats: {
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "Le plus possible",
+          "PM ": "-",
+          "Attaque supplémentaire": "-",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 58,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 2,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 79,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 23,
+            statPrincipale: "Dégâts de coup critique",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 70,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 49,
+            statPrincipale: "Dégâts de vent",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 14,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 38,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 9, statPrincipale: "Défense supplémentaire" },
+            { id: 4, statPrincipale: "Défense supplémentaire" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 7, statPrincipale: "PV supplémentaire" },
+            { id: 3, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 43 }, { id: 44 }, { id: 45 }],
+      },
+      {
+        id: 2001,
+        nom: "Général 2",
+        stats: {
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "Le plus possible",
+          "PM ": "-",
+          "Attaque supplémentaire": "-",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 97,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 98,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 99,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 100,
+            statPrincipale: "Dégâts de coup critique",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 101,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 102,
+            statPrincipale: "Dégâts de vent",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 103,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 104,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 9, statPrincipale: "Défense supplémentaire" },
+            { id: 4, statPrincipale: "Défense supplémentaire" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 7, statPrincipale: "PV supplémentaire" },
+            { id: 3, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 52 }, { id: 53 }, { id: 54 }],
+      },
+      
+      
+    ],
+  },
+
   // Miyeon
   {
     chasseurId: 46,
@@ -7680,7 +7838,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
             statsSecondaires: ["-"],
           },
           bottes: {
-            id: 323,
+            id: 23,
             statPrincipale: "Dégâts de coup critique",
             statsSecondaires: ["-"],
           },
