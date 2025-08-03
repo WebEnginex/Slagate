@@ -263,6 +263,80 @@ export const buildsChasseurs: ChasseurBuild[] = [
         },
         sets_bonus: [{ id: 52 }, { id: 53 }, { id: 54 }],
       },
+      {
+        id: 2001,
+        nom: "BDG",
+        stats: {
+          "PV supplémentaire": "-",
+          "Défense supplémentaire": "Le plus possible",
+          "PM ": "-",
+          "Attaque supplémentaire": "-",
+          "Précision": "-",
+          "Taux de coup critique ": "50%",
+          "Dégâts de coup critique ": "200% - 210%",
+          "Hausse des dégâts ": "30% +",
+          "Pénétration de défense ": "10% - 20%",
+          "Réduction des dégâts ": "-",
+          "Hausse des soins donnés ": "-",
+          "Hausse des soins reçus ": "-",
+          "Hausse du taux de récupération des PM ": "-",
+          "Baisse du coût de PM ": "-",
+        },
+        artefacts: {
+          casque: {
+            id: 59,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          armure: {
+            id: 6,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          gants: {
+            id: 83,
+            statPrincipale: "Attaque supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bottes: {
+            id: 27,
+            statPrincipale: "Dégâts de coup critique",
+            statsSecondaires: ["-"],
+          },
+          collier: {
+            id: 73,
+            statPrincipale: "PV supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          bracelet: {
+            id: 55,
+            statPrincipale: "Dégâts de vent",
+            statsSecondaires: ["-"],
+          },
+          bague: {
+            id: 20,
+            statPrincipale: "Défense supplémentaire",
+            statsSecondaires: ["-"],
+          },
+          boucles: {
+            id: 44,
+            statPrincipale: "PM",
+            statsSecondaires: ["-"],
+          },
+        },
+        noyaux: {
+          1: [
+            { id: 9, statPrincipale: "Défense supplémentaire" },
+            { id: 4, statPrincipale: "Défense supplémentaire" },
+          ],
+          2: [{ id: 12, statPrincipale: "Défense supplémentaire" }],
+          3: [
+            { id: 7, statPrincipale: "PV supplémentaire" },
+            { id: 3, statPrincipale: "PV supplémentaire" },
+          ],
+        },
+        sets_bonus: [{ id: 5 }, { id: 6 }, { id: 41 }, { id: 42 }],
+      },
       
       
     ],
