@@ -71,7 +71,7 @@ const getSocialIcon = (type: SocialLink["type"]) => {
     <LazyImage
       src={iconMap[type]}
       alt={type}
-      className="h-5 w-5"
+      className ="h-5 w-5"
       showSpinner={false}
       fallbackClassName="h-5 w-5"
     />
@@ -81,80 +81,37 @@ const getSocialIcon = (type: SocialLink["type"]) => {
 // Mettre les récompenses en listes
 const promoCodes = [
   {
-    code: "JUICYZAFF",
+    code: "CMIRON500GIFT",
     rewards: [
-      "Gold x100,000",
-      "Poudre de bénédiction x50",
+      "Fragment de rune x500",
+      "Cristal de mana de palier inférieur x500",
+      "Gold x 1.000.000",
     ],
-    date: "?",
+    date: "22 octobre à 1h59",
   },
   {
-    code: "BOTKING",
+    code: "AUG28THUD",
     rewards: [
-      "Gold x100,000",
-      "Fragment de rune x100",
-    ],
-    date: "?",
+    "Cristal abyssal x5",
+    "Traces d’ombre x100",
+    "Cristal de mana de palier inférieur x1.000",],
+    date: "25 Septembre à 16h59",
   },
   {
-    code: "PAYNECHULED",
-    rewards: [
-      "Gold x100,000",
-      "Poudre de bénédiction x50",
-    ],
-    date: "?",
-  },
-  {
-    code: "HIVEPORDY",
-    rewards: [
-      "Gold x100,000",
-      "Fragment de rune x100",
-    ],
-    date: "?",
-  },
-  {
-    code: "WHITEVALKYRIE",
-    rewards: [
-      "Concept spécial x2",
-      "Concept d'arme exclusive de chasseur x2",
-      "Concept d'arme de joueur spécial x2",
-    ],
-    date: "?",
-  },
-  {
-    code: "OREARA1STANNIV",
-    rewards: ["Pierres de l'esprit x1,000"],
-    date: "?",
-  },
-  {
-    code: "CMIRONGIFT",
-    rewards: [
-      "Énergie de l'ombre x1,111",
-    ],
-    date: "?",
-  },
-  {
-    code: "HAPPYCHANNIVERSARY",
-    rewards: [
-      "Concept spécial x2",
-      "Concept d'arme exclusive de chasseur x2",
-      "Concept d'arme de joueur spécial x2",
-    ],
-    date: "?",
-  },
-  {
-    code: "YEAROFTHEHUNTER",
-    rewards: [
-      "Pierres de l'esprit x1,000",
-    ],
-    date: "?",
-  },
-  {
-    code: "1YRANIVTHANKU",
+    code: "2NDIDLECOLLAB",
     rewards: [
       "Ticket de tirage personnalisé x10",
+      "Matériel d’amélioration d’arme III x50"],
+    date: "25 Septembre à 16h59",
+  },
+  {
+    code: "HAPPY500TH",
+    rewards: [
+      "Fragment de rune x1.000",
+      "Poudre de bénédiction x500",
+      "Gold x 1.000.000",
     ],
-    date: "?",
+    date: "25 Septembre à 16h59",
   },
   
 ];
