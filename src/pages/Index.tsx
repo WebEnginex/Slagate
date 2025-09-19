@@ -54,9 +54,9 @@ const HunterCard = ({
 // =========================
 const Index = () => {
   // IDs explicites pour chaque slot
-  const chasseur1 = 47;
-  const chasseur2 = 46;
-  const chasseur3 = 45;
+  const chasseur1 = 48;
+  const chasseur2 = 49;
+  const chasseur3 = 50;
   const hunterIds = [chasseur1, chasseur2, chasseur3];
 
   // Utilisation de useSupabaseFetch pour récupérer les chasseurs
