@@ -84,7 +84,8 @@ export default function TierListPage() {
         <div className="mb-8">
           <ul className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 px-2 sm:px-0 justify-center md:justify-start">
             {tabs.map((tab) => {
-              const isDisabled = tab === "Teams POD" || tab === "Teams BDG";
+              // const isDisabled = tab === "Teams POD" || tab === "Teams BDG";
+              const isDisabled = tab === "Teams POD";
               return (
                 <li
                   key={tab}

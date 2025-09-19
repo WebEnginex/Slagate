@@ -1,15 +1,14 @@
 export const teamBdgTiers = {
-  S: [
+  "Liste Boss : Giant Statue": [
     {
       id: 1,
-      name: "Team Feu",
-      hunters: [40, 35, 10, 11, 41, 3, 24], 
+      name: "Giant Statue - Feu",
+      hunters: [49, 10, 11, 39, 24, 6], 
     },
     {
       id: 2,
-      name: "Team Vent | Eau",
-      hunters: [40, 13, 14, 2, 41, 3, 32], 
-      // test
+      name: "Giant Statue - Ténèbres & Vent",
+      hunters: [48, 19, 5, 44, 47, 50], 
     },
   ],
   A: [],
