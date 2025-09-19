@@ -9,6 +9,7 @@ export const teamBdgTiers = {
       id: 2,
       name: "Team Vent | Eau",
       hunters: [40, 13, 14, 2, 41, 3, 32], 
+      // test
     },
   ],
   A: [],
