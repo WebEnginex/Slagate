@@ -81,6 +81,37 @@ const getSocialIcon = (type: SocialLink["type"]) => {
 // Mettre les récompenses en listes
 const promoCodes = [
   {
+    code: "FALLUPDAT3",
+    rewards: [
+      "Pierres de l'esprit x1000",
+      "Livres d'enchantement Craft I X10",
+    ],
+    date: "23 octobre à 1h59",
+  },
+  {
+    code: "NEWEAPONS",
+    rewards: [
+      "Tickets arme x10",
+      "Améliorations Arme III x50",
+    ],
+    date: "23 octobre à 1h59",
+  },
+  {
+    code: "SORRYFORBUG",
+    rewards: [
+      "Gold X 10.000.000",
+    ],
+    date: "23 octobre à 1h59",
+  },
+  {
+    code: "S3PUPDATE",
+    rewards: [
+      "Cristaux de mana avancés x100",
+      "Puces d'amélioration d'artefact II x200",
+    ],
+    date: "23 octobre à 1h59",
+  },
+  {
     code: "CMIRON500GIFT",
     rewards: [
       "Fragment de rune x500",
