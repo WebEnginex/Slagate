@@ -2,6 +2,7 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 import { hunterTiers } from "@/config/tier-list/chasseurs";
+import { hunterRoles } from "@/config/tier-list/chasseursRoles";
 import { weaponTiers } from "@/config/tier-list/armes";
 import { teamChasseursTiers } from "@/config/tier-list/teamsChasseurs";
 import { teamPodTiers } from "@/config/tier-list/teamsPod";
@@ -10,7 +11,7 @@ import Layout from "@/components/Layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Flame, Sword } from "lucide-react";
+import { Plus, Sword, Shield, Users } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import LastModified from "@/components/LastModified";
 import { lastModifiedDates } from "@/config/last-modification-date/lastModifiedDates";
@@ -146,6 +147,7 @@ const CachedWeaponImage = ({ imageUrl, altText }: { imageUrl: string | null, alt
 
 function HuntersTab() {
   const navigate = useNavigate();
+  const [activeRole, setActiveRole] = useState<keyof typeof hunterRoles>("Breakers");
   const { data: chasseurs = [] } = useSupabaseFetch(
     "supabase:chasseurs",
     async () => {
@@ -154,9 +156,11 @@ function HuntersTab() {
     }
   );
 
-  const huntersByTier = Object.entries(hunterTiers).reduce(
+  // Organiser les chasseurs pour le rôle actuel seulement
+  const currentRoleTiers = hunterRoles[activeRole];
+  const huntersForCurrentRole = Object.entries(currentRoleTiers).reduce(
     (acc, [tier, ids]) => {
-      // Filtrer les chasseurs par ID et les trier selon l'ordre des IDs dans hunterTiers
+      // Filtrer les chasseurs par ID et les trier selon l'ordre des IDs
       acc[tier] = ids
         .map((id) => chasseurs.find((h) => Number(h.id) === id))
         .filter((hunter) => hunter !== undefined) as Chasseur[];
@@ -165,59 +169,123 @@ function HuntersTab() {
     {} as Record<string, Chasseur[]>
   );
 
-  // Handler mis à jour pour naviguer vers le fragment d'ancrage approprié
+  // Handler pour naviguer vers le fragment d'ancrage approprié
   const handleHunterClick = (hunterId: number) => {
     navigate(`/builds#chasseur-${hunterId}`);
   };
 
+  // Liste des rôles pour les onglets
+  const roles = Object.keys(hunterRoles) as Array<keyof typeof hunterRoles>;
+
+  // Fonction pour obtenir l'icône du rôle
+  const getRoleIcon = (role: keyof typeof hunterRoles) => {
+    const iconProps = { size: 16, className: "mr-2" };
+    switch (role) {
+      case "Breakers":
+        return <Shield {...iconProps} />;
+      case "DPS":
+        return <Sword {...iconProps} />;
+      case "Supports":
+        return <Plus {...iconProps} />;
+      case "Collab":
+        return <Users {...iconProps} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="space-y-8">
-      {Object.entries(huntersByTier).map(([tier, hunters]) => (
-        <Card
-          key={tier}
-          className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl"
-        >
-          <div className="bg-sidebar-accent py-3 px-5 border-b border-sidebar-border">
-            <h2 className="text-2xl font-bold text-white">Tier {tier}</h2>
+      {/* Barre d'onglets pour les rôles */}
+      <div className="flex justify-center mb-2">
+        <div className="inline-flex bg-sidebar-accent rounded-xl p-1.5 shadow-lg border border-sidebar-border">
+          {roles.map((role) => (
+            <button
+              key={role}
+              onClick={() => setActiveRole(role)}
+              className={`flex items-center px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap ${
+                activeRole === role
+                  ? "bg-violet-500 text-white shadow-lg transform scale-105"
+                  : "text-gray-300 hover:text-white hover:bg-sidebar/50 hover:scale-102"
+              }`}
+            >
+              {getRoleIcon(role)}
+              {role}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Titre du rôle actuel */}
+      <div className="text-center">
+        <div className="flex items-center justify-center gap-3 mb-2">
+          <div className="text-violet-400 scale-150">
+            {getRoleIcon(activeRole)}
           </div>
-          <CardContent className="p-4 md:p-6">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-              {hunters.map((hunter) => (
-                <div
-                  key={hunter.id}
-                  className="relative bg-sidebar-accent rounded-lg shadow-md p-2 text-center hover:scale-[1.03] transition-transform border border-sidebar-border hover:border-solo-purple cursor-pointer"
-                  onClick={() => handleHunterClick(Number(hunter.id))}
-                >
-                  {/* Élément icon en haut à gauche */}
-                  {hunter.element && (
-                    <div className="absolute top-2 left-2 z-10 w-6 h-6">
-                      <img
-                        src={hunter.element}
-                        alt="Élément"
-                        className="w-full h-full"
-                      />
+          <h1 className="text-3xl md:text-4xl font-extrabold text-violet-400">
+            {activeRole}
+          </h1>
+        </div>
+        <p className="text-gray-400 text-sm mb-4">
+          {Object.values(huntersForCurrentRole).reduce((total, hunters) => total + hunters.length, 0)} chasseurs disponibles
+        </p>
+        <Separator className="bg-violet-400/30 h-0.5 max-w-md mx-auto" />
+      </div>
+      
+      {/* Tiers pour le rôle actuel */}
+      <div className="space-y-6">
+        {Object.entries(huntersForCurrentRole).map(([tier, hunters]) => {
+          // Ne pas afficher les tiers vides
+          if (hunters.length === 0) return null;
+          
+          return (
+            <Card
+              key={`${activeRole}-${tier}`}
+              className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl"
+            >
+              <div className="bg-sidebar-accent py-3 px-5 border-b border-sidebar-border">
+                <h2 className="text-2xl font-bold text-white">Tier {tier}</h2>
+              </div>
+              <CardContent className="p-4 md:p-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                  {hunters.map((hunter) => (
+                    <div
+                      key={hunter.id}
+                      className="relative bg-sidebar-accent rounded-lg shadow-md p-2 text-center hover:scale-[1.03] transition-transform border border-sidebar-border hover:border-solo-purple cursor-pointer"
+                      onClick={() => handleHunterClick(Number(hunter.id))}
+                    >
+                      {/* Élément icon en haut à gauche */}
+                      {hunter.element && (
+                        <div className="absolute top-2 left-2 z-10 w-6 h-6">
+                          <img
+                            src={hunter.element}
+                            alt="Élément"
+                            className="w-full h-full"
+                          />
+                        </div>
+                      )}
+
+                      {/* Image du chasseur */}
+                      <div className="relative mx-auto w-14 sm:w-16 md:w-20 h-14 sm:h-16 md:h-20 mb-2">
+                        <CachedHunterImage 
+                          imageUrl={hunter.image} 
+                          altText={hunter.nom}
+                        />
+                      </div>
+
+                      {/* Nom et rareté */}
+                      <p className="font-medium mt-1 text-xs sm:text-sm truncate">
+                        {hunter.nom}
+                      </p>
+                      <p className="text-xs text-gray-400">{hunter.rarete}</p>
                     </div>
-                  )}
-
-                  {/* Image du chasseur */}
-                  <div className="relative mx-auto w-14 sm:w-16 md:w-20 h-14 sm:h-16 md:h-20 mb-2">
-                    <CachedHunterImage 
-                      imageUrl={hunter.image} 
-                      altText={hunter.nom}
-                    />
-                  </div>
-
-                  {/* Nom et rareté */}
-                  <p className="font-medium mt-1 text-xs sm:text-sm truncate">
-                    {hunter.nom}
-                  </p>
-                  <p className="text-xs text-gray-400">{hunter.rarete}</p>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      ))}
+              </CardContent>
+            </Card>
+          );
+        })}
+      </div>
     </div>
   );
 }
