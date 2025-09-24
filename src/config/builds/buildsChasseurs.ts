@@ -109,7 +109,7 @@ export const buildsChasseurs: ChasseurBuild[] = [
       },
     ],
   },
-  // Soyeon
+  //  Soyeon
   {
   "chasseurId": 50,
   "element": "vent",
