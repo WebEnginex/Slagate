@@ -144,6 +144,37 @@ const promoCodes = [
     ],
     date: "25 Septembre à 16h59",
   },
+  {
+    code: "SORRYFORBUG",
+    rewards: [
+      "Gold x 10.000.000",
+    ],
+    date: "23 Octobre à 1h59",
+  },
+  {
+    code: "NEWEAPONS",
+    rewards: [
+      "Ticket d'arme x10",
+      "Potion d'amélioration d'arme x50",
+    ],
+    date: "23 Octobre à 1h59",
+  },
+  {
+    code: "S3UPDATE",
+    rewards: [
+      "Cristaux de mana avancé x100",
+      "Marteaux violets x200",
+    ],
+    date: "23 Octobre à 1h59",
+  },
+  {
+    code: "FALLUPDATE3",
+    rewards: [
+      "Essence stone x1.000",
+      "Livres d'enchantement x10",
+    ],
+    date: "23 Octobre à 1h59",
+  },
   
 ];
 
