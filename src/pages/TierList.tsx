@@ -4,9 +4,7 @@ import type { Database } from "@/integrations/supabase/types";
 import { hunterTiers } from "@/config/tier-list/chasseurs";
 import { hunterRoles } from "@/config/tier-list/chasseursRoles";
 import { weaponTiers } from "@/config/tier-list/armes";
-import { teamChasseursTiers } from "@/config/tier-list/teamsChasseurs";
-import { teamPodTiers } from "@/config/tier-list/teamsPod";
-import { teamBdgTiers } from "@/config/tier-list/teamBdg";
+import { elementBasedTeams, roleDisplayNames, type TeamRole, type RoleBasedTeam } from "@/config/tier-list/roleBasedTeams";
 import Layout from "@/components/Layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
@@ -32,8 +30,6 @@ const tabs = [
   "Chasseurs",
   "Armes",
   "Teams Chasseurs",
-  "Teams POD",
-  "Teams BDG",
 ];
 
 export default function TierListPage() {
@@ -85,8 +81,7 @@ export default function TierListPage() {
         <div className="mb-8">
           <ul className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 px-2 sm:px-0 justify-center md:justify-start">
             {tabs.map((tab) => {
-              // const isDisabled = tab === "Teams POD" || tab === "Teams BDG";
-              const isDisabled = tab === "Teams POD";
+              const isDisabled = false;
               return (
                 <li
                   key={tab}
@@ -110,11 +105,7 @@ export default function TierListPage() {
         <div className="text-white text-left bg-transparent p-4 sm:p-6 rounded-lg shadow-md overflow-x-hidden">
           {activeTab === "Chasseurs" && <HuntersTab />}
           {activeTab === "Armes" && <WeaponsTab />}
-          {activeTab === "Teams Chasseurs" && (
-            <TeamsTab tiers={teamChasseursTiers} teamSize={3} />
-          )}
-          {activeTab === "Teams POD" && <TeamsPodTab tiers={teamPodTiers} />}
-          {activeTab === "Teams BDG" && <TeamsBdgTab tiers={teamBdgTiers} />}
+          {activeTab === "Teams Chasseurs" && <RoleBasedTeamsTab />}
         </div>
       </div>
     </Layout>
@@ -505,6 +496,235 @@ function TeamsTab({
           </CardContent>
         </Card>
       ))}
+    </div>
+  );
+}
+
+function RoleBasedTeamsTab() {
+  const isMobile = useIsMobile();
+  const [activeElement, setActiveElement] = useState<keyof typeof elementBasedTeams>("Feu");
+  const { data: chasseurs = [] } = useSupabaseFetch(
+    "supabase:chasseurs",
+    async () => {
+      const { data } = await supabase.from("chasseurs").select("*");
+      return data || [];
+    }
+  );
+
+  // Fonction pour obtenir l'icône du rôle
+  const getRoleIcon = (role: TeamRole) => {
+    const iconProps = { size: 20, className: "mr-2" };
+    switch (role) {
+      case "breakers":
+        return <Shield {...iconProps} />;
+      case "dps":
+        return <Sword {...iconProps} />;
+      case "supports":
+        return <Plus {...iconProps} />;
+      default:
+        return null;
+    }
+  };
+
+  // Fonction pour rendre une colonne de rôle
+  const renderRoleColumn = (team: RoleBasedTeam, role: TeamRole, tier: string) => {
+    const hunterIds = team[role];
+    const roleDisplayName = roleDisplayNames[role];
+    
+    return (
+      <div className="space-y-2 min-w-0 flex-1">
+        {/* En-tête de colonne */}
+        <div className="flex items-center justify-center bg-sidebar-accent rounded-lg py-2 px-2 border border-sidebar-border">
+          <div className="flex items-center text-white font-semibold text-sm">
+            {getRoleIcon(role)}
+            <span className="truncate">{roleDisplayName}</span>
+          </div>
+        </div>
+
+        {/* Liste des chasseurs pour ce rôle */}
+        <div className="space-y-1.5">
+          {hunterIds.map((hunterId, index) => {
+            const hunter = chasseurs.find(h => Number(h.id) === hunterId);
+            if (!hunter) return null;
+
+            return (
+              <div
+                key={`${team.id}-${role}-${hunterId}`}
+                className={`relative bg-sidebar-accent rounded-lg shadow-md p-1.5 text-center hover:scale-[1.02] transition-transform border border-sidebar-border hover:border-solo-purple ${
+                  index === 0 ? 'ring-1 ring-violet-400/50' : ''
+                } min-h-[80px] lg:min-h-[90px]`}
+              >
+                {/* Badge de priorité */}
+                <div className={`absolute top-1 left-1 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold shadow-md ${
+                  index === 0 
+                    ? 'bg-violet-500 text-white' 
+                    : index === 1 
+                    ? 'bg-blue-500 text-white' 
+                    : 'bg-gray-500 text-white'
+                }`}>
+                  {index + 1}
+                </div>
+
+                {/* Élément icon en haut à droite */}
+                {hunter.element && (
+                  <div className="absolute top-1 right-1 z-10 w-4 h-4">
+                    <img
+                      src={hunter.element}
+                      alt="Élément"
+                      className="w-full h-full"
+                    />
+                  </div>
+                )}
+
+                {/* Image du chasseur */}
+                <div className="relative mx-auto mb-1 w-8 h-8 lg:w-10 lg:h-10">
+                  <CachedHunterImage 
+                    imageUrl={hunter.image} 
+                    altText={hunter.nom}
+                  />
+                </div>
+
+                {/* Nom du chasseur */}
+                <p className="font-medium truncate text-white text-xs">
+                  {hunter.nom}
+                </p>
+                
+                {/* Indicateur de priorité */}
+                <p className={`text-xs ${
+                  index === 0 
+                    ? 'text-violet-300' 
+                    : index === 1 
+                    ? 'text-blue-300' 
+                    : 'text-gray-400'
+                }`}>
+                  {index === 0 ? 'Optimal' : index === 1 ? 'Alt. 1' : `Alt. ${index}`}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
+  // Liste des éléments pour les onglets
+  const elements = Object.keys(elementBasedTeams) as Array<keyof typeof elementBasedTeams>;
+
+  // Fonction pour obtenir l'icône de l'élément
+  const getElementIcon = (element: keyof typeof elementBasedTeams) => {
+    const getElementImageUrl = (elementName: string) => {
+      return `https://todwuewxymmybbunbclz.supabase.co/storage/v1/object/public/elements//${elementName}_element.webp`;
+    };
+
+    switch (element) {
+      case "Feu":
+        return <img src={getElementImageUrl("Feu")} alt="Feu" className="w-4 h-4 mr-2" />;
+      case "Vent":
+        return <img src={getElementImageUrl("Vent")} alt="Vent" className="w-4 h-4 mr-2" />;
+      case "Lumière":
+        return <img src={getElementImageUrl("Lumiere")} alt="Lumière" className="w-4 h-4 mr-2" />;
+      case "Eau":
+        return <img src={getElementImageUrl("Eau")} alt="Eau" className="w-4 h-4 mr-2" />;
+      case "Ténèbres":
+        return <img src={getElementImageUrl("Tenebre")} alt="Ténèbres" className="w-4 h-4 mr-2" />;
+      case "Polyvalent":
+        return <Users size={16} className="mr-2" />;
+      default:
+        return null;
+    }
+  };
+
+  // Obtenir la team pour l'élément actuel
+  const currentTeam = elementBasedTeams[activeElement];
+
+  return (
+    <div className="space-y-8 max-w-full overflow-hidden">
+      {/* Instructions d'utilisation */}
+      <div className="bg-sidebar-accent p-3 sm:p-4 rounded-lg border border-sidebar-border">
+        <h3 className="text-base sm:text-lg font-semibold text-violet-400 mb-2 sm:mb-3 flex items-center">
+          <Users className="mr-2" size={18} />
+          Comment utiliser cette tier list
+        </h3>
+        <div className="text-xs sm:text-sm text-gray-300 space-y-2">
+          <div className="bg-sidebar/30 p-2 sm:p-3 rounded-lg border-l-4 border-violet-400">
+            <p className="font-medium text-violet-300 mb-1">🎯 Principe de base :</p>
+            <p>Choisissez les chasseurs <span className="text-violet-400 font-medium">selon ceux que vous possédez</span>. Le premier chasseur de chaque colonne est le plus optimal, mais les alternatives sont parfaitement viables !</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+            <div className="space-y-1">
+              <p>• <span className="text-violet-400 font-medium">Position 1</span> : Chasseur optimal (si vous l'avez)</p>
+              <p>• <span className="text-blue-400 font-medium">Position 2+</span> : Alternatives parfaitement jouables</p>
+            </div>
+            <div className="space-y-1">
+              <p>• <span className="text-green-400 font-medium">Astuce</span> : Mélangez les positions selon vos chasseurs</p>
+            </div>
+          </div>
+          <div className="bg-blue-500/10 p-2 rounded text-center border border-blue-500/30">
+            <p className="text-blue-300 font-medium text-xs sm:text-sm">💡 L'important est d'avoir un chasseur de chaque rôle, pas forcément le meilleur !</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Barre d'onglets pour les éléments */}
+      <div className="w-full overflow-x-auto mb-2">
+        <div className="flex justify-center min-w-full">
+          <div className="inline-flex bg-sidebar-accent rounded-xl p-1.5 shadow-lg border border-sidebar-border gap-1">
+            {elements.map((element) => (
+              <button
+                key={element}
+                onClick={() => setActiveElement(element)}
+                className={`flex items-center px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap min-w-0 ${
+                  activeElement === element
+                    ? "bg-violet-500 text-white shadow-lg"
+                    : "text-gray-300 hover:text-white hover:bg-sidebar/50"
+                }`}
+              >
+                <span className="mr-1 sm:mr-2 text-sm">
+                  {getElementIcon(element)}
+                </span>
+                <span className="truncate">{element}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Titre de l'élément actuel */}
+      <div className="text-center">
+        <div className="flex items-center justify-center gap-2 mb-2">
+          <div className="text-violet-400 scale-125">
+            {getElementIcon(activeElement)}
+          </div>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-violet-400">
+            {currentTeam.name}
+          </h1>
+        </div>
+        <Separator className="bg-violet-400/30 h-0.5 max-w-xs sm:max-w-md mx-auto" />
+      </div>
+
+      {/* Affichage de la team */}
+      <Card className="bg-sidebar border-sidebar-border overflow-hidden rounded-xl">
+        <CardContent className="p-3 sm:p-4 md:p-6">
+          <div className="space-y-3 sm:space-y-4">
+            {/* En-tête de l'équipe */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+              <h3 className="text-lg sm:text-xl font-semibold text-white px-3 sm:px-4 py-1.5 sm:py-2 bg-sidebar-accent rounded-lg border border-sidebar-border">
+                {currentTeam.name}
+              </h3>
+            </div>
+
+            {/* Colonnes des rôles */}
+            <div className="w-full overflow-hidden">
+              {/* Layout empilé sur mobile et petites tablettes, grid sur grands écrans */}
+              <div className="space-y-4 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-4 xl:gap-6">
+                {(['breakers', 'supports', 'dps'] as TeamRole[]).map((role) => 
+                  renderRoleColumn(currentTeam, role, '')
+                )}
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
