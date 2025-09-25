@@ -80,15 +80,7 @@ const getSocialIcon = (type: SocialLink["type"]) => {
 
 // Mettre les récompenses en listes
 const promoCodes = [
-  {
-    code: "CMIRON500GIFT",
-    rewards: [
-      "Fragment de rune x500",
-      "Cristal de mana de palier inférieur x500",
-      "Gold x 1.000.000",
-    ],
-    date: "22 octobre à 1h59",
-  },
+  
   {
     code: "AUG28THUD",
     rewards: [
@@ -112,6 +104,31 @@ const promoCodes = [
       "Gold x 1.000.000",
     ],
     date: "25 Septembre à 16h59",
+  },
+  {
+    code: "CMIRON500GIFT",
+    rewards: [
+      "Fragment de rune x500",
+      "Cristal de mana de palier inférieur x500",
+      "Gold x 1.000.000",
+    ],
+    date: "22 octobre à 1h59",
+  },
+  {
+    code: "SUNGFAMILY",
+    rewards: [
+      "Esprit Abyssal x5",
+      "Energie de l'ombre x1.000",
+    ],
+    date: "22 octobre à 1h59",
+  },
+  {
+    code: "FATHERSUNG",
+    rewards: [
+      "Pierre transcendée : Coffre de rune de compétence x10",
+      "Fragments de rune x10",
+    ],
+    date: "22 octobre à 1h59",
   },
   {
     code: "SORRYFORBUG",
