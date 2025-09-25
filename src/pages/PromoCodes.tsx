@@ -146,7 +146,7 @@ const promoCodes = [
     date: "23 Octobre à 1h59",
   },
   {
-    code: "S3UPDATE",
+    code: "S3PUPDATE",
     rewards: [
       "Cristaux de mana avancé x100",
       "Marteaux violets x200",
@@ -154,7 +154,7 @@ const promoCodes = [
     date: "23 Octobre à 1h59",
   },
   {
-    code: "FALLUPDATE3",
+    code: "FALLUPDAT3",
     rewards: [
       "Essence stone x1.000",
       "Livres d'enchantement x10",
