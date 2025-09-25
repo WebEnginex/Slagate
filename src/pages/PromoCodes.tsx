@@ -131,6 +131,13 @@ const promoCodes = [
     date: "22 octobre à 1h59",
   },
   {
+    code: "SUNGILHWAN0925",
+    rewards: [
+      "Ticket de tirage personalisé x10",
+    ],
+    date: "22 octobre à 1h59",
+  },
+  {
     code: "SORRYFORBUG",
     rewards: [
       "Gold x 10.000.000",
