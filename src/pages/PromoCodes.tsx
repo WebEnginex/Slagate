@@ -162,13 +162,6 @@ const promoCodes = [
     date: "23 Octobre à 1h59",
   },
   {
-    code: "SUNGILHWAN0925",
-    rewards: [
-      "Ticket de tirage personalisé x10",
-    ],
-    date: "31 octobre à 1h59",
-  },
-  {
     code: "DEV_10_N0TE",
     rewards: [
       "Ticket de réinitialisation de l'amélioration (durée limitée) x4",
@@ -177,8 +170,16 @@ const promoCodes = [
       "Cristal de mana palier inférieur x1.000",
       "Gold x1.000.000",
     ],
-    date: "Inconnue",
+    date: "23 Octobre à 1h59",
   },
+  {
+    code: "SUNGILHWAN0925",
+    rewards: [
+      "Ticket de tirage personalisé x10",
+    ],
+    date: "31 octobre à 1h59",
+  },
+  
   
 ];
 
