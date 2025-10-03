@@ -168,6 +168,17 @@ const promoCodes = [
     ],
     date: "31 octobre à 1h59",
   },
+  {
+    code: "DEV_10_N0TE",
+    rewards: [
+      "Ticket de réinitialisation de l'amélioration (durée limitée) x4",
+      "Puce d'amélioration d'artéfacts I x450",
+      "Puce d'amélioration d'artéfacts II x150",
+      "Cristal de mana palier inférieur x1.000",
+      "Gold x1.000.000",
+    ],
+    date: "Inconnue",
+  },
   
 ];
 
